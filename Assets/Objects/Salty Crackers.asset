@@ -9,9 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19dfd234401dc6548ab738b3c4b688f0, type: 3}
-  m_Name: Player Inventory
+  m_Script: {fileID: 11500000, guid: e2b5483359660c14aadfe85ea7dfb512, type: 3}
+  m_Name: Salty Crackers
   m_EditorClassIdentifier: 
-  itemsList:
-  - {fileID: 11400000, guid: 0959f4234bb59464b852f05d92305e5c, type: 2}
-  - {fileID: 11400000, guid: beeb3bb8a5e62b74f8d1b66cbbc7754b, type: 2}
+  itemType: 0000000001000000
+  name: 'Salty Crackers:'
+  image: {fileID: 0}
+  description: 
+  thirstValue: 30
+  hungerValue: 30
+  healthValue: 0
+  fatigueValue: 0

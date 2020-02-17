@@ -5,13 +5,13 @@ using UnityEngine.UI;
 
 public enum ItemType
 {
-    Food, Drink, Health
+    HungerValue, ThistValut, HealthValue,Fatigue,Scavengable,Craftable,Gear
 }
 
 public class Item: ScriptableObject
 {
     
-    [SerializeField ]public ItemType itemType;
+    [SerializeField ]public List<ItemType> itemType=new List<ItemType>();
     [SerializeField] private string name;
     [SerializeField] private Sprite image;
    
@@ -34,5 +34,32 @@ public class Item: ScriptableObject
     public Sprite getSprite()
     {
         return image;
+    }
+
+    public bool isEatable()
+    {
+        return this is Eatable;
+    }
+
+    public bool isCraftable()
+    {
+        return this.itemType.Contains(ItemType.Craftable);
+    }
+    public bool isGear()
+    {
+        return this.itemType.Contains(ItemType.Gear);
+    }
+
+    public override bool Equals(object other)
+    {
+        if (other is Item)
+        {
+            return ((Item) other).name.Equals(this.name);
+        }
+        else
+        {
+            return false;
+        }
+
     }
 }

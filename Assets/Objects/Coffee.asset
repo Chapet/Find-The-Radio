@@ -9,11 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a4d410eb42f7344593f0fda21e99ca7, type: 3}
-  m_Name: Orange
+  m_Script: {fileID: 11500000, guid: e2b5483359660c14aadfe85ea7dfb512, type: 3}
+  m_Name: Coffee
   m_EditorClassIdentifier: 
-  itemType: 0
-  name: Orange
-  image: {fileID: 21300000, guid: 27d54f956c9604d4895c44554a530719, type: 3}
+  itemType: 0100000003000000
+  name: Coffee
+  image: {fileID: 0}
   description: 
+  thirstValue: 20
+  hungerValue: 0
   healthValue: 0
+  fatigueValue: 40

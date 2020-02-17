@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(fileName="New Drink item",menuName="MyAsset/Items/Drink")]
 
 public class DrinkItem : Item
 {
@@ -10,7 +9,7 @@ public class DrinkItem : Item
 
     public DrinkItem() 
     {
-        itemType = ItemType.Food;
+        itemType.Add(ItemType.HungerValue);
     }
 
 }

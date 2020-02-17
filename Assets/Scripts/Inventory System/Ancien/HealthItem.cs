@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName="New Health item",menuName="MyAsset/Items/Health")]
 
 public class HealthItem : Item
 {
@@ -11,7 +10,7 @@ public class HealthItem : Item
 
     public void Awake()
     {
-        itemType= ItemType.Health;
+        itemType.Add(ItemType.HealthValue);
     }
 
     public int getHealthValue()

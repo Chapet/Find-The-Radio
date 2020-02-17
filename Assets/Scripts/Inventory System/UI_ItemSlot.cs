@@ -38,22 +38,29 @@ public class UI_ItemSlot : MonoBehaviour
     public void onClickItem()
     {
         Debug.Log("Press "+this.item.name);
-
-        switch (this.item.itemType)
+        
+        if (this.item.isEatable())
         {
-            case ItemType.Drink:
-                //TODO: action
-                break;
-            case ItemType.Food:
-                //TODO: action
-                break;
-            case ItemType.Health:
-                //TODO: action
-                break;
-            default:
-                Debug.Log("Item type unknow");
-                break;
+            Debug.Log("This item is eatable");
+            Eatable eatItem = (Eatable) this.item;
+            
+            if (eatItem.haveHungerValue()) ;
+            {
+                //TODO:action
+            }
+            
+            if (eatItem.haveThirstValue()) ;
+            {
+                //TODO:action
+            }
+            
+            if (eatItem.haveHealthValue())
+            {
+                //TODO:action
+            }
+            
         }
+
         
     }
 
