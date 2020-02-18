@@ -9,6 +9,7 @@ public class UiItemSlot : MonoBehaviour
     [SerializeField] private GameObject background; 
     public bool isEnable = false;
     public Image image;
+    private bool isItemInfoEnable = false;
     
     /**
      * Enable the itemSlot with item
@@ -38,9 +39,16 @@ public class UiItemSlot : MonoBehaviour
      */
     public void OnClickItem()
     {
+        if (!isItemInfoEnable)
+        {
+            GameObject.Find("InventoryPanel/InfoItemPanel");
+            isItemInfoEnable = true;
+        }
+
         Debug.Log("Click");
         
-        GameObject itemInfoPanel = GameObject.Find("InfoItemPanel");
+        
+        GameObject itemInfoPanel = GameObject.Find("InventoryPanel/InfoItemPanel");
         ShowItemProperty showItemProperty = itemInfoPanel.GetComponent<ShowItemProperty>();
         showItemProperty.ShowItem(this.item);
 
@@ -49,8 +57,8 @@ public class UiItemSlot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         
+
     }
 
     // Update is called once per frame

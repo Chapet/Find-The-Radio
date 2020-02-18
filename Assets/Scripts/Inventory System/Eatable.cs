@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-[CreateAssetMenu(fileName="New ThistValut item",menuName="MyAsset/Items/Eatable")]
+[CreateAssetMenu(fileName="New ThistValue item",menuName="MyAsset/Items/Eatable")]
 
 public class Eatable : Item
 {
@@ -20,7 +20,7 @@ public class Eatable : Item
     }
     public bool HaveThirstValue()
     {
-        return itemType.Contains(ItemType.ThistValut);
+        return itemType.Contains(ItemType.ThistValue);
     }
     public bool HaveHealthValue()
     {
@@ -30,6 +30,26 @@ public class Eatable : Item
     public bool HaveFatigueValue()
     {
         return itemType.Contains(ItemType.Fatigue);
+    }
+
+    public int GetHunger()
+    {
+        return hungerValue;
+    }
+
+    public int GetThirst()
+    {
+        return thirstValue;
+    }
+
+    public int GetHealth()
+    {
+        return healthValue;
+    }
+
+    public int GetFatigue()
+    {
+        return fatigueValue;
     }
 
 

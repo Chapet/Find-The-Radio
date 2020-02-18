@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public enum ItemType
 {
-    HungerValue, ThistValut, HealthValue,Fatigue,Scavengeable,Craftable,Gear
+    HungerValue, ThistValue, HealthValue,Fatigue,Scavengeable,Craftable,Gear
 }
 
 public class Item: ScriptableObject
@@ -61,5 +61,10 @@ public class Item: ScriptableObject
             return false;
         }
 
+    }
+
+    public string GetDescription()
+    {
+        return this.description;
     }
 }

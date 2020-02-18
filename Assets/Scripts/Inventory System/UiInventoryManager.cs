@@ -17,7 +17,6 @@ public class UiInventoryManager : MonoBehaviour
     [SerializeField] 
     private GameObject itemPrefab;
     
-
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +25,7 @@ public class UiInventoryManager : MonoBehaviour
 
         //itemSlots = GetComponentsInChildren<UI_ItemSlot>();
         
+            
         LoadAllUiItems();
         
         
@@ -80,7 +80,7 @@ public class UiInventoryManager : MonoBehaviour
         ClearUiInventory();
         foreach (Item i in inventory.itemsList)
         {
-            if (i.itemType.Contains(ItemType.ThistValut))
+            if (i.itemType.Contains(ItemType.ThistValue))
             {
                 LoadUiItem(i);
             }
