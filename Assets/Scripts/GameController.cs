@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+
 
 public class GameController : MonoBehaviour
 {
     [Range(0f, 24f)]
     public float gameClock;
+
+    public TMP_Text clock;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +26,6 @@ public class GameController : MonoBehaviour
     public void UpdateGameClock(float inc)
     {
         gameClock = (gameClock + inc) % 24f;
-        // Update UI
+        clock.SetText("Time : " + gameClock.ToString("0.0") + " h.");
     }
 }
