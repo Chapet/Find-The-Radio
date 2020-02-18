@@ -6,13 +6,14 @@ public class Sleep : MonoBehaviour
 {
     //[SerializeField]
     private GameObject sleepText;
-    private TextMeshPro text;
+    private TextMeshProUGUI text;
     // Start is called before the first frame update
     void Start()
     {
         sleepText = GameObject.Find("/Canvas/SleepText");
-        text = sleepText.GetComponent<TextMeshPro>();
+        text = sleepText.GetComponent<TextMeshProUGUI>();
         Debug.Log(sleepText);
+        Debug.Log(text);
     }
 
     // Update is called once per frame
