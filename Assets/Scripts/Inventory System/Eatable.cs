@@ -9,25 +9,25 @@ public class Eatable : Item
 {
     
     
-    [SerializeField]private int thirstValue; //value between -100 and 100
-    [SerializeField]private int hungerValue;
-    [SerializeField]private int healthValue;
-    [SerializeField] private int fatigueValue;
+    [Range(-100,100)][SerializeField]private int thirstValue; //value between -100 and 100
+    [Range(-100,100)][SerializeField]private int hungerValue;
+    [Range(-100,100)][SerializeField]private int healthValue;
+    [Range(-100,100)][SerializeField]private int fatigueValue;
 
-    public bool haveHungerValue()
+    public bool HaveHungerValue()
     {
         return itemType.Contains(ItemType.HungerValue);
     }
-    public bool haveThirstValue()
+    public bool HaveThirstValue()
     {
         return itemType.Contains(ItemType.ThistValut);
     }
-    public bool haveHealthValue()
+    public bool HaveHealthValue()
     {
         return itemType.Contains(ItemType.HealthValue);
     }
 
-    public bool haveFatigueValue()
+    public bool HaveFatigueValue()
     {
         return itemType.Contains(ItemType.Fatigue);
     }

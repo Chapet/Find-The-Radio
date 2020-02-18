@@ -5,47 +5,47 @@ using UnityEngine.UI;
 
 public enum ItemType
 {
-    HungerValue, ThistValut, HealthValue,Fatigue,Scavengable,Craftable,Gear
+    HungerValue, ThistValut, HealthValue,Fatigue,Scavengeable,Craftable,Gear
 }
 
 public class Item: ScriptableObject
 {
     
     [SerializeField ]public List<ItemType> itemType=new List<ItemType>();
-    [SerializeField] private string name;
+    [SerializeField] public new string name;
     [SerializeField] private Sprite image;
    
     
     [SerializeField] private string description;
 
-    public void setSprite(Sprite sprite)
+    public void SetSprite(Sprite sprite)
     {
         this.image = sprite;
     }
 
     /*public int amount;
 
-    public void addUnit()
+    public void    addUnit()
     {
         amount++;
     }*/
 
 
-    public Sprite getSprite()
+    public Sprite GetSprite()
     {
         return image;
     }
 
-    public bool isEatable()
+    public bool IsEatable()
     {
         return this is Eatable;
     }
 
-    public bool isCraftable()
+    public bool IsCraftable()
     {
         return this.itemType.Contains(ItemType.Craftable);
     }
-    public bool isGear()
+    public bool IsGear()
     {
         return this.itemType.Contains(ItemType.Gear);
     }
