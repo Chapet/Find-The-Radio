@@ -21,25 +21,17 @@ public class GameController : MonoBehaviour {
     public int maxEnergy = 100;
     public int currentEnergy;
 
-    public Slider healthSlider;
-    public Slider hungerSlider;
-    public Slider thirstySlider;
-    public Slider energySlider;
-
-    private StatusBar healthBar;
-    private StatusBar hungerBar;
-    private StatusBar thirstyBar;
-    private StatusBar energyBar;
+    public StatusBar healthBar;
+    public StatusBar hungerBar;
+    public StatusBar thirstyBar;
+    public StatusBar energyBar;
 
     public TMP_Text clock;
     public GameObject BunkerPanel;
 
     // Start is called before the first frame update
     void Start() {
-        healthBar = healthSlider.GetComponent<StatusBar>();
-        hungerBar = hungerSlider.GetComponent<StatusBar>();
-        thirstyBar = thirstySlider.GetComponent<StatusBar>();
-        energyBar = energySlider.GetComponent<StatusBar>();
+
 
         BunkerPanel.SetActive(true);
         currentHealth = maxHealth;

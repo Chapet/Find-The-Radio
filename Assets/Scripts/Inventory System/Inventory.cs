@@ -20,17 +20,17 @@ public class Inventory : ScriptableObject
     /**
      * Remove item from the inventory one time
      */
-    public void removeItem(Item item) 
+    public void RemoveItem(Item item) 
     {
         itemsList.Remove(item);
     }
 
-    public void removeAllItem(Item item)
+    public void RemoveAllItem(Item item)
     {
         itemsList.RemoveAll(match: element => element == item); //TODO:A VERIFIER
     }
 
-    public bool contain(Item item)
+    public bool Contain(Item item)
     {
         return itemsList.Contains(item);
     }

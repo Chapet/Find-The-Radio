@@ -15,4 +15,19 @@ public class StatusBar : MonoBehaviour
     public void SetMaxValue(int maxValue) {
         slider.maxValue = maxValue;
     }
+
+    public void addValue(int value)
+    {
+        float newValue = slider.value + value;
+        if (value > 0)
+        {
+            slider.value = Mathf.Min(100, slider.value + value);
+        }
+        else
+        {
+            slider.value = Mathf.Max(0, slider.value + value);
+        }
+
+
+    }
 }

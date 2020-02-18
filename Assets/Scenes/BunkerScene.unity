@@ -1222,8 +1222,8 @@ Canvas:
   m_GameObject: {fileID: 686395862}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 1498406160}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -1754,8 +1754,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -83.00006, y: -83}
-  m_SizeDelta: {x: 150, y: 150}
+  m_AnchoredPosition: {x: -110, y: -110}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1011717927
 MonoBehaviour:
@@ -2061,10 +2061,10 @@ MonoBehaviour:
   currentThirst: 0
   maxEnergy: 100
   currentEnergy: 0
-  healthSlider: {fileID: 325231932}
-  hungerSlider: {fileID: 960975864}
-  thirstySlider: {fileID: 1068601858}
-  energySlider: {fileID: 1357055652}
+  healthBar: {fileID: 325231933}
+  hungerBar: {fileID: 960975863}
+  thirstyBar: {fileID: 1068601857}
+  energyBar: {fileID: 1357055651}
   clock: {fileID: 236068887}
   BunkerPanel: {fileID: 943788442}
 --- !u!4 &1080351443
@@ -2075,7 +2075,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1080351441}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 528.97107, y: 747.02637, z: -257.072}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3554,7 +3554,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 138, y: -44.55551}
+  m_AnchoredPosition: {x: 138, y: -44.555542}
   m_SizeDelta: {x: 250, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2091591692

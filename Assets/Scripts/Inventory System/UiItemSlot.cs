@@ -3,19 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UI_ItemSlot : MonoBehaviour
+public class UiItemSlot : MonoBehaviour
 {
     Item item;
+    [SerializeField] private GameObject background; 
     public bool isEnable = false;
     public Image image;
+    private bool isItemInfoEnable = false;
     
     /**
      * Enable the itemSlot with item
      */
-    public void setItem(Item item)
+    public void SetItem(Item item)
     {
         this.item = item;
-        image.sprite = item.getSprite();
+        image.sprite = item.GetSprite();
         gameObject.SetActive(true);
         isEnable = true;
 
@@ -24,7 +26,7 @@ public class UI_ItemSlot : MonoBehaviour
     /**
      * disable the itemSlot from the inventory and clear variables
      */
-    private void clearSlot()
+    private void ClearSlot()
     {
         isEnable = false;
         item = null;
@@ -35,40 +37,28 @@ public class UI_ItemSlot : MonoBehaviour
     /**
      * this function is called when we press an item
      */
-    public void onClickItem()
+    public void OnClickItem()
     {
-        Debug.Log("Press "+this.item.name);
-        
-        if (this.item.isEatable())
+        if (!isItemInfoEnable)
         {
-            Debug.Log("This item is eatable");
-            Eatable eatItem = (Eatable) this.item;
-            
-            if (eatItem.haveHungerValue()) ;
-            {
-                //TODO:action
-            }
-            
-            if (eatItem.haveThirstValue()) ;
-            {
-                //TODO:action
-            }
-            
-            if (eatItem.haveHealthValue())
-            {
-                //TODO:action
-            }
-            
+            GameObject.Find("InventoryPanel/InfoItemPanel");
+            isItemInfoEnable = true;
         }
 
+        Debug.Log("Click");
         
+        
+        GameObject itemInfoPanel = GameObject.Find("InventoryPanel/InfoItemPanel");
+        ShowItemProperty showItemProperty = itemInfoPanel.GetComponent<ShowItemProperty>();
+        showItemProperty.ShowItem(this.item);
+
     }
 
     // Start is called before the first frame update
     void Start()
     {
-
         
+
     }
 
     // Update is called once per frame
