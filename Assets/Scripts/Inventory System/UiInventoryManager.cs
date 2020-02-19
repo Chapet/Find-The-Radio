@@ -26,21 +26,11 @@ public class UiInventoryManager : MonoBehaviour
         //itemSlots = GetComponentsInChildren<UI_ItemSlot>();
         
             
-        LoadAllUiItems();
+        LoadFoodUiItems();
         
         
     }
-
-
-    /*private void loadUIInventory()
-    {
-        clearUIInventory();
-        foreach (Item i in inventory.itemsList)
-        {
-            LoadUIItem(i);
-            Debug.Log("Item Name: "+i.name);
-        }
-    }*/
+    
 
     /**
      * load one item in the GridLayer

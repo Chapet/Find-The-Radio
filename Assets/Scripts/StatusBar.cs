@@ -27,7 +27,11 @@ public class StatusBar : MonoBehaviour
         {
             slider.value = Mathf.Max(0, slider.value + value);
         }
+        
+    }
 
-
+    public override string ToString()
+    {
+        return base.ToString();
     }
 }
