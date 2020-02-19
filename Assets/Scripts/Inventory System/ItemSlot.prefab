@@ -32,10 +32,10 @@ RectTransform:
   m_Father: {fileID: 1931949731455969988}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -0.0000038146973, y: 0.00024795532}
+  m_SizeDelta: {x: -8.2, y: -8.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2975304729429925628
 CanvasRenderer:
@@ -105,10 +105,10 @@ RectTransform:
   m_Father: {fileID: 1931949731455969988}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -0.02999878, y: 0.0002593994}
+  m_SizeDelta: {x: -4.23, y: 0.0005188}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1931949730574180584
 CanvasRenderer:
@@ -158,7 +158,7 @@ GameObject:
   - component: {fileID: 1931949731455969993}
   - component: {fileID: 1931949731455969994}
   - component: {fileID: 1931949731455969995}
-  - component: {fileID: 5249934184483837742}
+  - component: {fileID: 7543874493841780541}
   m_Layer: 5
   m_Name: ItemSlot
   m_TagString: Untagged
@@ -184,8 +184,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 110, y: 110}
+  m_AnchoredPosition: {x: -0.0000095367, y: 0.0000095367}
+  m_SizeDelta: {x: 71.77, y: 71.77}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1931949731455969993
 CanvasRenderer:
@@ -235,9 +235,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5342f214f33c9744790c42bab9846f6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  background: {fileID: 1931949731455969989}
   isEnable: 0
   image: {fileID: 7297279960772744080}
---- !u!114 &5249934184483837742
+--- !u!114 &7543874493841780541
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -281,13 +282,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1931949731455969995}
-        m_MethodName: onClickItem
+        m_MethodName: OnClickItem
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: onClick
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
