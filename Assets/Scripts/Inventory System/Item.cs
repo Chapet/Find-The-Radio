@@ -16,7 +16,7 @@ public class Item: ScriptableObject
     [SerializeField] private Sprite image;
    
     
-    [SerializeField] private string description;
+    [SerializeField] [Multiline]private string description;
 
     public void SetSprite(Sprite sprite)
     {

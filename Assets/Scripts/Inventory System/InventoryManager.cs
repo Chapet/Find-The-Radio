@@ -1,9 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class InventoryManager : MonoBehaviour
 {
+    
+    [Header("Game Proprity")]
+    public GameController playerController;
+    
+
+    [Header("Inventory Global gameobjects")]
+    [SerializeField] 
+    [Tooltip("Contain the root gameObject of the Inventory")]private GameObject inventoryRoot; 
+    
+    [Space]
+    public ShowItemProperty itemPropertyPanel;
+   
+    
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -18,19 +33,34 @@ public class InventoryManager : MonoBehaviour
 
     
     //**********    BUTTON TO DISABLE INVENTORY     ****************
-    
     public void DisableInventory()
     {
         Debug.Log("Disable button");
-        for (int i = 0; i < gameObject.transform.childCount; i++)
+        for (int i = 0; i < inventoryRoot.transform.childCount; i++)
         {
-            gameObject.transform.GetChild(i).gameObject.SetActive(false);
+            inventoryRoot.transform.GetChild(i).gameObject.SetActive(false);
         }
     }
     
+    //************    ENABLE INVENTORY    ********************
+    //[UnityEditor.MenuItem("Tools/Inventory/Enable")]
+    public void EnableInventory()
+    {
+        if (inventoryRoot == null)
+        {
+            Debug.LogError("InventoryRoot variable == null");
+            return;
+        }
+        
+        //eanable all gameobject
+        for (int i = 0; i < inventoryRoot.transform.childCount; i++)
+        {
+            inventoryRoot.transform.GetChild(i).gameObject.SetActive(true);
+        }
+    }
+
     //************    BUTTON USE ITEM    ********************
-    public ShowItemProperty itemPropertyPanel;
-    public GameController gameController;
+    
 
     public void OnClickUseItem()
     {
