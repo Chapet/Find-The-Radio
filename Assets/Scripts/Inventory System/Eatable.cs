@@ -9,10 +9,10 @@ public class Eatable : Item
 {
     
     
-    [Range(-100,100)][SerializeField]private int thirstValue; //value between -100 and 100
-    [Range(-100,100)][SerializeField]private int hungerValue;
-    [Range(-100,100)][SerializeField]private int healthValue;
-    [Range(-100,100)][SerializeField]private int fatigueValue;
+    [Range(-100,100)][SerializeField]private int thirstValue=0; //value between -100 and 100
+    [Range(-100,100)][SerializeField]private int hungerValue=0;
+    [Range(-100,100)][SerializeField]private int healthValue=0;
+    [Range(-100,100)][SerializeField]private int fatigueValue=0;
 
     public bool HaveHungerValue()
     {

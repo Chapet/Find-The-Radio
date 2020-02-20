@@ -7,9 +7,9 @@ using UnityEngine.UI;
 public class ShowItemProperty : MonoBehaviour
 {
     
-    [SerializeField]private TextMeshProUGUI itemName;
-    [SerializeField]private Image imageItem;
-    [SerializeField] private TextMeshProUGUI description;
+    [SerializeField] [Tooltip("gameObject that contain the name of the item selected")]private TextMeshProUGUI itemName;
+    [SerializeField][Tooltip("gameObject that contain the item's image")]private Image imageItem;
+    [SerializeField] [Tooltip("gameObject that contain the item's description")]private TextMeshProUGUI description;
 
     private Item itemSelected = null;
     
@@ -25,10 +25,6 @@ public class ShowItemProperty : MonoBehaviour
 
     }
 
-    public ShowItemProperty()
-    {
-       
-    }
     
 
     // Start is called before the first frame update

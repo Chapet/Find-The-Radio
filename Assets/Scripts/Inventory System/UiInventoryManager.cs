@@ -8,9 +8,14 @@ public enum InventoryButton
     All,Food,Drink,Medication,Ressource
 }
 
+/**
+ * This class is use by gameObject that contain the UiItem and that have a GridLayer Component
+ */
+
 public class UiInventoryManager : MonoBehaviour
 {
 
+    
     [SerializeField]
     private Inventory inventory;
 
