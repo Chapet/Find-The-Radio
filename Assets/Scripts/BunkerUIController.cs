@@ -9,13 +9,13 @@ public class BunkerUIController : MonoBehaviour
     private GameObject bunkerPanel;
     public GameObject inventoryPanel;
 
-    public GameObject goBackToBunkerBtn;
+    public GameObject backPanel;
     // Start is called before the first frame update
     void Start()
     {
         bunkerPanel = gameObject;
         bedPanel.SetActive(false);
-        goBackToBunkerBtn.SetActive(false);
+        backPanel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -33,12 +33,12 @@ public class BunkerUIController : MonoBehaviour
         }
         Debug.Log("Going to bed ... zZzZ ");
         bedPanel.SetActive(true);
-        goBackToBunkerBtn.SetActive(true);
+        backPanel.SetActive(true);
     }
     public void GoToBunker()
     {
         bunkerPanel.SetActive(true);
-        goBackToBunkerBtn.SetActive(false);
+        backPanel.SetActive(false);
         bedPanel.SetActive(false);
     }
 }

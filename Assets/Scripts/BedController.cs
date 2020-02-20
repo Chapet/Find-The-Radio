@@ -7,7 +7,7 @@ public class BedController : MonoBehaviour
 {
     public GameObject GameController;
     public GameObject BunkerPanel;
-    public GameObject BackToBunkerBtn;
+    public GameObject backPanel;
     public Color BrightYellow;
     public Color DarkYellow;
     public TMP_Text sleepText;
@@ -38,7 +38,7 @@ public class BedController : MonoBehaviour
     {
         BunkerPanel.SetActive(true);
         gameObject.SetActive(false);
-        BackToBunkerBtn.SetActive(false);
+        backPanel.SetActive(false);
     }
 
     public void SleepButtonClicked() {
