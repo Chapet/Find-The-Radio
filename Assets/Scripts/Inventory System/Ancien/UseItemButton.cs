@@ -20,23 +20,23 @@ public class UseItemButton : MonoBehaviour
             Eatable item = (Eatable) selectedItem;
             if (item.HaveHungerValue())
             {
-                //gameController.hungerBar.addValue(item.GetHunger());
+                //playerController.hungerBar.addValue(item.GetHunger());
             }
 
             if (item.HaveThirstValue())
             {
                 int v = item.GetThirst();
-                //gameController.thirstyBar.addValue(item.GetThirst());
+                //playerController.thirstyBar.addValue(item.GetThirst());
             }
 
             if (item.HaveHealthValue())
             {
-                //gameController.healthBar.addValue(item.GetHealth());
+                //playerController.healthBar.addValue(item.GetHealth());
             }
 
             if (item.HaveFatigueValue())
             {
-                //gameController.energyBar.addValue(item.GetFatigue());
+                //playerController.energyBar.addValue(item.GetEnergy());
             }
         }
     }

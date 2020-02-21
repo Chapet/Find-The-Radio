@@ -9,9 +9,9 @@ using UnityEngine.UI;
 
 public class UiItemSlot : MonoBehaviour
 {
-    Item item;
+    private Item item;
     [SerializeField] private GameObject background;
-    public Image image;
+    [HideInInspector]public Image image;
     private bool isItemInfoEnable = false;
     
     /**
@@ -51,6 +51,11 @@ public class UiItemSlot : MonoBehaviour
         InventoryInfoPanelManager showItemProperty = itemInfoPanel.GetComponent<InventoryInfoPanelManager>();
         showItemProperty.ShowItem(this.item);
         
+    }
+
+    public Item GetItem()
+    {
+        return item;
     }
 
     // Start is called before the first frame update

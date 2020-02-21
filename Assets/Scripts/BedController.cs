@@ -5,8 +5,9 @@ using TMPro;
 
 public class BedController : MonoBehaviour
 {
-    public GameObject GameController;
-    public GameObject BunkerPanel;
+    public GameController gameController;
+    public PlayerController player;
+    //public GameObject BunkerPanel;
     public GameObject backPanel;
     public Color BrightYellow;
     public Color DarkYellow;
@@ -36,7 +37,7 @@ public class BedController : MonoBehaviour
 
     public void ExitButtonClicked()
     {
-        BunkerPanel.SetActive(true);
+        //BunkerPanel.SetActive(true);
         gameObject.SetActive(false);
         backPanel.SetActive(false);
     }
@@ -48,7 +49,9 @@ public class BedController : MonoBehaviour
 
     void Sleep()
     {
-        GameController script = GameController.GetComponent<GameController>();
-        script.UpdateGameClock(sleepTime);
+        gameController.UpdateGameClock(sleepTime);
+        double hours = Math.Truncate(sleepTime);
+        double minutes = Math.Truncate((sleepTime - Math.Truncate(sleepTime)) * 60);
+        player.UpdateEnergy(2 * sleepTime);
     }
 }

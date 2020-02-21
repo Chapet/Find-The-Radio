@@ -1762,9 +1762,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05598dad13fdf2840a077d759262bf42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameController: {fileID: 0}
+  playerController: {fileID: 696615603}
   inventoryRoot: {fileID: 938387047}
-  itemPropertyPanel: {fileID: 0}
+  inventoryInfoPanelManager: {fileID: 1413462434}
+  uiInventoryManager: {fileID: 1874220042}
 --- !u!1 &950245222
 GameObject:
   m_ObjectHideFlags: 0
@@ -2192,9 +2193,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05598dad13fdf2840a077d759262bf42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameController: {fileID: 0}
+  playerController: {fileID: 0}
   inventoryRoot: {fileID: 938387047}
-  itemPropertyPanel: {fileID: 0}
+  inventoryInfoPanelManager: {fileID: 1413462434}
+  uiInventoryManager: {fileID: 1874220042}
 --- !u!114 &1128526140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2471,10 +2473,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   gameClock: 0
-  healthBar: {fileID: 0}
-  hungerBar: {fileID: 0}
-  thirstyBar: {fileID: 0}
-  energyBar: {fileID: 0}
   clock: {fileID: 0}
   BunkerPanel: {fileID: 2031752628}
 --- !u!4 &1220134540
@@ -2546,8 +2544,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemName: {fileID: 1027754652}
-  imageItem: {fileID: 0}
+  imageItem: {fileID: 1444510625}
   description: {fileID: 403516745}
+  useButton: {fileID: 1466887359}
 --- !u!1 &1439043746
 GameObject:
   m_ObjectHideFlags: 0
@@ -2967,9 +2966,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05598dad13fdf2840a077d759262bf42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameController: {fileID: 0}
+  playerController: {fileID: 696615603}
   inventoryRoot: {fileID: 938387047}
-  itemPropertyPanel: {fileID: 0}
+  inventoryInfoPanelManager: {fileID: 1413462434}
+  uiInventoryManager: {fileID: 1874220042}
 --- !u!114 &1466887362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3167,6 +3167,7 @@ MonoBehaviour:
   inventory: {fileID: 11400000, guid: 2e41d23b8ebc72247897924768ac3f61, type: 2}
   itemPrefab: {fileID: 1931949731455969989, guid: 165e963fa8762c8499c079cc77460c07,
     type: 3}
+  player: {fileID: 696615603}
 --- !u!114 &1874220043
 MonoBehaviour:
   m_ObjectHideFlags: 0

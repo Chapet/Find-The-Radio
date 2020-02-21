@@ -50,7 +50,7 @@ public class Item: ScriptableObject
         return this.itemType.Contains(ItemType.Gear);
     }
 
-    public override bool Equals(object other)
+    /*public override bool Equals(object other)
     {
         if (other is Item)
         {
@@ -61,7 +61,7 @@ public class Item: ScriptableObject
             return false;
         }
 
-    }
+    }*/
 
     public string GetDescription()
     {
