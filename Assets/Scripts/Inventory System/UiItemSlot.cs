@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/**
+ * This class is use by every itemSlot GameObject prefab  to show the item into an itemslot
+ */
+
 public class UiItemSlot : MonoBehaviour
 {
     Item item;
-    [SerializeField] private GameObject background; 
-    public bool isEnable = false;
+    [SerializeField] private GameObject background;
     public Image image;
     private bool isItemInfoEnable = false;
     
@@ -19,7 +22,6 @@ public class UiItemSlot : MonoBehaviour
         this.item = item;
         image.sprite = item.GetSprite();
         gameObject.SetActive(true);
-        isEnable = true;
 
     }
 
@@ -28,7 +30,6 @@ public class UiItemSlot : MonoBehaviour
      */
     private void ClearSlot()
     {
-        isEnable = false;
         item = null;
         image.sprite = null;
         gameObject.SetActive(false);
@@ -44,14 +45,12 @@ public class UiItemSlot : MonoBehaviour
             GameObject.Find("InventoryPanel/InfoItemPanel");
             isItemInfoEnable = true;
         }
-
-        Debug.Log("Click");
         
-        
+        // /!\ WARNING TO HAVE THE GOOD LINK FOR THR FIND FUNCTION
         GameObject itemInfoPanel = GameObject.Find("InventoryPanel/InfoItemPanel");
-        ShowItemProperty showItemProperty = itemInfoPanel.GetComponent<ShowItemProperty>();
+        InventoryInfoPanelManager showItemProperty = itemInfoPanel.GetComponent<InventoryInfoPanelManager>();
         showItemProperty.ShowItem(this.item);
-
+        
     }
 
     // Start is called before the first frame update
