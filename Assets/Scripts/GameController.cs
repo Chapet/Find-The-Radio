@@ -7,7 +7,7 @@ using System;
 
 public class GameController : MonoBehaviour {
     [Range(0f, 24f)]
-    public float gameClock = 12f;
+    public float gameClock = 8f;
 
     public int maxHealth = 100;
     public int currentHealth;
@@ -31,7 +31,7 @@ public class GameController : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-
+        //UpdateGameClock(gameClock);
 
         BunkerPanel.SetActive(true);
         currentHealth = maxHealth;
