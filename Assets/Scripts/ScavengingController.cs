@@ -5,7 +5,7 @@ using TMPro;
 
 public class ScavengingController : MonoBehaviour
 {
-    public GameObject GameController;
+    public GameController gameController;
     public GameObject BunkerPanel;
     public GameObject backPanel;
     public Color BrightYellow;
@@ -49,7 +49,7 @@ public class ScavengingController : MonoBehaviour
 
     void Scavenge()
     {
-        GameController script = GameController.GetComponent<GameController>();
-        script.UpdateGameClock(scavengeTime);
+        Debug.Log(scavengeTime);
+        gameController.UpdateGameClock(scavengeTime);
     }
 }

@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
         int value;
         if (inc < 0)
         {
-            value = Mathf.CeilToInt((Mathf.Ceil(inc) + Mathf.Ceil((inc - Mathf.Ceil(inc)))) * 60 / 24);
+            value = Mathf.CeilToInt((Mathf.Ceil(inc) + (inc - Mathf.Ceil(inc))) * 60 / 24);
         }
         else
         {
