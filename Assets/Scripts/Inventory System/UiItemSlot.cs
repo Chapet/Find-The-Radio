@@ -45,14 +45,12 @@ public class UiItemSlot : MonoBehaviour
             GameObject.Find("InventoryPanel/InfoItemPanel");
             isItemInfoEnable = true;
         }
-
-        Debug.Log("Click");
         
-        
+        // /!\ WARNING TO HAVE THE GOOD LINK FOR THR FIND FUNCTION
         GameObject itemInfoPanel = GameObject.Find("InventoryPanel/InfoItemPanel");
-        ShowItemProperty showItemProperty = itemInfoPanel.GetComponent<ShowItemProperty>();
+        InventoryInfoPanelManager showItemProperty = itemInfoPanel.GetComponent<InventoryInfoPanelManager>();
         showItemProperty.ShowItem(this.item);
-
+        
     }
 
     // Start is called before the first frame update

@@ -11,7 +11,7 @@ public enum ItemType
 public class Item: ScriptableObject
 {
     
-    [SerializeField ]public List<ItemType> itemType=new List<ItemType>();
+    [SerializeField] public List<ItemType> itemType=new List<ItemType>();
     [SerializeField] public new string name;
     [SerializeField] private Sprite image;
    

@@ -9,8 +9,8 @@ using UnityEngine;
 public class UseItemButton : MonoBehaviour
 {
 
-    public ShowItemProperty itemPropertyPanel;
-    public GameController gameController;
+    [SerializeField] private InventoryInfoPanelManager itemPropertyPanel;
+    [SerializeField] private GameController gameController;
 
     public void OnClick()
     {

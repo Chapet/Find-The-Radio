@@ -15,7 +15,7 @@ public class InventoryManager : MonoBehaviour
     [Tooltip("Contain the root gameObject of the Inventory")]private GameObject inventoryRoot; 
     
     [Space]
-    public ShowItemProperty itemPropertyPanel;
+    public InventoryInfoPanelManager itemPropertyPanel;
    
     
     
@@ -38,6 +38,7 @@ public class InventoryManager : MonoBehaviour
         Debug.Log("Disable button");
         for (int i = 0; i < inventoryRoot.transform.childCount; i++)
         {
+
             inventoryRoot.transform.GetChild(i).gameObject.SetActive(false);
         }
     }
@@ -59,9 +60,10 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    
+    
     //************    BUTTON USE ITEM    ********************
     
-
     public void OnClickUseItem()
     {
         Item selectedItem = itemPropertyPanel.GetSelectedItem();

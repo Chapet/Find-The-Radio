@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShowItemProperty : MonoBehaviour
+public class InventoryInfoPanelManager : MonoBehaviour
 {
     
     [SerializeField] [Tooltip("gameObject that contain the name of the item selected")]private TextMeshProUGUI itemName;
