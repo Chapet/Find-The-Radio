@@ -2051,6 +2051,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66410602a857a424997293ad3d424fe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player: {fileID: 11400000, guid: 6c0c62af9cb23b54fb88f424ff9ed4b0, type: 2}
   gameClock: 0
   maxHealth: 100
   currentHealth: 0
