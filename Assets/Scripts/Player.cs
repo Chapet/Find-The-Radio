@@ -2,18 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
-{
+[CreateAssetMenu(fileName = "New Inventory", menuName = "MyAsset/Player")]
 
-    [Tooltip("Link to inventory scritableObject")] public Inventory inventory;
-    
+public class Player : ScriptableObject
+{
     // Start is called before the first frame update
     void Start()
-    {
-        //TODO: load player data
-    }
-
-    private void loadItemsInInventory()
     {
         
     }
