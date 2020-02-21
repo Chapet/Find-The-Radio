@@ -7,15 +7,17 @@ public class InventoryManager : MonoBehaviour
 {
     
     [Header("Game Proprity")]
-    public GameController gameController;
+    public PlayerController playerController;
     
 
-    [Header("Inventory Global gameobjects")]
+    [Header("inventory Global gameobjects")]
     [SerializeField] 
-    [Tooltip("Contain the root gameObject of the Inventory")]private GameObject inventoryRoot; 
+    [Tooltip("Contain the root gameObject of the inventory")]private GameObject inventoryRoot; 
     
     [Space]
-    public InventoryInfoPanelManager itemPropertyPanel;
+    public InventoryInfoPanelManager inventoryInfoPanelManager;
+
+    public UiInventoryManager uiInventoryManager;
    
     
     
@@ -44,7 +46,7 @@ public class InventoryManager : MonoBehaviour
     }
     
     //************    ENABLE INVENTORY    ********************
-    //[UnityEditor.MenuItem("Tools/Inventory/Enable")]
+    //[UnityEditor.MenuItem("Tools/inventory/Enable")]
     public void EnableInventory()
     {
         if (inventoryRoot == null)
@@ -66,31 +68,42 @@ public class InventoryManager : MonoBehaviour
     
     public void OnClickUseItem()
     {
-        Item selectedItem = itemPropertyPanel.GetSelectedItem();
+        Item selectedItem = inventoryInfoPanelManager.GetSelectedItem();
+        //TODO: can't be user => popo up else:
+        Debug.Log("Use Item");
+        
         if (selectedItem.IsEatable())
         {
+            Debug.Log("The item is eatable");
             Eatable eat = (Eatable) selectedItem;
             if (eat.HaveHungerValue())
             {
-                //gameController.addHungerValue(eat.GetHunger());
+                playerController.IncrementHunger(eat.GetHunger());
             }
 
             if (eat.HaveThirstValue())
             {
-                int v = eat.GetThirst();
-                //gameController.thirstyBar.addValue(item.GetThirst());
+                playerController.InscrementThirst(eat.GetThirst());
             }
 
             if (eat.HaveHealthValue())
             {
-                //gameController.healthBar.addValue(item.GetHealth());
+                playerController.InscrementHealth(eat.GetHealth());
             }
 
             if (eat.HaveFatigueValue())
             {
-                //gameController.energyBar.addValue(item.GetFatigue());
+                playerController.InscrementEnergy(eat.GetEnergy());
             }
+            
+            
+            
         }
+
+        playerController.inventory.RemoveItem(selectedItem);
+        uiInventoryManager.updatePanel();
+        inventoryInfoPanelManager.cleanPanel();
+        Debug.Log("Item has been removed");
     }
     
 }

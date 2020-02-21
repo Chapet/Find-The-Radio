@@ -47,7 +47,7 @@ public class Eatable : Item
         return healthValue;
     }
 
-    public int GetFatigue()
+    public int GetEnergy()
     {
         return fatigueValue;
     }
