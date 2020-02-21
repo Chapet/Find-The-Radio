@@ -10,23 +10,23 @@ public class GameController : MonoBehaviour
 
     [Header("Scriptable objects")] 
     [Tooltip("Contain the object player")] 
-    public Player Player;
+    public Player player;
     
     [Space]
     [Range(0f, 24f)]
     public float gameClock = 8f;
 
-    public int maxHealth = 100;
-    public int currentHealth;
+    public static int maxHealth = 100;
+    
 
-    public int maxHunger = 100;
-    public int currentHunger;
+    public static int maxHunger = 100;
+    
 
-    public int maxThirst = 100;
-    public int currentThirst;
+    public static int maxThirst = 100;
+   
 
-    public int maxEnergy = 100;
-    public int currentEnergy;
+    public static int maxEnergy = 100;
+   
 
     public StatusBar healthBar;
     public StatusBar hungerBar;
@@ -41,19 +41,19 @@ public class GameController : MonoBehaviour
         //UpdateGameClock(gameClock);
 
         BunkerPanel.SetActive(true);
-        currentHealth = maxHealth;
+        player.currentHealth = maxHealth;
         healthBar.SetMaxValue(maxHealth);
         healthBar.SetValue(maxHealth);
 
-        currentHunger = maxHunger;
+        player.currentHunger = maxHunger;
         hungerBar.SetMaxValue(maxHunger);
         hungerBar.SetValue(maxHunger);
 
-        currentThirst = maxThirst;
+        player.currentThirst = maxThirst;
         thirstyBar.SetMaxValue(maxThirst);
         thirstyBar.SetValue(maxThirst);
 
-        currentEnergy = maxEnergy;
+        player.currentEnergy = maxEnergy;
         energyBar.SetMaxValue(maxEnergy);
         energyBar.SetValue(maxEnergy);
     }
@@ -68,4 +68,17 @@ public class GameController : MonoBehaviour
         String minutes = Math.Truncate((gameClock - Math.Truncate(gameClock)) * 60).ToString("0");
         clock.SetText("Clock : " + hours + "h" + minutes);
     }
+
+    public void addHungerValue(int value)
+    {
+        //getnewValue
+        
+        
+        //MAJ Player
+        
+        //MAJ hungerBar
+        hungerBar.addValue(value);
+    }
+    
+   
 }

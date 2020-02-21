@@ -6,6 +6,11 @@ using UnityEngine;
 
 public class Player : ScriptableObject
 {
+    
+    public  int currentHealth;
+    public int currentHunger;
+    public int currentThirst;
+    public int currentEnergy;
     // Start is called before the first frame update
     void Start()
     {

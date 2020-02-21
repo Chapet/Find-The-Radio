@@ -7,7 +7,7 @@ public class InventoryManager : MonoBehaviour
 {
     
     [Header("Game Proprity")]
-    public GameController playerController;
+    public GameController gameController;
     
 
     [Header("Inventory Global gameobjects")]
@@ -69,24 +69,24 @@ public class InventoryManager : MonoBehaviour
         Item selectedItem = itemPropertyPanel.GetSelectedItem();
         if (selectedItem.IsEatable())
         {
-            Eatable item = (Eatable) selectedItem;
-            if (item.HaveHungerValue())
+            Eatable eat = (Eatable) selectedItem;
+            if (eat.HaveHungerValue())
             {
-                //gameController.hungerBar.addValue(item.GetHunger());
+                gameController.addHungerValue(eat.GetHunger());
             }
 
-            if (item.HaveThirstValue())
+            if (eat.HaveThirstValue())
             {
-                int v = item.GetThirst();
+                int v = eat.GetThirst();
                 //gameController.thirstyBar.addValue(item.GetThirst());
             }
 
-            if (item.HaveHealthValue())
+            if (eat.HaveHealthValue())
             {
                 //gameController.healthBar.addValue(item.GetHealth());
             }
 
-            if (item.HaveFatigueValue())
+            if (eat.HaveFatigueValue())
             {
                 //gameController.energyBar.addValue(item.GetFatigue());
             }
