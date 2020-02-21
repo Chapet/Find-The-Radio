@@ -72,7 +72,7 @@ public class InventoryManager : MonoBehaviour
             Eatable eat = (Eatable) selectedItem;
             if (eat.HaveHungerValue())
             {
-                gameController.addHungerValue(eat.GetHunger());
+                //gameController.addHungerValue(eat.GetHunger());
             }
 
             if (eat.HaveThirstValue())

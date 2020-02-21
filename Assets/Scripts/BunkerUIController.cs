@@ -8,6 +8,7 @@ public class BunkerUIController : MonoBehaviour
     public GameObject bedPanel;
     private GameObject bunkerPanel;
     public GameObject inventoryPanel;
+    public GameObject cheatPanel;
 
     public GameObject backPanel;
     // Start is called before the first frame update
@@ -15,6 +16,7 @@ public class BunkerUIController : MonoBehaviour
     {
         bunkerPanel = gameObject;
         bedPanel.SetActive(false);
+        cheatPanel.SetActive(false);
         backPanel.SetActive(false);
     }
 
@@ -35,10 +37,17 @@ public class BunkerUIController : MonoBehaviour
         bedPanel.SetActive(true);
         backPanel.SetActive(true);
     }
+
     public void GoToBunker()
     {
         bunkerPanel.SetActive(true);
         backPanel.SetActive(false);
         bedPanel.SetActive(false);
+    }
+
+    public void CheatBtnClicked()
+    {
+        cheatPanel.SetActive(true);
+        backPanel.SetActive(true);
     }
 }

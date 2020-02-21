@@ -1,37 +1,16 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using System;
-
-
 
 public class GameController : MonoBehaviour
 {
 
-    [Header("Scriptable objects")] 
     [Tooltip("Contain the object player")] 
-    public Player player;
+    public PlayerController player;
     
     [Space]
     [Range(0f, 24f)]
     public float gameClock = 8f;
-
-    public static int maxHealth = 100;
-    
-
-    public static int maxHunger = 100;
-    
-
-    public static int maxThirst = 100;
-   
-
-    public static int maxEnergy = 100;
-   
-
-    public StatusBar healthBar;
-    public StatusBar hungerBar;
-    public StatusBar thirstyBar;
-    public StatusBar energyBar;
 
     public TMP_Text clock;
     public GameObject BunkerPanel;
@@ -41,21 +20,6 @@ public class GameController : MonoBehaviour
         //UpdateGameClock(gameClock);
 
         BunkerPanel.SetActive(true);
-        player.currentHealth = maxHealth;
-        healthBar.SetMaxValue(maxHealth);
-        healthBar.SetValue(maxHealth);
-
-        player.currentHunger = maxHunger;
-        hungerBar.SetMaxValue(maxHunger);
-        hungerBar.SetValue(maxHunger);
-
-        player.currentThirst = maxThirst;
-        thirstyBar.SetMaxValue(maxThirst);
-        thirstyBar.SetValue(maxThirst);
-
-        player.currentEnergy = maxEnergy;
-        energyBar.SetMaxValue(maxEnergy);
-        energyBar.SetValue(maxEnergy);
     }
 
     // Update is called once per frame
@@ -64,21 +28,10 @@ public class GameController : MonoBehaviour
 
     public void UpdateGameClock(float inc) {
         gameClock = (gameClock + inc) % 24f;
-        String hours = Math.Truncate(gameClock).ToString("0");
-        String minutes = Math.Truncate((gameClock - Math.Truncate(gameClock)) * 60).ToString("0");
-        clock.SetText("Clock : " + hours + "h" + minutes);
-    }
-
-    public void addHungerValue(int value)
-    {
-        //getnewValue
-        
-        
-        //MAJ Player
-        
-        //MAJ hungerBar
-        hungerBar.addValue(value);
-    }
-    
-   
+        double hours = Mathf.Ceil(gameClock);
+        double minutes = Mathf.Ceil((gameClock - Mathf.Ceil(gameClock)) * 60);
+        clock.SetText("Clock : " + hours.ToString("0") + "h" + minutes.ToString("0"));
+        Debug.Log("Decrementing energy by : " + inc);
+        player.UpdateEnergy(-1 * inc);
+    } 
 }
