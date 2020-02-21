@@ -6,8 +6,7 @@ using UnityEngine.UI;
 public class InventoryMenuButtonListener : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] private UiInventoryManager inventoryManager;
-    [SerializeField] private Button allButton;
+    [SerializeField] [Tooltip("Link to the UI gameObject that contain the inventory items")]private UiInventoryManager inventoryManager;
     [SerializeField] private Button foodButton;
     [SerializeField] private Button drinkButton;
     [SerializeField] private Button medicationButton;

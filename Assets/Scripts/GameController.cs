@@ -5,7 +5,14 @@ using System;
 
 
 
-public class GameController : MonoBehaviour {
+public class GameController : MonoBehaviour
+{
+
+    [Header("Scriptable objects")] 
+    [Tooltip("Contain the object player")] 
+    public Player Player;
+    
+    [Space]
     [Range(0f, 24f)]
     public float gameClock = 8f;
 
