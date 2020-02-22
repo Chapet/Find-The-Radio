@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2b5483359660c14aadfe85ea7dfb512, type: 3}
   m_Name: Coffee
   m_EditorClassIdentifier: 
-  itemType: 0100000003000000
+  itemType: 03000000
   name: Coffee
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: cfe8a9fc810cd9945bf961e98bc1a991, type: 3}
   description: 
   thirstValue: 20
   hungerValue: 0
