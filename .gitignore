@@ -66,3 +66,7 @@ crashlytics-build.properties
 .idea/
 
 .vscode/
+
+Assets/Scenes/MyScene.unity
+
+Assets/Scenes/MyScene.unity.meta
