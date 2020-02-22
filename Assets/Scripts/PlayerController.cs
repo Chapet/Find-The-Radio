@@ -6,10 +6,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public int maxHealth = 100;
-    public int maxHunger = 100;
-    public int maxThirst = 100;
-    public int maxEnergy = 100;
+    public static int maxHealth = 100;
+    public static int maxHunger = 100;
+    public static int maxThirst = 100;
+    public static int maxEnergy = 100;
 
     public int currentHealth;
     public int currentHunger;
@@ -74,6 +74,7 @@ public class PlayerController : MonoBehaviour
     public void IncrementHunger(int inc)
     {
         int value;
+        //define new value
         if (inc < 0)
         {
             value = Mathf.Min(maxHunger, currentHunger + inc);
@@ -82,6 +83,11 @@ public class PlayerController : MonoBehaviour
         {
             value = Mathf.Max(0, currentHunger + inc);
         }
+
+        currentHunger = value;
+        
+        //TODO:remove comment when is in bunker scene : hungerBar.SetValue(value);
+        
         Debug.Log("Adding " + inc + " to the Hunger.");
         
     }
@@ -100,7 +106,9 @@ public class PlayerController : MonoBehaviour
         {
             value = Mathf.Max(0, currentThirst + inc);
         }
-        
+
+        currentThirst = value;
+        //TODO:remove comment when is in bunker scene :tirstBar.SetValue(value);
         Debug.Log("Adding " + inc + " to the Thirst.");
         
     }
@@ -119,6 +127,9 @@ public class PlayerController : MonoBehaviour
         {
             value = Mathf.Max(0, currentHealth + inc);
         }
+
+        currentHealth = value;
+        //TODO:remove comment when is in bunker scene :healthBar.SetValue(value);
         Debug.Log("Adding " + inc + " to the Health.");
         
     }
@@ -133,6 +144,9 @@ public class PlayerController : MonoBehaviour
         {
             value = Mathf.Max(0, currentEnergy + inc);
         }
+
+        currentEnergy = value;
+        //TODO:remove comment when is in bunker scene :energyBar.SetValue(value);
         Debug.Log("Adding " + inc + " to the Energy.");
         
     }

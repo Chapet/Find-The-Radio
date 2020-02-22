@@ -72,7 +72,7 @@ public class InventoryManager : MonoBehaviour
         //TODO: can't be user => popo up else:
         Debug.Log("Use Item");
         
-        if (selectedItem.IsEatable())
+        if (selectedItem.IsUsable())
         {
             Debug.Log("The item is eatable");
             Eatable eat = (Eatable) selectedItem;
