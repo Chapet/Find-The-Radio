@@ -11,9 +11,15 @@ public class UiItemSlot : MonoBehaviour
 {
     private Item item;
     [SerializeField] private GameObject background;
-    [HideInInspector]public Image image;
+    public Image image;
     private bool isItemInfoEnable = false;
     
+    void Start()
+    {
+            
+
+    }
+
     /**
      * Enable the itemSlot with item
      */
@@ -59,12 +65,7 @@ public class UiItemSlot : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
-    {
-        
-
-    }
-
+ 
     // Update is called once per frame
     void Update()
     {

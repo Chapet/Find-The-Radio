@@ -16,7 +16,6 @@ public class UiInventoryManager : MonoBehaviour
 {
 
     
-    [SerializeField]
     private Inventory inventory;
 
     [SerializeField] 
@@ -33,8 +32,8 @@ public class UiInventoryManager : MonoBehaviour
         //inventory = Resources.Load("Player/Player inventory") as inventory;
 
         //itemSlots = GetComponentsInChildren<UI_ItemSlot>();
-        
-            
+
+        inventory = player.inventory;
         LoadFoodUiItems();
         
         
@@ -50,6 +49,7 @@ public class UiInventoryManager : MonoBehaviour
         obj.transform.parent = gameObject.transform;
         UiItemSlot slot = obj.GetComponent<UiItemSlot>();
         slot.SetItem(item);
+        obj.GetComponent<RectTransform>().sizeDelta=new Vector2(100,100);
         itemShowed.Add(obj);
     }
 

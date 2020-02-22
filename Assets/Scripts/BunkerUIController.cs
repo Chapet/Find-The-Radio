@@ -65,4 +65,11 @@ public class BunkerUIController : MonoBehaviour
         cheatPanel.SetActive(true);
         backPanel.SetActive(true);
     }
+
+
+    public void InventoryButtonClicked()
+    {
+        inventoryPanel.SetActive(true);
+        inventoryPanel.GetComponent<InventoryManager>().EnableInventory();
+    }
 }
