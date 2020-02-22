@@ -285,6 +285,7 @@ MonoBehaviour:
   drinkButton: {fileID: 1439043747}
   medicationButton: {fileID: 227925870}
   ressourceButton: {fileID: 1454002739}
+  selectedCategory: 0
 --- !u!114 &227925872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -626,6 +627,7 @@ MonoBehaviour:
   drinkButton: {fileID: 1439043747}
   medicationButton: {fileID: 227925870}
   ressourceButton: {fileID: 1454002739}
+  selectedCategory: 0
 --- !u!114 &342650115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1181,7 +1183,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -18.64}
+  m_AnchoredPosition: {x: 19.9, y: -26.1}
   m_SizeDelta: {x: -206, y: 31.769989}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &494313290
@@ -1211,8 +1213,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4290836735
-  m_fontColor: {r: 1, g: 0.9725491, b: 0.75294125, a: 1}
+    rgba: 4285058303
+  m_fontColor: {r: 1, g: 0.8000001, b: 0.40784317, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2193,7 +2195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05598dad13fdf2840a077d759262bf42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 0}
+  playerController: {fileID: 696615603}
   inventoryRoot: {fileID: 938387047}
   inventoryInfoPanelManager: {fileID: 1413462434}
   uiInventoryManager: {fileID: 1874220042}
@@ -2547,6 +2549,7 @@ MonoBehaviour:
   imageItem: {fileID: 1444510625}
   description: {fileID: 403516745}
   useButton: {fileID: 1466887359}
+  itemSelected: {fileID: 0}
 --- !u!1 &1439043746
 GameObject:
   m_ObjectHideFlags: 0
@@ -2638,6 +2641,7 @@ MonoBehaviour:
   drinkButton: {fileID: 1439043747}
   medicationButton: {fileID: 227925870}
   ressourceButton: {fileID: 1454002739}
+  selectedCategory: 0
 --- !u!114 &1439043749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2824,6 +2828,7 @@ MonoBehaviour:
   drinkButton: {fileID: 1439043747}
   medicationButton: {fileID: 227925870}
   ressourceButton: {fileID: 1454002739}
+  selectedCategory: 0
 --- !u!114 &1454002739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3168,6 +3173,7 @@ MonoBehaviour:
   itemPrefab: {fileID: 1931949731455969989, guid: 165e963fa8762c8499c079cc77460c07,
     type: 3}
   player: {fileID: 696615603}
+  menuButtonManager: {fileID: 342650114}
 --- !u!114 &1874220043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3188,7 +3194,7 @@ MonoBehaviour:
   m_ChildAlignment: 1
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 40, y: 40}
+  m_CellSize: {x: 50, y: 50}
   m_Spacing: {x: 10, y: 10}
   m_Constraint: 0
   m_ConstraintCount: 2

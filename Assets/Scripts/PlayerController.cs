@@ -82,6 +82,7 @@ public class PlayerController : MonoBehaviour
         {
             value = Mathf.Max(0, currentHunger + inc);
         }
+        Debug.Log("Adding " + inc + " to the Hunger.");
         
     }
     
@@ -100,6 +101,8 @@ public class PlayerController : MonoBehaviour
             value = Mathf.Max(0, currentThirst + inc);
         }
         
+        Debug.Log("Adding " + inc + " to the Thirst.");
+        
     }
     
     /**
@@ -116,6 +119,7 @@ public class PlayerController : MonoBehaviour
         {
             value = Mathf.Max(0, currentHealth + inc);
         }
+        Debug.Log("Adding " + inc + " to the Health.");
         
     }
     public void InscrementEnergy(int inc)
@@ -129,6 +133,7 @@ public class PlayerController : MonoBehaviour
         {
             value = Mathf.Max(0, currentEnergy + inc);
         }
+        Debug.Log("Adding " + inc + " to the Energy.");
         
     }
 
