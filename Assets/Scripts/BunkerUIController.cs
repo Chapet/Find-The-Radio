@@ -43,6 +43,7 @@ public class BunkerUIController : MonoBehaviour
         bunkerPanel.SetActive(true);
         backPanel.SetActive(false);
         bedPanel.SetActive(false);
+        cheatPanel.SetActive(false);
     }
 
     public void CheatBtnClicked()
