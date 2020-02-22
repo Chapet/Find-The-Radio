@@ -28,8 +28,8 @@ public class GameController : MonoBehaviour
 
     public void UpdateGameClock(float inc) {
         gameClock = (gameClock + inc) % 24f;
-        double hours = Mathf.Ceil(gameClock);
-        double minutes = Mathf.Ceil((gameClock - Mathf.Ceil(gameClock)) * 60);
+        double hours = Mathf.Floor(gameClock);
+        double minutes = Mathf.Abs(Mathf.Ceil((gameClock - Mathf.Ceil(gameClock)) * 60));
         clock.SetText("Clock : " + hours.ToString("0") + "h" + minutes.ToString("0"));
         Debug.Log("Decrementing energy by : " + inc);
         player.UpdateEnergy(-1 * inc);

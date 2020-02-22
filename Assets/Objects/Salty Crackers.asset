@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 0000000001000000
   name: 'Salty Crackers:'
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 27d54f956c9604d4895c44554a530719, type: 3}
   description: 
   thirstValue: 30
   hungerValue: 30
