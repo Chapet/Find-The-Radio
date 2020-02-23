@@ -15,7 +15,8 @@ MonoBehaviour:
   itemType: 00000000
   name: Military Ration
   image: {fileID: 21300000, guid: f223752dd690149d08ed9484695dd37e, type: 3}
-  description: 
+  description: Are you a solder or not?Are you a solder or not?Are you a solder or
+    not?
   thirstValue: 0
   hungerValue: 50
   healthValue: 0

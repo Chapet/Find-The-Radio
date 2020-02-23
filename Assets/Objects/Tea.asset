@@ -15,7 +15,7 @@ MonoBehaviour:
   itemType: 01000000
   name: Tea
   image: {fileID: 21300000, guid: 3010a40ac3a71ba419b4d98ff9d2a2cb, type: 3}
-  description: 
+  description: 'Will help you '
   thirstValue: 30
   hungerValue: 0
   healthValue: 0

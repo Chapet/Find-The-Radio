@@ -8,6 +8,7 @@ public enum InventoryButton
     All,Food,Drink,Medication,Ressource
 }
 
+
 /**
  * This class is use by gameObject that contain the UiItem and that have a GridLayer Component
  */
@@ -22,8 +23,10 @@ public class UiInventoryManager : MonoBehaviour
     private GameObject itemPrefab;
     
     private List<GameObject> itemShowed=new List<GameObject>();
-    [SerializeField]public PlayerController player;
+    [SerializeField] private InventoryManager inventoryManager;
+    private PlayerController player;
     [SerializeField] private InventoryMenuButtonListener menuButtonManager;
+    [HideInInspector]public InventoryButton selectedCategory = InventoryButton.Food;
     
     // Start is called before the first frame update
     void Start()
@@ -32,7 +35,7 @@ public class UiInventoryManager : MonoBehaviour
         //inventory = Resources.Load("Player/Player inventory") as inventory;
 
         //itemSlots = GetComponentsInChildren<UI_ItemSlot>();
-
+        player = inventoryManager.playerController;
         inventory = player.inventory;
         LoadFoodUiItems();
         
@@ -136,18 +139,18 @@ public class UiInventoryManager : MonoBehaviour
      */
     public void updatePanel()
     {
-        switch (menuButtonManager.selectedCategory)
+        switch (selectedCategory)
         {
-            case InventoryCategory.Food:
+            case InventoryButton.Food:
                 LoadFoodUiItems();
                 break;
-            case InventoryCategory.Drink:
+            case InventoryButton.Drink:
                 LoadDrinkItems();
                 break;
-            case InventoryCategory.Medicalion:
+            case InventoryButton.Medication:
                 LoadMedicationItems();
                 break;
-            case InventoryCategory.Ressource:
+            case InventoryButton.Ressource:
                 LoadRessourcesItems();
                 break;
             default:
