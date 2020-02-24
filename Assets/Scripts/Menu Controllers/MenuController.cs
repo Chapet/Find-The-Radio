@@ -22,9 +22,9 @@ public class MenuController : MonoBehaviour
         openCloseMenuAnimator = panel.GetComponent<Animator>();
         panel.SetActive(true);
         StartCoroutine(DoFade(canvGroup, 0, 1));
-        backPanel.SetActive(true);
         openCloseMenuAnimator.SetBool("close", false);
         openCloseMenuAnimator.SetBool("open", true);
+        backPanel.SetActive(true);
     }
 
     private IEnumerator ExitWithAnim(GameObject panel, float f)
