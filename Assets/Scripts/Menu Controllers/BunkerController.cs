@@ -10,6 +10,7 @@ public class BunkerController : MonoBehaviour
     private GameObject bunkerPanel;
     public GameObject inventoryPanel;
     public GameObject cheatPanel;
+    public GameObject craftingPanel;
 
     public GameObject backPanel;
 
@@ -23,6 +24,7 @@ public class BunkerController : MonoBehaviour
         scavengingPanel.SetActive(false);
         inventoryPanel.SetActive(false);
         cheatPanel.SetActive(false);
+        craftingPanel.SetActive(false);
         backPanel.SetActive(false);
     }
 
@@ -36,6 +38,12 @@ public class BunkerController : MonoBehaviour
     {
         Debug.Log("Scavenge: depart into the unknown ...");
         menuController.OpenMenu(scavengingPanel);
+    }
+
+    public void CraftingBtnClicked()
+    {
+        Debug.Log("Let's go crafting ...");
+        menuController.OpenMenu(craftingPanel);
     }
 
     public void GoToBunker()
@@ -56,6 +64,10 @@ public class BunkerController : MonoBehaviour
         if(cheatPanel.activeSelf)
         {
             menuController.ExitMenu(cheatPanel);
+        }
+        if (craftingPanel.activeSelf)
+        {
+            menuController.ExitMenu(craftingPanel);
         }
     }
 
