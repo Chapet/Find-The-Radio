@@ -2046,7 +2046,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1083365977}
-        m_MethodName: ExitButtonClicked
+        m_MethodName: ExitBtnClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2310,7 +2310,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1044469747}
-        m_MethodName: ExitButtonClicked
+        m_MethodName: ExitBtnClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3332,7 +3332,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1316167727}
-        m_MethodName: ExitButtonClicked
+        m_MethodName: ExitBtnClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3452,6 +3452,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 650429680}
   m_CullTransparentMesh: 0
+--- !u!1 &679916864
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 679916866}
+  - component: {fileID: 679916865}
+  m_Layer: 0
+  m_Name: MenuController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &679916865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 679916864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d35722114cfb4f6cb7be7fab9ec46a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  backPanel: {fileID: 131752665}
+--- !u!4 &679916866
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 679916864}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.2777548, y: 0.21167761, z: -15.813556}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &696724442
 GameObject:
   m_ObjectHideFlags: 0
@@ -5251,14 +5295,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameController: {fileID: 1003112623}
   player: {fileID: 312218291}
-  backPanel: {fileID: 131752665}
   BrightYellow: {r: 0, g: 0, b: 0, a: 0}
   DarkYellow: {r: 0, g: 0, b: 0, a: 0}
   sleepText: {fileID: 855575292}
   Slider: {fileID: 790665849}
-  anim: {fileID: 1044469750}
-  fadeDuration: 0.25
-  canvGroup: {fileID: 1044469751}
+  menuController: {fileID: 679916865}
 --- !u!114 &1044469748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5466,6 +5507,8 @@ GameObject:
   - component: {fileID: 1083365979}
   - component: {fileID: 1083365978}
   - component: {fileID: 1083365977}
+  - component: {fileID: 1083365981}
+  - component: {fileID: 1083365980}
   m_Layer: 5
   m_Name: CheatPanel
   m_TagString: Untagged
@@ -5509,10 +5552,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2142b97a8add3434a9f2b708d445c30b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backPanel: {fileID: 131752665}
   gameController: {fileID: 1003112623}
   gameClockText: {fileID: 2134348616}
   timeSlider: {fileID: 1275198901}
+  menuController: {fileID: 679916865}
 --- !u!114 &1083365978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5549,6 +5592,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1083365975}
   m_CullTransparentMesh: 0
+--- !u!225 &1083365980
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083365975}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
+--- !u!95 &1083365981
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083365975}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1b363e05447ec465a921720d4ab99434, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1092413405
 GameObject:
   m_ObjectHideFlags: 0
@@ -6686,6 +6760,8 @@ GameObject:
   - component: {fileID: 1316167729}
   - component: {fileID: 1316167728}
   - component: {fileID: 1316167727}
+  - component: {fileID: 1316167731}
+  - component: {fileID: 1316167730}
   m_Layer: 5
   m_Name: ScavengingPanel
   m_TagString: Untagged
@@ -6731,11 +6807,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameController: {fileID: 1003112623}
   BunkerPanel: {fileID: 1791890087}
-  backPanel: {fileID: 131752665}
   BrightYellow: {r: 0, g: 0, b: 0, a: 0}
   DarkYellow: {r: 0, g: 0, b: 0, a: 0}
   scavengeText: {fileID: 1315742847}
   Slider: {fileID: 885718515}
+  menuController: {fileID: 679916865}
 --- !u!114 &1316167728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6772,6 +6848,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1316167725}
   m_CullTransparentMesh: 0
+--- !u!95 &1316167730
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1316167725}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1b363e05447ec465a921720d4ab99434, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!225 &1316167731
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1316167725}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1336142143
 GameObject:
   m_ObjectHideFlags: 0
@@ -6929,7 +7036,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1316167727}
-        m_MethodName: ScavengingButtonClicked
+        m_MethodName: ScavengingBtnClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9153,6 +9260,7 @@ MonoBehaviour:
   inventoryPanel: {fileID: 2081677164}
   cheatPanel: {fileID: 1083365975}
   backPanel: {fileID: 131752665}
+  menuController: {fileID: 679916865}
 --- !u!114 &1791890090
 MonoBehaviour:
   m_ObjectHideFlags: 0

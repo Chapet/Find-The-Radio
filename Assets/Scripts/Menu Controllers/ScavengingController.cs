@@ -7,18 +7,14 @@ public class ScavengingController : MonoBehaviour
 {
     public GameController gameController;
     public GameObject BunkerPanel;
-    public GameObject backPanel;
+    //public GameObject backPanel;
     public Color BrightYellow;
     public Color DarkYellow;
     public TMP_Text scavengeText;
     public GameObject Slider;
     private float scavengeTime;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
+    public MenuController menuController;
 
     void Update()
     {
@@ -34,17 +30,15 @@ public class ScavengingController : MonoBehaviour
         Debug.Log(newValue);
     }
 
-    public void ExitButtonClicked()
+    public void ExitBtnClicked()
     {
-        BunkerPanel.SetActive(true);
-        gameObject.SetActive(false);
-        backPanel.SetActive(false);
+        menuController.ExitMenu(gameObject);
     }
 
-    public void ScavengingButtonClicked()
+    public void ScavengingBtnClicked()
     {
         Scavenge();
-        ExitButtonClicked();
+        menuController.ExitMenu(gameObject);
     }
 
     void Scavenge()

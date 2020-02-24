@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BunkerUIController : MonoBehaviour
+public class BunkerController : MonoBehaviour
 {
     public GameObject bedPanel;
     public GameObject scavengingPanel;
@@ -12,10 +12,13 @@ public class BunkerUIController : MonoBehaviour
     public GameObject cheatPanel;
 
     public GameObject backPanel;
+
+    public MenuController menuController;
     // Start is called before the first frame update
     void Start()
     {
         bunkerPanel = gameObject;
+        bunkerPanel.SetActive(true);
         bedPanel.SetActive(false);
         scavengingPanel.SetActive(false);
         inventoryPanel.SetActive(false);
@@ -23,48 +26,36 @@ public class BunkerUIController : MonoBehaviour
         backPanel.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void SleepButtonClicked()
     {
         Debug.Log("Going to bed ... zZzZ ");
-        bedPanel.SetActive(true);
-        bedPanel.GetComponent<BedController>().PlayOpenAnim();
+        menuController.OpenMenu(bedPanel);
     }
 
     public void ScavengeButtonClicked()
     {
         Debug.Log("Scavenge: depart into the unknown ...");
-        scavengingPanel.SetActive(true);
-        backPanel.SetActive(true);
+        menuController.OpenMenu(scavengingPanel);
     }
 
     public void GoToBunker()
     {
-        bunkerPanel.SetActive(true);
-        backPanel.SetActive(false);
-        StartCoroutine(bedPanel.GetComponent<BedController>().ExitWithAnim(bedPanel.GetComponent<BedController>().animDuration));
-        //bedPanel.SetActive(false);
-        scavengingPanel.SetActive(false);
-        inventoryPanel.SetActive(false);
-        cheatPanel.SetActive(false);
+        //bunkerPanel.SetActive(true);
+        menuController.ExitMenu(bedPanel);
+        menuController.ExitMenu(scavengingPanel);
+        //menuController.ExitMenu(inventoryPanel);
+        menuController.ExitMenu(cheatPanel);
     }
 
     public void CheatBtnClicked()
     {
-        cheatPanel.SetActive(true);
-        backPanel.SetActive(true);
+        menuController.OpenMenu(cheatPanel);
     }
 
 
     public void InventoryButtonClicked()
     {
-        inventoryPanel.SetActive(true);
-        backPanel.SetActive(true);
+        menuController.OpenMenu(inventoryPanel);
         inventoryPanel.GetComponent<InventoryManager>().EnableInventory();
     }
 }
