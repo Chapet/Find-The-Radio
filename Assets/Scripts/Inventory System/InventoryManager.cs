@@ -20,20 +20,6 @@ public class InventoryManager : MonoBehaviour
     public UiInventoryManager uiInventoryManager;
    
     
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    
     //**********    BUTTON TO DISABLE INVENTORY     ****************
     public void DisableInventory()
     {

@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum InventoryCategory
-{
-    Food,Drink,Medicalion,Ressource
-}
+
 
 public class InventoryMenuButtonListener : MonoBehaviour
 {
@@ -16,32 +13,34 @@ public class InventoryMenuButtonListener : MonoBehaviour
     [SerializeField] private Button drinkButton;
     [SerializeField] private Button medicationButton;
     [SerializeField] private Button ressourceButton;
-    public InventoryCategory selectedCategory;
+
+    [SerializeField] private UiInventoryManager uiInventoryManager;
+    
     
 
     
 
     public void OnClickFood()
     {
-        selectedCategory = InventoryCategory.Food;
+        uiInventoryManager.selectedCategory = InventoryButton.Food;
         inventoryManager.LoadFoodUiItems();
     }
 
     public void OnClickDrink()
     {
-        selectedCategory = InventoryCategory.Drink;
+        uiInventoryManager.selectedCategory = InventoryButton.Drink;
         inventoryManager.LoadDrinkItems();
     }
 
     public void OnClickMedication()
     {
-        selectedCategory = InventoryCategory.Medicalion;
+        uiInventoryManager.selectedCategory = InventoryButton.Medication;
         inventoryManager.LoadMedicationItems();
     }
 
     public void OnClickRessource()
     {
-        selectedCategory = InventoryCategory.Ressource;
+        uiInventoryManager.selectedCategory = InventoryButton.Ressource;
         inventoryManager.LoadRessourcesItems();
     }
 }

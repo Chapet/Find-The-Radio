@@ -41,10 +41,22 @@ public class BunkerController : MonoBehaviour
     public void GoToBunker()
     {
         //bunkerPanel.SetActive(true);
-        menuController.ExitMenu(bedPanel);
-        menuController.ExitMenu(scavengingPanel);
-        //menuController.ExitMenu(inventoryPanel);
-        menuController.ExitMenu(cheatPanel);
+        if(bedPanel.activeSelf)
+        {
+            menuController.ExitMenu(bedPanel);
+        }
+        if(scavengingPanel.activeSelf)
+        {
+            menuController.ExitMenu(scavengingPanel);
+        }
+        if(inventoryPanel.activeSelf)
+        {
+            menuController.ExitMenu(inventoryPanel);
+        }
+        if(cheatPanel.activeSelf)
+        {
+            menuController.ExitMenu(cheatPanel);
+        }
     }
 
     public void CheatBtnClicked()

@@ -15,7 +15,7 @@ MonoBehaviour:
   itemType: 0000000001000000
   name: 'Salty Crackers:'
   image: {fileID: 21300000, guid: 27d54f956c9604d4895c44554a530719, type: 3}
-  description: 
+  description: this is the perfect food
   thirstValue: 30
   hungerValue: 30
   healthValue: 0
