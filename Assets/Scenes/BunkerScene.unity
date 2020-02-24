@@ -975,7 +975,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &131752666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1019,7 +1019,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 131752665}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4030,7 +4030,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -5204,13 +5204,15 @@ GameObject:
   - component: {fileID: 1044469749}
   - component: {fileID: 1044469748}
   - component: {fileID: 1044469747}
+  - component: {fileID: 1044469750}
+  - component: {fileID: 1044469751}
   m_Layer: 5
   m_Name: BedPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1044469746
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5254,6 +5256,9 @@ MonoBehaviour:
   DarkYellow: {r: 0, g: 0, b: 0, a: 0}
   sleepText: {fileID: 855575292}
   Slider: {fileID: 790665849}
+  anim: {fileID: 1044469750}
+  fadeDuration: 0.25
+  canvGroup: {fileID: 1044469751}
 --- !u!114 &1044469748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5267,7 +5272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.0627451, g: 0.0627451, b: 0.14117648, a: 1}
+  m_Color: {r: 0.0627451, g: 0.0627451, b: 0.14117648, a: 0.9019608}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -5290,6 +5295,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1044469745}
   m_CullTransparentMesh: 0
+--- !u!95 &1044469750
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044469745}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1b363e05447ec465a921720d4ab99434, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!225 &1044469751
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1044469745}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1044533420
 GameObject:
   m_ObjectHideFlags: 0
@@ -5490,7 +5526,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.0627451, g: 0.0627451, b: 0.14117648, a: 1}
+  m_Color: {r: 0.0627451, g: 0.0627451, b: 0.14117648, a: 0.9019608}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -6713,7 +6749,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.0627451, g: 0.0627451, b: 0.14117648, a: 1}
+  m_Color: {r: 0.0627451, g: 0.0627451, b: 0.14117648, a: 0.9019608}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -7070,7 +7106,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0, g: 0, b: 0, a: 0.5019608}
+    m_NormalColor: {r: 0, g: 0, b: 0, a: 0.1254902}
     m_HighlightedColor: {r: 0, g: 0, b: 0, a: 0.1254902}
     m_PressedColor: {r: 0, g: 0, b: 0, a: 0.1254902}
     m_SelectedColor: {r: 0, g: 0, b: 0, a: 0.1254902}
@@ -9564,7 +9600,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -9620,7 +9656,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2081677165
 RectTransform:
   m_ObjectHideFlags: 0

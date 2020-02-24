@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -14,11 +15,17 @@ public class BedController : MonoBehaviour
     public TMP_Text sleepText;
     public GameObject Slider;
     private float sleepTime;
-    
+
+    public Animator anim;
+
+    public float animDuration = 15f / 60f;
+
+    public CanvasGroup canvGroup;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     void Update()
@@ -38,8 +45,9 @@ public class BedController : MonoBehaviour
     public void ExitButtonClicked()
     {
         //BunkerPanel.SetActive(true);
-        gameObject.SetActive(false);
-        backPanel.SetActive(false);
+        StartCoroutine(DoFade(canvGroup, 1, 0));
+        StartCoroutine(ExitWithAnim(animDuration));
+        
     }
 
     public void SleepButtonClicked() {
@@ -53,5 +61,37 @@ public class BedController : MonoBehaviour
         double hours = Math.Truncate(sleepTime);
         double minutes = Math.Truncate((sleepTime - Math.Truncate(sleepTime)) * 60);
         player.UpdateEnergy(2 * sleepTime);
+    }
+
+    public IEnumerator ExitWithAnim(float f)
+    {
+        Debug.Log("Waiting for " + f + " seconds ...");
+        anim.SetBool("open", false);
+        anim.SetBool("close", true);
+        backPanel.SetActive(false);
+        yield return new WaitForSeconds(f);
+        anim.SetBool("close", false);
+        gameObject.SetActive(false);
+    }
+
+    public void PlayOpenAnim()
+    {
+        StartCoroutine(DoFade(canvGroup, 0, 1));
+        backPanel.SetActive(true);
+        anim.SetBool("close", false);
+        anim.SetBool("open", true);
+    }
+
+    private IEnumerator DoFade(CanvasGroup c, float start, float end)
+    {
+        float counter = 0f;
+
+        while(counter < animDuration)
+        {
+            counter += Time.deltaTime;
+            c.alpha = Mathf.Lerp(start, end, counter / animDuration);
+
+            yield return null;
+        }
     }
 }

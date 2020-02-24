@@ -33,7 +33,7 @@ public class BunkerUIController : MonoBehaviour
     {
         Debug.Log("Going to bed ... zZzZ ");
         bedPanel.SetActive(true);
-        backPanel.SetActive(true);
+        bedPanel.GetComponent<BedController>().PlayOpenAnim();
     }
 
     public void ScavengeButtonClicked()
@@ -47,7 +47,8 @@ public class BunkerUIController : MonoBehaviour
     {
         bunkerPanel.SetActive(true);
         backPanel.SetActive(false);
-        bedPanel.SetActive(false);
+        StartCoroutine(bedPanel.GetComponent<BedController>().ExitWithAnim(bedPanel.GetComponent<BedController>().animDuration));
+        //bedPanel.SetActive(false);
         scavengingPanel.SetActive(false);
         inventoryPanel.SetActive(false);
         cheatPanel.SetActive(false);
