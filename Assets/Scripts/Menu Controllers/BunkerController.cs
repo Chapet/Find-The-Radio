@@ -12,6 +12,8 @@ public class BunkerController : MonoBehaviour
     public GameObject cheatPanel;
     public GameObject craftingPanel;
 
+    public TabManager tabController;
+
     public GameObject backPanel;
 
     public MenuController menuController;
@@ -59,6 +61,7 @@ public class BunkerController : MonoBehaviour
         }
         if(inventoryPanel.activeSelf)
         {
+            tabController.CloseTabs();
             menuController.ExitMenu(inventoryPanel);
         }
         if(cheatPanel.activeSelf)
