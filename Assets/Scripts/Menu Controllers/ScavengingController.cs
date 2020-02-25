@@ -13,6 +13,8 @@ public class ScavengingController : MonoBehaviour
     public TMP_Text scavengeText;
     public GameObject Slider;
     private float scavengeTime;
+    [Tooltip("Contain the object player")]
+    public PlayerController player;
 
     public MenuController menuController;
 
@@ -45,5 +47,6 @@ public class ScavengingController : MonoBehaviour
     {
         Debug.Log(scavengeTime);
         gameController.UpdateGameClock(scavengeTime);
+        player.UpdateEnergy(-2f * scavengeTime);
     }
 }
