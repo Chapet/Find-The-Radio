@@ -38,12 +38,12 @@ public class InventoryInfoPanelManager : MonoBehaviour
 
         if (item.IsUsable())
         {
-            Eatable eat = (Eatable) item;
+            Usable eat = (Usable) item;
             rootProperties.SetActive((true));
-            healthTxt.SetText(PropertyToString(Item.MIN_HEALTH_VALUE,Item.MAX_HEALTH_VALUE,eat.GetHealth()));
-            hungerTxt.SetText(PropertyToString(Item.MIN_HUNGER_VALUE,Item.MAX_HUNGER_VALUE,eat.GetHunger()));
-            thirstTxt.SetText(PropertyToString(Item.MIN_THIST_VALUE,Item.MAX_THIST_VALUE,eat.GetThirst()));
-            energyTxt.SetText(PropertyToString(Item.MIN_ENERGY_VALUE,Item.MAX_ENERGY_VALUE,eat.GetEnergy()));
+            healthTxt.SetText(PropertyToString(Usable.MIN_HEALTH_VALUE,Usable.MAX_HEALTH_VALUE,eat.GetHealth()));
+            hungerTxt.SetText(PropertyToString(Usable.MIN_HUNGER_VALUE,Usable.MAX_HUNGER_VALUE,eat.GetHunger()));
+            thirstTxt.SetText(PropertyToString(Usable.MIN_THIST_VALUE,Usable.MAX_THIST_VALUE,eat.GetThirst()));
+            energyTxt.SetText(PropertyToString(Usable.MIN_ENERGY_VALUE,Usable.MAX_ENERGY_VALUE,eat.GetEnergy()));
             
         }
 

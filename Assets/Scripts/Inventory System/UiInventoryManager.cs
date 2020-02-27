@@ -71,7 +71,7 @@ public class UiInventoryManager : MonoBehaviour
         ClearUiInventory();
         foreach (Item i in inventory.itemsList)
         {
-            if (i.itemType.Contains(ItemType.HungerValue))
+            if (((Usable)i).HaveHungerValue())
             {
                 LoadUiItem(i);
             }
@@ -83,8 +83,7 @@ public class UiInventoryManager : MonoBehaviour
         ClearUiInventory();
         foreach (Item i in inventory.itemsList)
         {
-            if (i.itemType.Contains(ItemType.ThistValue))
-            {
+            if (((Usable)i).HaveThirstValue()){
                 LoadUiItem(i);
             }
         }
@@ -95,7 +94,7 @@ public class UiInventoryManager : MonoBehaviour
         ClearUiInventory();
         foreach (Item i in inventory.itemsList)
         {
-            if (i.itemType.Contains(ItemType.HealthValue))
+            if (((Usable)i).HaveEnergyValue())
             {
                 LoadUiItem(i);
             }
@@ -107,7 +106,7 @@ public class UiInventoryManager : MonoBehaviour
         ClearUiInventory();
         foreach (Item i in inventory.itemsList)
         {
-            if (i.itemType.Contains(ItemType.Craftable)||i.itemType.Contains(ItemType.Gear)||i.itemType.Contains(ItemType.Scavengeable))
+            if (i.itemType.Contains(ItemType.Craftable)||i.itemType.Contains(ItemType.Gear))
             {
                 LoadUiItem(i);
             }

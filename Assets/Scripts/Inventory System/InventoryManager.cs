@@ -61,7 +61,7 @@ public class InventoryManager : MonoBehaviour
         if (selectedItem.IsUsable())
         {
             Debug.Log("The item is eatable");
-            Eatable eat = (Eatable) selectedItem;
+            Usable eat = (Usable) selectedItem;
             if (eat.HaveHungerValue())
             {
                 playerController.IncrementHunger(eat.GetHunger());
@@ -77,7 +77,7 @@ public class InventoryManager : MonoBehaviour
                 playerController.InscrementHealth(eat.GetHealth());
             }
 
-            if (eat.HaveFatigueValue())
+            if (eat.HaveEnergyValue())
             {
                 playerController.InscrementEnergy(eat.GetEnergy());
             }
