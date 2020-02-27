@@ -20,7 +20,7 @@ public class TabManager : MonoBehaviour
     private TMP_Text ressourcesTabText;
 
     private Vector2 unselectedAnchors;
-    private Vector2 selectedAnchors = new Vector2(240f, 5f);
+    private Vector2 selectedAnchors = new Vector2(215f, 5f);
     
 
     public float fadeDuration = 0.3f;
