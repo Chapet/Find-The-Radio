@@ -83,6 +83,5 @@ public class BunkerController : MonoBehaviour
     public void InventoryButtonClicked()
     {
         menuController.OpenMenu(inventoryPanel);
-        inventoryPanel.GetComponent<InventoryManager>().EnableInventory();
     }
 }

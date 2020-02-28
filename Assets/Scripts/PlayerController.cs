@@ -22,8 +22,6 @@ public class PlayerController : MonoBehaviour
 
     public StatusBar energyBar;
 
-    public Inventory inventory;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -133,7 +131,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Adding " + inc + " to the Health.");
         
     }
-    public void InscrementEnergy(int inc)
+    public void IncrementEnergy(int inc)
     {
         int value;
         if (inc < 0)
