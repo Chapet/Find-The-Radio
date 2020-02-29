@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class InventoryController : MonoBehaviour
 {
@@ -8,17 +10,33 @@ public class InventoryController : MonoBehaviour
     public GameObject slotPrefab;
     public CanvasGroup canvasGroup;
     public GameObject contentPanel;
+    public InventoryManager inventory;
 
+    public TMP_Text nameText;
+    public TMP_Text descriptionText;
+    public Image itemPreview;
+
+    public Color normalColor;
+    public Color selectedColor;
+
+    Item selectedItem = null;
+    Button prevSelectedSlot = null;
 
     private float fadeDuration = 0.3f;
 
-    public void Show(List<Item> inventory)
+    public void Show(List<Item> items)
     {
-        foreach(Item i in inventory)
+        foreach(Item i in items)
         {
             GameObject obj = Instantiate(slotPrefab);
-            obj.GetComponent<InventorySlot>().AddItem(i);
+            Button btn = obj.GetComponent<Button>();
+            InventorySlot slot = obj.GetComponent<InventorySlot>();
+            slot.AddItem(i);
             obj.transform.SetParent(contentPanel.transform, false);
+            btn.onClick.AddListener(delegate
+            {
+                SlotListener(slot, btn);
+            });
         }
         scrollView.SetActive(true);
         StartCoroutine(DoFade(0, 1));
@@ -47,6 +65,39 @@ public class InventoryController : MonoBehaviour
             canvasGroup.alpha = Mathf.Lerp(start, end, counter / fadeDuration);
 
             yield return null;
+        }
+    }
+
+    public void SlotListener(InventorySlot slot, Button btn)
+    {
+        if (prevSelectedSlot != null)
+        {
+            prevSelectedSlot.GetComponent<Image>().color = normalColor;
+        }
+
+        Item i = slot.GetItem();
+        Debug.Log("It is : " + i.name);
+
+        btn.GetComponent<Image>().color = selectedColor;
+        nameText.SetText(i.name);
+        descriptionText.SetText(i.GetDescription());
+        itemPreview.sprite = i.GetSprite();
+        selectedItem = i;
+        prevSelectedSlot = btn;
+    }
+
+    public void UseBtnClicked()
+    {
+        if (selectedItem != null)
+        {
+            Debug.Log(selectedItem + " used!");
+            if (selectedItem is Usable)
+            {
+                Debug.Log("This item is usable!");
+            }
+            inventory.RemoveItem(selectedItem);
+            Destroy(prevSelectedSlot.gameObject);
+            selectedItem = null;
         }
     }
 }

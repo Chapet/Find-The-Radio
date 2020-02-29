@@ -8,6 +8,9 @@ namespace Inventory_System
         option1,option2
     }
 
+    [CreateAssetMenu(fileName = "Gear Item", menuName = "MyAsset/Items/Gear")]
+
+
     public class Gear:Item
     {
         [SerializeField] private int scavengRate = 0; //change d'avoir certain item

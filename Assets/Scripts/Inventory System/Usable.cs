@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-//[CreateAssetMenu(fileName="New ThistValue item",menuName="MyAsset/Items/Usable")]
+[CreateAssetMenu(fileName="Usable Item",menuName="MyAsset/Items/Usable")]
 
 
 public class Usable : Item

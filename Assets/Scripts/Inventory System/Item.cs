@@ -9,7 +9,7 @@ public enum ItemType
     Food,Heal,Usable,Craftable,Gear
 }
 
-[CreateAssetMenu(fileName="Item Example",menuName="MyAsset/Items/Item")]
+[CreateAssetMenu(fileName="Item",menuName="MyAsset/Items/Item")]
 
 public class Item: ScriptableObject
 {

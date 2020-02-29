@@ -7,6 +7,7 @@ using TMPro;
 public class TabManager : MonoBehaviour
 {
     public InventoryManager inventory;
+    public InventoryController inventoryController;
 
     public GameObject headerPanel;
     public GameObject contentPanel;
@@ -88,7 +89,7 @@ public class TabManager : MonoBehaviour
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, foodDrinkTab.GetComponent<Image>()));
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, contentPanel.GetComponent<Image>()));
                     foodDrinkTab.GetComponent<RectTransform>().sizeDelta = selectedAnchors;
-                    scrollView.GetComponent<InventoryController>().Show(inventory.GetItems(ItemType.Food));
+                    inventoryController.Show(inventory.GetItems(ItemType.Food));
                     whichTabIsActive = Tab.FoodDrink;
                 }
                 else
@@ -104,7 +105,7 @@ public class TabManager : MonoBehaviour
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, gearTab.GetComponent<Image>()));
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, contentPanel.GetComponent<Image>()));
                     gearTab.GetComponent<RectTransform>().sizeDelta = selectedAnchors;
-                    scrollView.GetComponent<InventoryController>().Show(inventory.GetItems(ItemType.Gear));
+                    inventoryController.Show(inventory.GetItems(ItemType.Gear));
                     whichTabIsActive = Tab.Gear;
                 }
                 else
@@ -120,7 +121,7 @@ public class TabManager : MonoBehaviour
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, medsTab.GetComponent<Image>()));
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, contentPanel.GetComponent<Image>()));
                     medsTab.GetComponent<RectTransform>().sizeDelta = selectedAnchors;
-                    scrollView.GetComponent<InventoryController>().Show(inventory.GetItems(ItemType.Heal));
+                    inventoryController.Show(inventory.GetItems(ItemType.Heal));
                     whichTabIsActive = Tab.Meds;
                 }
                 break;
@@ -132,7 +133,7 @@ public class TabManager : MonoBehaviour
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, ressourcesTab.GetComponent<Image>()));
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, contentPanel.GetComponent<Image>()));
                     ressourcesTab.GetComponent<RectTransform>().sizeDelta = selectedAnchors;
-                    scrollView.GetComponent<InventoryController>().Show(inventory.GetItems(ItemType.Usable));
+                    inventoryController.Show(inventory.GetItems(ItemType.Usable));
                     whichTabIsActive = Tab.Ressources;
                 }
                 else
@@ -156,11 +157,11 @@ public class TabManager : MonoBehaviour
     {
         //Debug.Log("PrintOnEnable: script was enabled");
         scrollView.SetActive(false);
-}
+    }
 
     public void CloseTabs()
     {
-        scrollView.GetComponent<InventoryController>().Clear();
+        inventoryController.Clear();
         for (int i = 0; i < 4; i++)
         {
             GameObject btn = headerPanel.transform.GetChild(i).gameObject;

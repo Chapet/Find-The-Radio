@@ -19,4 +19,9 @@ public class InventorySlot : MonoBehaviour
         icon.sprite = null;
         icon.enabled = false;
     }
+
+    public Item GetItem()
+    {
+        return item;
+    } 
 }

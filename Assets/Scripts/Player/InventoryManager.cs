@@ -5,7 +5,7 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
     public InventoryExample inventoryExample;
-    List<Item> inventory;
+    public List<Item> inventory;
     public bool useExample = false;
     // Start is called before the first frame update
     void Start()
@@ -35,5 +35,11 @@ public class InventoryManager : MonoBehaviour
             }
         }
         return list;
+    }
+
+    public void RemoveItem(Item item)
+    {
+        inventory.Remove(item);
+        Debug.Log(item + " has been removed from the inventory");
     }
 }

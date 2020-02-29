@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Inventory Example
   m_EditorClassIdentifier: 
   exampleItems:
-  - {fileID: 11400000, guid: 1163422816beb40d9bec2a4614ee1a3a, type: 2}
+  - {fileID: 11400000, guid: bd65ae37951584cfda5f36f3ac0f60bb, type: 2}
   - {fileID: 11400000, guid: d3c80bd5216154eeab2c9a8435d029cd, type: 2}
-  - {fileID: 11400000, guid: 5eb011011dfa64f8991ecfeb555f7cc7, type: 2}
-  - {fileID: 11400000, guid: 7bdaa8bd231594184bee3c926fd610a4, type: 2}
-  numberOfItems: 100
+  - {fileID: 11400000, guid: d4d72ae0e719f4d68b3b114db692dc92, type: 2}
+  - {fileID: 11400000, guid: 36d57604fd8264cb7ba6cadce13d73dd, type: 2}
+  numberOfItems: 64
