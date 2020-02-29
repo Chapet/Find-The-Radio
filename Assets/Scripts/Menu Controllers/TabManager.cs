@@ -6,16 +6,19 @@ using TMPro;
 
 public class TabManager : MonoBehaviour
 {
+    public InventoryManager inventory;
+
     public GameObject headerPanel;
     public GameObject contentPanel;
+    public GameObject scrollView;
 
-    public Button foodTab;
-    public Button drinkTab;
+    public Button foodDrinkTab;
+    public Button gearTab;
     public Button medsTab;
     public Button ressourcesTab;
 
-    private TMP_Text foodTabText;
-    private TMP_Text drinkTabText;
+    private TMP_Text foodDrinkTabText;
+    private TMP_Text gearTabText;
     private TMP_Text medsTabText;
     private TMP_Text ressourcesTabText;
 
@@ -28,90 +31,136 @@ public class TabManager : MonoBehaviour
     public Color brightColor;
     public Color darkColor;
 
+    Tab whichTabIsActive = Tab.None;
+
     void Awake()
     {
-        foodTab.GetComponent<Image>().color = darkColor;
-        drinkTab.GetComponent<Image>().color = darkColor;
+        foodDrinkTab.GetComponent<Image>().color = darkColor;
+        gearTab.GetComponent<Image>().color = darkColor;
         medsTab.GetComponent<Image>().color = darkColor;
         ressourcesTab.GetComponent<Image>().color = darkColor;
 
-        foodTab.onClick.AddListener(delegate { TabBtnListener(Tab.Food); });
-        drinkTab.onClick.AddListener(delegate { TabBtnListener(Tab.Drink); });
+        foodDrinkTab.onClick.AddListener(delegate { TabBtnListener(Tab.FoodDrink); });
+        gearTab.onClick.AddListener(delegate { TabBtnListener(Tab.Gear); });
         medsTab.onClick.AddListener(delegate { TabBtnListener(Tab.Meds); });
         ressourcesTab.onClick.AddListener(delegate { TabBtnListener(Tab.Ressources); });
 
-        foodTabText = foodTab.transform.GetChild(0).gameObject.GetComponent<TMP_Text>();
-        drinkTabText = drinkTab.transform.GetChild(0).gameObject.GetComponent<TMP_Text>();
+        foodDrinkTabText = foodDrinkTab.transform.GetChild(0).gameObject.GetComponent<TMP_Text>();
+        gearTabText = gearTab.transform.GetChild(0).gameObject.GetComponent<TMP_Text>();
         medsTabText = medsTab.transform.GetChild(0).gameObject.GetComponent<TMP_Text>();
         ressourcesTabText = ressourcesTab.transform.GetChild(0).gameObject.GetComponent<TMP_Text>();
 
-        /*
-        foodTabText.color = brightColor;
-        drinkTabText.color = brightColor;
-        medsTabText.color = brightColor;
-        ressourcesTabText.color = brightColor;
-        */
-
         contentPanel.GetComponent<Image>().color = darkColor;
 
-        unselectedAnchors = foodTab.GetComponent<RectTransform>().sizeDelta;
+        unselectedAnchors = foodDrinkTab.GetComponent<RectTransform>().sizeDelta;
     }
 
     public void TabBtnListener(Tab which)
     {
-        if (contentPanel.GetComponent<Image>().color == brightColor)
+        
+        if (which != whichTabIsActive)
         {
-            StartCoroutine(ColorFade(brightColor, darkColor, fadeDuration / 3f, contentPanel.GetComponent<Image>()));
+            Debug.Log("Disabling current tab ...");
+            if (contentPanel.GetComponent<Image>().color == brightColor)
+            {
+                StartCoroutine(ColorFade(brightColor, darkColor, fadeDuration / 3f, contentPanel.GetComponent<Image>()));
+            }
+
+            foreach (Transform child in headerPanel.transform)
+            {
+                GameObject btn = child.gameObject;
+                Image img = btn.GetComponent<Image>();
+                if (img.color == brightColor)
+                {
+                    StartCoroutine(ColorFade(brightColor, darkColor, 0.1f, img));
+                    btn.GetComponent<RectTransform>().sizeDelta = unselectedAnchors;
+                }
+            }
         }
+
         switch (which)
         {
-            case Tab.Food:
-                Debug.Log("Food Tab");
-                StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, foodTab.GetComponent<Image>()));
-                StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, contentPanel.GetComponent<Image>()));
-                foodTab.GetComponent<RectTransform>().sizeDelta = selectedAnchors;
-                //foodTabText.color = darkColor;
+            case Tab.FoodDrink:
+                if (whichTabIsActive != Tab.FoodDrink)
+                {
+                    scrollView.GetComponent<InventoryController>().Clear();
+                    Debug.Log("Food & Drink Tab");
+                    StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, foodDrinkTab.GetComponent<Image>()));
+                    StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, contentPanel.GetComponent<Image>()));
+                    foodDrinkTab.GetComponent<RectTransform>().sizeDelta = selectedAnchors;
+                    scrollView.GetComponent<InventoryController>().Show(inventory.GetItems(ItemType.Food));
+                    whichTabIsActive = Tab.FoodDrink;
+                }
+                else
+                {
+                    Debug.Log("Already in the right tab :-)");
+                }
                 break;
-            case Tab.Drink:
-                Debug.Log("Drink Tab");
-                StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, drinkTab.GetComponent<Image>()));
-                StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, contentPanel.GetComponent<Image>()));
-                drinkTab.GetComponent<RectTransform>().sizeDelta = selectedAnchors;
-                //drinkTabText.color = darkColor;
+            case Tab.Gear:
+                if (whichTabIsActive != Tab.Gear)
+                {
+                    scrollView.GetComponent<InventoryController>().Clear();
+                    Debug.Log("Gear Tab");
+                    StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, gearTab.GetComponent<Image>()));
+                    StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, contentPanel.GetComponent<Image>()));
+                    gearTab.GetComponent<RectTransform>().sizeDelta = selectedAnchors;
+                    scrollView.GetComponent<InventoryController>().Show(inventory.GetItems(ItemType.Gear));
+                    whichTabIsActive = Tab.Gear;
+                }
+                else
+                {
+                    Debug.Log("Already in the right tab :-)");
+                }
                 break;
             case Tab.Meds:
-                Debug.Log("Meds Tab");
-                StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, medsTab.GetComponent<Image>()));
-                StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, contentPanel.GetComponent<Image>()));
-                medsTab.GetComponent<RectTransform>().sizeDelta = selectedAnchors;
-                //medsTabText.color = darkColor;
+                if (whichTabIsActive != Tab.Meds)
+                {
+                    scrollView.GetComponent<InventoryController>().Clear();
+                    Debug.Log("Meds Tab");
+                    StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, medsTab.GetComponent<Image>()));
+                    StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, contentPanel.GetComponent<Image>()));
+                    medsTab.GetComponent<RectTransform>().sizeDelta = selectedAnchors;
+                    scrollView.GetComponent<InventoryController>().Show(inventory.GetItems(ItemType.Heal));
+                    whichTabIsActive = Tab.Meds;
+                }
                 break;
             case Tab.Ressources:
-                Debug.Log("Ressources Tab");
-                StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, ressourcesTab.GetComponent<Image>()));
-                StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, contentPanel.GetComponent<Image>()));
-                ressourcesTab.GetComponent<RectTransform>().sizeDelta = selectedAnchors;
-                //ressourcesTabText.color = darkColor;
+                if (whichTabIsActive != Tab.Ressources)
+                {
+                    scrollView.GetComponent<InventoryController>().Clear();
+                    Debug.Log("Ressources Tab");
+                    StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, ressourcesTab.GetComponent<Image>()));
+                    StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, contentPanel.GetComponent<Image>()));
+                    ressourcesTab.GetComponent<RectTransform>().sizeDelta = selectedAnchors;
+                    scrollView.GetComponent<InventoryController>().Show(inventory.GetItems(ItemType.Usable));
+                    whichTabIsActive = Tab.Ressources;
+                }
+                else
+                {
+                    Debug.Log("Already in the right tab :-)");
+                }
                 break;
             default:
                 Debug.Log("Default case in the switch");
                 break;
         }
-        for (int i = 0; i < 4; i++)
-        {
-            GameObject btn = headerPanel.transform.GetChild(i).gameObject;
-            Image img = btn.GetComponent<Image>();
-            if (img.color == brightColor)
-            {
-                StartCoroutine(ColorFade(brightColor, darkColor, 0.1f, img));
-                //btn.transform.GetChild(0).gameObject.GetComponent<TMP_Text>().color = brightColor;
-                btn.GetComponent<RectTransform>().sizeDelta = unselectedAnchors;
-            }
-        }
     }
+
+    void OnDisable()
+    {
+        //Debug.Log("PrintOnDisable: script was disabled");
+        scrollView.SetActive(false);
+    }
+
+    void OnEnable()
+    {
+        //Debug.Log("PrintOnEnable: script was enabled");
+        scrollView.SetActive(false);
+}
 
     public void CloseTabs()
     {
+        scrollView.GetComponent<InventoryController>().Clear();
         for (int i = 0; i < 4; i++)
         {
             GameObject btn = headerPanel.transform.GetChild(i).gameObject;
@@ -140,8 +189,9 @@ public class TabManager : MonoBehaviour
 
     public enum Tab
     {
-        Food = 0,
-        Drink,
+        None = 0,
+        FoodDrink,
+        Gear,
         Meds,
         Ressources
     }

@@ -1,31 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Inventory_System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public enum ItemType
 {
-    HungerValue, ThistValue, HealthValue,Fatigue,Scavengeable,Craftable,Gear
+    Food,Heal,Usable,Craftable,Gear
 }
 
+[CreateAssetMenu(fileName="Item Example",menuName="MyAsset/Items/Item")]
 
 public class Item: ScriptableObject
 {
-    public const int MAX_HUNGER_VALUE = 100;
-    public const int MIN_HUNGER_VALUE = -100;
-    
-    public const int MAX_THIST_VALUE = 100;
-    public const int MIN_THIST_VALUE = -100;
 
-    public const int MAX_HEALTH_VALUE = 100;
-    public const int MIN_HEALTH_VALUE = -100;
-
-    public const int MAX_ENERGY_VALUE = 100;
-    public const int MIN_ENERGY_VALUE = -100;
-    
-    
-    
-    [SerializeField] public List<ItemType> itemType=new List<ItemType>();
+    [SerializeField] public List<ItemType> itemType=new List<ItemType>();//contient tt les type d'un item
     [SerializeField] public new string name;
     [SerializeField] private Sprite image;
    
@@ -37,13 +26,6 @@ public class Item: ScriptableObject
         this.image = sprite;
     }
 
-    /*public int amount;
-
-    public void    addUnit()
-    {
-        amount++;
-    }*/
-
 
     public Sprite GetSprite()
     {
@@ -52,7 +34,7 @@ public class Item: ScriptableObject
 
     public bool IsUsable()
     {
-        return this is Eatable;
+        return (this is Usable) || itemType.Contains(ItemType.Usable);
     }
 
     public bool IsCraftable()
@@ -61,21 +43,9 @@ public class Item: ScriptableObject
     }
     public bool IsGear()
     {
-        return this.itemType.Contains(ItemType.Gear);
+        return (this is Gear)||this.itemType.Contains(ItemType.Gear);
     }
-
-    /*public override bool Equals(object other)
-    {
-        if (other is Item)
-        {
-            return ((Item) other).name.Equals(this.name);
-        }
-        else
-        {
-            return false;
-        }
-
-    }*/
+    
 
     public string GetDescription()
     {
