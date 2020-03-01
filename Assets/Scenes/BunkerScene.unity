@@ -1403,7 +1403,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 201818441}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 001d7cf210000000085d7cf210000000, type: 3}
+  m_Script: {fileID: 11500000, guid: 061f8307f52000000f1f8307f5200000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 201818444}
@@ -1506,7 +1506,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 231180786}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 001d7cf210000000085d7cf210000000, type: 3}
+  m_Script: {fileID: 11500000, guid: 061f8307f52000000f1f8307f5200000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 231180789}
@@ -4003,7 +4003,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 42.6
+  m_fontSize: 42.45
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -7816,7 +7816,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 996004579}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 001d7cf210000000085d7cf210000000, type: 3}
+  m_Script: {fileID: 11500000, guid: 061f8307f52000000f1f8307f5200000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 996004582}
@@ -9489,7 +9489,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 42.6
+  m_fontSize: 42.45
   m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -11202,7 +11202,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1366726650}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 001d7cf210000000085d7cf210000000, type: 3}
+  m_Script: {fileID: 11500000, guid: 061f8307f52000000f1f8307f5200000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 1366726653}
@@ -15375,7 +15375,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 42.55
+  m_fontSize: 42.4
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -17118,6 +17118,7 @@ MonoBehaviour:
   currentHunger: 0
   currentThirst: 0
   currentEnergy: 0
+  maxCarryingSize: 4
   healthBar: {fileID: 231180788}
   hungerBar: {fileID: 201818443}
   tirstBar: {fileID: 996004581}
@@ -17149,6 +17150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryExample: {fileID: 11400000, guid: 9f096d711714d4a2aa372aa81d5c8831, type: 2}
+  inventory: []
   useExample: 1
 --- !u!1 &2004029032
 GameObject:
@@ -17870,7 +17872,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1641225162}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.36163643
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -18543,7 +18545,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 42.4
+  m_fontSize: 42.25
   m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 1

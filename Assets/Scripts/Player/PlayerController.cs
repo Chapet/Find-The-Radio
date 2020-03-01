@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     public int currentThirst;
     public int currentEnergy;
 
+    public int maxCarryingSize = 4;
+
     public StatusBar healthBar;
     public StatusBar hungerBar;
     public StatusBar tirstBar;
@@ -83,9 +85,8 @@ public class PlayerController : MonoBehaviour
         }
 
         currentHunger = value;
-        
-        //TODO:remove comment when is in bunker scene : hungerBar.SetValue(value);
-        
+        hungerBar.SetValue(value);
+
         Debug.Log("Adding " + inc + " to the Hunger.");
         
     }
@@ -106,7 +107,8 @@ public class PlayerController : MonoBehaviour
         }
 
         currentThirst = value;
-        //TODO:remove comment when is in bunker scene :tirstBar.SetValue(value);
+        tirstBar.SetValue(value);
+
         Debug.Log("Adding " + inc + " to the Thirst.");
         
     }

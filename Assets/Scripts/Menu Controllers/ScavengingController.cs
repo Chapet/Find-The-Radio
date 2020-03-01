@@ -46,7 +46,28 @@ public class ScavengingController : MonoBehaviour
     void Scavenge()
     {
         Debug.Log(scavengeTime);
+
+        //nombre de tranche de 30 min
+        int nbTimeSlice = (int)scavengeTime * 2;
+
+        // ajout aléatoire d'items, le compte total ne dépassant pas le maximum transportable
+        var rand = new System.Random();
+        int nbFound = 0;
+        for (int i = 0; i < nbTimeSlice && nbFound < player.maxCarryingSize; i++)
+        {
+            double chance  = rand.NextDouble();
+            if (chance > 0.5)
+            {
+                nbFound++;
+                Debug.Log("adding Item: " + i);
+            }
+        } //le principe est la, il faut balance et ajouter les items à l'inventaire
+
+        // updating game values
         gameController.UpdateGameClock(scavengeTime);
         player.UpdateEnergy(-2f * scavengeTime);
+
+        player.IncrementHunger(-2 * nbTimeSlice);
+        player.InscrementThirst(-3 * nbTimeSlice);
     }
 }
