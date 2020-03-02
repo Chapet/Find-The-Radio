@@ -1320,7 +1320,9 @@ MonoBehaviour:
   inventory: {fileID: 1987407794}
   nameText: {fileID: 1625681192}
   descriptionText: {fileID: 671203395}
+  descBackground: {fileID: 1650072656}
   itemPreview: {fileID: 1597580012}
+  blankSprite: {fileID: 21300000, guid: c03f01a8fb3d0476e99943b8029b5f7b, type: 3}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   selectedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
 --- !u!95 &194748599
@@ -3101,7 +3103,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &438433694
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6711,7 +6713,6 @@ GameObject:
   - component: {fileID: 815897779}
   - component: {fileID: 815897778}
   - component: {fileID: 815897781}
-  - component: {fileID: 815897782}
   m_Layer: 5
   m_Name: ScrollView
   m_TagString: Untagged
@@ -6818,29 +6819,6 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &815897782
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 815897776}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e4dca48004eb43d69942fc71d7ba473, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scrollView: {fileID: 815897776}
-  slotPrefab: {fileID: 2386212940216313008, guid: 94f4a2353020743d3ad1ce91e3b76d36,
-    type: 3}
-  canvasGroup: {fileID: 815897781}
-  contentPanel: {fileID: 353872944}
-  inventory: {fileID: 1987407794}
-  nameText: {fileID: 1625681192}
-  descriptionText: {fileID: 671203395}
-  itemPreview: {fileID: 1597580012}
-  normalColor: {r: 0, g: 0, b: 0, a: 0}
-  selectedColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!224 &827651131 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2386212940216313015, guid: 94f4a2353020743d3ad1ce91e3b76d36,
@@ -14377,14 +14355,14 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 60
+  m_fontSize: 50
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 60
+  m_fontSizeMax: 50
   m_fontStyle: 1
-  m_textAlignment: 514
+  m_textAlignment: 513
   m_characterSpacing: 0
   m_wordSpacing: 0
   m_lineSpacing: 0
@@ -14415,7 +14393,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 20, y: 20, z: 20, w: 20}
   m_textInfo:
     textComponent: {fileID: 1625681192}
     characterCount: 4
@@ -14891,7 +14869,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -0.11401367, y: -0.18502808}
+  m_AnchoredPosition: {x: -0.11401367, y: -0.1850586}
   m_SizeDelta: {x: -0.22801208, y: 0.37005806}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1692111307
@@ -17149,6 +17127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryExample: {fileID: 11400000, guid: 9f096d711714d4a2aa372aa81d5c8831, type: 2}
+  inventory: []
   useExample: 1
 --- !u!1 &2004029032
 GameObject:
@@ -18543,7 +18522,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 42.4
+  m_fontSize: 42.35
   m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 1

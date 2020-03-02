@@ -51,4 +51,16 @@ public class Item: ScriptableObject
     {
         return this.description;
     }
+
+    public bool Equals(Object other)
+    {
+        if (other is Item)
+        {
+            return ((Item)other).description == this.description
+                && ((Item)other).image == this.image
+                && ((Item)other).name == this.name
+                && ((Item)other).itemType.Equals(this.itemType);
+        }
+        return false;
+    }
 }

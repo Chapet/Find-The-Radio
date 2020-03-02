@@ -61,90 +61,77 @@ public class TabManager : MonoBehaviour
         
         if (which != whichTabIsActive)
         {
-            Debug.Log("Disabling current tab ...");
-            if (contentPanel.GetComponent<Image>().color == brightColor)
+            if(whichTabIsActive != Tab.None)
             {
-                StartCoroutine(ColorFade(brightColor, darkColor, fadeDuration / 3f, contentPanel.GetComponent<Image>()));
-            }
+                Debug.Log("Disabling current tab ...");
 
-            foreach (Transform child in headerPanel.transform)
-            {
-                GameObject btn = child.gameObject;
-                Image img = btn.GetComponent<Image>();
-                if (img.color == brightColor)
+                if (contentPanel.GetComponent<Image>().color == brightColor)
                 {
-                    StartCoroutine(ColorFade(brightColor, darkColor, 0.1f, img));
-                    btn.GetComponent<RectTransform>().sizeDelta = unselectedAnchors;
+                    StartCoroutine(ColorFade(brightColor, darkColor, fadeDuration / 3f, contentPanel.GetComponent<Image>()));
                 }
-            }
-        }
 
-        switch (which)
-        {
-            case Tab.FoodDrink:
-                if (whichTabIsActive != Tab.FoodDrink)
+                foreach (Transform child in headerPanel.transform)
                 {
-                    scrollView.GetComponent<InventoryController>().Clear();
+                    GameObject btn = child.gameObject;
+                    Image img = btn.GetComponent<Image>();
+                    if (img.color == brightColor)
+                    {
+                        StartCoroutine(ColorFade(brightColor, darkColor, 0.1f, img));
+                        btn.GetComponent<RectTransform>().sizeDelta = unselectedAnchors;
+                    }
+                }
+                inventoryController.Clear();
+            }     
+
+            switch (which)
+            {
+                case Tab.FoodDrink:
+                    //scrollView.GetComponent<InventoryController>().Clear();
                     Debug.Log("Food & Drink Tab");
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, foodDrinkTab.GetComponent<Image>()));
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, contentPanel.GetComponent<Image>()));
                     foodDrinkTab.GetComponent<RectTransform>().sizeDelta = selectedAnchors;
                     inventoryController.Show(inventory.GetItems(ItemType.Food));
                     whichTabIsActive = Tab.FoodDrink;
-                }
-                else
-                {
-                    Debug.Log("Already in the right tab :-)");
-                }
-                break;
-            case Tab.Gear:
-                if (whichTabIsActive != Tab.Gear)
-                {
-                    scrollView.GetComponent<InventoryController>().Clear();
+                    break;
+                case Tab.Gear:
+                    //scrollView.GetComponent<InventoryController>().Clear();
                     Debug.Log("Gear Tab");
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, gearTab.GetComponent<Image>()));
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, contentPanel.GetComponent<Image>()));
                     gearTab.GetComponent<RectTransform>().sizeDelta = selectedAnchors;
                     inventoryController.Show(inventory.GetItems(ItemType.Gear));
                     whichTabIsActive = Tab.Gear;
-                }
-                else
-                {
-                    Debug.Log("Already in the right tab :-)");
-                }
-                break;
-            case Tab.Meds:
-                if (whichTabIsActive != Tab.Meds)
-                {
-                    scrollView.GetComponent<InventoryController>().Clear();
+                    break;
+                case Tab.Meds:
+                    //scrollView.GetComponent<InventoryController>().Clear();
                     Debug.Log("Meds Tab");
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, medsTab.GetComponent<Image>()));
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, contentPanel.GetComponent<Image>()));
                     medsTab.GetComponent<RectTransform>().sizeDelta = selectedAnchors;
                     inventoryController.Show(inventory.GetItems(ItemType.Heal));
                     whichTabIsActive = Tab.Meds;
-                }
-                break;
-            case Tab.Ressources:
-                if (whichTabIsActive != Tab.Ressources)
-                {
-                    scrollView.GetComponent<InventoryController>().Clear();
+                    break;
+                case Tab.Ressources:
+                    //scrollView.GetComponent<InventoryController>().Clear();
                     Debug.Log("Ressources Tab");
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, ressourcesTab.GetComponent<Image>()));
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, contentPanel.GetComponent<Image>()));
                     ressourcesTab.GetComponent<RectTransform>().sizeDelta = selectedAnchors;
                     inventoryController.Show(inventory.GetItems(ItemType.Usable));
                     whichTabIsActive = Tab.Ressources;
-                }
-                else
-                {
-                    Debug.Log("Already in the right tab :-)");
-                }
-                break;
-            default:
-                Debug.Log("Default case in the switch");
-                break;
+                    break;
+                default:
+                    Debug.Log("Default case in the switch");
+                    break;
+            }
         }
+        else
+        {
+            Debug.Log("Already in the right tab :-)");
+        }
+
+        
     }
 
     void OnDisable()
@@ -169,11 +156,11 @@ public class TabManager : MonoBehaviour
             if (img.color == brightColor)
             {
                 StartCoroutine(ColorFade(brightColor, darkColor, 0.001f, img));
-                //btn.transform.GetChild(0).gameObject.GetComponent<TMP_Text>().color = brightColor;
                 btn.GetComponent<RectTransform>().sizeDelta = unselectedAnchors;
             }
         }
         StartCoroutine(ColorFade(brightColor, darkColor, 0.001f, contentPanel.GetComponent<Image>()));
+        whichTabIsActive = Tab.None;
     }
 
     private IEnumerator ColorFade(Color start, Color end, float duration, Image btnImage)

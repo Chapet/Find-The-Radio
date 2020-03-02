@@ -14,7 +14,10 @@ public class InventoryController : MonoBehaviour
 
     public TMP_Text nameText;
     public TMP_Text descriptionText;
+    public GameObject descBackground;
     public Image itemPreview;
+
+    public Sprite blankSprite;
 
     public Color normalColor;
     public Color selectedColor;
@@ -23,6 +26,11 @@ public class InventoryController : MonoBehaviour
     Button prevSelectedSlot = null;
 
     private float fadeDuration = 0.3f;
+
+    public void Awake()
+    {
+        Clear();
+    }
 
     public void Show(List<Item> items)
     {
@@ -53,6 +61,7 @@ public class InventoryController : MonoBehaviour
             StartCoroutine(DoFade(1, 0));
             scrollView.SetActive(false);
         }
+        ClearInfoPanel();
     }
 
     private IEnumerator DoFade(float start, float end)
@@ -75,12 +84,15 @@ public class InventoryController : MonoBehaviour
             prevSelectedSlot.GetComponent<Image>().color = normalColor;
         }
 
+        descBackground.SetActive(true);
+
         Item i = slot.GetItem();
         Debug.Log("It is : " + i.name);
 
         btn.GetComponent<Image>().color = selectedColor;
         nameText.SetText(i.name);
         descriptionText.SetText(i.GetDescription());
+        Debug.Log("Setting item preview to item image");
         itemPreview.sprite = i.GetSprite();
         selectedItem = i;
         prevSelectedSlot = btn;
@@ -98,6 +110,18 @@ public class InventoryController : MonoBehaviour
             inventory.RemoveItem(selectedItem);
             Destroy(prevSelectedSlot.gameObject);
             selectedItem = null;
+
+            ClearInfoPanel();
         }
+    }
+
+    private void ClearInfoPanel()
+    {
+        Debug.Log("Clearing info panel ...");
+        nameText.SetText("");
+        descriptionText.SetText("");
+        Debug.Log("Setting item preview to blank sprite");
+        itemPreview.sprite = blankSprite;
+        descBackground.SetActive(false);
     }
 }
