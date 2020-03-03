@@ -21,7 +21,7 @@ public class GameController : MonoBehaviour
 
     // Start is called before the first frame update
     void Start() {
-        //UpdateGameClock(gameClock);
+        UpdateGameClock(gameClock);
 
         BunkerPanel.SetActive(true);
     }
@@ -37,7 +37,7 @@ public class GameController : MonoBehaviour
         clock.SetText("Clock : " + hours.ToString("0") + "h" + minutes.ToString("0"));
     }
 
-    public List<Item> getAllItems()
+    public List<Item> GetAllItems()
     {
         return allItems;
     }

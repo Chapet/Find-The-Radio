@@ -65,7 +65,7 @@ public class ScavengingController : MonoBehaviour
 
         // updating game values
         gameController.UpdateGameClock(scavengeTime);
-        player.EnergyLostByTime(-2f * scavengeTime);
+        player.UpdateEnergy(-2 * nbTimeSlice);
 
         player.UpdateHunger(-2 * nbTimeSlice);
         player.UpdateThirst(-3 * nbTimeSlice);
