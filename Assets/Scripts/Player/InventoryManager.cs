@@ -37,6 +37,28 @@ public class InventoryManager : MonoBehaviour
         return list;
     }
 
+    public List<Item> GetItems(Item item, int n)
+    {
+        List<Item> list = new List<Item>();
+        foreach (Item i in inventory)
+        {
+            if (i.Equals(item) && n>0)
+            {
+                list.Add(i);
+                n--;
+            }
+        }
+        if (n != 0)
+        {
+            return null;
+        }
+        else
+        {
+            return list;
+        }
+    }
+
+
     public Item GetItem(Item item)
     {
         foreach (Item i in inventory)
@@ -48,6 +70,8 @@ public class InventoryManager : MonoBehaviour
         }
         return null;
     }
+
+
 
     public void RemoveItem(Item item)
     {
