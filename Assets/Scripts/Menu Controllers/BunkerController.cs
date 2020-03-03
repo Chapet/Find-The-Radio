@@ -12,7 +12,7 @@ public class BunkerController : MonoBehaviour
     public GameObject cheatPanel;
     public GameObject craftingPanel;
 
-    public TabManager tabController;
+    public TabController tabController;
 
     public GameObject backPanel;
 

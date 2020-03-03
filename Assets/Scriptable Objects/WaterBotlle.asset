@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2b5483359660c14aadfe85ea7dfb512, type: 3}
   m_Name: WaterBotlle
   m_EditorClassIdentifier: 
-  itemType: 0100000002000000
+  itemTypes: 0000000002000000
   name: Bottle of water
   image: {fileID: 21300000, guid: 30a2419434ae74f73b974af8835e08d1, type: 3}
+  id: 1
   description: This is a bottle of water :-)
   thirstValue: 50
   hungerValue: 0
-  healthValue: 25
-  energyValue: 10
+  healthValue: 0
+  energyValue: 0

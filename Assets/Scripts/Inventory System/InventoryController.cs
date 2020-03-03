@@ -18,6 +18,8 @@ public class InventoryController : MonoBehaviour
     public TMP_Text descriptionText;
     public GameObject descBackground;
     public Image itemPreview;
+    public Button useButton;
+    public Button equipButton;
 
     public Sprite blankSprite;
 
@@ -98,22 +100,43 @@ public class InventoryController : MonoBehaviour
         itemPreview.sprite = i.GetSprite();
         selectedItem = i;
         prevSelectedSlot = btn;
+
+        if(selectedItem.IsOfType(ItemType.Usable))
+        {
+            useButton.gameObject.SetActive(true);
+        }
+        else if (selectedItem.IsOfType(ItemType.Gear))
+        {
+            equipButton.gameObject.SetActive(true);
+        }
     }
 
     public void UseBtnClicked()
     {
         if (selectedItem != null)
         {
-            Debug.Log(selectedItem + " used!");
-            if (selectedItem is Usable)
-            {
-                Debug.Log("This item is usable!");
-            }
+            Usable usable = (Usable)selectedItem;
+            Debug.Log("This item is usable, updating corresponding values ...");
+            player.UpdateEnergy(usable.GetEnergy());
+            player.UpdateHealth(usable.GetHealth());
+            player.UpdateHunger(usable.GetHunger());
+            player.UpdateThirst(usable.GetThirst());
             inventory.RemoveItem(selectedItem);
             Destroy(prevSelectedSlot.gameObject);
             selectedItem = null;
 
             ClearInfoPanel();
+
+            Debug.Log(selectedItem + " used!");
+        }
+    }
+
+    public void EquipBtnClicked()
+    {
+        if (selectedItem != null)
+        {
+            Debug.Log("Equipped !");
+            //equipButton.gameObject.transform.GetChild(0).GetComponent<TMP_Text>().SetText("Equipped");
         }
     }
 
@@ -125,5 +148,7 @@ public class InventoryController : MonoBehaviour
         Debug.Log("Setting item preview to blank sprite");
         itemPreview.sprite = blankSprite;
         descBackground.SetActive(false);
+        useButton.gameObject.SetActive(false);
+        equipButton.gameObject.SetActive(false);
     }
 }

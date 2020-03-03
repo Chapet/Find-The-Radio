@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
@@ -25,7 +24,7 @@ public class InventoryManager : MonoBehaviour
         List<Item> list = new List<Item>();
         foreach (Item i in inventory)
         {
-            foreach(ItemType it in i.itemType)
+            foreach(ItemType it in i.GetItemTypes())
             {
                 if (it == itemType)
                 {

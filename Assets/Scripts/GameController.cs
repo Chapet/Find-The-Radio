@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 
+
 public class GameController : MonoBehaviour
 {
 
@@ -18,6 +19,9 @@ public class GameController : MonoBehaviour
     [SerializeField]
     [Tooltip("Drag to it the prefabs of all the items you want in the game")]
     private List<Item> allItems;
+
+    //[Tooltip("Names of all items")]
+    
 
     // Start is called before the first frame update
     void Start() {
@@ -37,8 +41,15 @@ public class GameController : MonoBehaviour
         clock.SetText("Clock : " + hours.ToString("0") + "h" + minutes.ToString("0"));
     }
 
-    public List<Item> GetAllItems()
+    public Item GetItem(ItemID id)
     {
-        return allItems;
+        foreach(Item i in allItems)
+        {
+            if (i.GetItemID() == id)
+            {
+                return i;
+            }
+        }
+        return null;
     }
 }

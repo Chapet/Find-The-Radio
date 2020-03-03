@@ -1,10 +1,9 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class TabManager : MonoBehaviour
+public class TabController : MonoBehaviour
 {
     public InventoryManager inventory;
     public InventoryController inventoryController;
@@ -86,16 +85,14 @@ public class TabManager : MonoBehaviour
             switch (which)
             {
                 case Tab.FoodDrink:
-                    //scrollView.GetComponent<InventoryController>().Clear();
                     Debug.Log("Food & Drink Tab");
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, foodDrinkTab.GetComponent<Image>()));
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, contentPanel.GetComponent<Image>()));
                     foodDrinkTab.GetComponent<RectTransform>().sizeDelta = selectedAnchors;
-                    inventoryController.Show(inventory.GetItems(ItemType.Food));
+                    inventoryController.Show(inventory.GetItems(ItemType.FoodAndDrink));
                     whichTabIsActive = Tab.FoodDrink;
                     break;
                 case Tab.Gear:
-                    //scrollView.GetComponent<InventoryController>().Clear();
                     Debug.Log("Gear Tab");
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, gearTab.GetComponent<Image>()));
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, contentPanel.GetComponent<Image>()));
@@ -104,21 +101,19 @@ public class TabManager : MonoBehaviour
                     whichTabIsActive = Tab.Gear;
                     break;
                 case Tab.Meds:
-                    //scrollView.GetComponent<InventoryController>().Clear();
                     Debug.Log("Meds Tab");
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, medsTab.GetComponent<Image>()));
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, contentPanel.GetComponent<Image>()));
                     medsTab.GetComponent<RectTransform>().sizeDelta = selectedAnchors;
-                    inventoryController.Show(inventory.GetItems(ItemType.Heal));
+                    inventoryController.Show(inventory.GetItems(ItemType.Meds));
                     whichTabIsActive = Tab.Meds;
                     break;
                 case Tab.Ressources:
-                    //scrollView.GetComponent<InventoryController>().Clear();
                     Debug.Log("Ressources Tab");
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, ressourcesTab.GetComponent<Image>()));
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, contentPanel.GetComponent<Image>()));
                     ressourcesTab.GetComponent<RectTransform>().sizeDelta = selectedAnchors;
-                    inventoryController.Show(inventory.GetItems(ItemType.Usable));
+                    inventoryController.Show(inventory.GetItems(ItemType.Ressources));
                     whichTabIsActive = Tab.Ressources;
                     break;
                 default:

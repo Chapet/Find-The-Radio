@@ -1,25 +1,28 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using Inventory_System;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public enum ItemType
 {
-    Food,Heal,Usable,Craftable,Gear
+    FoodAndDrink = 0, Meds, Usable, Craftable, Gear, Ressources
 }
 
-[CreateAssetMenu(fileName="Item",menuName="MyAsset/Items/Item")]
+public enum ItemID
+{
+    DefaultID = 0, WaterBottle, Gun, FoodCan, Soda, WoodLog
+}
 
-public class Item: ScriptableObject
+[CreateAssetMenu(fileName = "Item", menuName = "MyAsset/Items/Item")]
+
+public class Item : ScriptableObject
 {
 
-    [SerializeField] public List<ItemType> itemType=new List<ItemType>();//contient tt les type d'un item
+    [SerializeField] private List<ItemType> itemTypes = new List<ItemType>();//contient tt les type d'un item
     [SerializeField] public new string name;
     [SerializeField] private Sprite image;
-   
-    
-    [SerializeField] [Multiline]private string description;
+    [SerializeField] private ItemID id;
+
+
+    [SerializeField] [Multiline] private string description;
 
     public void SetSprite(Sprite sprite)
     {
@@ -34,18 +37,18 @@ public class Item: ScriptableObject
 
     public bool IsUsable()
     {
-        return (this is Usable) || itemType.Contains(ItemType.Usable);
+        return (this is Usable) || itemTypes.Contains(ItemType.Usable);
     }
 
     public bool IsCraftable()
     {
-        return this.itemType.Contains(ItemType.Craftable);
+        return this.itemTypes.Contains(ItemType.Craftable);
     }
     public bool IsGear()
     {
-        return (this is Gear)||this.itemType.Contains(ItemType.Gear);
+        return (this is Gear) || this.itemTypes.Contains(ItemType.Gear);
     }
-    
+
 
     public string GetDescription()
     {
@@ -56,10 +59,29 @@ public class Item: ScriptableObject
     {
         if (other is Item)
         {
-            return ((Item)other).description == this.description
-                && ((Item)other).image == this.image
-                && ((Item)other).name == this.name
-                && ((Item)other).itemType.Equals(this.itemType);
+            return ((Item)other).GetItemID() == this.GetItemID();
+        }
+        return false;
+    }
+
+    public ItemID GetItemID()
+    {
+        return id;
+    }
+
+    public List<ItemType> GetItemTypes()
+    {
+        return itemTypes;
+    }
+
+    public bool IsOfType(ItemType it)
+    {
+        foreach(ItemType itemType in itemTypes)
+        {
+            if (itemType == it)
+            {
+                return true;
+            }
         }
         return false;
     }
