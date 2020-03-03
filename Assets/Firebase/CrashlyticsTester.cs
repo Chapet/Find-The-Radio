@@ -21,14 +21,14 @@ public class CrashlyticsTester : MonoBehaviour {
     void Update()    
     {
         
-        /*var message = new AndroidJavaObject("java.lang.String", "This is a test crash, ignore.");
+        var message = new AndroidJavaObject("java.lang.String", "This is a test crash, ignore.");
         var exception = new AndroidJavaObject("java.lang.Exception", message);
        
         var looperClass = new AndroidJavaClass("android.os.Looper");
         var mainLooper = looperClass.CallStatic<AndroidJavaObject>("getMainLooper");
         var mainThread = mainLooper.Call<AndroidJavaObject>("getThread");
         var exceptionHandler = mainThread.Call<AndroidJavaObject>("getUncaughtExceptionHandler");
-        exceptionHandler.Call("uncaughtException", mainThread, exception);*/
+        exceptionHandler.Call("uncaughtException", mainThread, exception);
         
         
         // Call the exception-throwing method here so that it's run

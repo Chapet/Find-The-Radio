@@ -33,6 +33,7 @@ public class BunkerController : MonoBehaviour
     public void SleepButtonClicked()
     {
         Debug.Log("Going to bed ... zZzZ ");
+        throw new System.Exception("test exception CLickOnBed ");
         menuController.OpenMenu(bedPanel);
     }
 
