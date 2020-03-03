@@ -1312,6 +1312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e4dca48004eb43d69942fc71d7ba473, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   scrollView: {fileID: 815897776}
   slotPrefab: {fileID: 2386212940216313008, guid: 94f4a2353020743d3ad1ce91e3b76d36,
     type: 3}
@@ -13229,6 +13230,11 @@ MonoBehaviour:
   gameClock: 0
   clock: {fileID: 1283474185}
   BunkerPanel: {fileID: 158567353}
+  allItems:
+  - {fileID: 11400000, guid: bd65ae37951584cfda5f36f3ac0f60bb, type: 2}
+  - {fileID: 11400000, guid: d3c80bd5216154eeab2c9a8435d029cd, type: 2}
+  - {fileID: 11400000, guid: d4d72ae0e719f4d68b3b114db692dc92, type: 2}
+  - {fileID: 11400000, guid: 36d57604fd8264cb7ba6cadce13d73dd, type: 2}
 --- !u!4 &1560540181
 Transform:
   m_ObjectHideFlags: 0
@@ -17096,6 +17102,7 @@ MonoBehaviour:
   currentHunger: 0
   currentThirst: 0
   currentEnergy: 0
+  maxCarryingSize: 4
   healthBar: {fileID: 231180788}
   hungerBar: {fileID: 201818443}
   tirstBar: {fileID: 996004581}

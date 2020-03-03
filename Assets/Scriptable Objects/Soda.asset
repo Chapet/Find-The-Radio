@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e2b5483359660c14aadfe85ea7dfb512, type: 3}
-  m_Name: Soda Example
+  m_Name: Soda
   m_EditorClassIdentifier: 
   itemType: 000000000200000001000000
   name: Soda

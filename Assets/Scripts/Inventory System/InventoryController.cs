@@ -6,6 +6,8 @@ using TMPro;
 
 public class InventoryController : MonoBehaviour
 {
+    public PlayerController player;
+
     public GameObject scrollView;
     public GameObject slotPrefab;
     public CanvasGroup canvasGroup;

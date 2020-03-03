@@ -45,6 +45,7 @@ public class BedController : MonoBehaviour
     void Sleep()
     {
         gameController.UpdateGameClock(sleepTime);
-        player.UpdateEnergy(2 * sleepTime);
+        // 1 energy point per 9.6 mintues <=> 6.25 energy points per hour <=> 100 energy point per 16 hours
+        player.UpdateEnergy(Mathf.FloorToInt((Mathf.Floor(sleepTime) + Mathf.Floor((sleepTime - Mathf.Floor(sleepTime)))) * 60f / 9.6f));
     }
 }

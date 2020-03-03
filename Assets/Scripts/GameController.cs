@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
+using System.Collections.Generic;
 using TMPro;
 
 public class GameController : MonoBehaviour
@@ -14,6 +14,10 @@ public class GameController : MonoBehaviour
 
     public TMP_Text clock;
     public GameObject BunkerPanel;
+
+    [SerializeField]
+    [Tooltip("Drag to it the prefabs of all the items you want in the game")]
+    private List<Item> allItems;
 
     // Start is called before the first frame update
     void Start() {
@@ -31,7 +35,10 @@ public class GameController : MonoBehaviour
         double hours = Mathf.Floor(gameClock);
         double minutes = Mathf.Abs(Mathf.Ceil((gameClock - Mathf.Ceil(gameClock)) * 60));
         clock.SetText("Clock : " + hours.ToString("0") + "h" + minutes.ToString("0"));
-        Debug.Log("Decrementing energy by : " + inc);
-        player.UpdateEnergy(-1 * inc);
-    } 
+    }
+
+    public List<Item> getAllItems()
+    {
+        return allItems;
+    }
 }
