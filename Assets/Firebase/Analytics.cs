@@ -13,6 +13,7 @@ public class Analytics : MonoBehaviour
                 Firebase.Analytics.FirebaseAnalytics.ParameterGroupId,
                 "Test Analytics"
             );
+        Firebase.Analytics.FirebaseAnalytics.LogEvent("Test","param name","value");
     }
 
     // Update is called once per frame
