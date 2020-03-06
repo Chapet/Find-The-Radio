@@ -1,9 +1,36 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
-[CreateAssetMenu(fileName = "Usable Item", menuName = "MyAsset/Items/Usable")]
+[CreateAssetMenu(fileName = "Consumable Item", menuName = "FindTheRadio/Items/Consumable")]
 
-public class Usable : Item
+public class Consumable : Item
 {
+    // ===== Canvas for item types =====
+    public enum ItemType
+    {
+        None=0, Food, Drink, Meds
+    }
+
+    [SerializeField] private List<ItemType> itemTypes = new List<ItemType>();
+
+    public List<ItemType> GetItemTypes()
+    {
+        return itemTypes;
+    }
+
+    public bool IsOfType(ItemType it)
+    {
+        foreach (ItemType itemType in itemTypes)
+        {
+            if (itemType == it)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    // =================================
+
     public const int MAX_HUNGER_VALUE = 100;
     public const int MIN_HUNGER_VALUE = -100;
 
@@ -22,6 +49,8 @@ public class Usable : Item
     [Range(MIN_HUNGER_VALUE, MAX_HUNGER_VALUE)] [SerializeField] private int hungerValue = 0;
     [Range(MIN_HEALTH_VALUE, MAX_HEALTH_VALUE)] [SerializeField] private int healthValue = 0;
     [Range(MIN_ENERGY_VALUE, MAX_ENERGY_VALUE)] [SerializeField] private int energyValue = 0;
+
+    
 
     public bool HaveHungerValue()
     {
@@ -61,4 +90,8 @@ public class Usable : Item
         return energyValue;
     }
 
+    public override bool IsCraftable()
+    {
+        return false;
+    }
 }
