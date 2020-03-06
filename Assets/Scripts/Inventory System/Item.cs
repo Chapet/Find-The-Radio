@@ -1,54 +1,38 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public enum ItemType
-{
-    FoodAndDrink = 0, Meds, Usable, Craftable, Gear, Ressources
-}
+//[CreateAssetMenu(fileName = "Item", menuName = "MyAsset/Items/Item")]
 
-public enum ItemID
-{
-    DefaultID = 0, WaterBottle, Gun, FoodCan, Soda, WoodLog
-}
-
-[CreateAssetMenu(fileName = "Item", menuName = "MyAsset/Items/Item")]
-
-public class Item : ScriptableObject
+abstract public class Item : ScriptableObject
 {
 
-    [SerializeField] private List<ItemType> itemTypes = new List<ItemType>();//contient tt les type d'un item
+    //[SerializeField] private List<ItemType> itemTypes = new List<ItemType>();//contient tt les type d'un item
     [SerializeField] public new string name;
     [SerializeField] private Sprite image;
-    [SerializeField] private ItemID id;
+    [SerializeField] private int itemID = 0;
 
-
-    [SerializeField] [Multiline] private string description;
+    [SerializeField] [Multiline] private string description = "";
 
     public void SetSprite(Sprite sprite)
     {
         this.image = sprite;
     }
 
-
     public Sprite GetSprite()
     {
         return image;
     }
 
-    public bool IsUsable()
+    public bool IsConsumable()
     {
-        return (this is Usable) || itemTypes.Contains(ItemType.Usable);
+        return (this is Consumable);
     }
 
-    public bool IsCraftable()
-    {
-        return this.itemTypes.Contains(ItemType.Craftable);
-    }
+    abstract public bool IsCraftable();
+    
     public bool IsGear()
     {
-        return (this is Gear) || this.itemTypes.Contains(ItemType.Gear);
+        return (this is Gear);
     }
-
 
     public string GetDescription()
     {
@@ -64,25 +48,9 @@ public class Item : ScriptableObject
         return false;
     }
 
-    public ItemID GetItemID()
+    public int GetItemID()
     {
-        return id;
+        return itemID;
     }
 
-    public List<ItemType> GetItemTypes()
-    {
-        return itemTypes;
-    }
-
-    public bool IsOfType(ItemType it)
-    {
-        foreach(ItemType itemType in itemTypes)
-        {
-            if (itemType == it)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
 }

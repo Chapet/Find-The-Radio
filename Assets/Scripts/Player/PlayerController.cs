@@ -18,9 +18,81 @@ public class PlayerController : MonoBehaviour
 
     public StatusBar healthBar;
     public StatusBar hungerBar;
-    public StatusBar tirstBar;
-
+    public StatusBar thirstBar;
     public StatusBar energyBar;
+
+    [SerializeField] private Gear headGear = null;
+    [SerializeField] private Gear chestGear = null;
+    [SerializeField] private Gear legsGear = null;
+    [SerializeField] private Gear weapon = null;
+
+    public void PutHeadGearOn(Gear g)
+    {
+        if (g.IsOfType(Gear.ItemType.Head))
+        {
+            headGear = g;
+        }
+        else
+        {
+            Debug.Log("Not for the head!");
+        }
+    }
+
+    public void RemoveHeadGear()
+    {
+        headGear = null;
+    }
+
+    public void PutChestGearOn(Gear g)
+    {
+        if (g.IsOfType(Gear.ItemType.Chest))
+        {
+            chestGear = g;
+        }
+        else
+        {
+            Debug.Log("Not for the chest!");
+        }
+    }
+
+    public void RemoveChestGear()
+    {
+        chestGear = null;
+    }
+
+    public void PutLegsGearOn(Gear g)
+    {
+        if (g.IsOfType(Gear.ItemType.Legs))
+        {
+            legsGear = g;
+        }
+        else
+        {
+            Debug.Log("Not for the legs!");
+        }
+    }
+
+    public void RemoveLegsGear()
+    {
+        legsGear = null;
+    }
+
+    public void EquipWeapon(Gear g)
+    {
+        if (g.IsOfType(Gear.ItemType.Weapon))
+        {
+            weapon = g;
+        }
+        else
+        {
+            Debug.Log("This is not a weapon!");
+        }
+    }
+
+    public void UnequipWeapon()
+    {
+        weapon = null;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -34,8 +106,8 @@ public class PlayerController : MonoBehaviour
         hungerBar.SetValue(maxHunger);
 
         currentThirst = maxThirst;
-        tirstBar.SetMaxValue(maxThirst);
-        tirstBar.SetValue(maxThirst);
+        thirstBar.SetMaxValue(maxThirst);
+        thirstBar.SetValue(maxThirst);
 
         currentEnergy = maxEnergy;
         energyBar.SetMaxValue(maxEnergy);
@@ -80,7 +152,7 @@ public class PlayerController : MonoBehaviour
         }
 
         currentThirst = value;
-        tirstBar.SetValue(value);
+        thirstBar.SetValue(value);
 
         Debug.Log("Adding " + inc + " to the Thirst.");
         

@@ -1,4 +1,7 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -40,10 +43,10 @@ public class TabController : MonoBehaviour
         medsTab.GetComponent<Image>().color = darkColor;
         ressourcesTab.GetComponent<Image>().color = darkColor;
 
-        foodDrinkTab.onClick.AddListener(delegate { TabBtnListener(Tab.FoodDrink); });
+        foodDrinkTab.onClick.AddListener(delegate { TabBtnListener(Tab.FoodAndDrink); });
         gearTab.onClick.AddListener(delegate { TabBtnListener(Tab.Gear); });
         medsTab.onClick.AddListener(delegate { TabBtnListener(Tab.Meds); });
-        ressourcesTab.onClick.AddListener(delegate { TabBtnListener(Tab.Ressources); });
+        ressourcesTab.onClick.AddListener(delegate { TabBtnListener(Tab.Resources); });
 
         foodDrinkTabText = foodDrinkTab.transform.GetChild(0).gameObject.GetComponent<TMP_Text>();
         gearTabText = gearTab.transform.GetChild(0).gameObject.GetComponent<TMP_Text>();
@@ -57,7 +60,8 @@ public class TabController : MonoBehaviour
 
     public void TabBtnListener(Tab which)
     {
-        
+        //Debug.Log(which);
+
         if (which != whichTabIsActive)
         {
             if(whichTabIsActive != Tab.None)
@@ -80,24 +84,35 @@ public class TabController : MonoBehaviour
                     }
                 }
                 inventoryController.Clear();
-            }     
-
+            }
+            List<Item> list = new List<Item>();
             switch (which)
             {
-                case Tab.FoodDrink:
+                case Tab.FoodAndDrink:
                     Debug.Log("Food & Drink Tab");
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, foodDrinkTab.GetComponent<Image>()));
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, contentPanel.GetComponent<Image>()));
                     foodDrinkTab.GetComponent<RectTransform>().sizeDelta = selectedAnchors;
-                    inventoryController.Show(inventory.GetItems(ItemType.FoodAndDrink));
-                    whichTabIsActive = Tab.FoodDrink;
+
+                    //Getting food AND drinks
+                    list = inventory.GetItems(Consumable.ItemType.Food).Concat(inventory.GetItems(Consumable.ItemType.Drink)).ToList();
+                    inventoryController.Show(list);
+
+                    whichTabIsActive = Tab.FoodAndDrink;
                     break;
                 case Tab.Gear:
                     Debug.Log("Gear Tab");
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, gearTab.GetComponent<Image>()));
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, contentPanel.GetComponent<Image>()));
                     gearTab.GetComponent<RectTransform>().sizeDelta = selectedAnchors;
-                    inventoryController.Show(inventory.GetItems(ItemType.Gear));
+
+                    //Getting all gears    
+                    foreach (Gear.ItemType it in Enum.GetValues(typeof(Gear.ItemType)).Cast<Gear.ItemType>())
+                    {
+                        list = list.Concat(inventory.GetItems(it)).ToList();
+                    }
+                    inventoryController.Show(list);
+
                     whichTabIsActive = Tab.Gear;
                     break;
                 case Tab.Meds:
@@ -105,16 +120,18 @@ public class TabController : MonoBehaviour
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, medsTab.GetComponent<Image>()));
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, contentPanel.GetComponent<Image>()));
                     medsTab.GetComponent<RectTransform>().sizeDelta = selectedAnchors;
-                    inventoryController.Show(inventory.GetItems(ItemType.Meds));
+                    inventoryController.Show(inventory.GetItems(Consumable.ItemType.Meds));
                     whichTabIsActive = Tab.Meds;
                     break;
-                case Tab.Ressources:
+                case Tab.Resources:
                     Debug.Log("Ressources Tab");
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, ressourcesTab.GetComponent<Image>()));
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, contentPanel.GetComponent<Image>()));
                     ressourcesTab.GetComponent<RectTransform>().sizeDelta = selectedAnchors;
-                    inventoryController.Show(inventory.GetItems(ItemType.Ressources));
-                    whichTabIsActive = Tab.Ressources;
+
+                    inventoryController.Show(inventory.GetItems(Resource.ItemType.Resource));
+
+                    whichTabIsActive = Tab.Resources;
                     break;
                 default:
                     Debug.Log("Default case in the switch");
@@ -127,18 +144,6 @@ public class TabController : MonoBehaviour
         }
 
         
-    }
-
-    void OnDisable()
-    {
-        //Debug.Log("PrintOnDisable: script was disabled");
-        scrollView.SetActive(false);
-    }
-
-    void OnEnable()
-    {
-        //Debug.Log("PrintOnEnable: script was enabled");
-        scrollView.SetActive(false);
     }
 
     public void CloseTabs()
@@ -173,9 +178,9 @@ public class TabController : MonoBehaviour
     public enum Tab
     {
         None = 0,
-        FoodDrink,
+        FoodAndDrink,
         Gear,
         Meds,
-        Ressources
+        Resources
     }
 }

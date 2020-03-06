@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class InventoryManager : MonoBehaviour
@@ -19,16 +20,50 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public List<Item> GetItems(ItemType itemType)
+    public List<Item> GetItems(Consumable.ItemType itemType)
     {
         List<Item> list = new List<Item>();
-        foreach (Item i in inventory)
+        foreach (Consumable c in inventory.OfType<Consumable>())
         {
-            foreach(ItemType it in i.GetItemTypes())
+            foreach (Consumable.ItemType it in c.GetItemTypes())
             {
                 if (it == itemType)
                 {
-                    list.Add(i);
+                    list.Add(c);
+                    break;
+                }
+            }
+        }
+        return list;
+    }
+
+    public List<Item> GetItems(Gear.ItemType itemType)
+    {
+        List<Item> list = new List<Item>();
+        foreach (Gear g in inventory.OfType<Gear>())
+        {
+            foreach (Gear.ItemType it in g.GetItemTypes())
+            {
+                if (it == itemType)
+                {
+                    list.Add(g);
+                    break;
+                }
+            }
+        }
+        return list;
+    }
+
+    public List<Item> GetItems(Resource.ItemType itemType)
+    {
+        List<Item> list = new List<Item>();
+        foreach (Resource r in inventory.OfType<Resource>())
+        {
+            foreach (Resource.ItemType it in r.GetItemTypes())
+            {
+                if (it == itemType)
+                {
+                    list.Add(r);
                     break;
                 }
             }

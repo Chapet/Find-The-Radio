@@ -18,7 +18,7 @@ public class BunkerController : MonoBehaviour
 
     public MenuController menuController;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         bunkerPanel = gameObject;
         bunkerPanel.SetActive(true);

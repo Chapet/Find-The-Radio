@@ -18,7 +18,7 @@ public class GameController : MonoBehaviour
 
     [SerializeField]
     [Tooltip("Drag to it the prefabs of all the items you want in the game")]
-    private List<Item> allItems;
+    private List<Item> allItems = new List<Item>();
 
     //[Tooltip("Names of all items")]
     
@@ -41,7 +41,7 @@ public class GameController : MonoBehaviour
         clock.SetText("Clock : " + hours.ToString("0") + "h" + minutes.ToString("0"));
     }
 
-    public Item GetItem(ItemID id)
+    public Item GetItem(int id)
     {
         foreach(Item i in allItems)
         {

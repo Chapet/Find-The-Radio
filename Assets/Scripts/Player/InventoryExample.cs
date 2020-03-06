@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName="Inventory Example",menuName="MyAsset/Player/Inventory")]
+[CreateAssetMenu(fileName="Inventory Example",menuName="FindTheRadio/Player/Inventory")]
 
 public class InventoryExample : ScriptableObject
 {

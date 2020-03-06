@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PopUpController : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI message;
+    [SerializeField] private TextMeshProUGUI message = null;
     
     // Start is called before the first frame update
     public void show(string msg)
