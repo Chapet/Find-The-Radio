@@ -55,6 +55,7 @@ public class SlotsHandler : MonoBehaviour
 
     public void DeleteCurrentSlot()
     {
+        slots.Remove(currentlySelected);
         Destroy(currentlySelected.gameObject);
     }
 

@@ -217,8 +217,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 2386212939630508117}
   slot: {fileID: 2386212940216313013}
-  equippedColor: {r: 0.627451, g: 1, b: 0.13725491, a: 1}
+  equippedColor: {r: 0.49125654, g: 0.9339623, b: 0.057271298, a: 1}
   standardColor: {r: 1, g: 1, b: 1, a: 1}
   selectedColor: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 1}
   player: {fileID: 0}
-  contentPanel: {fileID: 0}
+  slotsHandler: {fileID: 0}

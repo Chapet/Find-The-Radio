@@ -22,15 +22,20 @@ public class PlayerController : MonoBehaviour
     public StatusBar energyBar;
 
     [SerializeField] private Gear headGear = null;
+    //[SerializeField] private int headInstanceID = -1;
     [SerializeField] private Gear chestGear = null;
+    //[SerializeField] private int chestInstanceID = -1;
     [SerializeField] private Gear legsGear = null;
+    //[SerializeField] private int legsInstanceID = -1;
     [SerializeField] private Gear weapon = null;
+    //[SerializeField] private int weaponInstanceID = -1;
 
     public void PutHeadGearOn(Gear g)
     {
         if (g.IsOfType(Gear.ItemType.Head))
         {
             headGear = g;
+            //headInstanceID = g.GetInstanceID();
         }
         else
         {
@@ -41,6 +46,7 @@ public class PlayerController : MonoBehaviour
     public void RemoveHeadGear()
     {
         headGear = null;
+        //headInstanceID = -1;
     }
 
     public void PutChestGearOn(Gear g)
@@ -48,6 +54,7 @@ public class PlayerController : MonoBehaviour
         if (g.IsOfType(Gear.ItemType.Chest))
         {
             chestGear = g;
+            //chestInstanceID = g.GetInstanceID();
         }
         else
         {
@@ -58,6 +65,7 @@ public class PlayerController : MonoBehaviour
     public void RemoveChestGear()
     {
         chestGear = null;
+        //chestInstanceID = -1;
     }
 
     public void PutLegsGearOn(Gear g)
@@ -65,6 +73,7 @@ public class PlayerController : MonoBehaviour
         if (g.IsOfType(Gear.ItemType.Legs))
         {
             legsGear = g;
+            //legsInstanceID = g.GetInstanceID();
         }
         else
         {
@@ -75,6 +84,7 @@ public class PlayerController : MonoBehaviour
     public void RemoveLegsGear()
     {
         legsGear = null;
+        //legsInstanceID = -1;
     }
 
     public void EquipWeapon(Gear g)
@@ -82,6 +92,7 @@ public class PlayerController : MonoBehaviour
         if (g.IsOfType(Gear.ItemType.Weapon))
         {
             weapon = g;
+            //weaponInstanceID = g.GetInstanceID();
         }
         else
         {
@@ -92,6 +103,7 @@ public class PlayerController : MonoBehaviour
     public void UnequipWeapon()
     {
         weapon = null;
+        //weaponInstanceID = -1;
     }
 
     public bool IsEquipped(Gear g)
@@ -126,7 +138,7 @@ public class PlayerController : MonoBehaviour
     {
         int value;
         //define new value
-        if (inc < 0)
+        if (inc > 0)
         {
             value = Mathf.Min(maxHunger, currentHunger + inc);
         }
@@ -147,7 +159,7 @@ public class PlayerController : MonoBehaviour
     public void UpdateThirst(int inc)
     {
         int value;
-        if (inc < 0)
+        if (inc > 0)
         {
             value = Mathf.Min(maxThirst, currentThirst + inc);
         }
@@ -169,7 +181,7 @@ public class PlayerController : MonoBehaviour
     public void UpdateHealth(int inc)
     {
         int value;
-        if (inc < 0)
+        if (inc > 0)
         {
             value = Mathf.Min(maxHealth, currentHealth + inc);
         }
@@ -186,7 +198,7 @@ public class PlayerController : MonoBehaviour
     public void UpdateEnergy(int inc)
     {
         int value;
-        if (inc < 0)
+        if (inc > 0)
         {
             value = Mathf.Min(maxEnergy, currentEnergy + inc);
         }

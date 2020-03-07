@@ -187,7 +187,7 @@ public class InventoryController : MonoBehaviour
             {
                 Debug.Log("Gear of type NONE : unable to equip this type!");
             }
-            Debug.Log("Equipped !");
+            //Debug.Log("Equipped !");
             equipButton.gameObject.transform.GetChild(0).GetComponent<TMP_Text>().SetText("Unequip");
             curr.Select();
         }
@@ -274,11 +274,11 @@ public class InventoryController : MonoBehaviour
         descBackground.SetActive(true);
 
         Item selectedItem = selected.GetItem();
-        Debug.Log("It is : " + selectedItem.name);
+        //Debug.Log("It is : " + selectedItem.name);
 
         nameText.SetText(selectedItem.name);
         descriptionText.SetText(selectedItem.GetDescription());
-        Debug.Log("Setting item preview to item image");
+        //Debug.Log("Setting item preview to item image");
         itemPreview.sprite = selectedItem.GetSprite();
 
         if (selectedItem.IsConsumable())

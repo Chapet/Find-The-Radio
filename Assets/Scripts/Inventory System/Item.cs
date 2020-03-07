@@ -4,7 +4,6 @@
 
 abstract public class Item : ScriptableObject
 {
-
     //[SerializeField] private List<ItemType> itemTypes = new List<ItemType>();//contient tt les type d'un item
     [SerializeField] public new string name;
     [SerializeField] private Sprite image;
@@ -43,7 +42,8 @@ abstract public class Item : ScriptableObject
     {
         if (other is Item)
         {
-            return ((Item)other).GetItemID() == this.GetItemID();
+            //return ((Item)other).GetItemID() == this.GetItemID();
+            return other.GetInstanceID() == this.GetInstanceID();
         }
         return false;
     }

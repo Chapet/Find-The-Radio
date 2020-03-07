@@ -14,7 +14,8 @@ public class InventoryExample : ScriptableObject
         for (int i=0; i<numberOfItems; i++)
         {
             int rnd = Random.Range(0, exampleItems.Count);
-            list.Add(exampleItems[rnd]);
+            Item item = Instantiate(exampleItems[rnd]);
+            list.Add(item);
         }
         return list;
     }

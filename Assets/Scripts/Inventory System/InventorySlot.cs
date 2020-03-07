@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class InventorySlot : MonoBehaviour
 {
     private Item item;
+    //[SerializeField] private int itemInstanceID;
     public Image icon;
     public Image slot;
     public Color equippedColor;
@@ -15,6 +16,7 @@ public class InventorySlot : MonoBehaviour
     public void AddItem(Item newItem)
     {
         item = newItem;
+        //itemInstanceID = newItem.GetInstanceID();
         icon.sprite = item.GetSprite();
         icon.enabled = true;
     }
@@ -60,7 +62,7 @@ public class InventorySlot : MonoBehaviour
 
     public void OnClick()
     {
-        Debug.Log("Clicked");
+        //Debug.Log("Clicked");
         Select();
         slotsHandler.SlotSelected(this);
     }
