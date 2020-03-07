@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 using System.Linq;
 using UnityEngine;
 
@@ -20,14 +21,27 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public List<Item> GetItems(Consumable.ItemType itemType)
+    public List<Item> GetItems(Type type)
+    {
+        List<Item> list = new List<Item>();
+        foreach (Item i in inventory)
+        {
+            if (type == i.GetType())
+            {
+                list.Add(i);
+            }
+        }
+        return list;
+    }
+
+    public List<Item> GetItems(params Consumable.ItemType[] itemTypes)
     {
         List<Item> list = new List<Item>();
         foreach (Consumable c in inventory.OfType<Consumable>())
         {
             foreach (Consumable.ItemType it in c.GetItemTypes())
             {
-                if (it == itemType)
+                if (itemTypes.Contains(it))
                 {
                     list.Add(c);
                     break;
@@ -35,16 +49,16 @@ public class InventoryManager : MonoBehaviour
             }
         }
         return list;
-    }
+    } 
 
-    public List<Item> GetItems(Gear.ItemType itemType)
+    public List<Item> GetItems(params Gear.ItemType[] itemTypes)
     {
         List<Item> list = new List<Item>();
         foreach (Gear g in inventory.OfType<Gear>())
         {
             foreach (Gear.ItemType it in g.GetItemTypes())
             {
-                if (it == itemType)
+                if (itemTypes.Contains(it))
                 {
                     list.Add(g);
                     break;
@@ -54,14 +68,14 @@ public class InventoryManager : MonoBehaviour
         return list;
     }
 
-    public List<Item> GetItems(Resource.ItemType itemType)
+    public List<Item> GetItems(params Resource.ItemType[] itemTypes)
     {
         List<Item> list = new List<Item>();
         foreach (Resource r in inventory.OfType<Resource>())
         {
             foreach (Resource.ItemType it in r.GetItemTypes())
             {
-                if (it == itemType)
+                if (itemTypes.Contains(it))
                 {
                     list.Add(r);
                     break;
@@ -91,7 +105,6 @@ public class InventoryManager : MonoBehaviour
             return list;
         }
     }
-
 
     public Item GetItem(Item item)
     {

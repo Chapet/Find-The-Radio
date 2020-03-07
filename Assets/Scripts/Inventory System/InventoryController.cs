@@ -12,10 +12,11 @@ public class InventoryController : MonoBehaviour
     public ScrollRect scrollRect;
 
     public GameObject scrollView;
-    public GameObject slotPrefab;
     public CanvasGroup canvasGroup;
     public GameObject contentPanel;
     public InventoryManager inventory;
+
+    private SlotsHandler slotsHandler;
 
     public TMP_Text nameText;
     public TMP_Text descriptionText;
@@ -34,36 +35,25 @@ public class InventoryController : MonoBehaviour
     public Color normalColor;
     public Color selectedColor;
 
-    Item selectedItem = null;
-    Button prevSelectedSlot = null;
+    //InventorySlot selectedSlot = null;
+    //Button prevSelectedSlot = null;
 
     private float fadeDuration = 0.3f;
 
     void Awake()
     {
         Clear();
+        slotsHandler = contentPanel.GetComponent<SlotsHandler>();
     }
 
     void OnEnable()
     {
         StartCoroutine(StartOnTabAfterWait(15));
-        //scrollRect.verticalNormalizedPosition = 0.98f;
     }
 
     public void Show(List<Item> items)
     {
-        foreach(Item i in items)
-        {
-            GameObject obj = Instantiate(slotPrefab);
-            Button btn = obj.GetComponent<Button>();
-            InventorySlot slot = obj.GetComponent<InventorySlot>();
-            slot.AddItem(i);
-            obj.transform.SetParent(contentPanel.transform, false);
-            btn.onClick.AddListener(delegate
-            {
-                SlotListener(slot, btn);
-            });
-        }
+        slotsHandler.Show(items);
         scrollView.SetActive(true);
         StartCoroutine(DoFade(0, 1));
     }
@@ -95,14 +85,24 @@ public class InventoryController : MonoBehaviour
         }
     }
 
+    /*
     public void SlotListener(InventorySlot slot, Button btn)
     {
+        
         if (prevSelectedSlot != null)
         {
             ClearProperties();
-            prevSelectedSlot.GetComponent<Image>().color = normalColor;
+            InventorySlot s = prevSelectedSlot.GetComponent<InventorySlot>();
+            Gear g = s.GetItem() as Gear;
+            if (g != null && player.IsEquipped(g))
+            {
+                slot.Unselect();
+            }
+            else
+            {
+                prevSelectedSlot.GetComponent<Image>().color = normalColor;
+            }         
         }
-
         descBackground.SetActive(true);
 
         Item i = slot.GetItem();
@@ -124,22 +124,35 @@ public class InventoryController : MonoBehaviour
         else if (selectedItem.IsGear())
         {
             equipButton.gameObject.SetActive(true);
+            Gear g = selectedItem as Gear;
+            if (player.IsEquipped(g))
+            {
+                equipButton.gameObject.transform.GetChild(0).GetComponent<TMP_Text>().SetText("Unequip");
+            }
+            else
+            {
+                equipButton.gameObject.transform.GetChild(0).GetComponent<TMP_Text>().SetText("Equip");
+            }
         }
+        
     }
+    */
 
     public void UseBtnClicked()
     {
-        if (selectedItem != null)
+        InventorySlot curr = slotsHandler.GetCurrentSlot();
+        if (curr != null)
         {
-            Consumable usable = (Consumable)selectedItem;
+            Item selectedItem = curr.GetItem();
+            Consumable cons = selectedItem as Consumable;
             Debug.Log("This item is usable, updating corresponding values ...");
-            player.UpdateEnergy(usable.GetEnergy());
-            player.UpdateHealth(usable.GetHealth());
-            player.UpdateHunger(usable.GetHunger());
-            player.UpdateThirst(usable.GetThirst());
+            player.UpdateEnergy(cons.GetEnergy());
+            player.UpdateHealth(cons.GetHealth());
+            player.UpdateHunger(cons.GetHunger());
+            player.UpdateThirst(cons.GetThirst());
+
             inventory.RemoveItem(selectedItem);
-            Destroy(prevSelectedSlot.gameObject);
-            selectedItem = null;
+            slotsHandler.DeleteCurrentSlot();
 
             ClearInfoPanel();
 
@@ -149,8 +162,10 @@ public class InventoryController : MonoBehaviour
 
     public void EquipBtnClicked()
     {
-        if (selectedItem != null)
+        InventorySlot curr = slotsHandler.GetCurrentSlot();
+        if (curr != null)
         {
+            Item selectedItem = curr.GetItem();
             Gear g = selectedItem as Gear;
             if (g.IsOfType(Gear.ItemType.Head))
             {
@@ -173,7 +188,8 @@ public class InventoryController : MonoBehaviour
                 Debug.Log("Gear of type NONE : unable to equip this type!");
             }
             Debug.Log("Equipped !");
-            //equipButton.gameObject.transform.GetChild(0).GetComponent<TMP_Text>().SetText("Unequip");
+            equipButton.gameObject.transform.GetChild(0).GetComponent<TMP_Text>().SetText("Unequip");
+            curr.Select();
         }
     }
 
@@ -250,6 +266,39 @@ public class InventoryController : MonoBehaviour
         }
         go.transform.GetChild(1).GetComponent<TMP_Text>().SetText(str);
         go.SetActive(true);
+    }
+
+    public void SlotSelected()
+    {
+        InventorySlot selected = slotsHandler.GetCurrentSlot();
+        descBackground.SetActive(true);
+
+        Item selectedItem = selected.GetItem();
+        Debug.Log("It is : " + selectedItem.name);
+
+        nameText.SetText(selectedItem.name);
+        descriptionText.SetText(selectedItem.GetDescription());
+        Debug.Log("Setting item preview to item image");
+        itemPreview.sprite = selectedItem.GetSprite();
+
+        if (selectedItem.IsConsumable())
+        {
+            useButton.gameObject.SetActive(true);
+            SetProperties(selectedItem);
+        }
+        else if (selectedItem.IsGear())
+        {
+            equipButton.gameObject.SetActive(true);
+            Gear g = selectedItem as Gear;
+            if (player.IsEquipped(g))
+            {
+                equipButton.gameObject.transform.GetChild(0).GetComponent<TMP_Text>().SetText("Unequip");
+            }
+            else
+            {
+                equipButton.gameObject.transform.GetChild(0).GetComponent<TMP_Text>().SetText("Equip");
+            }
+        }
     }
 
     private int PropertyRound(int i)

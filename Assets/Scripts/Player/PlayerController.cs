@@ -94,6 +94,11 @@ public class PlayerController : MonoBehaviour
         weapon = null;
     }
 
+    public bool IsEquipped(Gear g)
+    {
+        return g.Equals(headGear) || g.Equals(chestGear) || g.Equals(legsGear) || g.Equals(weapon);
+    }
+
     // Start is called before the first frame update
     void Start()
     {

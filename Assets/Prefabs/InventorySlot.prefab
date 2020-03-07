@@ -191,7 +191,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2386212940216313013}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5822045147601614926}
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &5822045147601614926
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,3 +216,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 2386212939630508117}
+  slot: {fileID: 2386212940216313013}
+  equippedColor: {r: 0.627451, g: 1, b: 0.13725491, a: 1}
+  standardColor: {r: 1, g: 1, b: 1, a: 1}
+  selectedColor: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 1}
+  player: {fileID: 0}
+  contentPanel: {fileID: 0}

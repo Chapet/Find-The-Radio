@@ -95,10 +95,8 @@ public class TabController : MonoBehaviour
                     foodDrinkTab.GetComponent<RectTransform>().sizeDelta = selectedAnchors;
 
                     //Getting food AND drinks
-                    list = inventory.GetItems(Consumable.ItemType.Food).Concat(inventory.GetItems(Consumable.ItemType.Drink)).ToList();
-                    inventoryController.Show(list);
+                    list = inventory.GetItems(Consumable.ItemType.Food, Consumable.ItemType.Drink);
 
-                    whichTabIsActive = Tab.FoodAndDrink;
                     break;
                 case Tab.Gear:
                     Debug.Log("Gear Tab");
@@ -111,17 +109,16 @@ public class TabController : MonoBehaviour
                     {
                         list = list.Concat(inventory.GetItems(it)).ToList();
                     }
-                    inventoryController.Show(list);
 
-                    whichTabIsActive = Tab.Gear;
                     break;
                 case Tab.Meds:
                     Debug.Log("Meds Tab");
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, medsTab.GetComponent<Image>()));
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, contentPanel.GetComponent<Image>()));
                     medsTab.GetComponent<RectTransform>().sizeDelta = selectedAnchors;
-                    inventoryController.Show(inventory.GetItems(Consumable.ItemType.Meds));
-                    whichTabIsActive = Tab.Meds;
+
+                    list = inventory.GetItems(Consumable.ItemType.Meds);
+
                     break;
                 case Tab.Resources:
                     Debug.Log("Ressources Tab");
@@ -129,14 +126,15 @@ public class TabController : MonoBehaviour
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, contentPanel.GetComponent<Image>()));
                     ressourcesTab.GetComponent<RectTransform>().sizeDelta = selectedAnchors;
 
-                    inventoryController.Show(inventory.GetItems(Resource.ItemType.Resource));
+                    list = inventory.GetItems(typeof(Resource));
 
-                    whichTabIsActive = Tab.Resources;
                     break;
                 default:
                     Debug.Log("Default case in the switch");
                     break;
             }
+            whichTabIsActive = which;
+            inventoryController.Show(list);
         }
         else
         {
