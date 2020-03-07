@@ -16,12 +16,11 @@ public class GameController : MonoBehaviour
     public TMP_Text clock;
     public GameObject BunkerPanel;
 
+    /*
     [SerializeField]
     [Tooltip("Drag to it the prefabs of all the items you want in the game")]
     private List<Item> allItems = new List<Item>();
-
-    //[Tooltip("Names of all items")]
-    
+    */    
 
     // Start is called before the first frame update
     void Start() {
@@ -41,6 +40,7 @@ public class GameController : MonoBehaviour
         clock.SetText("Clock : " + hours.ToString("0") + "h" + minutes.ToString("0"));
     }
 
+    /*
     public Item GetItem(int id)
     {
         foreach(Item i in allItems)
@@ -52,4 +52,5 @@ public class GameController : MonoBehaviour
         }
         return null;
     }
+    */
 }

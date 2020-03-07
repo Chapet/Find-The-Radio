@@ -22,93 +22,75 @@ public class PlayerController : MonoBehaviour
     public StatusBar energyBar;
 
     [SerializeField] private Gear headGear = null;
-    //[SerializeField] private int headInstanceID = -1;
     [SerializeField] private Gear chestGear = null;
-    //[SerializeField] private int chestInstanceID = -1;
     [SerializeField] private Gear legsGear = null;
-    //[SerializeField] private int legsInstanceID = -1;
     [SerializeField] private Gear weapon = null;
-    //[SerializeField] private int weaponInstanceID = -1;
-
-    public void PutHeadGearOn(Gear g)
-    {
-        if (g.IsOfType(Gear.ItemType.Head))
-        {
-            headGear = g;
-            //headInstanceID = g.GetInstanceID();
-        }
-        else
-        {
-            Debug.Log("Not for the head!");
-        }
-    }
-
-    public void RemoveHeadGear()
-    {
-        headGear = null;
-        //headInstanceID = -1;
-    }
-
-    public void PutChestGearOn(Gear g)
-    {
-        if (g.IsOfType(Gear.ItemType.Chest))
-        {
-            chestGear = g;
-            //chestInstanceID = g.GetInstanceID();
-        }
-        else
-        {
-            Debug.Log("Not for the chest!");
-        }
-    }
-
-    public void RemoveChestGear()
-    {
-        chestGear = null;
-        //chestInstanceID = -1;
-    }
-
-    public void PutLegsGearOn(Gear g)
-    {
-        if (g.IsOfType(Gear.ItemType.Legs))
-        {
-            legsGear = g;
-            //legsInstanceID = g.GetInstanceID();
-        }
-        else
-        {
-            Debug.Log("Not for the legs!");
-        }
-    }
-
-    public void RemoveLegsGear()
-    {
-        legsGear = null;
-        //legsInstanceID = -1;
-    }
-
-    public void EquipWeapon(Gear g)
-    {
-        if (g.IsOfType(Gear.ItemType.Weapon))
-        {
-            weapon = g;
-            //weaponInstanceID = g.GetInstanceID();
-        }
-        else
-        {
-            Debug.Log("This is not a weapon!");
-        }
-    }
-
-    public void UnequipWeapon()
-    {
-        weapon = null;
-        //weaponInstanceID = -1;
-    }
 
     public bool IsEquipped(Gear g)
     {
         return g.Equals(headGear) || g.Equals(chestGear) || g.Equals(legsGear) || g.Equals(weapon);
+    }
+
+    public void EquipGear(Gear g)
+    {
+        if (!IsEquipped(g))
+        {
+            if (g.IsOfType(Gear.ItemType.Head))
+            {
+                headGear = g;
+            }
+            else if (g.IsOfType(Gear.ItemType.Chest))
+            {
+                chestGear = g;
+            }
+            else if (g.IsOfType(Gear.ItemType.Legs))
+            {
+                legsGear = g;
+            }
+            else if (g.IsOfType(Gear.ItemType.Weapon))
+            {
+                weapon = g;
+            }
+            else
+            {
+                Debug.Log("This item wasn't equippable!");
+            }
+        }
+        else
+        {
+            Debug.Log("This gear was already equipped!");
+        }
+    }
+
+    public void UnequipGear(Gear g)
+    {
+        if (IsEquipped(g))
+        {
+            if (g.Equals(headGear))
+            {
+                headGear = null;
+            }
+            else if (g.Equals(chestGear))
+            {
+                chestGear = null;
+            }
+            else if (g.Equals(legsGear))
+            {
+                legsGear = null;
+            }
+            else if (g.Equals(weapon))
+            {
+                weapon = null;
+            }
+            else
+            {
+                Debug.Log("This item wasn't equipped!");
+            }
+        }
+        else
+        {
+            Debug.Log("This gear wasn't equipped!");
+        }
     }
 
     // Start is called before the first frame update

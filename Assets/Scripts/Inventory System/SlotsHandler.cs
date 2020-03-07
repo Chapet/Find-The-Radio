@@ -20,14 +20,24 @@ public class SlotsHandler : MonoBehaviour
     public void SlotSelected(InventorySlot selected)
     {
         currentlySelected = selected;
-        foreach(InventorySlot s in slots)
+        inventoryController.SlotSelected();
+        UpdateSlots();
+    }
+
+    public void UpdateSlots()
+    {
+        foreach (InventorySlot s in slots)
         {
-            if (s != selected)
+            if (s != currentlySelected)
             {
                 s.Unselect();
             }
+            else
+            {
+                s.Select();
+            }
+            s.Render();
         }
-        inventoryController.SlotSelected();
     }
 
     public void Show(List<Item> items)
@@ -36,21 +46,16 @@ public class SlotsHandler : MonoBehaviour
         foreach (Item i in items)
         {
             GameObject obj = Instantiate(slotPrefab);
-            //Button btn = obj.GetComponent<Button>();
+
             InventorySlot slot = obj.GetComponent<InventorySlot>();
             slot.AddItem(i);
             slot.slotsHandler = this;
             slot.player = player;
             obj.transform.SetParent(contentPanel.transform, false);
-            /*
-            btn.onClick.AddListener(delegate
-            {
-                SlotListener(slot, btn);
-            });
-            */
-            slot.Unselect();
+
             slots.Add(slot);
         }
+        UpdateSlots();
     }
 
     public void DeleteCurrentSlot()
