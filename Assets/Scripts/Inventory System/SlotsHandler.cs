@@ -61,7 +61,8 @@ public class SlotsHandler : MonoBehaviour
     public void DeleteCurrentSlot()
     {
         slots.Remove(currentlySelected);
-        Destroy(currentlySelected.gameObject);
+        currentlySelected.PlayDeleteAnimation(17f / 60f);
+        Destroy(currentlySelected.gameObject, 20f / 60f);
     }
 
     public InventorySlot GetCurrentSlot()

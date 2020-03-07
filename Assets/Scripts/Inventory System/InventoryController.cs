@@ -129,7 +129,7 @@ public class InventoryController : MonoBehaviour
         ClearProperties();
         descriptionText.SetText("Item used :-)");
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1f);
         descriptionText.SetText("");
         descBackground.SetActive(false);
     }

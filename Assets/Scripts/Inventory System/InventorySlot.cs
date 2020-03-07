@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour
@@ -64,6 +65,27 @@ public class InventorySlot : MonoBehaviour
         {
             
             slot.color = standardColor;
+        }
+    }
+
+    public void PlayDeleteAnimation(float animDuration)
+    {
+        var canvGroup = gameObject.GetComponent<CanvasGroup>();
+        Animator anim = gameObject.GetComponent<Animator>();
+        StartCoroutine(DoFade(canvGroup, 0, 1, animDuration));
+        anim.SetTrigger("PopTrigger");
+    }
+
+    private IEnumerator DoFade(CanvasGroup c, float start, float end, float animDuration)
+    {
+        float counter = 0f;
+
+        while (counter < animDuration)
+        {
+            counter += Time.deltaTime;
+            c.alpha = Mathf.Lerp(start, end, counter / animDuration);
+
+            yield return null;
         }
     }
 

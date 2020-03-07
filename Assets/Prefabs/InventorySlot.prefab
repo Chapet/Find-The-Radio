@@ -86,6 +86,8 @@ GameObject:
   - component: {fileID: 2386212940216313013}
   - component: {fileID: 2386212940216313014}
   - component: {fileID: 5822045147601614926}
+  - component: {fileID: 7364318974685689975}
+  - component: {fileID: 380957985263952658}
   m_Layer: 5
   m_Name: InventorySlot
   m_TagString: Untagged
@@ -216,7 +218,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7045da993b9d8497188a7df0c1ccdf9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemInstanceID: 0
   icon: {fileID: 2386212939630508117}
   slot: {fileID: 2386212940216313013}
   check: {fileID: 7336533331640663856}
@@ -225,6 +226,37 @@ MonoBehaviour:
   selectedColor: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 1}
   player: {fileID: 0}
   slotsHandler: {fileID: 0}
+--- !u!95 &7364318974685689975
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2386212940216313008}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4270c281758c145e2bb83a84eb2f2f7b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!225 &380957985263952658
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2386212940216313008}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &6623794925099747184
 GameObject:
   m_ObjectHideFlags: 0
