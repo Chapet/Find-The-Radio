@@ -1416,7 +1416,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05d1140f452000000ed1140f45200000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 201818444}
 --- !u!114 &201818444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1519,7 +1518,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05d1140f452000000ed1140f45200000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 231180789}
 --- !u!114 &231180789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8107,7 +8105,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05d1140f452000000ed1140f45200000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 996004582}
 --- !u!114 &996004582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11495,7 +11492,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05d1140f452000000ed1140f45200000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 1366726653}
 --- !u!114 &1366726653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17427,7 +17423,7 @@ MonoBehaviour:
   currentThirst: 0
   currentEnergy: 0
   maxCarryingSize: 4
-  healthBar: {fileID: 231180788}
+  healthBar: {fileID: 0}
   hungerBar: {fileID: 201818443}
   thirstBar: {fileID: 996004581}
   energyBar: {fileID: 1366726652}
