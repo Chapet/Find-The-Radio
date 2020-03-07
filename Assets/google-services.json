@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "977628339232",
+    "firebase_url": "https://find-the-radio.firebaseio.com",
+    "project_id": "find-the-radio",
+    "storage_bucket": "find-the-radio.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:977628339232:android:b8632d354cba8e331cb045",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.FindtheRadio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "977628339232-krrp5ukihva4tem8h6f06pr4eh4clami.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzhgGUlNVRUURWwJetDlrDQotN6sk3TGY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "977628339232-krrp5ukihva4tem8h6f06pr4eh4clami.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
