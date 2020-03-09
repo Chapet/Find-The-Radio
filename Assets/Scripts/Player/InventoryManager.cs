@@ -21,6 +21,7 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    //  Get all items in inventory corresponding to the class type @type
     public List<Item> GetItems(Type type)
     {
         List<Item> list = new List<Item>();
@@ -34,6 +35,7 @@ public class InventoryManager : MonoBehaviour
         return list;
     }
 
+    //  Get all items in inventory corresponding to the types enumarated in @itemTypes
     public List<Item> GetItems(params Consumable.ItemType[] itemTypes)
     {
         List<Item> list = new List<Item>();
@@ -49,8 +51,9 @@ public class InventoryManager : MonoBehaviour
             }
         }
         return list;
-    } 
+    }
 
+    //  Get all items in inventory corresponding to the types enumarated in @itemTypes
     public List<Item> GetItems(params Gear.ItemType[] itemTypes)
     {
         List<Item> list = new List<Item>();
@@ -68,6 +71,7 @@ public class InventoryManager : MonoBehaviour
         return list;
     }
 
+    //  Get all items in inventory corresponding to the types enumarated in @itemTypes
     public List<Item> GetItems(params Resource.ItemType[] itemTypes)
     {
         List<Item> list = new List<Item>();
@@ -85,6 +89,9 @@ public class InventoryManager : MonoBehaviour
         return list;
     }
 
+    //  Get @n items in inventory corresponding to the @item:
+    //      if there are @n items,
+    //      otherwise null.
     public List<Item> GetItems(Item item, int n)
     {
         List<Item> list = new List<Item>();
@@ -106,6 +113,9 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    //  Get @item:
+    //      if it's in the inventory,
+    //      otherwise null.
     public Item GetItem(Item item)
     {
         foreach (Item i in inventory)
@@ -117,8 +127,6 @@ public class InventoryManager : MonoBehaviour
         }
         return null;
     }
-
-
 
     public void RemoveItem(Item item)
     {

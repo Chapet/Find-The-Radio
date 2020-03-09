@@ -105,10 +105,8 @@ public class TabController : MonoBehaviour
                     gearTab.GetComponent<RectTransform>().sizeDelta = selectedAnchors;
 
                     //Getting all gears    
-                    foreach (Gear.ItemType it in Enum.GetValues(typeof(Gear.ItemType)).Cast<Gear.ItemType>())
-                    {
-                        list = list.Concat(inventory.GetItems(it)).ToList();
-                    }
+
+                    list = inventory.GetItems(typeof(Gear));
 
                     break;
                 case Tab.Meds:
