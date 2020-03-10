@@ -4,10 +4,9 @@
 
 abstract public class Item : ScriptableObject
 {
-    //[SerializeField] private List<ItemType> itemTypes = new List<ItemType>();//contient tt les type d'un item
     [SerializeField] public new string name;
     [SerializeField] private Sprite image;
-    [SerializeField] private int itemID = 0;
+    //[SerializeField] private int itemID = 0;
 
     [SerializeField] [Multiline] private string description = "";
 
@@ -48,9 +47,11 @@ abstract public class Item : ScriptableObject
         return false;
     }
 
+    /*
     public int GetItemID()
     {
         return itemID;
     }
+    */
 
 }

@@ -35,15 +35,26 @@ public class InventoryController : MonoBehaviour
     public Color normalColor;
     public Color selectedColor;
 
-    //InventorySlot selectedSlot = null;
-    //Button prevSelectedSlot = null;
-
     private float fadeDuration = 0.3f;
+
+    private IEnumerator coroutine;
 
     void Awake()
     {
         Clear();
         slotsHandler = contentPanel.GetComponent<SlotsHandler>();
+        coroutine = UsedNotification();
+        /*
+        Gear gunFromResources = Resources.Load<Gear>("Items/Gears/Gun");
+        if (gunFromResources != null)
+        {
+            Debug.Log("Successfully getting : " + gunFromResources);
+        }
+        else
+        {
+            Debug.Log("Unable to reach the requested object!");
+        }
+        */
     }
 
     void OnEnable()
@@ -85,59 +96,6 @@ public class InventoryController : MonoBehaviour
         }
     }
 
-    /*
-    public void SlotListener(InventorySlot slot, Button btn)
-    {
-        
-        if (prevSelectedSlot != null)
-        {
-            ClearProperties();
-            InventorySlot s = prevSelectedSlot.GetComponent<InventorySlot>();
-            Gear g = s.GetItem() as Gear;
-            if (g != null && player.IsEquipped(g))
-            {
-                slot.Unselect();
-            }
-            else
-            {
-                prevSelectedSlot.GetComponent<Image>().color = normalColor;
-            }         
-        }
-        descBackground.SetActive(true);
-
-        Item i = slot.GetItem();
-        Debug.Log("It is : " + i.name);
-
-        btn.GetComponent<Image>().color = selectedColor;
-        nameText.SetText(i.name);
-        descriptionText.SetText(i.GetDescription());
-        Debug.Log("Setting item preview to item image");
-        itemPreview.sprite = i.GetSprite();
-        selectedItem = i;
-        prevSelectedSlot = btn;
-
-        if(selectedItem.IsConsumable())
-        {
-            useButton.gameObject.SetActive(true);
-            SetProperties(selectedItem);
-        }
-        else if (selectedItem.IsGear())
-        {
-            equipButton.gameObject.SetActive(true);
-            Gear g = selectedItem as Gear;
-            if (player.IsEquipped(g))
-            {
-                equipButton.gameObject.transform.GetChild(0).GetComponent<TMP_Text>().SetText("Unequip");
-            }
-            else
-            {
-                equipButton.gameObject.transform.GetChild(0).GetComponent<TMP_Text>().SetText("Equip");
-            }
-        }
-        
-    }
-    */
-
     public void UseBtnClicked()
     {
         InventorySlot curr = slotsHandler.GetCurrentSlot();
@@ -154,10 +112,26 @@ public class InventoryController : MonoBehaviour
             inventory.RemoveItem(selectedItem);
             slotsHandler.DeleteCurrentSlot();
 
-            ClearInfoPanel();
+            coroutine = UsedNotification();
+
+            StartCoroutine(coroutine);
 
             Debug.Log(selectedItem + " used!");
         }
+    }
+
+    private IEnumerator UsedNotification()
+    {
+        nameText.SetText("");
+        itemPreview.sprite = blankSprite;
+        useButton.gameObject.SetActive(false);
+        equipButton.gameObject.SetActive(false);
+        ClearProperties();
+        descriptionText.SetText("Item used :-)");
+
+        yield return new WaitForSeconds(1f);
+        descriptionText.SetText("");
+        descBackground.SetActive(false);
     }
 
     public void EquipBtnClicked()
@@ -165,31 +139,22 @@ public class InventoryController : MonoBehaviour
         InventorySlot curr = slotsHandler.GetCurrentSlot();
         if (curr != null)
         {
+            
             Item selectedItem = curr.GetItem();
             Gear g = selectedItem as Gear;
-            if (g.IsOfType(Gear.ItemType.Head))
+
+            if (player.IsEquipped(g))
             {
-                player.PutHeadGearOn(g);
-            }
-            else if (g.IsOfType(Gear.ItemType.Chest))
-            {
-                player.PutChestGearOn(g);
-            }
-            else if (g.IsOfType(Gear.ItemType.Legs))
-            {
-                player.PutLegsGearOn(g);
-            }
-            else if (g.IsOfType(Gear.ItemType.Weapon))
-            {
-                player.EquipWeapon(g);
+                player.UnequipGear(g);
+                equipButton.gameObject.transform.GetChild(0).GetComponent<TMP_Text>().SetText("Equip");
             }
             else
             {
-                Debug.Log("Gear of type NONE : unable to equip this type!");
+                player.EquipGear(g);
+                equipButton.gameObject.transform.GetChild(0).GetComponent<TMP_Text>().SetText("Unequip");
             }
-            //Debug.Log("Equipped !");
-            equipButton.gameObject.transform.GetChild(0).GetComponent<TMP_Text>().SetText("Unequip");
-            curr.Select();
+
+            slotsHandler.UpdateSlots();
         }
     }
 
@@ -270,15 +235,15 @@ public class InventoryController : MonoBehaviour
 
     public void SlotSelected()
     {
+        StopCoroutine(coroutine);
+
         InventorySlot selected = slotsHandler.GetCurrentSlot();
         descBackground.SetActive(true);
 
         Item selectedItem = selected.GetItem();
-        //Debug.Log("It is : " + selectedItem.name);
 
         nameText.SetText(selectedItem.name);
         descriptionText.SetText(selectedItem.GetDescription());
-        //Debug.Log("Setting item preview to item image");
         itemPreview.sprite = selectedItem.GetSprite();
 
         if (selectedItem.IsConsumable())
