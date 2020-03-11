@@ -7,6 +7,7 @@ using TMPro;
 public class InventoryController : MonoBehaviour
 {
     public PlayerController player;
+    public MenuController menuController;
 
     public TabController tabController;
     public ScrollRect scrollRect;
@@ -44,17 +45,6 @@ public class InventoryController : MonoBehaviour
         Clear();
         slotsHandler = contentPanel.GetComponent<SlotsHandler>();
         coroutine = UsedNotification();
-        /*
-        Gear gunFromResources = Resources.Load<Gear>("Items/Gears/Gun");
-        if (gunFromResources != null)
-        {
-            Debug.Log("Successfully getting : " + gunFromResources);
-        }
-        else
-        {
-            Debug.Log("Unable to reach the requested object!");
-        }
-        */
     }
 
     void OnEnable()
@@ -264,6 +254,11 @@ public class InventoryController : MonoBehaviour
                 equipButton.gameObject.transform.GetChild(0).GetComponent<TMP_Text>().SetText("Equip");
             }
         }
+    }
+
+    public void ExitBtnClicked()
+    {
+        menuController.ExitMenu(gameObject);
     }
 
     private int PropertyRound(int i)

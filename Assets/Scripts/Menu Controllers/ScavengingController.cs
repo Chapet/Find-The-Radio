@@ -46,7 +46,7 @@ public class ScavengingController : MonoBehaviour
 
     void Scavenge()
     {
-        Debug.Log(scavengeTime);
+        //Debug.Log(scavengeTime);
 
         //nombre de tranche de 30 min
         int nbTimeSlice = (int)scavengeTime * 2;
@@ -69,18 +69,27 @@ public class ScavengingController : MonoBehaviour
 
                 if (chance > 0.9) //gun
                 {
-                    Debug.Log("pistol added to inventory");
+                    //Debug.Log("pistol added to inventory");
+                    Gear gun = Resources.Load<Gear>("Items/Gear/Gun");
+                    Debug.Log(gun);
+                    inventory.AddItem(gun);
                 }
                 else if (chance > 0.45) // water
                 {
-                    Debug.Log("water added to inventory");
+                    //Debug.Log("water added to inventory");
+                    Consumable water = Resources.Load<Consumable>("Items/Consumables/WaterBottle");
+                    Debug.Log(water);
+                    inventory.AddItem(water);
                 }
                 else //food
                 {
-                    Debug.Log("food can added to inventory");
+                    //Debug.Log("food can added to inventory");
+                    Consumable foodCan = Resources.Load<Consumable>("Items/Consumables/FoodCan");
+                    Debug.Log(foodCan);
+                    inventory.AddItem(foodCan);
                 }
 
-                Debug.Log("adding Item: " + i);
+                //Debug.Log("adding Item: " + i);
             }
 
             if (!ev)
