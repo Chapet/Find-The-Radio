@@ -31,7 +31,6 @@ public class Junk : Item
     }
     // =================================
 
-
     public override bool IsCraftable()
     {
         return false;

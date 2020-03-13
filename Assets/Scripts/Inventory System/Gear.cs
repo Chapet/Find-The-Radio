@@ -10,6 +10,11 @@ public enum ScavengOption
 
 public class Gear:Item
 {
+    [SerializeField] private List<Item> recipe = new List<Item>();
+    public List<Item> Recipe {
+        get { return this.recipe; }
+    }
+
     // ===== Canvas for item types =====
     public enum ItemType
     {
@@ -62,6 +67,6 @@ public class Gear:Item
 
     public override bool IsCraftable()
     {
-        return true;
+        return recipe.Count != 0;
     }
 }

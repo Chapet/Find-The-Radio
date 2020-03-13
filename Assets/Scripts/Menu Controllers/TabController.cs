@@ -18,7 +18,7 @@ public class TabController : MonoBehaviour
     public Button foodDrinkTab;
     public Button gearTab;
     public Button medsTab;
-    public Button ressourcesTab;
+    public Button miscTab;
 
     private TMP_Text foodDrinkTabText;
     private TMP_Text gearTabText;
@@ -26,7 +26,7 @@ public class TabController : MonoBehaviour
     private TMP_Text ressourcesTabText;
 
     private Vector2 unselectedAnchors;
-    private Vector2 selectedAnchors = new Vector2(215f, 5f);
+    private Vector2 selectedAnchors;// = new Vector2(215f, 5f);
     
 
     public float fadeDuration = 0.3f;
@@ -41,26 +41,28 @@ public class TabController : MonoBehaviour
         foodDrinkTab.GetComponent<Image>().color = darkColor;
         gearTab.GetComponent<Image>().color = darkColor;
         medsTab.GetComponent<Image>().color = darkColor;
-        ressourcesTab.GetComponent<Image>().color = darkColor;
+        miscTab.GetComponent<Image>().color = darkColor;
 
         foodDrinkTab.onClick.AddListener(delegate { TabBtnListener(Tab.FoodAndDrink); });
         gearTab.onClick.AddListener(delegate { TabBtnListener(Tab.Gear); });
         medsTab.onClick.AddListener(delegate { TabBtnListener(Tab.Meds); });
-        ressourcesTab.onClick.AddListener(delegate { TabBtnListener(Tab.Resources); });
+        miscTab.onClick.AddListener(delegate { TabBtnListener(Tab.Misc); });
 
         foodDrinkTabText = foodDrinkTab.transform.GetChild(0).gameObject.GetComponent<TMP_Text>();
         gearTabText = gearTab.transform.GetChild(0).gameObject.GetComponent<TMP_Text>();
         medsTabText = medsTab.transform.GetChild(0).gameObject.GetComponent<TMP_Text>();
-        ressourcesTabText = ressourcesTab.transform.GetChild(0).gameObject.GetComponent<TMP_Text>();
+        ressourcesTabText = miscTab.transform.GetChild(0).gameObject.GetComponent<TMP_Text>();
 
         contentPanel.GetComponent<Image>().color = darkColor;
 
         unselectedAnchors = foodDrinkTab.GetComponent<RectTransform>().sizeDelta;
+        selectedAnchors = new Vector2(1.1f * unselectedAnchors.x, 0.9f * unselectedAnchors.y);
     }
 
     public void TabBtnListener(Tab which)
     {
-        //Debug.Log(which);
+        Debug.Log(whichTabIsActive);
+        Debug.Log(which);
 
         if (which != whichTabIsActive)
         {
@@ -118,11 +120,11 @@ public class TabController : MonoBehaviour
                     list = inventory.GetItems(Consumable.ItemType.Meds);
 
                     break;
-                case Tab.Resources:
-                    Debug.Log("Ressources Tab");
-                    StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, ressourcesTab.GetComponent<Image>()));
+                case Tab.Misc:
+                    Debug.Log("Misc. Tab");
+                    StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, miscTab.GetComponent<Image>()));
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, contentPanel.GetComponent<Image>()));
-                    ressourcesTab.GetComponent<RectTransform>().sizeDelta = selectedAnchors;
+                    miscTab.GetComponent<RectTransform>().sizeDelta = selectedAnchors;
 
                     list = inventory.GetItems(typeof(Resource));
 
@@ -177,6 +179,6 @@ public class TabController : MonoBehaviour
         FoodAndDrink,
         Gear,
         Meds,
-        Resources
+        Misc
     }
 }

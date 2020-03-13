@@ -16,11 +16,10 @@ public class GameController : MonoBehaviour
     public TMP_Text clock;
     public GameObject BunkerPanel;
 
-    /*
-    [SerializeField]
-    [Tooltip("Drag to it the prefabs of all the items you want in the game")]
-    private List<Item> allItems = new List<Item>();
-    */    
+    void Awake()
+    {
+        Application.targetFrameRate = 60;
+    }
 
     // Start is called before the first frame update
     void Start() {
