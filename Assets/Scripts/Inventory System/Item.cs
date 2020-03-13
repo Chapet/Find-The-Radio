@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
-//[CreateAssetMenu(fileName = "Item", menuName = "MyAsset/Items/Item")]
+//[CreateAssetMenu(fileName = "Item", menuName = "FindTheRadio/Items/Item")]
 
 abstract public class Item : ScriptableObject
 {
@@ -11,7 +12,6 @@ abstract public class Item : ScriptableObject
 
     [SerializeField] public new string name;
     [SerializeField] private Sprite image;
-    //[SerializeField] private int itemID = 0;
 
     [SerializeField] [Multiline] private string description = "";
 
@@ -60,3 +60,4 @@ abstract public class Item : ScriptableObject
     */
 
 }
+
