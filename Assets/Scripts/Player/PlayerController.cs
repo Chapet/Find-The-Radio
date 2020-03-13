@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour
         }
 
         currentHunger = value;
-        hungerBar.SetValue(value);
+        //hungerBar.SetValue(value);
 
         //Debug.Log("Adding " + inc + " to the Hunger.");
     }
@@ -151,7 +151,7 @@ public class PlayerController : MonoBehaviour
         }
 
         currentThirst = value;
-        thirstBar.SetValue(value);
+        //thirstBar.SetValue(value);
 
         //Debug.Log("Adding " + inc + " to the Thirst.");
         
@@ -173,7 +173,7 @@ public class PlayerController : MonoBehaviour
         }
 
         currentHealth = value;
-        healthBar.SetValue(value);
+        //healthBar.SetValue(value);
         //Debug.Log("Adding " + inc + " to the Health.");
         
     }
@@ -190,7 +190,7 @@ public class PlayerController : MonoBehaviour
         }
 
         currentEnergy = value;
-        energyBar.SetValue(value);
+        //energyBar.SetValue(value);
         //Debug.Log("Adding " + inc + " to the Energy.");
     }
 }

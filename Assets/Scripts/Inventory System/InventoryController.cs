@@ -8,6 +8,7 @@ public class InventoryController : MonoBehaviour
 {
     public PlayerController player;
     public MenuController menuController;
+    public StatusBarController barController;
 
     public TabController tabController;
     public ScrollRect scrollRect;
@@ -107,6 +108,7 @@ public class InventoryController : MonoBehaviour
             StartCoroutine(coroutine);
 
             Debug.Log(selectedItem + " used!");
+            barController.UpdateStatusBars();
         }
     }
 
@@ -235,6 +237,8 @@ public class InventoryController : MonoBehaviour
         nameText.SetText(selectedItem.name);
         descriptionText.SetText(selectedItem.GetDescription());
         itemPreview.sprite = selectedItem.GetSprite();
+
+        ClearProperties();
 
         if (selectedItem.IsConsumable())
         {

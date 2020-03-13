@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class MenuController : MonoBehaviour
 {
+    public StatusBarController barController;
     public GameObject backPanel;
     private Animator openCloseMenuAnimator;
     private float animDuration = 10f / 60f;
@@ -14,6 +15,7 @@ public class MenuController : MonoBehaviour
         openCloseMenuAnimator = panel.GetComponent<Animator>();
         StartCoroutine(DoFade(canvGroup, 1, 0));
         StartCoroutine(ExitWithAnim(panel, animDuration));
+        barController.UpdateStatusBars();
     }
 
     public void OpenMenu(GameObject panel)
