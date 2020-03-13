@@ -4,6 +4,11 @@
 
 abstract public class Item : ScriptableObject
 {
+    public enum ItemType
+    {
+        Consumable,Gear,Junk,Ressouce
+    };
+
     [SerializeField] public new string name;
     [SerializeField] private Sprite image;
     //[SerializeField] private int itemID = 0;
