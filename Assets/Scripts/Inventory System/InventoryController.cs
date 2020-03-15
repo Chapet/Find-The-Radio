@@ -6,9 +6,12 @@ using TMPro;
 
 public class InventoryController : MonoBehaviour
 {
-    public PlayerController player;
+    public GameObject player;
     public MenuController menuController;
-    public StatusBarController barController;
+
+    private StatusBarController barController;
+    private InventoryManager inventory;
+    private PlayerController playerController;
 
     public TabController tabController;
     public ScrollRect scrollRect;
@@ -16,7 +19,7 @@ public class InventoryController : MonoBehaviour
     public GameObject scrollView;
     public CanvasGroup canvasGroup;
     public GameObject contentPanel;
-    public InventoryManager inventory;
+    
 
     private SlotsHandler slotsHandler;
 
@@ -46,6 +49,9 @@ public class InventoryController : MonoBehaviour
         Clear();
         slotsHandler = contentPanel.GetComponent<SlotsHandler>();
         coroutine = UsedNotification();
+        barController = player.GetComponent<StatusBarController>();
+        inventory = player.GetComponent<InventoryManager>();
+        playerController = player.GetComponent<PlayerController>();
     }
 
     void OnEnable()
@@ -95,10 +101,10 @@ public class InventoryController : MonoBehaviour
             Item selectedItem = curr.GetItem();
             Consumable cons = selectedItem as Consumable;
             Debug.Log("This item is usable, updating corresponding values ...");
-            player.UpdateEnergy(cons.GetEnergy());
-            player.UpdateHealth(cons.GetHealth());
-            player.UpdateHunger(cons.GetHunger());
-            player.UpdateThirst(cons.GetThirst());
+            playerController.UpdateEnergy(cons.GetEnergy());
+            playerController.UpdateHealth(cons.GetHealth());
+            playerController.UpdateHunger(cons.GetHunger());
+            playerController.UpdateThirst(cons.GetThirst());
 
             inventory.RemoveItem(selectedItem);
             slotsHandler.DeleteCurrentSlot();
@@ -135,14 +141,14 @@ public class InventoryController : MonoBehaviour
             Item selectedItem = curr.GetItem();
             Gear g = selectedItem as Gear;
 
-            if (player.IsEquipped(g))
+            if (playerController.IsEquipped(g))
             {
-                player.UnequipGear(g);
+                playerController.UnequipGear(g);
                 equipButton.gameObject.transform.GetChild(0).GetComponent<TMP_Text>().SetText("Equip");
             }
             else
             {
-                player.EquipGear(g);
+                playerController.EquipGear(g);
                 equipButton.gameObject.transform.GetChild(0).GetComponent<TMP_Text>().SetText("Unequip");
             }
 
@@ -249,7 +255,7 @@ public class InventoryController : MonoBehaviour
         {
             equipButton.gameObject.SetActive(true);
             Gear g = selectedItem as Gear;
-            if (player.IsEquipped(g))
+            if (playerController.IsEquipped(g))
             {
                 equipButton.gameObject.transform.GetChild(0).GetComponent<TMP_Text>().SetText("Unequip");
             }

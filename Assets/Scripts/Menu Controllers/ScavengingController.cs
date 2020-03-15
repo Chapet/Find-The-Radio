@@ -61,23 +61,23 @@ public class ScavengingController : MonoBehaviour
      * itypeType: le type de ressources
      * scavengeTime: le temps minimum qu'il faut sortir pour trouuver cet item (en nbr d'heure)
      */
-    private (string link,int minLevel,Item.ItemType itemType,double minTimeOut)[] scavengeItems = new[]
+    private (string link,int minLevel,Item.ItemClass itemType,double minTimeOut)[] scavengeItems = new[]
     {
         /*======CONSUMABLE=====*/
-        (link:"Items/Consumables/WaterBottle",minLevel:0,itemType:Item.ItemType.Consumable,minTimeOut:0.0),
-        (link:"Items/Consumables/FoodCan",minLevel:0,itemType:Item.ItemType.Consumable,minTimeOut:0.0),
-        (link:"Items/Consumables/Soda",minLevel:0,itemType:Item.ItemType.Consumable,minTimeOut:0.0),
+        (link:"Items/Consumables/WaterBottle",minLevel:0,itemType:Item.ItemClass.Consumable,minTimeOut:0.0),
+        (link:"Items/Consumables/FoodCan",minLevel:0,itemType:Item.ItemClass.Consumable,minTimeOut:0.0),
+        (link:"Items/Consumables/Soda",minLevel:0,itemType:Item.ItemClass.Consumable,minTimeOut:0.0),
        
         
         /*======GEAR=====*/
-        (link:"Items/Gear/Gun",minLevel:0,itemType:Item.ItemType.Gear,minTimeOut:0.0),
+        (link:"Items/Gear/Gun",minLevel:0,itemType:Item.ItemClass.Gear,minTimeOut:0.0),
         
         /*======RESOURCES=====*/
-        (link:"Items/Resources/WoodLog",minLevel:0,itemType:Item.ItemType.Ressouce,minTimeOut:0.0),        
+        (link:"Items/Resources/WoodLog",minLevel:0,itemType:Item.ItemClass.Ressouce,minTimeOut:0.0),        
         
         /*======Junk=====*/
         
-        (link:"Items/Junk/Grass",minLevel:0,itemType:Item.ItemType.Ressouce,minTimeOut:0.0),     
+        (link:"Items/Junk/Grass",minLevel:0,itemType:Item.ItemClass.Ressouce,minTimeOut:0.0),     
     };
     
     
@@ -89,9 +89,9 @@ public class ScavengingController : MonoBehaviour
      *
      * Return array of [<link> as string, <luck> as double, <minlevel> as int, <itemtype> as ItemType, <minTimeOut> as double]
      */
-    private static (string link,int minLevel,Item.ItemType itemType,double minTimeOut)[] getMyLevelItems((string link,int minLevel,Item.ItemType itemType,double minTimeOut)[] tuple,int myLevel,Item.ItemType type, double scavengeTime)
+    private static (string link,int minLevel,Item.ItemClass itemType,double minTimeOut)[] getMyLevelItems((string link,int minLevel,Item.ItemClass itemType,double minTimeOut)[] tuple,int myLevel,Item.ItemClass type, double scavengeTime)
     {
-        List <(string link,int minLevel,Item.ItemType itemType,double minTimeOut)> result= new List<(string link,int minLevel,Item.ItemType itemType,double minTimeOut)>();
+        List <(string link,int minLevel,Item.ItemClass itemType,double minTimeOut)> result= new List<(string link,int minLevel,Item.ItemClass itemType,double minTimeOut)>();
 
         for (int i = 0; i < tuple.Length; i++)
         {
@@ -138,12 +138,12 @@ public class ScavengingController : MonoBehaviour
                 
                 int myLevel = 100;//TODO: link with player
                 
-                (string link,int minLevel,Item.ItemType itemType,double minTimeOut)[] possibleItem;
+                (string link,int minLevel,Item.ItemClass itemType,double minTimeOut)[] possibleItem;
 
                 if (chance > 0.9)/*========== GEAR ===========*/
                 {
                     //retourn tt les items que je pourrais possiblement trouver sur mon chemin en fonction de mon level, du type d'objet et du temps que j'ai décidé de sortir
-                    possibleItem= getMyLevelItems(scavengeItems, myLevel,Item.ItemType.Gear,scavengeTime);
+                    possibleItem= getMyLevelItems(scavengeItems, myLevel,Item.ItemClass.Gear,scavengeTime);
                     
                     if (possibleItem != null)
                     {
@@ -155,7 +155,7 @@ public class ScavengingController : MonoBehaviour
                 }
                 else if (chance > 0.45)/*========== Consumable ===========*/
                 {
-                    possibleItem= getMyLevelItems(scavengeItems, myLevel,Item.ItemType.Consumable,scavengeTime);
+                    possibleItem= getMyLevelItems(scavengeItems, myLevel,Item.ItemClass.Consumable,scavengeTime);
                     if (possibleItem != null)
                     {
                         int index = (int) (rand.NextDouble() * (possibleItem.Length - 1));
@@ -166,7 +166,7 @@ public class ScavengingController : MonoBehaviour
                 }
                 else if (chance > 0.20)/*========== RESSOURCES ===========*/
                 {
-                    possibleItem= getMyLevelItems(scavengeItems, myLevel,Item.ItemType.Ressouce,scavengeTime);
+                    possibleItem= getMyLevelItems(scavengeItems, myLevel,Item.ItemClass.Ressouce,scavengeTime);
                     if (possibleItem != null)
                     {
                         int index = (int) (rand.NextDouble() * (possibleItem.Length - 1));
@@ -176,7 +176,7 @@ public class ScavengingController : MonoBehaviour
                     }
                 }else if (chance > 0) /*========== JUNK ===========*/
                 {
-                    possibleItem= getMyLevelItems(scavengeItems, myLevel,Item.ItemType.Junk,scavengeTime);
+                    possibleItem= getMyLevelItems(scavengeItems, myLevel,Item.ItemClass.Junk,scavengeTime);
                     if (possibleItem != null)
                     {
                         int index = (int) (rand.NextDouble() * (possibleItem.Length - 1));

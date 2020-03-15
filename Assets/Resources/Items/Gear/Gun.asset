@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Gun
   image: {fileID: 21300000, guid: b33698affa852443bb6626fdc446e66d, type: 3}
-  itemID: 1
+  itemID: 3
   description: This is a gun ... Pew Pew !
+  recipe: []
   itemTypes: 01000000
   scavengRate: 0
   scavengSize: 0

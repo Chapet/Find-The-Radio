@@ -97,20 +97,20 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         currentHealth = maxHealth;
-        healthBar.SetMaxValue(maxHealth);
-        healthBar.SetValue(maxHealth);
+        //healthBar.SetMaxValue(maxHealth);
+        //healthBar.SetValue(maxHealth);
 
         currentHunger = maxHunger;
-        hungerBar.SetMaxValue(maxHunger);
-        hungerBar.SetValue(maxHunger);
+        //hungerBar.SetMaxValue(maxHunger);
+        //hungerBar.SetValue(maxHunger);
 
         currentThirst = maxThirst;
-        thirstBar.SetMaxValue(maxThirst);
-        thirstBar.SetValue(maxThirst);
+        //thirstBar.SetMaxValue(maxThirst);
+        //thirstBar.SetValue(maxThirst);
 
         currentEnergy = maxEnergy;
-        energyBar.SetMaxValue(maxEnergy);
-        energyBar.SetValue(maxEnergy);
+        //energyBar.SetMaxValue(maxEnergy);
+        //energyBar.SetValue(maxEnergy);
     }
 
     /**

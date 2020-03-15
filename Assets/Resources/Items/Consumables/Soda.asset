@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Soda
   image: {fileID: 21300000, guid: 43e4376ca2c324407aa15fe01a4912e5, type: 3}
-  itemID: 2
+  itemID: 1
   description: Enjoy the coke side of life ...
   itemTypes: 010000000200000003000000
   thirstValue: -13

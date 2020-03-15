@@ -1,17 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 //[CreateAssetMenu(fileName = "Item", menuName = "FindTheRadio/Items/Item")]
 
 abstract public class Item : ScriptableObject
 {
-    public enum ItemType
+    public enum ItemClass
     {
         Consumable,Gear,Junk,Ressouce
-    };
+    }
 
     [SerializeField] public new string name;
     [SerializeField] private Sprite image;
+    [SerializeField] private int itemID;
 
     [SerializeField] [Multiline] private string description = "";
 
@@ -42,12 +44,22 @@ abstract public class Item : ScriptableObject
         return this.description;
     }
 
-    public bool Equals(Object other)
+    public bool Equals(UnityEngine.Object other)
     {
         if (other is Item)
         {
             //return ((Item)other).GetItemID() == this.GetItemID();
             return other.GetInstanceID() == this.GetInstanceID();
+        }
+        return false;
+    }
+
+    public bool IsSameAs(Item item)
+    {
+        Type type = this.GetType();
+        if (type == item.GetType())
+        {
+            return this.name == item.name && this.itemID == item.itemID; ;
         }
         return false;
     }

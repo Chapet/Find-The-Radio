@@ -144,7 +144,7 @@ public class TabController : MonoBehaviour
                     miscTab.GetComponent<RectTransform>().offsetMax += new Vector2(20, 5);
                     miscTab.GetComponent<RectTransform>().offsetMin += new Vector2(-5, -5);
 
-                    list = inventory.GetItems(typeof(Resource));
+                    list = inventory.GetItems(typeof(Resource), typeof(Junk));
 
                     break;
                 default:
