@@ -16,10 +16,12 @@ public class PlayerController : MonoBehaviour
 
     public int maxCarryingSize = 4;
 
-    public StatusBar healthBar;
-    public StatusBar hungerBar;
-    public StatusBar thirstBar;
-    public StatusBar energyBar;
+    //public StatusBar healthBar;
+    //public StatusBar hungerBar;
+    //public StatusBar thirstBar;
+    //public StatusBar energyBar;
+
+    public StatusBarController statusBarController;
 
     [SerializeField] private Gear headGear = null;
     [SerializeField] private Gear chestGear = null;
@@ -130,6 +132,7 @@ public class PlayerController : MonoBehaviour
         }
 
         currentHunger = value;
+        statusBarController.UpdateStatusBars();
         //hungerBar.SetValue(value);
 
         //Debug.Log("Adding " + inc + " to the Hunger.");
@@ -151,10 +154,11 @@ public class PlayerController : MonoBehaviour
         }
 
         currentThirst = value;
+        statusBarController.UpdateStatusBars();
         //thirstBar.SetValue(value);
 
         //Debug.Log("Adding " + inc + " to the Thirst.");
-        
+
     }
     
     /**
@@ -173,9 +177,10 @@ public class PlayerController : MonoBehaviour
         }
 
         currentHealth = value;
+        statusBarController.UpdateStatusBars();
         //healthBar.SetValue(value);
         //Debug.Log("Adding " + inc + " to the Health.");
-        
+
     }
     public void UpdateEnergy(int inc)
     {
@@ -190,6 +195,7 @@ public class PlayerController : MonoBehaviour
         }
 
         currentEnergy = value;
+        statusBarController.UpdateStatusBars();
         //energyBar.SetValue(value);
         //Debug.Log("Adding " + inc + " to the Energy.");
     }

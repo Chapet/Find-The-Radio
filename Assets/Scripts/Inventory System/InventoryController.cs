@@ -9,7 +9,7 @@ public class InventoryController : MonoBehaviour
     public GameObject player;
     public MenuController menuController;
 
-    private StatusBarController barController;
+    //private StatusBarController barController;
     private InventoryManager inventory;
     private PlayerController playerController;
 
@@ -49,7 +49,7 @@ public class InventoryController : MonoBehaviour
         Clear();
         slotsHandler = contentPanel.GetComponent<SlotsHandler>();
         coroutine = UsedNotification();
-        barController = player.GetComponent<StatusBarController>();
+        //barController = player.GetComponent<StatusBarController>();
         inventory = player.GetComponent<InventoryManager>();
         playerController = player.GetComponent<PlayerController>();
     }
@@ -114,7 +114,7 @@ public class InventoryController : MonoBehaviour
             StartCoroutine(coroutine);
 
             Debug.Log(selectedItem + " used!");
-            barController.UpdateStatusBars();
+            //barController.UpdateStatusBars();
         }
     }
 
