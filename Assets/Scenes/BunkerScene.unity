@@ -20992,10 +20992,7 @@ MonoBehaviour:
   currentThirst: 0
   currentEnergy: 0
   maxCarryingSize: 4
-  healthBar: {fileID: 231180788}
-  hungerBar: {fileID: 0}
-  thirstBar: {fileID: 0}
-  energyBar: {fileID: 0}
+  statusBarController: {fileID: 1987407795}
   headGear: {fileID: 0}
   chestGear: {fileID: 0}
   legsGear: {fileID: 0}
@@ -22656,7 +22653,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d35722114cfb4f6cb7be7fab9ec46a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barController: {fileID: 1987407795}
   backPanel: {fileID: 2079418909}
 --- !u!4 &2142818588
 Transform:
