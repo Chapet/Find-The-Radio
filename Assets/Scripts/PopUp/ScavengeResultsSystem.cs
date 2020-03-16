@@ -79,30 +79,31 @@ public class ScavengeResultsSystem : MonoBehaviour
      * increment est le nombre que l'on va rajouter au slider pour atteindre la valeur finale
      * inc est toujours possitif
      */
-    private void incrementSlider(Slider slider, float finalValue, int inc)
+    private void incrementSlider(StatusBar statusBar, float finalValue, int inc)
     {
-        if (slider.value < finalValue)
+        if (statusBar.slider.value < finalValue)
         {
-            healthBar.addValue(inc);
-        }else if (slider.value > finalValue)
+            statusBar.addValue(inc);
+        }else if (statusBar.slider.value > finalValue)
         {
-            healthBar.addValue(-1*inc);
+            statusBar.addValue(-1*inc);
         }
+        
     }
 
     public void Update()
     {
         //===========    HEALTH    =============
-        incrementSlider(healthBar.slider,healthGoal,1);
+        incrementSlider(healthBar,healthGoal,1);
         
         //===========    HUNGER    =============
-        incrementSlider(hungerBar.slider,hungerGoal,1);
+        incrementSlider(hungerBar,hungerGoal,1);
         
         //===========    THIRST    =============
-        incrementSlider(thirstBar.slider,thirstGoal,1);
+        incrementSlider(thirstBar,thirstGoal,1);
         
         //===========    ENERGY    =============
-        incrementSlider(energyBar.slider,energyGoal,1);
+        incrementSlider(energyBar,energyGoal,1);
     }
     
 
