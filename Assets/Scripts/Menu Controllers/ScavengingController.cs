@@ -22,6 +22,7 @@ public class ScavengingController : MonoBehaviour
     public PlayerController player;
     public MenuController menuController;
     public PopupSystem pop;
+    public ScavengeResultsSystem popUpResult;
 
     /*[SerializeField] [Tooltip("Contain all the items that you can find outside the bunker")]
     private ScavengingListItem itemList;
@@ -77,7 +78,8 @@ public class ScavengingController : MonoBehaviour
         
         /*======Junk=====*/
         
-        (link:"Items/Junk/Grass",minLevel:0,itemType:Item.ItemClass.Ressouce,minTimeOut:0.0),     
+        (link:"Items/Junks/Grass",minLevel:0,itemType:Item.ItemClass.Junk,minTimeOut:0.0),     
+
     };
     
     
@@ -105,11 +107,19 @@ public class ScavengingController : MonoBehaviour
 
     /*=============================================================================*/
 
+    private List<Item> itemsFound;
+
+    public void Start()
+    {
+        itemsFound=new List<Item>();
+    }
+
     /**
      * Mets les items trouvés dans qq chose en attendant que la sortie soit finie et qu'on montre le résultat de la sortie.
      */
     private void addItemFound(Item item)
     {
+        itemsFound.Add(item);
         inventory.AddItem(item);
     }
 
@@ -145,7 +155,7 @@ public class ScavengingController : MonoBehaviour
                     //retourn tt les items que je pourrais possiblement trouver sur mon chemin en fonction de mon level, du type d'objet et du temps que j'ai décidé de sortir
                     possibleItem= getMyLevelItems(scavengeItems, myLevel,Item.ItemClass.Gear,scavengeTime);
                     
-                    if (possibleItem != null)
+                    if (possibleItem != null && possibleItem.Length>0)
                     {
                         int index = (int) (rand.NextDouble() * (possibleItem.Length) - 1); //index random parmis les objets possible
                         Gear element = Resources.Load<Gear>(possibleItem[index].link); //load l'item
@@ -156,7 +166,8 @@ public class ScavengingController : MonoBehaviour
                 else if (chance > 0.45)/*========== Consumable ===========*/
                 {
                     possibleItem= getMyLevelItems(scavengeItems, myLevel,Item.ItemClass.Consumable,scavengeTime);
-                    if (possibleItem != null)
+                    if (possibleItem != null&& possibleItem.Length>0)
+
                     {
                         int index = (int) (rand.NextDouble() * (possibleItem.Length - 1));
                         Consumable element = Resources.Load<Consumable>(possibleItem[index].link);
@@ -167,7 +178,8 @@ public class ScavengingController : MonoBehaviour
                 else if (chance > 0.20)/*========== RESSOURCES ===========*/
                 {
                     possibleItem= getMyLevelItems(scavengeItems, myLevel,Item.ItemClass.Ressouce,scavengeTime);
-                    if (possibleItem != null)
+                    if (possibleItem != null&& possibleItem.Length>0)
+
                     {
                         int index = (int) (rand.NextDouble() * (possibleItem.Length - 1));
                         Resource element = Resources.Load<Resource>(possibleItem[index].link);
@@ -177,7 +189,8 @@ public class ScavengingController : MonoBehaviour
                 }else if (chance > 0) /*========== JUNK ===========*/
                 {
                     possibleItem= getMyLevelItems(scavengeItems, myLevel,Item.ItemClass.Junk,scavengeTime);
-                    if (possibleItem != null)
+                    if (possibleItem != null&& possibleItem.Length>0)
+
                     {
                         int index = (int) (rand.NextDouble() * (possibleItem.Length - 1));
                         Junk element = Resources.Load<Junk>(possibleItem[index].link);
@@ -225,15 +238,38 @@ public class ScavengingController : MonoBehaviour
             }
            
         } //le principe est la, il faut balance et ajouter les items à l'inventaire
-
-        //pop up resultat
+        
+        
+        
         
         // updating game values
         gameController.UpdateGameClock(scavengeTime);
-        player.UpdateEnergy(-2 * nbTimeSlice);
 
+        //========== KEEP STATUS BAR BEFORE MODIFICATION ===========
+        
+        int oldHealth = player.currentHealth;
+        int oldHunger = player.currentHunger;
+        int oldThirst = player.currentThirst;
+        int oldEnergy = player.currentEnergy;
+        
+        
+        //========== MODIFY STATUS BAR =================
+        
+        player.UpdateEnergy(-2 * nbTimeSlice);
         player.UpdateHunger(-2 * nbTimeSlice);
         player.UpdateThirst(-3 * nbTimeSlice);
+        
+        //===============================================
+        
+        
+        menuController.ExitMenu(this.gameObject);
+
+        //=======    POP UP RESULT    =============
+        popUpResult.PopResult(itemsFound,(health:(old: oldHealth, now: player.currentHealth),hunger:(old:oldHunger,now:player.currentHunger),thirst:(old:oldThirst,now:player.currentThirst),ernery:(old:oldEnergy,now:player.currentEnergy)));
+
+        
+        itemsFound.Clear();
+
     }
 
    
