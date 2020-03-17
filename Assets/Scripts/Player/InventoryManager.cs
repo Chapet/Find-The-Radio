@@ -7,11 +7,11 @@ public class InventoryManager : MonoBehaviour
 {
     public InventoryExample inventoryExample;
     //public List<Item> inventory;
-    public List<Consumable> consumables;
-    public List<Gear> equipment;
-    public List<Resource> resources;
-    public List<Junk> junks;
-    public bool useExample = false;
+    [SerializeField] private List<Consumable> consumables;
+    [SerializeField] private List<Gear> equipment;
+    [SerializeField] private List<Resource> resources;
+    [SerializeField] private List<Junk> junks;
+    [SerializeField] private bool useExample = false;
     [SerializeField] private int maxConsumables = 32;
     [SerializeField] private int maxEquipment = 32;
     [SerializeField] private int maxResources = 32;
