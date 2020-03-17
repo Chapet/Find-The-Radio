@@ -323,7 +323,6 @@ public class InventoryManager : MonoBehaviour
                 break;
 
         }
-
         //inventory.Add(item);
         Debug.Log(item + " has been added to the inventory");
     }

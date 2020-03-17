@@ -11,6 +11,12 @@ abstract public class Item : ScriptableObject
         Consumable,Gear,Junk,Ressouce
     }
 
+    [SerializeField] private List<Item> recipe = new List<Item>();
+    public List<Item> Recipe
+    {
+        get { return this.recipe; }
+    }
+
     [SerializeField] public new string name;
     [SerializeField] private Sprite image;
     [SerializeField] private int itemID;
@@ -32,7 +38,10 @@ abstract public class Item : ScriptableObject
         return (this is Consumable);
     }
 
-    abstract public bool IsCraftable();
+    public bool IsCraftable()
+    {
+        return recipe.Count != 0;
+    }
     
     public bool IsGear()
     {
