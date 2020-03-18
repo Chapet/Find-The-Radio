@@ -58,7 +58,7 @@ abstract public class Item : ScriptableObject
         if (other is Item)
         {
             //return ((Item)other).GetItemID() == this.GetItemID();
-            return other.GetInstanceID() == this.GetInstanceID();
+            return other.GetInstanceID() == GetInstanceID();
         }
         return false;
     }

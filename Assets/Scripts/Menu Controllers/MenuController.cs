@@ -15,7 +15,6 @@ public class MenuController : MonoBehaviour
         openCloseMenuAnimator = panel.GetComponent<Animator>();
         StartCoroutine(DoFade(canvGroup, 1, 0));
         StartCoroutine(ExitWithAnim(panel, animDuration));
-        //barController.UpdateStatusBars();
     }
 
     public void OpenMenu(GameObject panel)
@@ -24,9 +23,20 @@ public class MenuController : MonoBehaviour
         openCloseMenuAnimator = panel.GetComponent<Animator>();
         panel.SetActive(true);
         StartCoroutine(DoFade(canvGroup, 0, 1));
+        StartCoroutine(OpenWithAnim(animDuration));
+        /*
         openCloseMenuAnimator.SetBool("close", false);
         openCloseMenuAnimator.SetBool("open", true);
         backPanel.SetActive(true);
+        */
+    }
+
+    private IEnumerator OpenWithAnim(float f)
+    {
+        openCloseMenuAnimator.SetBool("close", false);
+        openCloseMenuAnimator.SetBool("open", true);
+        backPanel.SetActive(true);
+        yield return new WaitForSeconds(f);
     }
 
     private IEnumerator ExitWithAnim(GameObject panel, float f)

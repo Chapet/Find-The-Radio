@@ -6,7 +6,8 @@ using TMPro;
 
 public class InventoryController : MonoBehaviour
 {
-    public GameObject player;
+
+    //private GameObject player;
     public MenuController menuController;
 
     //private StatusBarController barController;
@@ -19,7 +20,13 @@ public class InventoryController : MonoBehaviour
     public GameObject scrollView;
     public CanvasGroup canvasGroup;
     public GameObject contentPanel;
-    
+
+    public GameObject itemView;
+    public GameObject playerView;
+    public InventorySlot headSlot;
+    public InventorySlot chestSlot;
+    public InventorySlot legsSlot;
+    public InventorySlot weaponsSlot;
 
     private SlotsHandler slotsHandler;
 
@@ -50,8 +57,12 @@ public class InventoryController : MonoBehaviour
         slotsHandler = contentPanel.GetComponent<SlotsHandler>();
         coroutine = UsedNotification();
         //barController = player.GetComponent<StatusBarController>();
-        inventory = player.GetComponent<InventoryManager>();
-        playerController = player.GetComponent<PlayerController>();
+    }
+    private void Start()
+    {
+        inventory = InventoryManager.Inventory;
+        playerController = PlayerController.Player;
+        //player = playerController.gameObject;
     }
 
     void OnEnable()
@@ -91,6 +102,18 @@ public class InventoryController : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    public void StandardTabSelected()
+    {
+        playerView.SetActive(false);
+        itemView.SetActive(true); 
+    }
+
+    public void GearTabSelected()
+    {
+        itemView.SetActive(false);
+        playerView.SetActive(true);
     }
 
     public void UseBtnClicked()

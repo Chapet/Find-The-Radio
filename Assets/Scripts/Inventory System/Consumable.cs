@@ -89,9 +89,4 @@ public class Consumable : Item
     {
         return energyValue;
     }
-
-    public override bool IsCraftable()
-    {
-        return false;
-    }
 }

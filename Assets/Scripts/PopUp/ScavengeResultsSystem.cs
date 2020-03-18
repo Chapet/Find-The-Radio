@@ -11,13 +11,12 @@ public class ScavengeResultsSystem : MonoBehaviour
 {
     
     public  MenuController menuController;
-    public GameObject gameObject;
     public GameObject backPanel;
     public GameObject slotPrefab;
     public GameObject itemContent;
     private List<GameObject> inventorySlots= new List<GameObject>();
-    public InventoryExample inventoryExample;
     public TextMeshProUGUI message;
+    private PlayerController player;
 
     public StatusBar healthBar;
     public StatusBar hungerBar;
@@ -30,12 +29,13 @@ public class ScavengeResultsSystem : MonoBehaviour
     private float energyGoal;
     
 
-    public void Awake()
+    public void Start()
     {
-        healthGoal = healthBar.slider.value;
-        hungerGoal = hungerBar.slider.value;
-        thirstGoal = thirstBar.slider.value;
-        energyGoal = energyBar.slider.value;
+        player = PlayerController.Player;
+        healthGoal = player.currentHealth;// healthBar.GetValue();
+        hungerGoal = player.currentHunger;//hungerBar.GetValue();
+        thirstGoal = player.currentThirst;//thirstBar.GetValue();
+        energyGoal = player.currentEnergy;//energyBar.GetValue();
     }
 
     public void PopResult(List<Item> items,((int old, int now) health,(int old, int now) hunger,(int old, int now) thirst,(int old, int now) energy) statusBarUpdate)
@@ -44,7 +44,7 @@ public class ScavengeResultsSystem : MonoBehaviour
         clearInventorySlot();
         if (items.Count == 0)
         {
-            message.SetText("You didn't find anything");
+            Debug.Log("You didn't find anything");
         }
 
         //add show all Item
@@ -59,20 +59,19 @@ public class ScavengeResultsSystem : MonoBehaviour
         }
         
         menuController.OpenMenu(gameObject);
-        
+
         //=============    ANIMATION    ================ 
         healthBar.SetValue(statusBarUpdate.health.old);
         healthGoal = statusBarUpdate.health.now;
-        
+
         hungerBar.SetValue(statusBarUpdate.hunger.old);
         hungerGoal = statusBarUpdate.hunger.now;
-        
+
         thirstBar.SetValue(statusBarUpdate.thirst.old);
         thirstGoal = statusBarUpdate.thirst.now;
-        
+
         energyBar.SetValue(statusBarUpdate.energy.old);
         energyGoal = statusBarUpdate.energy.now;
-
     }
 
     /**
@@ -81,17 +80,17 @@ public class ScavengeResultsSystem : MonoBehaviour
      */
     private void incrementSlider(StatusBar statusBar, float finalValue, int inc)
     {
-        if (statusBar.slider.value < finalValue)
+        if (statusBar.GetValue() < finalValue)
         {
             statusBar.addValue(inc);
-        }else if (statusBar.slider.value > finalValue)
+        }else if (statusBar.GetValue() > finalValue)
         {
             statusBar.addValue(-1*inc);
         }
         
     }
 
-    public void Update()
+    public void FixedUpdate()
     {
         //===========    HEALTH    =============
         incrementSlider(healthBar,healthGoal,1);
@@ -124,6 +123,4 @@ public class ScavengeResultsSystem : MonoBehaviour
     {
         menuController.ExitMenu(this.gameObject);
     }
-    
-    
 }

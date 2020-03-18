@@ -29,7 +29,7 @@ public class InventoryExample : ScriptableObject
                 int rnd = Random.Range(6, (int)((numberOfConsumables - consumables.Count) * (0.8f)));
                 for (int j = 0; j < rnd; j++)
                 {
-                    consumables.Add(i as Consumable);
+                    consumables.Add(Instantiate(i as Consumable));
                 }
             }
             if (i.GetType().ToString() == "Gear")
@@ -37,7 +37,7 @@ public class InventoryExample : ScriptableObject
                 int rnd = Random.Range(2, (int)((numberOfEquipment - equipment.Count) * (0.8f)));
                 for (int j = 0; j < rnd; j++)
                 {
-                    equipment.Add(i as Gear);
+                    equipment.Add(Instantiate(i as Gear));
                 }
             }
             if (i.GetType().ToString() == "Resource")
@@ -45,7 +45,7 @@ public class InventoryExample : ScriptableObject
                 int rnd = Random.Range(4, (int)((numberOfResources - resources.Count) * (0.8f)));
                 for (int j = 0; j < rnd; j++)
                 {
-                    resources.Add(i as Resource);
+                    resources.Add(Instantiate(i as Resource));
                 }
             }
             if (i.GetType().ToString() == "Junk")
@@ -53,7 +53,7 @@ public class InventoryExample : ScriptableObject
                 int rnd = Random.Range(4, (int)((numberOfJunks - junks.Count) * (0.8f)));
                 for (int j = 0; j < rnd; j++)
                 {
-                    junks.Add(i as Junk);
+                    junks.Add(Instantiate(i as Junk));
                 }
             }
         }

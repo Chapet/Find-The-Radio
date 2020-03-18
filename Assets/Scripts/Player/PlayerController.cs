@@ -4,6 +4,11 @@
 
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController Player
+    {
+        get; private set;
+    }
+
     public static int maxHealth = 100;
     public static int maxHunger = 100;
     public static int maxThirst = 100;
@@ -96,7 +101,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         currentHealth = maxHealth;
         //healthBar.SetMaxValue(maxHealth);
@@ -113,6 +118,7 @@ public class PlayerController : MonoBehaviour
         currentEnergy = maxEnergy;
         //energyBar.SetMaxValue(maxEnergy);
         //energyBar.SetValue(maxEnergy);
+        Player = this;
     }
 
     /**

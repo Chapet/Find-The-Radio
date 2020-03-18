@@ -8,7 +8,7 @@ using TMPro;
 
 public class TabController : MonoBehaviour
 {
-    public InventoryManager inventory;
+    private InventoryManager inventory;
     public InventoryController inventoryController;
 
     public GameObject headerPanel;
@@ -36,7 +36,7 @@ public class TabController : MonoBehaviour
 
     Tab whichTabIsActive = Tab.None;
 
-    void Awake()
+    private void Awake()
     {
         foodDrinkTab.GetComponent<Image>().color = darkColor;
         gearTab.GetComponent<Image>().color = darkColor;
@@ -57,6 +57,11 @@ public class TabController : MonoBehaviour
 
         //unselectedAnchors = foodDrinkTab.GetComponent<RectTransform>().sizeDelta;
         //selectedAnchors = new Vector2(-0.5f * unselectedAnchors.x, unselectedAnchors.y);
+    }
+
+    private void Start()
+    {
+        inventory = InventoryManager.Inventory;
     }
 
     public void TabBtnListener(Tab which)
@@ -121,7 +126,6 @@ public class TabController : MonoBehaviour
                     gearTab.GetComponent<RectTransform>().offsetMin += new Vector2(-5, -5);
 
                     //Getting all gears    
-
                     list = inventory.GetItems(typeof(Gear));
 
                     break;
@@ -151,6 +155,10 @@ public class TabController : MonoBehaviour
                     Debug.Log("Default case in the switch");
                     break;
             }
+
+            if (which == Tab.Gear) inventoryController.GearTabSelected();
+            else inventoryController.StandardTabSelected();
+
             whichTabIsActive = which;
             inventoryController.Show(list);
         }

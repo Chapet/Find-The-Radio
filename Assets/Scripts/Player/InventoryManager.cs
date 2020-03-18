@@ -6,6 +6,10 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
     public InventoryExample inventoryExample;
+    public static InventoryManager Inventory
+    {
+        get; private set;
+    }
     //public List<Item> inventory;
     [SerializeField] private List<Consumable> consumables;
     [SerializeField] private List<Gear> equipment;
@@ -16,6 +20,10 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private int maxEquipment = 32;
     [SerializeField] private int maxResources = 32;
     [SerializeField] private int maxJunks = 32;
+    private void Awake()
+    {
+        Inventory = this;
+    }
 
     void Start()
     {     

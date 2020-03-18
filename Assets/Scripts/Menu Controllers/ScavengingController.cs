@@ -11,7 +11,7 @@ public class ScavengingController : MonoBehaviour
 {
     public GameController gameController;
     public GameObject BunkerPanel;
-    public InventoryManager inventory;
+    private InventoryManager inventory;
     //public GameObject backPanel;
     public Color BrightYellow;
     public Color DarkYellow;
@@ -19,7 +19,7 @@ public class ScavengingController : MonoBehaviour
     public GameObject Slider;
     private float scavengeTime;
     [Tooltip("Contain the object player")]
-    public PlayerController player;
+    private PlayerController player;
     public MenuController menuController;
     public PopupSystem pop;
     public ScavengeResultsSystem popUpResult;
@@ -27,8 +27,15 @@ public class ScavengingController : MonoBehaviour
     /*[SerializeField] [Tooltip("Contain all the items that you can find outside the bunker")]
     private ScavengingListItem itemList;
     */
-    
-    
+
+    void Start()
+    {
+        itemsFound = new List<Item>();
+        player = PlayerController.Player;
+        inventory = InventoryManager.Inventory;
+    }
+
+
     void Update()
     {
         scavengeTime = (Slider.GetComponent<Slider>().value) / 2;
@@ -54,7 +61,7 @@ public class ScavengingController : MonoBehaviour
         menuController.ExitMenu(gameObject);
     }
 
-    
+
     /*========================= ALL ITEM SCAVENGE =================================*/
     /**
      * link: lien vers l'item
@@ -62,7 +69,7 @@ public class ScavengingController : MonoBehaviour
      * itypeType: le type de ressources
      * scavengeTime: le temps minimum qu'il faut sortir pour trouuver cet item (en nbr d'heure)
      */
-    private (string link,int minLevel,Item.ItemClass itemType,double minTimeOut)[] scavengeItems = new[]
+    private (string link, int minLevel, Item.ItemClass itemType, double minTimeOut)[] scavengeItems = new[]
     {
         /*======CONSUMABLE=====*/
         (link:"Items/Consumables/WaterBottle",minLevel:0,itemType:Item.ItemClass.Consumable,minTimeOut:0.0),
@@ -78,12 +85,12 @@ public class ScavengingController : MonoBehaviour
         
         /*======Junk=====*/
         
-        (link:"Items/Junks/Grass",minLevel:0,itemType:Item.ItemClass.Junk,minTimeOut:0.0),     
+        (link:"Items/Junks/Grass",minLevel:0,itemType:Item.ItemClass.Junk,minTimeOut:0.0),
 
     };
-    
-    
-    
+
+
+
 
     /**
      * get all item that have a minLevl less of equal to mylevel, a type of type (consummable, ressources, junk and gear)
@@ -91,13 +98,13 @@ public class ScavengingController : MonoBehaviour
      *
      * Return array of [<link> as string, <luck> as double, <minlevel> as int, <itemtype> as ItemType, <minTimeOut> as double]
      */
-    private static (string link,int minLevel,Item.ItemClass itemType,double minTimeOut)[] getMyLevelItems((string link,int minLevel,Item.ItemClass itemType,double minTimeOut)[] tuple,int myLevel,Item.ItemClass type, double scavengeTime)
+    private static (string link, int minLevel, Item.ItemClass itemType, double minTimeOut)[] getMyLevelItems((string link, int minLevel, Item.ItemClass itemType, double minTimeOut)[] tuple, int myLevel, Item.ItemClass type, double scavengeTime)
     {
-        List <(string link,int minLevel,Item.ItemClass itemType,double minTimeOut)> result= new List<(string link,int minLevel,Item.ItemClass itemType,double minTimeOut)>();
+        List<(string link, int minLevel, Item.ItemClass itemType, double minTimeOut)> result = new List<(string link, int minLevel, Item.ItemClass itemType, double minTimeOut)>();
 
         for (int i = 0; i < tuple.Length; i++)
         {
-            if (tuple[i].minLevel <= myLevel && tuple[i].itemType==type &&tuple[i].minTimeOut<=(double)scavengeTime)
+            if (tuple[i].minLevel <= myLevel && tuple[i].itemType == type && tuple[i].minTimeOut <= (double)scavengeTime)
             {
                 result.Add(tuple[i]);
             }
@@ -108,11 +115,6 @@ public class ScavengingController : MonoBehaviour
     /*=============================================================================*/
 
     private List<Item> itemsFound;
-
-    public void Start()
-    {
-        itemsFound=new List<Item>();
-    }
 
     /**
      * Mets les items trouvés dans qq chose en attendant que la sortie soit finie et qu'on montre le résultat de la sortie.
@@ -138,26 +140,26 @@ public class ScavengingController : MonoBehaviour
 
         for (int i = 0; i < nbTimeSlice && nbFound < player.maxCarryingSize; i++)
         {
-            chance  = rand.NextDouble(); // 0.0 <= chance < 1.0
+            chance = rand.NextDouble(); // 0.0 <= chance < 1.0
             if (chance > 0.66)/*========== FIND A ITEM  ===========*/
             {
                 nbFound++;
 
                 //chances for the found item, has to be balance when all items in the game
                 chance = rand.NextDouble();
-                
+
                 int myLevel = 100;//TODO: link with player
-                
-                (string link,int minLevel,Item.ItemClass itemType,double minTimeOut)[] possibleItem;
+
+                (string link, int minLevel, Item.ItemClass itemType, double minTimeOut)[] possibleItem;
 
                 if (chance > 0.9)/*========== GEAR ===========*/
                 {
                     //retourn tt les items que je pourrais possiblement trouver sur mon chemin en fonction de mon level, du type d'objet et du temps que j'ai décidé de sortir
-                    possibleItem= getMyLevelItems(scavengeItems, myLevel,Item.ItemClass.Gear,scavengeTime);
-                    
-                    if (possibleItem != null && possibleItem.Length>0)
+                    possibleItem = getMyLevelItems(scavengeItems, myLevel, Item.ItemClass.Gear, scavengeTime);
+
+                    if (possibleItem != null && possibleItem.Length > 0)
                     {
-                        int index = (int) (rand.NextDouble() * (possibleItem.Length) - 1); //index random parmis les objets possible
+                        int index = (int)(rand.NextDouble() * (possibleItem.Length) - 1); //index random parmis les objets possible
                         Gear element = Resources.Load<Gear>(possibleItem[index].link); //load l'item
                         Debug.Log("Find" + element.name);//print
                         addItemFound(element);//add to inventory
@@ -165,11 +167,11 @@ public class ScavengingController : MonoBehaviour
                 }
                 else if (chance > 0.45)/*========== Consumable ===========*/
                 {
-                    possibleItem= getMyLevelItems(scavengeItems, myLevel,Item.ItemClass.Consumable,scavengeTime);
-                    if (possibleItem != null&& possibleItem.Length>0)
+                    possibleItem = getMyLevelItems(scavengeItems, myLevel, Item.ItemClass.Consumable, scavengeTime);
+                    if (possibleItem != null && possibleItem.Length > 0)
 
                     {
-                        int index = (int) (rand.NextDouble() * (possibleItem.Length - 1));
+                        int index = (int)(rand.NextDouble() * (possibleItem.Length - 1));
                         Consumable element = Resources.Load<Consumable>(possibleItem[index].link);
                         Debug.Log("Find" + element.name);
                         addItemFound(element);
@@ -177,100 +179,75 @@ public class ScavengingController : MonoBehaviour
                 }
                 else if (chance > 0.20)/*========== RESSOURCES ===========*/
                 {
-                    possibleItem= getMyLevelItems(scavengeItems, myLevel,Item.ItemClass.Ressouce,scavengeTime);
-                    if (possibleItem != null&& possibleItem.Length>0)
+                    possibleItem = getMyLevelItems(scavengeItems, myLevel, Item.ItemClass.Ressouce, scavengeTime);
+                    if (possibleItem != null && possibleItem.Length > 0)
 
                     {
-                        int index = (int) (rand.NextDouble() * (possibleItem.Length - 1));
+                        int index = (int)(rand.NextDouble() * (possibleItem.Length - 1));
                         Resource element = Resources.Load<Resource>(possibleItem[index].link);
                         Debug.Log("Find" + element.name);
                         addItemFound(element);
                     }
-                }else if (chance > 0) /*========== JUNK ===========*/
+                }
+                else if (chance > 0) /*========== JUNK ===========*/
                 {
-                    possibleItem= getMyLevelItems(scavengeItems, myLevel,Item.ItemClass.Junk,scavengeTime);
-                    if (possibleItem != null&& possibleItem.Length>0)
+                    possibleItem = getMyLevelItems(scavengeItems, myLevel, Item.ItemClass.Junk, scavengeTime);
+                    if (possibleItem != null && possibleItem.Length > 0)
 
                     {
-                        int index = (int) (rand.NextDouble() * (possibleItem.Length - 1));
+                        int index = (int)(rand.NextDouble() * (possibleItem.Length - 1));
                         Junk element = Resources.Load<Junk>(possibleItem[index].link);
                         Debug.Log("Find" + element.name);
                         addItemFound(element);
                     }
                 }
-                
-                //********Old implementation 
-                /* if (chance > 0.9) //gun
-                 {
-                     //Debug.Log("pistol added to inventory");
-                     Gear gun = Resources.Load<Gear>("Items/Gear/Gun");
-                     Debug.Log(gun);
-                     inventory.AddItem(gun);
-                 }
-                 else if (chance > 0.45) // water
-                 {
-                     //Debug.Log("water added to inventory");
-                     Consumable water = Resources.Load<Consumable>("Items/Consumables/WaterBottle");
-                     Debug.Log(water);
-                     inventory.AddItem(water);
-                 }
-                 else //food
-                 {
-                     //Debug.Log("food can added to inventory");
-                     Consumable foodCan = Resources.Load<Consumable>("Items/Consumables/FoodCan");
-                     Debug.Log(foodCan);
-                     inventory.AddItem(foodCan);
-                 }
- 
-                 //Debug.Log("adding Item: " + i);
-                 */
             }
             else if (true)/*========== START SENARIO ===========*/
             {
-                
+
             }
 
-            if (!ev&&false)
+            if (!ev && false)
             {
                 chance = rand.NextDouble();
                 if (chance > 0.999) pop.PopMessage(PopupSystem.Popup.Death);
                 else if (chance > 0.80) pop.PopMessage(PopupSystem.Popup.Bite);
             }
-           
+
         } //le principe est la, il faut balance et ajouter les items à l'inventaire
-        
-        
-        
-        
+
+
+
+
         // updating game values
         gameController.UpdateGameClock(scavengeTime);
 
         //========== KEEP STATUS BAR BEFORE MODIFICATION ===========
-        
+
         int oldHealth = player.currentHealth;
         int oldHunger = player.currentHunger;
         int oldThirst = player.currentThirst;
         int oldEnergy = player.currentEnergy;
-        
-        
+
+
         //========== MODIFY STATUS BAR =================
-        
+
         player.UpdateEnergy(-2 * nbTimeSlice);
         player.UpdateHunger(-2 * nbTimeSlice);
         player.UpdateThirst(-3 * nbTimeSlice);
-        
+
         //===============================================
-        
-        
+
+
         menuController.ExitMenu(this.gameObject);
 
         //=======    POP UP RESULT    =============
-        popUpResult.PopResult(itemsFound,(health:(old: oldHealth, now: player.currentHealth),hunger:(old:oldHunger,now:player.currentHunger),thirst:(old:oldThirst,now:player.currentThirst),ernery:(old:oldEnergy,now:player.currentEnergy)));
+        popUpResult.PopResult(itemsFound, (health: (old: oldHealth, now: player.currentHealth), hunger: (old: oldHunger, now: player.currentHunger), thirst: (old: oldThirst, now: player.currentThirst), energy: (old: oldEnergy, now: player.currentEnergy)));
 
-        
+
         itemsFound.Clear();
 
     }
 
-   
+
 }

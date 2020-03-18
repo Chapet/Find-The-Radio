@@ -11,9 +11,15 @@ public class InventorySlot : MonoBehaviour
     public Color equippedColor;
     public Color standardColor;
     public Color selectedColor;
-    public PlayerController player;
+    private PlayerController player;
     public SlotsHandler slotsHandler;
     private bool selected = false;
+    [SerializeField] private int instanceID;
+
+    private void Start()
+    {
+        player = PlayerController.Player;
+    }
 
     public void AddItem(Item newItem)
     {
@@ -21,6 +27,8 @@ public class InventorySlot : MonoBehaviour
         icon.sprite = item.GetSprite();
         icon.enabled = true;
         check.enabled = false;
+        player = PlayerController.Player;
+        instanceID = item.GetInstanceID();
     }
 
     public void ClearSlot()
@@ -48,6 +56,12 @@ public class InventorySlot : MonoBehaviour
     public void Render()
     {
         Gear g = item as Gear;
+        /*
+        if (player==null)
+        {
+            player = PlayerController.GetPlayer;
+        }
+        */
         if (g != null && player.IsEquipped(g))
         {
             check.enabled = true;
