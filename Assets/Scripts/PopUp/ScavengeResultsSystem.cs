@@ -13,10 +13,11 @@ public class ScavengeResultsSystem : MonoBehaviour
     public  MenuController menuController;
     public GameObject backPanel;
     public GameObject slotPrefab;
+    public GameObject scavengingLogprefab;
     public GameObject itemContent;
+    public GameObject scavengingLogContent;
     private List<GameObject> inventorySlots= new List<GameObject>();
     public TextMeshProUGUI message;
-    private PlayerController player;
 
     public StatusBar healthBar;
     public StatusBar hungerBar;
@@ -29,23 +30,19 @@ public class ScavengeResultsSystem : MonoBehaviour
     private float energyGoal;
     
 
-    public void Start()
+    public void Awake()
     {
-        player = PlayerController.Player;
-        healthGoal = player.currentHealth;// healthBar.GetValue();
-        hungerGoal = player.currentHunger;//hungerBar.GetValue();
-        thirstGoal = player.currentThirst;//thirstBar.GetValue();
-        energyGoal = player.currentEnergy;//energyBar.GetValue();
+        healthGoal = healthBar.GetValue();
+        hungerGoal = hungerBar.GetValue();
+        thirstGoal = thirstBar.GetValue();
+        energyGoal = energyBar.GetValue();
     }
 
-    public void PopResult(List<Item> items,((int old, int now) health,(int old, int now) hunger,(int old, int now) thirst,(int old, int now) energy) statusBarUpdate)
+    public void PopResult(List<Item> items,((int old, int now) health,(int old, int now) hunger,(int old, int now) thirst,(int old, int now) energy) statusBarUpdate,string [] scavengingLog)
     {
         
         clearInventorySlot();
-        if (items.Count == 0)
-        {
-            Debug.Log("You didn't find anything");
-        }
+
 
         //add show all Item
         foreach (Item item in items)
@@ -59,19 +56,41 @@ public class ScavengeResultsSystem : MonoBehaviour
         }
         
         menuController.OpenMenu(gameObject);
+        
+        //=============    REMOVE EXEMPLE TEXTE    ===================
+        for (int i=0 ;i< scavengingLogContent.transform.childCount;i++)
+        {
+            Destroy(scavengingLogContent.transform.GetChild(i).gameObject); 
+        }
+        
+        //=============    ADD SCAVENGING LOG    ===================
+        
+        
+        foreach (string log in scavengingLog)
+        {
+            GameObject obj = Instantiate(scavengingLogprefab);
+            ScavengeLog scavengeLog= obj.GetComponent<ScavengeLog>();
+            scavengeLog.SetText(log);
+            
+            obj.transform.SetParent(scavengingLogContent.transform,false);
 
+        }
+        
+        
+        
         //=============    ANIMATION    ================ 
         healthBar.SetValue(statusBarUpdate.health.old);
         healthGoal = statusBarUpdate.health.now;
-
+        
         hungerBar.SetValue(statusBarUpdate.hunger.old);
         hungerGoal = statusBarUpdate.hunger.now;
-
+        
         thirstBar.SetValue(statusBarUpdate.thirst.old);
         thirstGoal = statusBarUpdate.thirst.now;
-
+        
         energyBar.SetValue(statusBarUpdate.energy.old);
         energyGoal = statusBarUpdate.energy.now;
+
     }
 
     /**
@@ -90,7 +109,7 @@ public class ScavengeResultsSystem : MonoBehaviour
         
     }
 
-    public void FixedUpdate()
+    public void Update()
     {
         //===========    HEALTH    =============
         incrementSlider(healthBar,healthGoal,1);
@@ -123,4 +142,6 @@ public class ScavengeResultsSystem : MonoBehaviour
     {
         menuController.ExitMenu(this.gameObject);
     }
+    
+    
 }
