@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e82bd9d5b3e514f8ea05bb9b9e80fd22, type: 3}
   m_Name: WoodLog
   m_EditorClassIdentifier: 
+  recipe: []
   name: Wood Log
   image: {fileID: 21300000, guid: cd7a7451e4b864fbda8d41fe62ab133c, type: 3}
-  itemID: 5
+  itemID: 41
   description: Timbeeeeeeeer !!!
   itemTypes: 01000000

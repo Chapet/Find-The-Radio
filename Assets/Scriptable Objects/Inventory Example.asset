@@ -19,6 +19,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 36d57604fd8264cb7ba6cadce13d73dd, type: 2}
   - {fileID: 11400000, guid: ac919e747552847a48d65c60c59eac4c, type: 2}
   - {fileID: 11400000, guid: 77f0771e010a174449ae6656adc45b7d, type: 2}
+  - {fileID: 11400000, guid: 9af1da6e23d5849f78009083af905eb7, type: 2}
   numberOfConsumables: 24
   numberOfEquipment: 8
   numberOfJunks: 16
