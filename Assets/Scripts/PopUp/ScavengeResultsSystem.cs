@@ -13,7 +13,9 @@ public class ScavengeResultsSystem : MonoBehaviour
     public  MenuController menuController;
     public GameObject backPanel;
     public GameObject slotPrefab;
+    public GameObject scavengingLogprefab;
     public GameObject itemContent;
+    public GameObject scavengingLogContent;
     private List<GameObject> inventorySlots= new List<GameObject>();
     public TextMeshProUGUI message;
     private PlayerController player;
@@ -26,21 +28,18 @@ public class ScavengeResultsSystem : MonoBehaviour
     private float[] goals;
     
 
-    public void Start()
+    public void Awake()
     {
         player = PlayerController.Player;
         goals = new float[player.currentStats.Length];
         Array.Copy(player.currentStats, 0, goals, 0, player.currentStats.Length);
     }
 
-    public void PopResult(List<Item> items,((int old, int now) health,(int old, int now) hunger,(int old, int now) thirst,(int old, int now) energy) statusBarUpdate)
+    public void PopResult(List<Item> items,((int old, int now) health,(int old, int now) hunger,(int old, int now) thirst,(int old, int now) energy) statusBarUpdate,string [] scavengingLog)
     {
         
         clearInventorySlot();
-        if (items.Count == 0)
-        {
-            Debug.Log("You didn't find anything");
-        }
+
 
         //add show all Item
         foreach (Item item in items)
@@ -54,6 +53,24 @@ public class ScavengeResultsSystem : MonoBehaviour
         }
         
         menuController.OpenMenu(gameObject);
+        
+        //=============    REMOVE EXEMPLE TEXTE    ===================
+        for (int i=0 ;i< scavengingLogContent.transform.childCount;i++)
+        {
+            Destroy(scavengingLogContent.transform.GetChild(i).gameObject); 
+        }
+
+        //=============    ADD SCAVENGING LOG    ===================
+
+
+        foreach (string log in scavengingLog)
+        {
+            GameObject obj = Instantiate(scavengingLogprefab);
+            ScavengeLog scavengeLog = obj.GetComponent<ScavengeLog>();
+            scavengeLog.SetText(log);
+
+            obj.transform.SetParent(scavengingLogContent.transform, false);
+        }
 
         //=============    ANIMATION    ================
         healthBar.SetValue(statusBarUpdate.health.now);
@@ -81,5 +98,6 @@ public class ScavengeResultsSystem : MonoBehaviour
     public void ExitBtnClicked()
     {
         menuController.ExitMenu(this.gameObject);
-    }
+    } 
+    
 }
