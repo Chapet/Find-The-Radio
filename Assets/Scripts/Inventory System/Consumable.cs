@@ -11,16 +11,16 @@ public class Consumable : Item
         None=0, Food, Drink, Meds
     }
 
-    [SerializeField] private List<ItemType> itemTypes = new List<ItemType>();
+    [SerializeField] private List<ItemType> types = new List<ItemType>();
 
-    public List<ItemType> GetItemTypes()
+    public List<ItemType> GetTypes()
     {
-        return itemTypes;
+        return types;
     }
 
     public bool IsOfType(ItemType it)
     {
-        foreach (ItemType itemType in itemTypes)
+        foreach (ItemType itemType in types)
         {
             if (itemType == it)
             {

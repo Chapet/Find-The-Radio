@@ -17,7 +17,7 @@ MonoBehaviour:
   image: {fileID: 21300000, guid: b33698affa852443bb6626fdc446e66d, type: 3}
   itemID: 21
   description: This is a gun ... Pew Pew !
-  itemTypes: 01000000
+  type: 4
   scavengRate: 0
   scavengSize: 0
   scavengOptions: 

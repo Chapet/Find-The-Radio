@@ -23,19 +23,14 @@ public class ScavengeResultsSystem : MonoBehaviour
     public StatusBar thirstBar;
     public StatusBar energyBar;
 
-    private float healthGoal;
-    private float hungerGoal;
-    private float thirstGoal;
-    private float energyGoal;
+    private float[] goals;
     
 
     public void Start()
     {
         player = PlayerController.Player;
-        healthGoal = player.currentHealth;// healthBar.GetValue();
-        hungerGoal = player.currentHunger;//hungerBar.GetValue();
-        thirstGoal = player.currentThirst;//thirstBar.GetValue();
-        energyGoal = player.currentEnergy;//energyBar.GetValue();
+        goals = new float[player.currentStats.Length];
+        Array.Copy(player.currentStats, 0, goals, 0, player.currentStats.Length);
     }
 
     public void PopResult(List<Item> items,((int old, int now) health,(int old, int now) hunger,(int old, int now) thirst,(int old, int now) energy) statusBarUpdate)
@@ -60,51 +55,15 @@ public class ScavengeResultsSystem : MonoBehaviour
         
         menuController.OpenMenu(gameObject);
 
-        //=============    ANIMATION    ================ 
-        healthBar.SetValue(statusBarUpdate.health.old);
-        healthGoal = statusBarUpdate.health.now;
+        //=============    ANIMATION    ================
+        healthBar.SetValue(statusBarUpdate.health.now);
 
-        hungerBar.SetValue(statusBarUpdate.hunger.old);
-        hungerGoal = statusBarUpdate.hunger.now;
+        hungerBar.SetValue(statusBarUpdate.hunger.now);
 
-        thirstBar.SetValue(statusBarUpdate.thirst.old);
-        thirstGoal = statusBarUpdate.thirst.now;
+        thirstBar.SetValue(statusBarUpdate.thirst.now);
 
-        energyBar.SetValue(statusBarUpdate.energy.old);
-        energyGoal = statusBarUpdate.energy.now;
+        energyBar.SetValue(statusBarUpdate.energy.now);
     }
-
-    /**
-     * increment est le nombre que l'on va rajouter au slider pour atteindre la valeur finale
-     * inc est toujours possitif
-     */
-    private void incrementSlider(StatusBar statusBar, float finalValue, int inc)
-    {
-        if (statusBar.GetValue() < finalValue)
-        {
-            statusBar.addValue(inc);
-        }else if (statusBar.GetValue() > finalValue)
-        {
-            statusBar.addValue(-1*inc);
-        }
-        
-    }
-
-    public void FixedUpdate()
-    {
-        //===========    HEALTH    =============
-        incrementSlider(healthBar,healthGoal,1);
-        
-        //===========    HUNGER    =============
-        incrementSlider(hungerBar,hungerGoal,1);
-        
-        //===========    THIRST    =============
-        incrementSlider(thirstBar,thirstGoal,1);
-        
-        //===========    ENERGY    =============
-        incrementSlider(energyBar,energyGoal,1);
-    }
-    
 
     private void clearInventorySlot()
     {

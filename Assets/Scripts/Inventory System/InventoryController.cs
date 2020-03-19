@@ -6,7 +6,10 @@ using TMPro;
 
 public class InventoryController : MonoBehaviour
 {
-
+    public static InventoryController InvController
+    {
+        get; private set;
+    }
     //private GameObject player;
     public MenuController menuController;
 
@@ -23,10 +26,12 @@ public class InventoryController : MonoBehaviour
 
     public GameObject itemView;
     public GameObject playerView;
-    public InventorySlot headSlot;
-    public InventorySlot chestSlot;
-    public InventorySlot legsSlot;
-    public InventorySlot weaponsSlot;
+
+    public EquipmentSlot[] equipment;
+    //public InventorySlot helmetSlot;
+    //public InventorySlot chestplateSlot;
+    //public InventorySlot greavesSlot;
+    //public InventorySlot weaponSlot;
 
     private SlotsHandler slotsHandler;
 
@@ -56,18 +61,24 @@ public class InventoryController : MonoBehaviour
         Clear();
         slotsHandler = contentPanel.GetComponent<SlotsHandler>();
         coroutine = UsedNotification();
-        //barController = player.GetComponent<StatusBarController>();
+        InvController = this;
+        equipment = new EquipmentSlot[5];
     }
+
     private void Start()
     {
         inventory = InventoryManager.Inventory;
         playerController = PlayerController.Player;
-        //player = playerController.gameObject;
     }
 
     void OnEnable()
     {
         StartCoroutine(StartOnTabAfterWait(15));
+    }
+
+    public void AddEquipmentSlot(EquipmentSlot es)
+    {
+        equipment[(int) es.slotType] = es;
     }
 
     public void Show(List<Item> items)
@@ -114,6 +125,7 @@ public class InventoryController : MonoBehaviour
     {
         itemView.SetActive(false);
         playerView.SetActive(true);
+        RefreshEquipmentSlots();
     }
 
     public void UseBtnClicked()
@@ -137,7 +149,6 @@ public class InventoryController : MonoBehaviour
             StartCoroutine(coroutine);
 
             Debug.Log(selectedItem + " used!");
-            //barController.UpdateStatusBars();
         }
     }
 
@@ -176,19 +187,21 @@ public class InventoryController : MonoBehaviour
             }
 
             slotsHandler.UpdateSlots();
+            RefreshEquipmentSlots();
         }
     }
 
     private void ClearInfoPanel()
     {
-        Debug.Log("Clearing info panel ...");
         nameText.SetText("");
         descriptionText.SetText("");
-        Debug.Log("Setting item preview to blank sprite");
+
         itemPreview.sprite = blankSprite;
+
         descBackground.SetActive(false);
         useButton.gameObject.SetActive(false);
         equipButton.gameObject.SetActive(false);
+
         ClearProperties();
     }
 
@@ -323,5 +336,16 @@ public class InventoryController : MonoBehaviour
         Debug.Log("Wait for " + msec + " millisecond(s)");
         yield return new WaitForSeconds((float)msec / 1000f);
         tabController.TabBtnListener(TabController.Tab.FoodAndDrink);
+    }
+
+    private void RefreshEquipmentSlots()
+    {
+        foreach(EquipmentSlot e in equipment)
+        {
+            if(e!=null)
+            {
+                e.Refresh();
+            }
+        }
     }
 }

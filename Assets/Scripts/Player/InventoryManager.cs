@@ -70,17 +70,6 @@ public class InventoryManager : MonoBehaviour
             }
         }
         return list;
-        /*
-        List<Item> list = new List<Item>();
-        foreach (Item i in inventory)
-        {
-            if (type == i.GetType())
-            {
-                list.Add(i);
-            }
-        }
-        return list;
-        */
     }
 
     //  Get all items in inventory corresponding to the types enumarated in @itemTypes
@@ -89,7 +78,7 @@ public class InventoryManager : MonoBehaviour
         List<Item> list = new List<Item>();
         foreach (Consumable c in consumables)
         {
-            foreach (Consumable.ItemType it in c.GetItemTypes())
+            foreach (Consumable.ItemType it in c.GetTypes())
             {
                 if (itemTypes.Contains(it))
                 {
@@ -99,21 +88,6 @@ public class InventoryManager : MonoBehaviour
             }
         }
         return list;
-        /*
-        List<Item> list = new List<Item>();
-        foreach (Consumable c in inventory.OfType<Consumable>())
-        {
-            foreach (Consumable.ItemType it in c.GetItemTypes())
-            {
-                if (itemTypes.Contains(it))
-                {
-                    list.Add(c);
-                    break;
-                }
-            }
-        }
-        return list;
-        */
     }
 
     //  Get all items in inventory corresponding to the types enumarated in @itemTypes
@@ -122,13 +96,10 @@ public class InventoryManager : MonoBehaviour
         List<Item> list = new List<Item>();
         foreach (Gear g in equipment)
         {
-            foreach (Gear.ItemType it in g.GetItemTypes())
+            if (itemTypes.Contains(g.Type))
             {
-                if (itemTypes.Contains(it))
-                {
-                    list.Add(g);
-                    break;
-                }
+                list.Add(g);
+                break;
             }
         }
         return list;
@@ -140,7 +111,7 @@ public class InventoryManager : MonoBehaviour
         List<Item> list = new List<Item>();
         foreach (Resource r in resources)
         {
-            foreach (Resource.ItemType it in r.GetItemTypes())
+            foreach (Resource.ItemType it in r.GetTypes())
             {
                 if (itemTypes.Contains(it))
                 {

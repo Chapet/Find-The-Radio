@@ -8,83 +8,93 @@ public class StatusBar : MonoBehaviour
     
     [SerializeField] private Slider slider;
     [SerializeField] private bool managedByController = true;
-    //private PlayerController player;
-    public SBType Type
+    [SerializeField] private bool animated = true;
+    private bool initialized = false;
+    private bool valueHasChanged;
+    private int newValue;
+
+    public StatType Type
     {
         get; private set;
     }
     //[SerializeField] private bool liveUpdate = true;
     //private float timer = 0f;
-    
+
     private void Start()
+    {
+        Init();
+        SetMaxValue();
+        initialized = true;
+        OnEnable();
+    }
+
+    private void OnEnable()
+    {
+        if (initialized && managedByController)
+        {
+            slider.value = PlayerController.Player.currentStats[(int) Type];
+            newValue = PlayerController.Player.currentStats[(int)Type];
+        }
+    }
+
+    private void Init()
     {
         slider = gameObject.GetComponent<Slider>();
 
-        if (slider == null)
-        {
-            Debug.Log("== Begining of Kaput ==");
-            Debug.Log(gameObject.name + " with parent : " + gameObject.transform.parent.gameObject.name);
-        }
-        else
-        {
-            Debug.Log("Slider catched!");
-        }
-        switch(gameObject.name)
+        switch (gameObject.name)
         {
             case ("Health Bar"):
-                Type = SBType.health;
+                Type = StatType.Health;
                 break;
             case ("Hunger Bar"):
-                Type = SBType.hunger;
+                Type = StatType.Hunger;
                 break;
             case ("Thirst Bar"):
-                Type = SBType.thirst;
+                Type = StatType.Thirst;
                 break;
             case ("Energy Bar"):
-                Type = SBType.energy;
+                Type = StatType.Energy;
                 break;
             default:
-                Type = SBType.none;
+                Type = StatType.None;
                 break;
         }
+
         if (managedByController)
         {
             StatusBarController.SBController.AddStatusBar(this);
         }
-
-        //player = PlayerController.GetPlayer;
     }
 
-    /*
-    void FixedUpdate()
+    private void SetMaxValue()
     {
-        if (slider == null)
-        {
-            Start();
-        }
-        if (liveUpdate && timer < Time.fixedDeltaTime)
-        {
-            switch (type)
-            {
-                case (SBType.health):
-                    SetValue(player.currentHealth);
-                    break;
-                case (SBType.hunger):
-                    SetValue(player.currentHunger);
-                    break;
-                case (SBType.thirst):
-                    SetValue(player.currentThirst);
-                    break;
-                case (SBType.energy):
-                    SetValue(player.currentEnergy);
-                    break;
-                default:
-                    break;
-            }
-        }
-        timer = (timer + Time.fixedDeltaTime) % (5f * Time.fixedDeltaTime);
+        slider.maxValue = PlayerController.maxStats[(int) Type];
     }
-    */
+
+    public void FixedUpdate()
+    {
+        if(animated && valueHasChanged)
+        {
+            incrementSlider(1);
+        }
+    }
+
+    private void incrementSlider(int step)
+    {
+        if (GetValue() < newValue)
+        {
+            slider.value = Mathf.Min(100, slider.value + step);
+        }
+        else if (GetValue() > newValue)
+        {
+            slider.value = Mathf.Max(0, slider.value - step);
+        }
+        else
+        {
+            valueHasChanged = false;
+        }
+    }
+
     public bool HasBeenRendered()
     {
         return slider != null;
@@ -92,55 +102,41 @@ public class StatusBar : MonoBehaviour
 
 
     public void SetValue(int value) {
-        if (slider == null)
+        newValue = value;
+        valueHasChanged = true;
+
+        if (!animated)
         {
-            Debug.Log("SB slider null pointer => SB type : " + Type + " with parent : " + transform.parent.gameObject.name);
-            Start();
+            slider.value = newValue;
         }
-        slider.value = value;
     }
 
     public int GetValue()
     {
-        if (slider == null)
-        {
-            Debug.Log("SB slider null pointer => SB type : " + Type + " with parent : " + transform.parent.gameObject.name);
-            Start();
-        }
         return (int) (slider.value);
     }
 
-    public void SetMaxValue(int maxValue)
-    {
-        if (slider == null)
-        {
-            Debug.Log("SB slider null pointer => SB type : " + Type + " with parent : " + transform.parent.gameObject.name);
-            Start();
-        }
-        if (slider==null)
-        {
-            
-        }
-        slider.maxValue = maxValue;
-    }
+    //public void SetMaxValue(int maxValue)
+    //{
+    //    slider.maxValue = maxValue;
+    //}
 
     public void addValue(int value)
     {
-        if (slider == null)
-        {
-            Debug.Log("SB slider null pointer => SB type : " + Type + " with parent : " + transform.parent.gameObject.name);
-            Start();
-        }
-        float newValue = slider.value + value;
         if (value > 0)
         {
-            slider.value = Mathf.Min(100, newValue);
+            newValue = (int) Mathf.Min(100, slider.value + value);
         }
         else
         {
-            slider.value = Mathf.Max(0, newValue);
+            newValue = (int) Mathf.Max(0, slider.value + value);
         }
-        
+        valueHasChanged = true;
+
+        if (!animated)
+        {
+            slider.value = newValue;
+        }
     }
 
     public override string ToString()

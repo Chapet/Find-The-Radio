@@ -1,6 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 //[CreateAssetMenu(fileName = "New inventory", menuName = "MyAsset/Player")]
+public enum StatType
+{
+    None = 0, Health, Hunger, Thirst, Energy
+}
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,54 +19,50 @@ public class PlayerController : MonoBehaviour
     public static int maxThirst = 100;
     public static int maxEnergy = 100;
 
-    public int currentHealth;
-    public int currentHunger;
-    public int currentThirst;
-    public int currentEnergy;
+    public static int[] maxStats = new int[] { -1, 100, 100, 100, 100 };
+    public int[] currentStats;
 
     public int maxCarryingSize = 4;
 
-    //public StatusBar healthBar;
-    //public StatusBar hungerBar;
-    //public StatusBar thirstBar;
-    //public StatusBar energyBar;
-
     public StatusBarController statusBarController;
 
-    [SerializeField] private Gear headGear = null;
-    [SerializeField] private Gear chestGear = null;
-    [SerializeField] private Gear legsGear = null;
-    [SerializeField] private Gear weapon = null;
+    //[SerializeField] private Gear headGear = null;
+    //[SerializeField] private Gear chestGear = null;
+    //[SerializeField] private Gear legsGear = null;
+    //[SerializeField] private Gear weapon = null;
+    [SerializeField] private Gear[] equipment;
+
+    // Start is called before the first frame update
+    void Awake()
+    {
+        Player = this;
+        currentStats = new int[maxStats.Length];
+        Array.Copy(maxStats, 0, currentStats, 0, maxStats.Length);
+        equipment = new Gear[5];
+    }
 
     public bool IsEquipped(Gear g)
     {
-        return g.Equals(headGear) || g.Equals(chestGear) || g.Equals(legsGear) || g.Equals(weapon);
+        foreach(Gear e in equipment)
+        {
+            if(g.Equals(e))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Gear GetGear(Gear.ItemType type)
+    {
+        return equipment[(int)type];
     }
 
     public void EquipGear(Gear g)
     {
         if (!IsEquipped(g))
         {
-            if (g.IsOfType(Gear.ItemType.Head))
-            {
-                headGear = g;
-            }
-            else if (g.IsOfType(Gear.ItemType.Chest))
-            {
-                chestGear = g;
-            }
-            else if (g.IsOfType(Gear.ItemType.Legs))
-            {
-                legsGear = g;
-            }
-            else if (g.IsOfType(Gear.ItemType.Weapon))
-            {
-                weapon = g;
-            }
-            else
-            {
-                Debug.Log("This item wasn't equippable!");
-            }
+            equipment[(int)g.Type] = g;
         }
         else
         {
@@ -73,26 +74,7 @@ public class PlayerController : MonoBehaviour
     {
         if (IsEquipped(g))
         {
-            if (g.Equals(headGear))
-            {
-                headGear = null;
-            }
-            else if (g.Equals(chestGear))
-            {
-                chestGear = null;
-            }
-            else if (g.Equals(legsGear))
-            {
-                legsGear = null;
-            }
-            else if (g.Equals(weapon))
-            {
-                weapon = null;
-            }
-            else
-            {
-                Debug.Log("This item wasn't equipped!");
-            }
+            equipment[(int)g.Type] = null;
         }
         else
         {
@@ -100,25 +82,28 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
-    void Awake()
+    public void UpdateStat(int inc, StatType type)
     {
-        currentHealth = maxHealth;
-        //healthBar.SetMaxValue(maxHealth);
-        //healthBar.SetValue(maxHealth);
+        int value;
+        if (inc > 0)
+        {
+            value = Mathf.Min(maxHunger, currentStats[(int) type] + inc);
+        }
+        else
+        {
+            value = Mathf.Max(0, currentStats[(int)type] + inc);
+        }
 
-        currentHunger = maxHunger;
-        //hungerBar.SetMaxValue(maxHunger);
-        //hungerBar.SetValue(maxHunger);
+        currentStats[(int) type] = value;
+        statusBarController.UpdateStatusBars(type);
+    }
 
-        currentThirst = maxThirst;
-        //thirstBar.SetMaxValue(maxThirst);
-        //thirstBar.SetValue(maxThirst);
-
-        currentEnergy = maxEnergy;
-        //energyBar.SetMaxValue(maxEnergy);
-        //energyBar.SetValue(maxEnergy);
-        Player = this;
+    /**
+     * add inc to the health value
+     */
+    public void UpdateHealth(int inc)
+    {
+        UpdateStat(inc, StatType.Health);
     }
 
     /**
@@ -126,22 +111,7 @@ public class PlayerController : MonoBehaviour
      */
     public void UpdateHunger(int inc)
     {
-        int value;
-        //define new value
-        if (inc > 0)
-        {
-            value = Mathf.Min(maxHunger, currentHunger + inc);
-        }
-        else
-        {
-            value = Mathf.Max(0, currentHunger + inc);
-        }
-
-        currentHunger = value;
-        statusBarController.UpdateStatusBars();
-        //hungerBar.SetValue(value);
-
-        //Debug.Log("Adding " + inc + " to the Hunger.");
+        UpdateStat(inc, StatType.Hunger);
     }
     
     /**
@@ -149,60 +119,12 @@ public class PlayerController : MonoBehaviour
      */
     public void UpdateThirst(int inc)
     {
-        int value;
-        if (inc > 0)
-        {
-            value = Mathf.Min(maxThirst, currentThirst + inc);
-        }
-        else
-        {
-            value = Mathf.Max(0, currentThirst + inc);
-        }
-
-        currentThirst = value;
-        statusBarController.UpdateStatusBars();
-        //thirstBar.SetValue(value);
-
-        //Debug.Log("Adding " + inc + " to the Thirst.");
-
+        UpdateStat(inc, StatType.Thirst);
     }
     
-    /**
-     * add inc to the health value
-     */
-    public void UpdateHealth(int inc)
-    {
-        int value;
-        if (inc > 0)
-        {
-            value = Mathf.Min(maxHealth, currentHealth + inc);
-        }
-        else
-        {
-            value = Mathf.Max(0, currentHealth + inc);
-        }
-
-        currentHealth = value;
-        statusBarController.UpdateStatusBars();
-        //healthBar.SetValue(value);
-        //Debug.Log("Adding " + inc + " to the Health.");
-
-    }
+    
     public void UpdateEnergy(int inc)
     {
-        int value;
-        if (inc > 0)
-        {
-            value = Mathf.Min(maxEnergy, currentEnergy + inc);
-        }
-        else
-        {
-            value = Mathf.Max(0, currentEnergy + inc);
-        }
-
-        currentEnergy = value;
-        statusBarController.UpdateStatusBars();
-        //energyBar.SetValue(value);
-        //Debug.Log("Adding " + inc + " to the Energy.");
+        UpdateStat(inc, StatType.Energy);
     }
 }

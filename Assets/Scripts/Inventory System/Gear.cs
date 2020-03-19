@@ -13,26 +13,12 @@ public class Gear:Item
     // ===== Canvas for item types =====
     public enum ItemType
     {
-        None = 0, Weapon, Head, Chest, Legs
+        None = 0, Helmet, Chestplate, Greaves, Weapon
     }
+    public ItemType type;
 
-    [SerializeField] private List<ItemType> itemTypes = new List<ItemType>();
-
-    public List<ItemType> GetItemTypes()
-    {
-        return itemTypes;
-    }
-
-    public bool IsOfType(ItemType it)
-    {
-        foreach (ItemType itemType in itemTypes)
-        {
-            if (itemType == it)
-            {
-                return true;
-            }
-        }
-        return false;
+    public ItemType Type {
+        get { return type; }
     }
     // =================================
 

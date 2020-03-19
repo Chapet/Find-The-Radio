@@ -56,12 +56,6 @@ public class InventorySlot : MonoBehaviour
     public void Render()
     {
         Gear g = item as Gear;
-        /*
-        if (player==null)
-        {
-            player = PlayerController.GetPlayer;
-        }
-        */
         if (g != null && player.IsEquipped(g))
         {
             check.enabled = true;

@@ -19,4 +19,4 @@ MonoBehaviour:
   description: 'The grass was greener,
 
     The light was brighter, ...'
-  itemTypes: 01000000
+  types: 01000000

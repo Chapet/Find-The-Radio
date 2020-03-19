@@ -58,7 +58,7 @@ public class ScavengingController : MonoBehaviour
     public void ScavengingBtnClicked()
     {
         Scavenge();
-        menuController.ExitMenu(gameObject);
+        //menuController.ExitMenu(gameObject);
     }
 
 
@@ -224,10 +224,10 @@ public class ScavengingController : MonoBehaviour
 
         //========== KEEP STATUS BAR BEFORE MODIFICATION ===========
 
-        int oldHealth = player.currentHealth;
-        int oldHunger = player.currentHunger;
-        int oldThirst = player.currentThirst;
-        int oldEnergy = player.currentEnergy;
+        int oldHealth = player.currentStats[(int) StatType.Health];
+        int oldHunger = player.currentStats[(int)StatType.Hunger];
+        int oldThirst = player.currentStats[(int)StatType.Thirst];
+        int oldEnergy = player.currentStats[(int)StatType.Energy];
 
 
         //========== MODIFY STATUS BAR =================
@@ -239,11 +239,15 @@ public class ScavengingController : MonoBehaviour
         //===============================================
 
 
-        menuController.ExitMenu(this.gameObject);
+        menuController.ExitMenu(gameObject);
 
         //=======    POP UP RESULT    =============
-        popUpResult.PopResult(itemsFound, (health: (old: oldHealth, now: player.currentHealth), hunger: (old: oldHunger, now: player.currentHunger), thirst: (old: oldThirst, now: player.currentThirst), energy: (old: oldEnergy, now: player.currentEnergy)));
-
+        popUpResult.PopResult(itemsFound, (
+            health: (old: oldHealth, now: player.currentStats[(int)StatType.Health]),
+            hunger: (old: oldHunger, now: player.currentStats[(int)StatType.Hunger]),
+            thirst: (old: oldThirst, now: player.currentStats[(int)StatType.Thirst]),
+            energy: (old: oldEnergy, now: player.currentStats[(int)StatType.Energy])
+            ));
 
         itemsFound.Clear();
 
