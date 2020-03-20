@@ -296,6 +296,7 @@ public class InventoryController : MonoBehaviour
         nameText.SetText(selectedItem.name);
         descriptionText.SetText(selectedItem.GetDescription());
         itemPreview.sprite = selectedItem.GetSprite();
+        itemPreview.color = selectedItem.GetMaskColor();
 
         ClearProperties();
 

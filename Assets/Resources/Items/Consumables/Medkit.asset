@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7cdea1c30062346d4bdda24a2ab608bd, type: 3}
-  m_Name: FoodCan
+  m_Name: Medkit
   m_EditorClassIdentifier: 
   recipe: []
-  name: Food Can
-  image: {fileID: 21300000, guid: 5a8741c22e9fd43cfb589566c964c6cc, type: 3}
-  itemID: 11
-  description: This is a can of food (Miam)
+  name: Medkit
+  image: {fileID: 21300000, guid: 981851fd2b066a142ba1f89438c0b3f0, type: 3}
+  itemID: 16
+  description: A medkit to restore health
   maskColor:
     serializedVersion: 2
     rgba: 4294967295
-  types: 0100000003000000
+  types: 03000000
   thirstValue: 0
-  hungerValue: 25
-  healthValue: 0
-  energyValue: 13
+  hungerValue: 0
+  healthValue: 50
+  energyValue: 0

@@ -21,8 +21,16 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 77f0771e010a174449ae6656adc45b7d, type: 2}
   - {fileID: 11400000, guid: 9af1da6e23d5849f78009083af905eb7, type: 2}
   - {fileID: 11400000, guid: 9218cb67ac1924f4b8aac993fb904593, type: 2}
+  - {fileID: 11400000, guid: 8637ad278513344aaab041a86ba6543f, type: 2}
+  - {fileID: 11400000, guid: 43e9ecc9e8b494c3eb52f64b4d10dea4, type: 2}
+  - {fileID: 11400000, guid: 77bd3fb0e747147549ff34268e081a6c, type: 2}
+  - {fileID: 11400000, guid: 149b7c605de554484905d04f2e143ee6, type: 2}
+  - {fileID: 11400000, guid: 093cbab3806b7475d973ba7bb9ffcffe, type: 2}
   - {fileID: 11400000, guid: 3911cfb8c8a78438d8a2abee14d2bf67, type: 2}
-  numberOfConsumables: 24
-  numberOfEquipment: 8
-  numberOfJunks: 16
-  numberOfResources: 16
+  - {fileID: 11400000, guid: f4eaed167bd2440478490f5ce4f0b2c8, type: 2}
+  - {fileID: 11400000, guid: eed59ccc0da7e4ba3b436b4c425a6b69, type: 2}
+  - {fileID: 11400000, guid: 4173da99b221045528767045747ece4d, type: 2}
+  numberOfConsumables: 32
+  numberOfEquipment: 16
+  numberOfJunks: 24
+  numberOfResources: 24
