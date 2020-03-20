@@ -10,10 +10,9 @@ public class InventoryController : MonoBehaviour
     {
         get; private set;
     }
-    //private GameObject player;
+
     public MenuController menuController;
 
-    //private StatusBarController barController;
     private InventoryManager inventory;
     private PlayerController playerController;
 
@@ -28,10 +27,6 @@ public class InventoryController : MonoBehaviour
     public GameObject playerView;
 
     public EquipmentSlot[] equipment;
-    //public InventorySlot helmetSlot;
-    //public InventorySlot chestplateSlot;
-    //public InventorySlot greavesSlot;
-    //public InventorySlot weaponSlot;
 
     private SlotsHandler slotsHandler;
 
@@ -40,7 +35,9 @@ public class InventoryController : MonoBehaviour
     public GameObject descBackground;
     public Image itemPreview;
     public Button useButton;
+    public Button deleteItemButton;
     public Button equipButton;
+    public Button deleteGearButton;
     public GameObject itemProperties;
     public GameObject health;
     public GameObject hunger;
@@ -118,13 +115,14 @@ public class InventoryController : MonoBehaviour
     public void StandardTabSelected()
     {
         playerView.SetActive(false);
-        itemView.SetActive(true); 
     }
 
     public void GearTabSelected()
     {
         itemView.SetActive(false);
         playerView.SetActive(true);
+        equipButton.gameObject.SetActive(false);
+        deleteGearButton.gameObject.SetActive(false);
         RefreshEquipmentSlots();
     }
 
@@ -135,7 +133,7 @@ public class InventoryController : MonoBehaviour
         {
             Item selectedItem = curr.GetItem();
             Consumable cons = selectedItem as Consumable;
-            Debug.Log("This item is usable, updating corresponding values ...");
+
             playerController.UpdateEnergy(cons.GetEnergy());
             playerController.UpdateHealth(cons.GetHealth());
             playerController.UpdateHunger(cons.GetHunger());
@@ -144,11 +142,7 @@ public class InventoryController : MonoBehaviour
             inventory.RemoveItem(selectedItem);
             slotsHandler.DeleteCurrentSlot();
 
-            coroutine = UsedNotification();
-
-            StartCoroutine(coroutine);
-
-            Debug.Log(selectedItem + " used!");
+            ClearInfoPanel();
         }
     }
 
@@ -190,9 +184,33 @@ public class InventoryController : MonoBehaviour
             RefreshEquipmentSlots();
         }
     }
+    public void DeleteBtnClicked()
+    {
+        InventorySlot curr = slotsHandler.GetCurrentSlot();
+        if (curr != null)
+        {
+            Item selectedItem = curr.GetItem();
+
+            inventory.RemoveItem(selectedItem);
+            slotsHandler.DeleteCurrentSlot();
+
+            if(selectedItem is Gear)
+            {
+                equipButton.gameObject.SetActive(false);
+                deleteGearButton.gameObject.SetActive(false);
+                RefreshEquipmentSlots();
+            }
+            else
+            {
+                ClearInfoPanel();
+            }
+        }
+    }
 
     private void ClearInfoPanel()
     {
+        itemView.SetActive(false);
+
         nameText.SetText("");
         descriptionText.SetText("");
 
@@ -200,7 +218,6 @@ public class InventoryController : MonoBehaviour
 
         descBackground.SetActive(false);
         useButton.gameObject.SetActive(false);
-        equipButton.gameObject.SetActive(false);
 
         ClearProperties();
     }
@@ -285,11 +302,14 @@ public class InventoryController : MonoBehaviour
         if (selectedItem.IsConsumable())
         {
             useButton.gameObject.SetActive(true);
+            deleteItemButton.gameObject.SetActive(true);
             SetProperties(selectedItem);
+            itemView.SetActive(true);
         }
         else if (selectedItem.IsGear())
         {
             equipButton.gameObject.SetActive(true);
+            deleteGearButton.gameObject.SetActive(true);
             Gear g = selectedItem as Gear;
             if (playerController.IsEquipped(g))
             {
@@ -299,6 +319,11 @@ public class InventoryController : MonoBehaviour
             {
                 equipButton.gameObject.transform.GetChild(0).GetComponent<TMP_Text>().SetText("Equip");
             }
+        }
+        else
+        {
+            itemView.SetActive(true);
+            deleteItemButton.gameObject.SetActive(true);
         }
     }
 

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class StatusBar : MonoBehaviour
 {
     
-    [SerializeField] private Slider slider;
+    private Slider slider;
     [SerializeField] private bool managedByController = true;
     [SerializeField] private bool animated = true;
     private bool initialized = false;

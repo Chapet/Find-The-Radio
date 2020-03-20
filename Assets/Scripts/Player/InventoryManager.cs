@@ -257,6 +257,10 @@ public class InventoryManager : MonoBehaviour
                 break;
             case "Gear":
                 equipment.Remove(item as Gear);
+                if(PlayerController.Player.IsEquipped(item as Gear))
+                {
+                    PlayerController.Player.UnequipGear(item as Gear);
+                }
                 break;
             case "Resource":
                 resources.Remove(item as Resource);

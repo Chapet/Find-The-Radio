@@ -23,6 +23,12 @@ abstract public class Item : ScriptableObject
 
     [SerializeField] [Multiline] private string description = "";
 
+    [SerializeField] private Color32 maskColor = new Color32(255, 255, 255, 255);
+    public Color32 GetMaskColor()
+    {
+        return maskColor;
+    }
+
     public void SetSprite(Sprite sprite)
     {
         this.image = sprite;

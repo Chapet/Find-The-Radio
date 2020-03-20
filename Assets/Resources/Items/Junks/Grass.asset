@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recipe: []
   name: Grass
-  image: {fileID: 21300000, guid: 9fb04f65535cd47cd8c226d5249a6415, type: 3}
+  image: {fileID: 21300000, guid: 81430f3f47e96451f8b584dd04f0b93a, type: 3}
   itemID: 31
   description: 'The grass was greener,
 
     The light was brighter, ...'
+  maskColor:
+    serializedVersion: 2
+    rgba: 4283476873
   types: 01000000

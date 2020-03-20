@@ -25,6 +25,7 @@ public class InventorySlot : MonoBehaviour
     {
         item = newItem;
         icon.sprite = item.GetSprite();
+        icon.color = item.GetMaskColor();
         icon.enabled = true;
         check.enabled = false;
         player = PlayerController.Player;
