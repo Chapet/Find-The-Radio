@@ -221,7 +221,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 1, y: -1}
-  m_SizeDelta: {x: -30, y: -30}
+  m_SizeDelta: {x: -38, y: -38}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7081959697277555308
 CanvasRenderer:
@@ -268,6 +268,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7081959697669062098}
+  - component: {fileID: 6995732437669239234}
   m_Layer: 5
   m_Name: CraftingSlot
   m_TagString: Untagged
@@ -296,6 +297,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1300, y: 190}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &6995732437669239234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7081959697669062109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be849482d152245feb5150c00a70dcd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  contentPanel: {fileID: 5754409281934828607}
+  icon: {fileID: 7081959697277555311}
+  ingredientPrefab: {fileID: 4725564134655548374, guid: 7d54f864d00834b4bbfe4a24bdc9138a,
+    type: 3}
 --- !u!1001 &1305891047627988473
 PrefabInstance:
   m_ObjectHideFlags: 0

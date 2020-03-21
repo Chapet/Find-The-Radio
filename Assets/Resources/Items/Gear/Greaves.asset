@@ -12,11 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5554672da773407391d45ae86f3c48e3, type: 3}
   m_Name: Greaves
   m_EditorClassIdentifier: 
-  recipe: []
+  recipe:
+  - {fileID: 11400000, guid: eed59ccc0da7e4ba3b436b4c425a6b69, type: 2}
+  - {fileID: 11400000, guid: 4173da99b221045528767045747ece4d, type: 2}
+  - {fileID: 11400000, guid: f4eaed167bd2440478490f5ce4f0b2c8, type: 2}
   name: Greaves
   image: {fileID: 21300000, guid: d9e0fefb84ab941598640860872a3412, type: 3}
   itemID: 24
   description: Iron Greaves from Minecraft
+  maskColor:
+    serializedVersion: 2
+    rgba: 4294967295
   type: 3
   scavengRate: 0
   scavengSize: 0

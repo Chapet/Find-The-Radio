@@ -1011,6 +1011,10 @@ MonoBehaviour:
   inventoryPanel: {fileID: 194748596}
   cheatPanel: {fileID: 946274393}
   craftingPanel: {fileID: 1433741046}
+  healthBar: {fileID: 0}
+  hungerBar: {fileID: 0}
+  thirstBar: {fileID: 0}
+  energyBar: {fileID: 0}
   tabController: {fileID: 967591808}
   backPanel: {fileID: 2079418909}
   menuController: {fileID: 2142818587}
@@ -1365,20 +1369,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e4dca48004eb43d69942fc71d7ba473, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1987407792}
   menuController: {fileID: 2142818587}
   tabController: {fileID: 967591808}
   scrollRect: {fileID: 815897778}
   scrollView: {fileID: 815897776}
   canvasGroup: {fileID: 815897781}
   contentPanel: {fileID: 353872944}
-  inventory: {fileID: 1987407794}
+  itemView: {fileID: 0}
+  playerView: {fileID: 0}
+  equipment: []
   nameText: {fileID: 1625681192}
   descriptionText: {fileID: 671203395}
   descBackground: {fileID: 1650072656}
   itemPreview: {fileID: 1597580012}
   useButton: {fileID: 1366648237}
+  deleteItemButton: {fileID: 0}
   equipButton: {fileID: 546582231}
+  deleteGearButton: {fileID: 0}
   itemProperties: {fileID: 438433693}
   health: {fileID: 18246676}
   hunger: {fileID: 1434596280}
@@ -1506,7 +1513,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aded713100000000870e71310000000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 201818444}
+  managedByController: 1
+  animated: 1
 --- !u!114 &201818444
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1615,7 +1623,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aded713100000000870e71310000000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 231180789}
+  managedByController: 1
+  animated: 1
 --- !u!114 &231180789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2724,9 +2733,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8479a3124c99f40c98775d6a0681b09e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  contentPanel: {fileID: 0}
   slotPrefab: {fileID: 2386212940216313008, guid: 94f4a2353020743d3ad1ce91e3b76d36,
     type: 3}
-  player: {fileID: 1987407792}
   inventoryController: {fileID: 194748598}
 --- !u!1 &357001112
 GameObject:
@@ -5298,9 +5307,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -10}
+  m_AnchoredPosition: {x: 0, y: 10}
   m_SizeDelta: {x: 20, y: -20}
-  m_Pivot: {x: 1, y: 0}
+  m_Pivot: {x: 1, y: 1}
 --- !u!114 &600735625
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5342,7 +5351,7 @@ MonoBehaviour:
   m_Interactable: 1
   m_TargetGraphic: {fileID: 857892072}
   m_HandleRect: {fileID: 857892071}
-  m_Direction: 3
+  m_Direction: 2
   m_Value: 1.0000001
   m_Size: 0.37756002
   m_NumberOfSteps: 0
@@ -7345,7 +7354,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0.18, y: 1}
-  m_AnchoredPosition: {x: 5, y: 0}
+  m_AnchoredPosition: {x: 5.000061, y: 0}
   m_SizeDelta: {x: -10, y: -20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &851917772
@@ -7727,7 +7736,7 @@ PrefabInstance:
     - target: {fileID: 7081959697669062098, guid: d0e661d7dab0344f3b1fe7a88f753502,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 650
+      value: 730
       objectReference: {fileID: 0}
     - target: {fileID: 7081959697669062098, guid: d0e661d7dab0344f3b1fe7a88f753502,
         type: 3}
@@ -8708,7 +8717,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69838fbb7c4f742ce852eec62cc5131c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 1987407794}
   inventoryController: {fileID: 194748598}
   headerPanel: {fileID: 851917770}
   contentPanel: {fileID: 1132511984}
@@ -8881,7 +8889,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aded713100000000870e71310000000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 996004582}
+  managedByController: 1
+  animated: 1
 --- !u!114 &996004582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9296,7 +9305,7 @@ PrefabInstance:
     - target: {fileID: 7081959697669062098, guid: d0e661d7dab0344f3b1fe7a88f753502,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 650
+      value: 730
       objectReference: {fileID: 0}
     - target: {fileID: 7081959697669062098, guid: d0e661d7dab0344f3b1fe7a88f753502,
         type: 3}
@@ -11166,7 +11175,7 @@ PrefabInstance:
     - target: {fileID: 7081959697669062098, guid: d0e661d7dab0344f3b1fe7a88f753502,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 650
+      value: 730
       objectReference: {fileID: 0}
     - target: {fileID: 7081959697669062098, guid: d0e661d7dab0344f3b1fe7a88f753502,
         type: 3}
@@ -12846,7 +12855,7 @@ PrefabInstance:
     - target: {fileID: 7081959697669062098, guid: d0e661d7dab0344f3b1fe7a88f753502,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 650
+      value: 730
       objectReference: {fileID: 0}
     - target: {fileID: 7081959697669062098, guid: d0e661d7dab0344f3b1fe7a88f753502,
         type: 3}
@@ -13141,7 +13150,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0aded713100000000870e71310000000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 1366726653}
+  managedByController: 1
+  animated: 1
 --- !u!114 &1366726653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13766,6 +13776,7 @@ MonoBehaviour:
   player: {fileID: 1987407792}
   menuController: {fileID: 2142818587}
   pop: {fileID: 751872907}
+  popUpResult: {fileID: 0}
 --- !u!95 &1389500529
 Animator:
   serializedVersion: 3
@@ -14306,7 +14317,7 @@ PrefabInstance:
     - target: {fileID: 7081959697669062098, guid: d0e661d7dab0344f3b1fe7a88f753502,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 650
+      value: 730
       objectReference: {fileID: 0}
     - target: {fileID: 7081959697669062098, guid: d0e661d7dab0344f3b1fe7a88f753502,
         type: 3}
@@ -17338,7 +17349,7 @@ PrefabInstance:
     - target: {fileID: 7081959697669062098, guid: d0e661d7dab0344f3b1fe7a88f753502,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 650
+      value: 730
       objectReference: {fileID: 0}
     - target: {fileID: 7081959697669062098, guid: d0e661d7dab0344f3b1fe7a88f753502,
         type: 3}
@@ -17644,6 +17655,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1833129242}
   - component: {fileID: 1833129243}
+  - component: {fileID: 1833129244}
   m_Layer: 5
   m_Name: Content
   m_TagString: Untagged
@@ -17692,7 +17704,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
+    m_Left: 80
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
@@ -17703,6 +17715,24 @@ MonoBehaviour:
   m_Spacing: {x: 0, y: 20}
   m_Constraint: 1
   m_ConstraintCount: 1
+--- !u!114 &1833129244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1833129241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38d0dcaaf0d69403e8ac18b54fb3c0ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  craftingList:
+  - {fileID: 11400000, guid: 9218cb67ac1924f4b8aac993fb904593, type: 2}
+  - {fileID: 11400000, guid: 3911cfb8c8a78438d8a2abee14d2bf67, type: 2}
+  - {fileID: 11400000, guid: 9af1da6e23d5849f78009083af905eb7, type: 2}
+  craftPrefab: {fileID: 7081959697669062109, guid: d0e661d7dab0344f3b1fe7a88f753502,
+    type: 3}
 --- !u!1 &1850246965
 GameObject:
   m_ObjectHideFlags: 0
@@ -18088,7 +18118,7 @@ PrefabInstance:
     - target: {fileID: 7081959697669062098, guid: d0e661d7dab0344f3b1fe7a88f753502,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 650
+      value: 730
       objectReference: {fileID: 0}
     - target: {fileID: 7081959697669062098, guid: d0e661d7dab0344f3b1fe7a88f753502,
         type: 3}
@@ -19139,19 +19169,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44e764ce26b73094096c343053c1df04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 0
-  currentHunger: 0
-  currentThirst: 0
-  currentEnergy: 0
+  currentStats: 
   maxCarryingSize: 4
-  healthBar: {fileID: 231180788}
-  hungerBar: {fileID: 201818443}
-  thirstBar: {fileID: 996004581}
-  energyBar: {fileID: 1366726652}
-  headGear: {fileID: 0}
-  chestGear: {fileID: 0}
-  legsGear: {fileID: 0}
-  weapon: {fileID: 0}
+  statusBarController: {fileID: 0}
+  equipment: []
 --- !u!4 &1987407793
 Transform:
   m_ObjectHideFlags: 0
@@ -19179,8 +19200,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryExample: {fileID: 11400000, guid: 9f096d711714d4a2aa372aa81d5c8831, type: 2}
-  inventory: []
+  consumables: []
+  equipment: []
+  resources: []
+  junks: []
   useExample: 1
+  maxConsumables: 32
+  maxEquipment: 32
+  maxResources: 32
+  maxJunks: 32
 --- !u!224 &2001744903 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7081959697669062098, guid: d0e661d7dab0344f3b1fe7a88f753502,
@@ -20395,7 +20423,7 @@ PrefabInstance:
     - target: {fileID: 7081959697669062098, guid: d0e661d7dab0344f3b1fe7a88f753502,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 650
+      value: 730
       objectReference: {fileID: 0}
     - target: {fileID: 7081959697669062098, guid: d0e661d7dab0344f3b1fe7a88f753502,
         type: 3}
@@ -21072,7 +21100,7 @@ PrefabInstance:
     - target: {fileID: 7081959697669062098, guid: d0e661d7dab0344f3b1fe7a88f753502,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 650
+      value: 730
       objectReference: {fileID: 0}
     - target: {fileID: 7081959697669062098, guid: d0e661d7dab0344f3b1fe7a88f753502,
         type: 3}
