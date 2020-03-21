@@ -11,16 +11,25 @@ public class InventorySlot : MonoBehaviour
     public Color equippedColor;
     public Color standardColor;
     public Color selectedColor;
-    public PlayerController player;
+    private PlayerController player;
     public SlotsHandler slotsHandler;
     private bool selected = false;
+    [SerializeField] private int instanceID;
+
+    private void Start()
+    {
+        player = PlayerController.Player;
+    }
 
     public void AddItem(Item newItem)
     {
         item = newItem;
         icon.sprite = item.GetSprite();
+        icon.color = item.GetMaskColor();
         icon.enabled = true;
         check.enabled = false;
+        player = PlayerController.Player;
+        instanceID = item.GetInstanceID();
     }
 
     public void ClearSlot()

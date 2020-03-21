@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 1, y: -1}
-  m_SizeDelta: {x: -30, y: -30}
+  m_SizeDelta: {x: -38, y: -38}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2386212939630508116
 CanvasRenderer:
@@ -224,8 +224,8 @@ MonoBehaviour:
   equippedColor: {r: 0.49125654, g: 0.9339623, b: 0.057271298, a: 1}
   standardColor: {r: 1, g: 1, b: 1, a: 1}
   selectedColor: {r: 0.5882353, g: 0.5882353, b: 0.5882353, a: 1}
-  player: {fileID: 0}
   slotsHandler: {fileID: 0}
+  instanceID: 0
 --- !u!95 &7364318974685689975
 Animator:
   serializedVersion: 3

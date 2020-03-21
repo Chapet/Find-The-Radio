@@ -10,34 +10,15 @@ public enum ScavengOption
 
 public class Gear:Item
 {
-    [SerializeField] private List<Item> recipe = new List<Item>();
-    public List<Item> Recipe {
-        get { return this.recipe; }
-    }
-
     // ===== Canvas for item types =====
     public enum ItemType
     {
-        None = 0, Weapon, Head, Chest, Legs
+        None = 0, Helmet, Chestplate, Greaves, Weapon
     }
+    public ItemType type;
 
-    [SerializeField] private List<ItemType> itemTypes = new List<ItemType>();
-
-    public List<ItemType> GetItemTypes()
-    {
-        return itemTypes;
-    }
-
-    public bool IsOfType(ItemType it)
-    {
-        foreach (ItemType itemType in itemTypes)
-        {
-            if (itemType == it)
-            {
-                return true;
-            }
-        }
-        return false;
+    public ItemType Type {
+        get { return type; }
     }
     // =================================
 
@@ -63,10 +44,5 @@ public class Gear:Item
     public bool haveScavengeOption(ScavengOption option)
     {
         return scavengOptions.Contains(option);
-    }
-
-    public override bool IsCraftable()
-    {
-        return recipe.Count != 0;
     }
 }

@@ -12,6 +12,11 @@ public class BunkerController : MonoBehaviour
     public GameObject cheatPanel;
     public GameObject craftingPanel;
 
+    public GameObject healthBar;
+    public GameObject hungerBar;
+    public GameObject thirstBar;
+    public GameObject energyBar;
+
     public TabController tabController;
 
     public GameObject backPanel;
@@ -51,7 +56,6 @@ public class BunkerController : MonoBehaviour
 
     public void GoToBunker()
     {
-        //bunkerPanel.SetActive(true);
         if(bedPanel.activeSelf)
         {
             menuController.ExitMenu(bedPanel);

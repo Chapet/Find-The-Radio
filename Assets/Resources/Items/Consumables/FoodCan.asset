@@ -12,12 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cdea1c30062346d4bdda24a2ab608bd, type: 3}
   m_Name: FoodCan
   m_EditorClassIdentifier: 
+  recipe: []
   name: Food Can
   image: {fileID: 21300000, guid: 5a8741c22e9fd43cfb589566c964c6cc, type: 3}
-  itemID: 0
+  itemID: 11
   description: This is a can of food (Miam)
-  itemTypes: 0100000003000000
+  maskColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  types: 0100000003000000
   thirstValue: 0
-  hungerValue: 50
-  healthValue: 25
-  energyValue: 25
+  hungerValue: 25
+  healthValue: 0
+  energyValue: 13

@@ -5,16 +5,14 @@ using UnityEngine;
 public class SlotsHandler : MonoBehaviour
 {
     List<InventorySlot> slots = new List<InventorySlot>();
-    private GameObject contentPanel;
+    [SerializeField] private GameObject contentPanel;
     public GameObject slotPrefab;
-    public PlayerController player;
     public InventoryController inventoryController;
     private InventorySlot currentlySelected = null;
 
-
-    public void Awake()
+    private void Awake()
     {
-        contentPanel = this.gameObject;
+        contentPanel = gameObject;
     }
 
     public void SlotSelected(InventorySlot selected)
@@ -50,7 +48,6 @@ public class SlotsHandler : MonoBehaviour
             InventorySlot slot = obj.GetComponent<InventorySlot>();
             slot.AddItem(i);
             slot.slotsHandler = this;
-            slot.player = player;
             obj.transform.SetParent(contentPanel.transform, false);
 
             slots.Add(slot);

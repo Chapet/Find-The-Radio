@@ -6,8 +6,15 @@ using TMPro;
 
 public class InventoryController : MonoBehaviour
 {
-    public PlayerController player;
+    public static InventoryController InvController
+    {
+        get; private set;
+    }
+
     public MenuController menuController;
+
+    private InventoryManager inventory;
+    private PlayerController playerController;
 
     public TabController tabController;
     public ScrollRect scrollRect;
@@ -15,7 +22,11 @@ public class InventoryController : MonoBehaviour
     public GameObject scrollView;
     public CanvasGroup canvasGroup;
     public GameObject contentPanel;
-    public InventoryManager inventory;
+
+    public GameObject itemView;
+    public GameObject playerView;
+
+    public EquipmentSlot[] equipment;
 
     private SlotsHandler slotsHandler;
 
@@ -24,7 +35,9 @@ public class InventoryController : MonoBehaviour
     public GameObject descBackground;
     public Image itemPreview;
     public Button useButton;
+    public Button deleteItemButton;
     public Button equipButton;
+    public Button deleteGearButton;
     public GameObject itemProperties;
     public GameObject health;
     public GameObject hunger;
@@ -45,11 +58,24 @@ public class InventoryController : MonoBehaviour
         Clear();
         slotsHandler = contentPanel.GetComponent<SlotsHandler>();
         coroutine = UsedNotification();
+        InvController = this;
+        equipment = new EquipmentSlot[5];
+    }
+
+    private void Start()
+    {
+        inventory = InventoryManager.Inventory;
+        playerController = PlayerController.Player;
     }
 
     void OnEnable()
     {
         StartCoroutine(StartOnTabAfterWait(15));
+    }
+
+    public void AddEquipmentSlot(EquipmentSlot es)
+    {
+        equipment[(int) es.slotType] = es;
     }
 
     public void Show(List<Item> items)
@@ -86,6 +112,20 @@ public class InventoryController : MonoBehaviour
         }
     }
 
+    public void StandardTabSelected()
+    {
+        playerView.SetActive(false);
+    }
+
+    public void GearTabSelected()
+    {
+        itemView.SetActive(false);
+        playerView.SetActive(true);
+        equipButton.gameObject.SetActive(false);
+        deleteGearButton.gameObject.SetActive(false);
+        RefreshEquipmentSlots();
+    }
+
     public void UseBtnClicked()
     {
         InventorySlot curr = slotsHandler.GetCurrentSlot();
@@ -93,20 +133,16 @@ public class InventoryController : MonoBehaviour
         {
             Item selectedItem = curr.GetItem();
             Consumable cons = selectedItem as Consumable;
-            Debug.Log("This item is usable, updating corresponding values ...");
-            player.UpdateEnergy(cons.GetEnergy());
-            player.UpdateHealth(cons.GetHealth());
-            player.UpdateHunger(cons.GetHunger());
-            player.UpdateThirst(cons.GetThirst());
+
+            playerController.UpdateEnergy(cons.GetEnergy());
+            playerController.UpdateHealth(cons.GetHealth());
+            playerController.UpdateHunger(cons.GetHunger());
+            playerController.UpdateThirst(cons.GetThirst());
 
             inventory.RemoveItem(selectedItem);
             slotsHandler.DeleteCurrentSlot();
 
-            coroutine = UsedNotification();
-
-            StartCoroutine(coroutine);
-
-            Debug.Log(selectedItem + " used!");
+            ClearInfoPanel();
         }
     }
 
@@ -133,31 +169,56 @@ public class InventoryController : MonoBehaviour
             Item selectedItem = curr.GetItem();
             Gear g = selectedItem as Gear;
 
-            if (player.IsEquipped(g))
+            if (playerController.IsEquipped(g))
             {
-                player.UnequipGear(g);
+                playerController.UnequipGear(g);
                 equipButton.gameObject.transform.GetChild(0).GetComponent<TMP_Text>().SetText("Equip");
             }
             else
             {
-                player.EquipGear(g);
+                playerController.EquipGear(g);
                 equipButton.gameObject.transform.GetChild(0).GetComponent<TMP_Text>().SetText("Unequip");
             }
 
             slotsHandler.UpdateSlots();
+            RefreshEquipmentSlots();
+        }
+    }
+    public void DeleteBtnClicked()
+    {
+        InventorySlot curr = slotsHandler.GetCurrentSlot();
+        if (curr != null)
+        {
+            Item selectedItem = curr.GetItem();
+
+            inventory.RemoveItem(selectedItem);
+            slotsHandler.DeleteCurrentSlot();
+
+            if(selectedItem is Gear)
+            {
+                equipButton.gameObject.SetActive(false);
+                deleteGearButton.gameObject.SetActive(false);
+                RefreshEquipmentSlots();
+            }
+            else
+            {
+                ClearInfoPanel();
+            }
         }
     }
 
     private void ClearInfoPanel()
     {
-        Debug.Log("Clearing info panel ...");
+        itemView.SetActive(false);
+
         nameText.SetText("");
         descriptionText.SetText("");
-        Debug.Log("Setting item preview to blank sprite");
+
         itemPreview.sprite = blankSprite;
+
         descBackground.SetActive(false);
         useButton.gameObject.SetActive(false);
-        equipButton.gameObject.SetActive(false);
+
         ClearProperties();
     }
 
@@ -235,17 +296,23 @@ public class InventoryController : MonoBehaviour
         nameText.SetText(selectedItem.name);
         descriptionText.SetText(selectedItem.GetDescription());
         itemPreview.sprite = selectedItem.GetSprite();
+        itemPreview.color = selectedItem.GetMaskColor();
+
+        ClearProperties();
 
         if (selectedItem.IsConsumable())
         {
             useButton.gameObject.SetActive(true);
+            deleteItemButton.gameObject.SetActive(true);
             SetProperties(selectedItem);
+            itemView.SetActive(true);
         }
         else if (selectedItem.IsGear())
         {
             equipButton.gameObject.SetActive(true);
+            deleteGearButton.gameObject.SetActive(true);
             Gear g = selectedItem as Gear;
-            if (player.IsEquipped(g))
+            if (playerController.IsEquipped(g))
             {
                 equipButton.gameObject.transform.GetChild(0).GetComponent<TMP_Text>().SetText("Unequip");
             }
@@ -253,6 +320,11 @@ public class InventoryController : MonoBehaviour
             {
                 equipButton.gameObject.transform.GetChild(0).GetComponent<TMP_Text>().SetText("Equip");
             }
+        }
+        else
+        {
+            itemView.SetActive(true);
+            deleteItemButton.gameObject.SetActive(true);
         }
     }
 
@@ -290,5 +362,16 @@ public class InventoryController : MonoBehaviour
         Debug.Log("Wait for " + msec + " millisecond(s)");
         yield return new WaitForSeconds((float)msec / 1000f);
         tabController.TabBtnListener(TabController.Tab.FoodAndDrink);
+    }
+
+    private void RefreshEquipmentSlots()
+    {
+        foreach(EquipmentSlot e in equipment)
+        {
+            if(e!=null)
+            {
+                e.Refresh();
+            }
+        }
     }
 }
