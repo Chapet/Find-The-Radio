@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+//using System.Linq;
 using UnityEngine;
 
 public class StatusBarController : MonoBehaviour
 {
-    //private static StatusBarController statusBarController;
     public static StatusBarController SBController
     {
         get; private set;
@@ -16,9 +15,13 @@ public class StatusBarController : MonoBehaviour
 
     private void Awake()
     {
-        player = PlayerController.Player;
         SBController = this;
         bars = new List<StatusBar>[] { new List<StatusBar>(), new List<StatusBar>(), new List<StatusBar>(), new List<StatusBar>(), new List<StatusBar>() };
+    }
+
+    private void Start()
+    {
+        player = PlayerController.Player;
     }
 
     public void UpdateStatusBars(StatType type)

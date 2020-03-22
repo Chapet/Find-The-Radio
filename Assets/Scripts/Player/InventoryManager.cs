@@ -258,9 +258,7 @@ public class InventoryManager : MonoBehaviour
             case "Junk":
                 junks.Remove(item as Junk);
                 break;
-
         }
-        //inventory.Remove(item);
         
         Debug.Log(item + " has been removed from the inventory");
     }

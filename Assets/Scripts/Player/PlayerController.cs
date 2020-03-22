@@ -35,10 +35,16 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        Debug.Log("1");
         Player = this;
         currentStats = new int[maxStats.Length];
         Array.Copy(maxStats, 0, currentStats, 0, maxStats.Length);
         equipment = new Gear[5];
+    }
+
+    private void Start()
+    {
+        statusBarController = StatusBarController.SBController;
     }
 
     public bool IsEquipped(Gear g)
