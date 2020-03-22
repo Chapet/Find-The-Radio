@@ -12004,7 +12004,7 @@ GameObject:
   - component: {fileID: 1301186171}
   - component: {fileID: 1301186170}
   m_Layer: 5
-  m_Name: EquipButton
+  m_Name: CraftButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12068,13 +12068,13 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1301186171}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 194748598}
-        m_MethodName: EquipBtnClicked
+      - m_Target: {fileID: 1433741048}
+        m_MethodName: CraftBtnClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14760,10 +14760,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuController: {fileID: 2142818587}
   craftsHandler: {fileID: 1833129244}
+  inventoryManager: {fileID: 1987407794}
   descBackground: {fileID: 1650072656}
   nameText: {fileID: 1625681192}
   descriptionText: {fileID: 671203395}
   itemPreview: {fileID: 1597580012}
+  craftButton: {fileID: 1301186170}
 --- !u!225 &1433741049
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -15864,7 +15866,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.75}
   m_AnchorMax: {x: 0.45, y: 1}
-  m_AnchoredPosition: {x: 0.011016846, y: -0.02267456}
+  m_AnchoredPosition: {x: 0.010986328, y: -0.022705078}
   m_SizeDelta: {x: -39.999992, y: -40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1616310082
@@ -16138,7 +16140,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.45, y: 0.75}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.008956909, y: -0.02267456}
+  m_AnchoredPosition: {x: -0.008972168, y: -0.022705078}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1641225161
@@ -18024,6 +18026,7 @@ MonoBehaviour:
   craftPrefab: {fileID: 7081959697669062109, guid: d0e661d7dab0344f3b1fe7a88f753502,
     type: 3}
   craftingController: {fileID: 1433741048}
+  inventoryManager: {fileID: 1987407794}
 --- !u!1 &1850246965
 GameObject:
   m_ObjectHideFlags: 0

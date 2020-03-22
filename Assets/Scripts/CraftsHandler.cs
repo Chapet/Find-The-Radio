@@ -7,6 +7,7 @@ public class CraftsHandler : MonoBehaviour
     public List<Item> craftingList;
     public GameObject craftPrefab;
     public CraftingController craftingController;
+    public InventoryManager inventoryManager;
 
     private List<CraftingSlot> slots = new List<CraftingSlot>();
     private GameObject contentPanel;
@@ -18,7 +19,6 @@ public class CraftsHandler : MonoBehaviour
 
     // Start is called before the first frame update
     void Start() {
-        Clear();
         Show();
     }
 
@@ -29,14 +29,16 @@ public class CraftsHandler : MonoBehaviour
     }
 
     public void Show() {
+        Clear();
         slots = new List<CraftingSlot>();
 
         foreach (Item item in craftingList) {
             GameObject obj = Instantiate(craftPrefab);
 
             CraftingSlot slot = obj.GetComponent<CraftingSlot>();
-            slot.AddItem(item);
+            slot.inventoryManager = inventoryManager;
             slot.craftsHandler = this;
+            slot.AddItem(item);
 
             obj.transform.SetParent(contentPanel.transform, false);
 
@@ -60,5 +62,11 @@ public class CraftsHandler : MonoBehaviour
 
     public CraftingSlot GetSlotSelected() {
         return slotSelected;
+    }
+
+    public void UpdateRecipe() {
+        foreach (CraftingSlot s in slots) {
+            s.UpdateRecipe();
+        }
     }
 }

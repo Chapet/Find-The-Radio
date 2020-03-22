@@ -51,6 +51,7 @@ public class BunkerController : MonoBehaviour
     public void CraftingBtnClicked()
     {
         Debug.Log("Let's go crafting ...");
+        craftingPanel.GetComponent<CraftingController>().UpdateCraftable();
         menuController.OpenMenu(craftingPanel);
     }
 

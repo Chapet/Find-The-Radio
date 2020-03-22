@@ -9,6 +9,7 @@ public class CraftingSlot : MonoBehaviour
     private Item item;
     private List<Item> recipe;
     private bool selected = false;
+    private bool isCraftable = true;
 
 
     public GameObject contentPanel;
@@ -16,11 +17,20 @@ public class CraftingSlot : MonoBehaviour
     public Image slot;
     public GameObject ingredientPrefab;
     public CraftsHandler craftsHandler;
+    public InventoryManager inventoryManager;
     public Color selectedColor;
     public Color standardColor;
 
+    public List<Item> GetRecipe() {
+        return recipe;
+    }
+
     public Item GetItem() {
         return item;
+    }
+
+    public bool GetIsCraftable() {
+        return isCraftable;
     }
 
     public void AddItem(Item newItem) {
@@ -44,6 +54,7 @@ public class CraftingSlot : MonoBehaviour
             obj.transform.SetParent(contentPanel.transform, false);
             recipeSlots.Add(slot);
         }
+        UpdateRecipe();
     }
 
     public void Clear() {
@@ -68,5 +79,26 @@ public class CraftingSlot : MonoBehaviour
     public void OnCLick() {
         Select();
         craftsHandler.SlotSelected(this);
+    }
+
+    public void UpdateRecipe() {
+        isCraftable = true;
+        if (recipeSlots.Count == 0) return;
+        Item currentItem = recipeSlots[0].GetItem();
+        int n = 0;
+        foreach (RecipeSlot i in recipeSlots) {
+            if (currentItem != i.GetItem()) {
+                currentItem = i.GetItem();
+                n = 1;
+            } else {
+                n++;
+            }
+            if (inventoryManager.GetItems(currentItem, n) == null) {
+                i.Mask();
+                isCraftable = false;
+            } else {
+                i.UnMask();
+            }
+        }
     }
 }

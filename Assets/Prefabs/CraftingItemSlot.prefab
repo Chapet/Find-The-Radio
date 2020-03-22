@@ -161,3 +161,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 6118554860865669696}
+  slot: {fileID: 658522307085463693}
+  standardColor: {r: 1, g: 1, b: 1, a: 1}
+  missingColor: {r: 0.8867924, g: 0.21333212, b: 0.21333212, a: 1}
