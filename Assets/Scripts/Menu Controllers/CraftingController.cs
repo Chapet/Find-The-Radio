@@ -53,7 +53,8 @@ public class CraftingController : MonoBehaviour
     public void CraftBtnClicked() {
         CraftingSlot selectedSlot = craftsHandler.GetSlotSelected();
         foreach (Item s in selectedSlot.GetRecipe()) {
-            inventoryManager.RemoveItem(s);
+            Item removedItem = inventoryManager.GetItem(s);
+            inventoryManager.RemoveItem(removedItem);
         }
         inventoryManager.AddItem(selectedSlot.GetItem());
         UpdateCraftable();
