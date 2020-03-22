@@ -177,16 +177,6 @@ public class InventoryManager : MonoBehaviour
                 }
             }
         }
-        /*
-        foreach (Item i in inventory)
-        {
-            if (i.Equals(item) && n>0)
-            {
-                list.Add(i);
-                n--;
-            }
-        }
-        */
         if (n != 0)
         {
             return null;

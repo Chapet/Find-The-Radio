@@ -8,7 +8,7 @@ abstract public class Item : ScriptableObject
 {
     public enum ItemClass
     {
-        Consumable,Gear,Junk,Ressouce
+        Consumable,Gear,Junk,Resource
     }
 
     [SerializeField] private List<Item> recipe = new List<Item>();

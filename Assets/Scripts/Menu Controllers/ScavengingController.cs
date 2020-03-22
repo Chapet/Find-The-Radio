@@ -79,7 +79,7 @@ public class ScavengingController : MonoBehaviour
         (link:"Items/Gear/Gun",minLevel:0,itemType:Item.ItemClass.Gear,minTimeOut:0.0),
         
         /*======RESOURCES=====*/
-        (link:"Items/Resources/WoodLog",minLevel:0,itemType:Item.ItemClass.Ressouce,minTimeOut:0.0),        
+        (link:"Items/Resources/Wood",minLevel:0,itemType:Item.ItemClass.Resource,minTimeOut:0.0),        
         
         /*======Junk=====*/
         
@@ -196,7 +196,7 @@ public class ScavengingController : MonoBehaviour
                 }
                 else if (chance > 0.20)/*========== RESSOURCES ===========*/
                 {
-                    possibleItem= getMyLevelItems(scavengeItems, myLevel,Item.ItemClass.Ressouce,scavengeTime);
+                    possibleItem= getMyLevelItems(scavengeItems, myLevel,Item.ItemClass.Resource,scavengeTime);
                     if (possibleItem != null&& possibleItem.Length>0)
 
                     {
