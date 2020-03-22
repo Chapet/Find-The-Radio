@@ -20,6 +20,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private int maxEquipment = 32;
     [SerializeField] private int maxResources = 32;
     [SerializeField] private int maxJunks = 32;
+
     private void Awake()
     {
         Inventory = this;
