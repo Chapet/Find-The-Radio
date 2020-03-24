@@ -20,7 +20,7 @@ MonoBehaviour:
   maskColor:
     serializedVersion: 2
     rgba: 4294967295
-  types: 0100000003000000
+  types: 01000000
   thirstValue: 0
   hungerValue: 25
   healthValue: 0

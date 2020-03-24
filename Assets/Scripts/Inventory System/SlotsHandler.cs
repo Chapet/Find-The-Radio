@@ -12,6 +12,7 @@ public class SlotsHandler : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log("WTF");
         contentPanel = gameObject;
     }
 

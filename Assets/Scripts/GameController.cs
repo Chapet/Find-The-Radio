@@ -18,7 +18,7 @@ public class GameController : MonoBehaviour
 
     void Awake()
     {
-        Application.targetFrameRate = 60;
+        
     }
 
     // Start is called before the first frame update
@@ -29,8 +29,7 @@ public class GameController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update() {
-    }
+    
 
     public void UpdateGameClock(float inc) {
         gameClock = (gameClock + inc) % 24f;
