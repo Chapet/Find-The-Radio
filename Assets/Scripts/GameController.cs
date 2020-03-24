@@ -16,11 +16,6 @@ public class GameController : MonoBehaviour
     public TMP_Text clock;
     public GameObject BunkerPanel;
 
-    void Awake()
-    {
-        
-    }
-
     // Start is called before the first frame update
     void Start() {
         UpdateGameClock(gameClock);
