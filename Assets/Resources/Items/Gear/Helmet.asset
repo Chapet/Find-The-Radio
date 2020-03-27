@@ -16,6 +16,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4173da99b221045528767045747ece4d, type: 2}
   - {fileID: 11400000, guid: 4173da99b221045528767045747ece4d, type: 2}
   name: Helmet
+  filename: Helmet
   image: {fileID: 21300000, guid: c6c5774275c89490b973d504e8c201ed, type: 3}
   itemID: 22
   description: Iron Helmet from Minecraft

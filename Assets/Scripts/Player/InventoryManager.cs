@@ -12,9 +12,13 @@ public class InventoryManager : MonoBehaviour
     }
     //public List<Item> inventory;
     [SerializeField] private List<Consumable> consumables;
+    public List<Consumable> Consumables { get { return consumables; } }
     [SerializeField] private List<Gear> equipment;
+    public List<Gear> Equipment { get { return equipment; } }
     [SerializeField] private List<Resource> resources;
+    public List<Resource> Resources { get { return resources; } }
     [SerializeField] private List<Junk> junks;
+    public List<Junk> Junks { get { return junks; } }
     [SerializeField] private bool useExample = false;
     [SerializeField] private int maxConsumables = 32;
     [SerializeField] private int maxEquipment = 32;
@@ -24,10 +28,6 @@ public class InventoryManager : MonoBehaviour
     private void Awake()
     {
         Inventory = this;
-    }
-
-    void Start()
-    {     
         if (useExample)
         {
             //inventory = inventoryExample.GetInventory();
@@ -37,7 +37,7 @@ public class InventoryManager : MonoBehaviour
             resources = example[2] as List<Resource>;
             junks = example[3] as List<Junk>;
         }
-        else
+        else //if (!GameController.saveLoaded)
         {
             //inventory = new List<Item>();
             consumables = new List<Consumable>();
@@ -45,6 +45,11 @@ public class InventoryManager : MonoBehaviour
             resources = new List<Resource>();
             junks = new List<Junk>();
         }
+    }
+
+    void Start()
+    {
+        Debug.Log("Inventory Started!");
     }
 
     //  Get all items in inventory corresponding to the class type @type

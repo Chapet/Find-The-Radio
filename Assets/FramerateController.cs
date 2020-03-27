@@ -5,13 +5,15 @@ public class FramerateController : MonoBehaviour
 	float deltaTime = 0.0f;
     public Color32 textColor = new Color32(255, 255, 255, 255);
 	[Range(0.01f, 0.10f)] public float heightRatio = 0.03f;
-
-	[Range(32, 128)] public int targetFramerate = 64;
+	//public int width = 1920;
+	//public int height = 1080;
+	[Range(32, 128)] public int targetFramerate = 90;
 
 	void Update()
 	{
 		Application.targetFrameRate = targetFramerate;
 		deltaTime += (Time.unscaledDeltaTime - deltaTime) * 0.1f;
+		//Screen.SetResolution(width, height, true, targetFramerate);
 	}
 
 	void OnGUI()

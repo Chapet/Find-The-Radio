@@ -18,6 +18,7 @@ abstract public class Item : ScriptableObject
     }
 
     [SerializeField] public new string name;
+    [SerializeField] public string filename;
     [SerializeField] private Sprite image;
     [SerializeField] private int itemID;
 
