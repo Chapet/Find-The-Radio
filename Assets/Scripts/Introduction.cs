@@ -11,10 +11,12 @@ public class Introduction : MonoBehaviour
     [SerializeField] private TextMeshProUGUI text;
     [SerializeField] private Button nextButton;
     [SerializeField] private GameObject backpanel;
+    [SerializeField] private ScrollRect _scrollRect;
+    [SerializeField] private int TEXT_MAX_CARACTERE;
 
     private string[] introTxt=
     {
-        "coucou",
+        "cela prend place durant l'an 20erzrz ou les petut essaye d e prende de plus en plius de place les prochains jours pcq j et on saot trop bien que ce texte est trop logn pour le cadre et ouis voilà ce qui se passe quant ut revail",
         "viucezrzr"
     };
     
@@ -23,7 +25,8 @@ public class Introduction : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        text.SetText(introTxt[0]);
+        this.SetText(introTxt[0]);
+        _scrollRect.enabled = false;
         //background.transform.position = new Vector3(0, -700);
     }
     //.transform.position = new Vector3(0, 20, 0)
@@ -32,7 +35,7 @@ public class Introduction : MonoBehaviour
     public void StartIntroduction()
     {
         this.gameObject.SetActive(true);   
-        text.SetText(introTxt[0]);
+        this.SetText(introTxt[0]);
         
         
         nextButton.onClick.RemoveAllListeners();
@@ -59,9 +62,23 @@ public class Introduction : MonoBehaviour
         else
         {
             // on continue l'intro
-            text.SetText(introTxt[currentTxt]);
+            this.SetText(introTxt[currentTxt]);
         }
     }
-    
-    
+
+    private void SetText(string s)
+    {
+        if (s.Length >= TEXT_MAX_CARACTERE)
+        {
+            _scrollRect.enabled = true;
+        }
+        else
+        {
+            _scrollRect.enabled = false;
+        }
+
+        text.SetText(s);
+    }
+
+
 }

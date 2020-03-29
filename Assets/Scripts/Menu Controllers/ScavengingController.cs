@@ -67,23 +67,25 @@ public class ScavengingController : MonoBehaviour
      * itypeType: le type de ressources
      * scavengeTime: le temps minimum qu'il faut sortir pour trouuver cet item (en nbr d'heure)
      */
-    private (string link,int minLevel,Item.ItemClass itemType,double minTimeOut)[] scavengeItems = new[]
+    private (string link, int minLevel, Item.ItemClass itemType, double minTimeOut)[] scavengeItems = new[]
     {
         /*======CONSUMABLE=====*/
-        (link:"Items/Consumables/WaterBottle",minLevel:0,itemType:Item.ItemClass.Consumable,minTimeOut:0.0),
-        (link:"Items/Consumables/FoodCan",minLevel:0,itemType:Item.ItemClass.Consumable,minTimeOut:0.0),
-        (link:"Items/Consumables/Soda",minLevel:0,itemType:Item.ItemClass.Consumable,minTimeOut:0.0),
-       
-        
+        (link: "Items/Consumables/WaterBottle", minLevel: 0, itemType: Item.ItemClass.Consumable, minTimeOut: 0.0),
+        (link: "Items/Consumables/FoodCan", minLevel: 0, itemType: Item.ItemClass.Consumable, minTimeOut: 0.0),
+        (link: "Items/Consumables/Soda", minLevel: 0, itemType: Item.ItemClass.Consumable, minTimeOut: 0.0),
+        (link: "Items/Consumables/MilitaryRation", minLevel: 0, itemType: Item.ItemClass.Consumable, minTimeOut: 0.0),
+
+
         /*======GEAR=====*/
-        (link:"Items/Gear/Gun",minLevel:0,itemType:Item.ItemClass.Gear,minTimeOut:0.0),
-        
+        (link: "Items/Gear/Gun", minLevel: 0, itemType: Item.ItemClass.Gear, minTimeOut: 0.0),
+
         /*======RESOURCES=====*/
-        (link:"Items/Resources/Wood",minLevel:0,itemType:Item.ItemClass.Resource,minTimeOut:0.0),        
-        
+        (link: "Items/Resources/Wood", minLevel: 0, itemType: Item.ItemClass.Resource, minTimeOut: 0.0),
+        (link: "Items/Resources/Metalscrap", minLevel: 0, itemType: Item.ItemClass.Resource, minTimeOut: 0.0),
+
         /*======Junk=====*/
-        
-        (link:"Items/Junks/Grass",minLevel:0,itemType:Item.ItemClass.Junk,minTimeOut:0.0),     
+
+        (link: "Items/Junks/Grass", minLevel: 0, itemType: Item.ItemClass.Junk, minTimeOut: 0.0),
 
     };
 
@@ -178,7 +180,7 @@ public class ScavengingController : MonoBehaviour
                     {
                         int index = (int) (rand.NextDouble() * (possibleItem.Length) - 1); //index random parmis les objets possible
                         Gear element = Resources.Load<Gear>(possibleItem[index].link); //load l'item
-                        Debug.Log("Find" + element.name);//print
+                        //Debug.Log("Find" + element.name);//print
                         addItemFound(element);//add to inventory
                     }
                 }
@@ -190,11 +192,11 @@ public class ScavengingController : MonoBehaviour
                     {
                         int index = (int) (rand.NextDouble() * (possibleItem.Length - 1));
                         Consumable element = Resources.Load<Consumable>(possibleItem[index].link);
-                        Debug.Log("Find" + element.name);
+                        //Debug.Log("Find" + element.name);
                         addItemFound(element);
                     }
                 }
-                else if (chance > 0.20)/*========== RESSOURCES ===========*/
+                else if (chance > 0.15)/*========== RESSOURCES ===========*/
                 {
                     possibleItem= getMyLevelItems(scavengeItems, myLevel,Item.ItemClass.Resource,scavengeTime);
                     if (possibleItem != null&& possibleItem.Length>0)
@@ -202,7 +204,7 @@ public class ScavengingController : MonoBehaviour
                     {
                         int index = (int) (rand.NextDouble() * (possibleItem.Length - 1));
                         Resource element = Resources.Load<Resource>(possibleItem[index].link);
-                        Debug.Log("Find" + element.name);
+                        //Debug.Log("Find" + element.name);
                         addItemFound(element);
                     }
                 }else if (chance > 0) /*========== JUNK ===========*/
@@ -213,7 +215,7 @@ public class ScavengingController : MonoBehaviour
                     {
                         int index = (int) (rand.NextDouble() * (possibleItem.Length - 1));
                         Junk element = Resources.Load<Junk>(possibleItem[index].link);
-                        Debug.Log("Find" + element.name);
+                        //Debug.Log("Find" + element.name);
                         addItemFound(element);
                     }
                 }
@@ -237,7 +239,7 @@ public class ScavengingController : MonoBehaviour
                 {
                     //=========    BITTEN    =========
                     scavengeLog.Add("You were bitten by a zombie (-20)");//ADD log/message
-                    player.UpdateHealth(-20);//update heamth
+                    player.UpdateHealth(-10);//update heamth
                 }
             }
                
@@ -252,9 +254,9 @@ public class ScavengingController : MonoBehaviour
 
         //========== MODIFY STATUS BAR =================
 
-        player.UpdateEnergy(-2 * nbTimeSlice);
+        player.UpdateEnergy(-1 * nbTimeSlice);
         player.UpdateHunger(-2 * nbTimeSlice);
-        player.UpdateThirst(-3 * nbTimeSlice);
+        player.UpdateThirst(-2 * nbTimeSlice);
         
         //===============================================
 

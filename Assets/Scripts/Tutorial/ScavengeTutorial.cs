@@ -12,27 +12,15 @@ public class ScavengeTutorial : TutorialStep
     public GameObject slider;
     
     
-    public override void startTutorial()
+    public override void StartTutorial()
     {
-        nextDialog = TutorialController.TUTORIAL_CONTROLER.GetDialogButton();
-        dialogText = TutorialController.TUTORIAL_CONTROLER.GetDialog();
-        
-        nextDialog.onClick.RemoveAllListeners();
-        nextDialog.onClick.AddListener(NextStep);
+        base.StartTutorial();
         TutorialController.TUTORIAL_CONTROLER.GetBunkerCotnroller().ScavengeButtonClicked();
         
-        //first Step
-        hasBeenStarted = true;
         currentStep = -1;
         NextStep();
-        
-        this.gameObject.SetActive(true);
     }
-
-    public override bool hasBeenStart()
-    {
-        return hasBeenStarted;
-    }
+    
 
 
     public override void NextStep()
@@ -42,17 +30,17 @@ public class ScavengeTutorial : TutorialStep
         {
             case 0:
                 slider.SetActive(true);
-                dialogText.SetText("The slider let you choose how long you will be out of the bunker.");
+                this.SetText("The slider let you choose how long you will be out of the bunker.");
                 break;
             case 1:
                 slider.SetActive(false);
-                dialogText.SetText("The longer you're out, the more good items you'll find.");
+                this.SetText("The longer you're out, the more good items you'll find.");
                 break;
             case 2:
-                dialogText.SetText("However, the longer you go out, the more dangerous it gets");
+                this.SetText("However, the longer you go out, the more dangerous it gets");
                 break;
             case 3:
-                dialogText.SetText("Gears can protect you from certain dangers.");
+                this.SetText("Gears can protect you from certain dangers.");
                 break;
             default:
                 StopTutorial();
@@ -60,11 +48,8 @@ public class ScavengeTutorial : TutorialStep
         }
     }
 
-    private void StopTutorial()
+    protected override void StopTutorial()
     {
-        TutorialController.TUTORIAL_CONTROLER.GetBunkerCotnroller().GoToBunker();
-        this.gameObject.SetActive(false);
-        TutorialController.TUTORIAL_CURRENT_STEP++;
-        TutorialController.TUTORIAL_CONTROLER.backPanel.SetActive(true);
+        base.StopTutorial();
     }
 }

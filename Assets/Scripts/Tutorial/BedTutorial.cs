@@ -12,31 +12,18 @@ public class BedTutorial : TutorialStep
     public GameObject bedSlider;
     
     
-    public override void startTutorial()
+    public override void StartTutorial()
     {
+        base.StartTutorial();
         bedSlider.SetActive(false);
         
-        nextDialog = TutorialController.TUTORIAL_CONTROLER.GetDialogButton();
-        dialogText = TutorialController.TUTORIAL_CONTROLER.GetDialog();
-        
-        nextDialog.onClick.RemoveAllListeners();
-        nextDialog.onClick.AddListener(NextStep);
         TutorialController.TUTORIAL_CONTROLER.GetBunkerCotnroller().SleepButtonClicked();
-        //TutorialController.TUTORIAL_CONTROLER.backPanel.GetComponent<Image>().enabled = false;
         
-        
-        //first step
-        hasBeenStarted = true;
         currentStep = -1;
         NextStep();
-        
-        this.gameObject.SetActive(true);
+
     }
 
-    public override bool hasBeenStart()
-    {
-        return hasBeenStarted;
-    }
 
 
     public override void NextStep()
@@ -45,11 +32,11 @@ public class BedTutorial : TutorialStep
         switch (currentStep)
         {
             case 0:
-                dialogText.SetText("The bed allows you to recuperate energy");
+                this.SetText("The bed allows you to recuperate energy");
                 break;
             case 1:
                 bedSlider.SetActive(true);
-                dialogText.SetText("You choose the time you sleep with the slider, the more you sleep, the more energy you get back, but during this time you may be thirsty and/or hungry.");
+                this.SetText("You choose the time you sleep with the slider, the more you sleep, the more energy you get back, but during this time you may be thirsty and/or hungry.");
                 break;
             default:
                 StopTutorial();
@@ -57,11 +44,8 @@ public class BedTutorial : TutorialStep
         }
     }
 
-    private void StopTutorial()
+    protected override void StopTutorial()
     {
-        TutorialController.TUTORIAL_CONTROLER.GetBunkerCotnroller().GoToBunker();
-        this.gameObject.SetActive(false);
-        TutorialController.TUTORIAL_CURRENT_STEP++;
-        TutorialController.TUTORIAL_CONTROLER.backPanel.SetActive(true);
+        base.StopTutorial();
     }
 }
