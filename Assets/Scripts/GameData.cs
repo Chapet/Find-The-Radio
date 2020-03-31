@@ -9,7 +9,7 @@ public class GameData
     public int thirst;
     public int energy;
 
-    public List<string> test = new List<string>(new string[] { "test1", "test2" });
+    public float gameClock;
 
     [SerializeField] public List<string> equippedGear = new List<string>();
 
@@ -24,6 +24,8 @@ public class GameData
         hunger = p.currentStats[(int)StatType.Hunger];
         thirst = p.currentStats[(int)StatType.Thirst];
         energy = p.currentStats[(int)StatType.Energy];
+
+        gameClock = t;
 
         foreach (Gear g in p.Equipment)
         {
