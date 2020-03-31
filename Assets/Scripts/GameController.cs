@@ -19,7 +19,14 @@ public class GameController : MonoBehaviour
     public GameObject transitionPanel;
     public Animator transitionAnim;
     public GameData loaded;
-    public static bool saveLoaded = false;
+    public static bool NewGame { get; set; }
+
+    //public static GameController GController { get; private set; }
+
+    private void Awake()
+    {
+        //GController = this;
+    }
 
     // Start is called before the first frame update
     void Start() {
@@ -27,10 +34,23 @@ public class GameController : MonoBehaviour
         BunkerPanel.SetActive(true);
         transitionPanel.SetActive(true);
         StartCoroutine(TransitionAnim());
-        LoadSave();
+        if (NewGame)
+        {
+            ErasePreviousSave();
+        }
+        else
+        {
+            LoadGame();
+        }
     }
 
-    private void LoadSave()
+    private void ErasePreviousSave()
+    {
+        Debug.Log("NewGame");
+        Save();
+    }
+
+    private void LoadGame()
     {
         GameData data = SaveSystem.Load();
         if (data != null)
@@ -40,6 +60,8 @@ public class GameController : MonoBehaviour
             PlayerController.Player.currentStats[(int)StatType.Hunger] = data.hunger;
             PlayerController.Player.currentStats[(int)StatType.Thirst] = data.thirst;
             PlayerController.Player.currentStats[(int)StatType.Energy] = data.energy;
+
+            UpdateGameClock(data.gameClock);
 
             foreach (string s in data.equippedGear)
             {
@@ -83,7 +105,7 @@ public class GameController : MonoBehaviour
                 }
             }
             Debug.Log("Save loaded!");
-            saveLoaded = true;
+            NewGame = false;
         }
     }
 
@@ -91,10 +113,7 @@ public class GameController : MonoBehaviour
     {
         transitionAnim.SetTrigger("in");
         yield return new WaitForSeconds(0.5f);
-    }
-
-    // Update is called once per frame
-    
+    }    
 
     public void UpdateGameClock(float inc) {
         gameClock = (gameClock + inc) % 24f;
@@ -103,9 +122,21 @@ public class GameController : MonoBehaviour
         clock.SetText("Clock : " + hours.ToString("0") + "h" + minutes.ToString("0"));
     }
 
-    void OnApplicationQuit()
+    void OnApplicationPause(bool isPaused)
     {
-        Debug.Log("Application ending after " + Time.time + " seconds");
+        if (isPaused)
+        {
+            Save();
+        }
+    }
+
+    private void OnApplicationQuit()
+    {
+        Save();
+    }
+
+    private void Save()
+    {
         GameData data = new GameData(PlayerController.Player, InventoryManager.Inventory, gameClock);
         SaveSystem.Save(data);
     }
