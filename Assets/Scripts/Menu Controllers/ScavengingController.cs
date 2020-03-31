@@ -238,13 +238,12 @@ public class ScavengingController : MonoBehaviour
                 else if (chance > 0.80)
                 {
                     //=========    BITTEN    =========
-                    scavengeLog.Add("You were bitten by a zombie (-20)");//ADD log/message
+                    scavengeLog.Add("You were bitten by a zombie (-10)");//ADD log/message
                     player.UpdateHealth(-10);//update heamth
                 }
             }
                
         } //le principe est la, il faut balance et ajouter les items à l'inventaire
-        
         
         
         
