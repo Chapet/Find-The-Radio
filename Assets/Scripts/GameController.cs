@@ -20,6 +20,7 @@ public class GameController : MonoBehaviour
     public Animator transitionAnim;
     public GameData loaded;
     public static bool saveLoaded = false;
+    [SerializeField] private Introduction _introduction;
 
     // Start is called before the first frame update
     void Start() {
@@ -28,6 +29,10 @@ public class GameController : MonoBehaviour
         transitionPanel.SetActive(true);
         StartCoroutine(TransitionAnim());
         LoadSave();
+        if (PlayerController.IS_FIRST_GAME)
+        {
+            _introduction.StartIntroduction();
+        }
     }
 
     private void LoadSave()
@@ -35,6 +40,7 @@ public class GameController : MonoBehaviour
         GameData data = SaveSystem.Load();
         if (data != null)
         {
+            PlayerController.IS_FIRST_GAME = data.is_firstGame;
             loaded = data;
             PlayerController.Player.currentStats[(int)StatType.Health] = data.health;
             PlayerController.Player.currentStats[(int)StatType.Hunger] = data.hunger;
