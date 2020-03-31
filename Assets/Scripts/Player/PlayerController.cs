@@ -139,6 +139,7 @@ public class PlayerController : MonoBehaviour
     {
         if (currentStats[(int) StatType.Health] < 1)
         {
+            GameController.ResetGame();
             SceneManager.LoadScene(0);
         }
     }

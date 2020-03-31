@@ -32,7 +32,8 @@ public class GameController : MonoBehaviour
         StartCoroutine(TransitionAnim());
         if (NewGame)
         {
-            ErasePreviousSave();
+            GameController.ResetGame();
+            CleanSave();
         }
         else
         {
@@ -45,13 +46,13 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void ErasePreviousSave()
+    private void CleanSave()
     {
         Debug.Log("NewGame");
         Save();
     }
 
-    public void ResetGame()
+    public static void ResetGame()
     {
         DirectoryInfo save_dir = new DirectoryInfo(Application.persistentDataPath + SaveSystem.path);
         save_dir.Delete(true);
