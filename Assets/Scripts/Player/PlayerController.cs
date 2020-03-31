@@ -24,12 +24,10 @@ public class PlayerController : MonoBehaviour
 
     public int maxCarryingSize = 4;
 
+    public Sprite[] clock_num = new Sprite[10];
+
     public StatusBarController statusBarController;
 
-    //[SerializeField] private Gear headGear = null;
-    //[SerializeField] private Gear chestGear = null;
-    //[SerializeField] private Gear legsGear = null;
-    //[SerializeField] private Gear weapon = null;
     [SerializeField] private Gear[] equipment;
     public Gear[] Equipment {get {return equipment; }}
 

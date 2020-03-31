@@ -14,19 +14,14 @@ public class GameController : MonoBehaviour
     [Range(0f, 24f)]
     public float gameClock = 8f;
 
-    public TMP_Text clock;
+    //public TMP_Text clock;
     public GameObject BunkerPanel;
     public GameObject transitionPanel;
     public Animator transitionAnim;
     public GameData loaded;
     public static bool NewGame { get; set; }
 
-    //public static GameController GController { get; private set; }
-
-    private void Awake()
-    {
-        //GController = this;
-    }
+    public ClockController clock; 
 
     // Start is called before the first frame update
     void Start() {
@@ -119,7 +114,8 @@ public class GameController : MonoBehaviour
         gameClock = (gameClock + inc) % 24f;
         double hours = Mathf.Floor(gameClock);
         double minutes = Mathf.Abs(Mathf.Ceil((gameClock - Mathf.Ceil(gameClock)) * 60));
-        clock.SetText("Clock : " + hours.ToString("0") + "h" + minutes.ToString("0"));
+        clock.UpdateClock((int) hours, (int) minutes);
+        //clock.SetText("Clock : " + hours.ToString("0") + "h" + minutes.ToString("0"));
     }
 
     void OnApplicationPause(bool isPaused)
