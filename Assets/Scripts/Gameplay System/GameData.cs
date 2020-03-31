@@ -17,6 +17,7 @@ public class GameData
     [SerializeField] public List<string> equipment = new List<string>();
     [SerializeField] public List<string> resources = new List<string>();
     [SerializeField] public List<string> junks = new List<string>();
+    [SerializeField] public bool is_firstGame;
 
     public GameData(PlayerController p, InventoryManager i, float t)
     {
@@ -24,6 +25,7 @@ public class GameData
         hunger = p.currentStats[(int)StatType.Hunger];
         thirst = p.currentStats[(int)StatType.Thirst];
         energy = p.currentStats[(int)StatType.Energy];
+        is_firstGame = PlayerController.IS_FIRST_GAME;
 
         gameClock = t;
 

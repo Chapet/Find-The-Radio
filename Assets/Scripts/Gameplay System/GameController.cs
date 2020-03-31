@@ -19,6 +19,7 @@ public class GameController : MonoBehaviour
     public GameObject transitionPanel;
     public Animator transitionAnim;
     public GameData loaded;
+    [SerializeField] private Introduction _introduction;
     public static bool NewGame { get; set; }
 
     public ClockController clock; 
@@ -37,6 +38,11 @@ public class GameController : MonoBehaviour
         {
             LoadGame();
         }
+
+        if (PlayerController.IS_FIRST_GAME)
+        {
+            _introduction.StartIntroduction();
+        }
     }
 
     private void ErasePreviousSave()
@@ -50,6 +56,7 @@ public class GameController : MonoBehaviour
         GameData data = SaveSystem.Load();
         if (data != null)
         {
+            PlayerController.IS_FIRST_GAME = data.is_firstGame;
             loaded = data;
             PlayerController.Player.currentStats[(int)StatType.Health] = data.health;
             PlayerController.Player.currentStats[(int)StatType.Hunger] = data.hunger;

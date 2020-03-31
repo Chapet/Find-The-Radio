@@ -82,6 +82,7 @@ public class TutorialController : MonoBehaviour
             {
                 //=============    END OF TUTORIAL    ==============
                 backPanel.SetActive(false);
+                PlayerController.IS_FIRST_GAME = false;
                 this.gameObject.SetActive(false);
             }
             

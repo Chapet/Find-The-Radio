@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     public StatusBarController statusBarController;
 
     [SerializeField] private Gear[] equipment;
+    public static bool IS_FIRST_GAME = true;
     public Gear[] Equipment {get {return equipment; }}
 
     // Start is called before the first frame update
