@@ -2898,14 +2898,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 141059281}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1528dfe539014967a247e85beabb37e, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f6a8cf47db5e42ea97514133bb74d58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   textColor:
     serializedVersion: 2
-    rgba: 4290836735
-  heightRatio: 0.05
-  targetFramerate: 64
+    rgba: 4294967295
+  heightRatio: 0.03
 --- !u!1 &151123298
 GameObject:
   m_ObjectHideFlags: 0
@@ -5350,6 +5349,8 @@ MonoBehaviour:
     equipment: []
     resources: []
     junks: []
+    is_firstGame: 0
+  _introduction: {fileID: 0}
   clock: {fileID: 1103367990}
 --- !u!4 &383633853
 Transform:

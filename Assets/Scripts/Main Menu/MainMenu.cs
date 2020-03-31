@@ -1,21 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 public class MainMenu : MonoBehaviour
 {
-    public void NewGame()
-    {
-        GameController.NewGame = true;
-        Debug.Log("New game selected");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
+    public MenuController menuController;
+    public GameObject optionsMenu;
 
-    public void Continue() 
+    public void OptionsBtnClicked()
     {
-        GameController.NewGame = false;
-        Debug.Log("Continue selected");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        menuController.OpenMenu(optionsMenu);
     }
 }

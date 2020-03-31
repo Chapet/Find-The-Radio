@@ -7,9 +7,14 @@ public class FramerateController : MonoBehaviour
 	[Range(0.01f, 0.10f)] public float heightRatio = 0.03f;
 	//public int width = 1920;
 	//public int height = 1080;
-	[Range(32, 128)] public int targetFramerate = 90;
+	private int targetFramerate;
 
-	void Update()
+    private void Start()
+    {
+		targetFramerate = GameController.framerate;
+    }
+
+    void Update()
 	{
 		Application.targetFrameRate = targetFramerate;
 		deltaTime += (Time.unscaledDeltaTime - deltaTime) * 0.1f;

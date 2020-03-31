@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+using System.IO;
 
 
 public class GameController : MonoBehaviour
@@ -14,7 +13,8 @@ public class GameController : MonoBehaviour
     [Range(0f, 24f)]
     public float gameClock = 8f;
 
-    //public TMP_Text clock;
+    public static int framerate = 60;
+
     public GameObject BunkerPanel;
     public GameObject transitionPanel;
     public Animator transitionAnim;
@@ -49,6 +49,12 @@ public class GameController : MonoBehaviour
     {
         Debug.Log("NewGame");
         Save();
+    }
+
+    public void ResetGame()
+    {
+        DirectoryInfo save_dir = new DirectoryInfo(Application.persistentDataPath + SaveSystem.path);
+        save_dir.Delete(true);
     }
 
     private void LoadGame()
