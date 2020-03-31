@@ -80,8 +80,8 @@ public class InventoryController : MonoBehaviour
 
     public void Show(List<Item> items)
     {
-        slotsHandler.Show(items);
         scrollView.SetActive(true);
+        slotsHandler.Show(items);
         StartCoroutine(DoFade(0, 1));
     }
 

@@ -14,6 +14,7 @@ public class MenuController : MonoBehaviour
         var canvGroup = panel.GetComponent<CanvasGroup>();
         openCloseMenuAnimator = panel.GetComponent<Animator>();
         StartCoroutine(DoFade(canvGroup, 1, 0));
+        StartCoroutine(BackPanel());
         StartCoroutine(ExitWithAnim(panel, animDuration));
     }
 
@@ -23,19 +24,15 @@ public class MenuController : MonoBehaviour
         openCloseMenuAnimator = panel.GetComponent<Animator>();
         panel.SetActive(true);
         StartCoroutine(DoFade(canvGroup, 0, 1));
+        StartCoroutine(BackPanel());
         StartCoroutine(OpenWithAnim(animDuration));
-        /*
-        openCloseMenuAnimator.SetBool("close", false);
-        openCloseMenuAnimator.SetBool("open", true);
-        backPanel.SetActive(true);
-        */
     }
 
     private IEnumerator OpenWithAnim(float f)
     {
         openCloseMenuAnimator.SetBool("close", false);
         openCloseMenuAnimator.SetBool("open", true);
-        backPanel.SetActive(true);
+        
         yield return new WaitForSeconds(f);
     }
 
@@ -43,7 +40,6 @@ public class MenuController : MonoBehaviour
     {
         openCloseMenuAnimator.SetBool("open", false);
         openCloseMenuAnimator.SetBool("close", true);
-        backPanel.SetActive(false);
         yield return new WaitForSeconds(f);
         openCloseMenuAnimator.SetBool("close", false);
         panel.SetActive(false);
@@ -60,5 +56,13 @@ public class MenuController : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    private bool backPanelActive = false;
+    private IEnumerator BackPanel()
+    {
+        backPanelActive = !backPanelActive;
+        backPanel.SetActive(backPanelActive);
+        yield return null;
     }
 }

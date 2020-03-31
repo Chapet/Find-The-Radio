@@ -17,6 +17,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4173da99b221045528767045747ece4d, type: 2}
   - {fileID: 11400000, guid: f4eaed167bd2440478490f5ce4f0b2c8, type: 2}
   name: Greaves
+  filename: Greaves
   image: {fileID: 21300000, guid: d9e0fefb84ab941598640860872a3412, type: 3}
   itemID: 24
   description: Iron Greaves from Minecraft

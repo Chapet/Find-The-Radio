@@ -14,9 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recipe: []
   name: Bottle of Water
+  filename: WaterBottle
   image: {fileID: 21300000, guid: 30a2419434ae74f73b974af8835e08d1, type: 3}
   itemID: 13
   description: Just a bottle of water !
+  maskColor:
+    serializedVersion: 2
+    rgba: 4294967295
   types: 02000000
   thirstValue: 50
   hungerValue: 0

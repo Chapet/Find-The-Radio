@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     //[SerializeField] private Gear legsGear = null;
     //[SerializeField] private Gear weapon = null;
     [SerializeField] private Gear[] equipment;
+    public Gear[] Equipment {get {return equipment; }}
 
     // Start is called before the first frame update
     void Awake()

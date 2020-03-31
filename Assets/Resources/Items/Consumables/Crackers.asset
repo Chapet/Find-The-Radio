@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recipe: []
   name: Crackers
+  filename: Crackers
   image: {fileID: 21300000, guid: 22cdb2dae264e3646a0619ab6993482b, type: 3}
   itemID: 15
   description: Salty crackers :p

@@ -15,8 +15,8 @@ public class SceneTransitions : MonoBehaviour
 
     IEnumerator LoadScene()
     {
-        transitionAnim.SetTrigger("launch");
-        yield return new WaitForSeconds(0.5f);
+        transitionAnim.SetTrigger("out");
+        yield return new WaitForSeconds(0.3f);
         SceneManager.LoadScene(sceneName);
     }
 }
