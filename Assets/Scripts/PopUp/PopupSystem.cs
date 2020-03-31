@@ -11,7 +11,7 @@ public class PopupSystem : MonoBehaviour
     public GameObject popPanel;
     public GameObject backPanel;
     public PlayerController player;
-    public enum Popup {Bite, Death};
+    public enum Popup {Bite, Death, DeathEvent};
 
     public void PopMessage(Popup popup) 
     {
@@ -26,9 +26,13 @@ public class PopupSystem : MonoBehaviour
                 //update player effect: biten/bleeding
                 okButton.gameObject.SetActive(true);
                 break;
-            case Popup.Death:
+            case Popup.DeathEvent:
                 textPopupMsg.text = "   You were assaulted by a crowd of zombies, you didn't make it";
                 player.UpdateHealth(-100);
+                okButton.gameObject.SetActive(true);
+                break;
+            case Popup.Death:
+                textPopupMsg.text = "   You were unable to survive in this harsh world. Your story ends here.";
                 okButton.gameObject.SetActive(true);
                 break;
         }
