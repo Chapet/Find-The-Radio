@@ -10,6 +10,15 @@ public class SceneTransitions : MonoBehaviour
 
     public void NewGame()
     {
+        GameController.NewGame = true;
+        Debug.Log("New game selected");
+        StartCoroutine(LoadScene());
+    }
+
+    public void ContinueGame()
+    {
+        GameController.NewGame = false;
+        Debug.Log("Continue selected");
         StartCoroutine(LoadScene());
     }
 
