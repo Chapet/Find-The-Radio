@@ -11,14 +11,15 @@ public class ClockController : MonoBehaviour
     public Image tenMinutes;
     public Image unitMinutes;
 
-    void Start()
-    {
-        Debug.Log(digits.Digits);
-        digits.Digits = new Sprite[] { digits.zero, digits.one, digits.two, digits.three, digits.four, digits.five, digits.six, digits.seven, digits.eight, digits.nine };
-    }
+    private bool init = false;
 
     public void UpdateClock(int hours, int minutes)
     {
+        if (!init)
+        {
+            digits.Digits = new Sprite[] { digits.zero, digits.one, digits.two, digits.three, digits.four, digits.five, digits.six, digits.seven, digits.eight, digits.nine };
+            init = true;
+        }
         int ten_hours = hours / 10;
         int unit_hours = hours % 10;
 
