@@ -374,7 +374,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 15131955}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 163737564737f237362796074737f276, type: 3}
+  m_Script: {fileID: 11500000, guid: 0dbaea08942000000972fa0894200000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   managedByController: 1
@@ -937,7 +937,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 51055825}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 163737564737f237362796074737f276, type: 3}
+  m_Script: {fileID: 11500000, guid: 0dbaea08942000000972fa0894200000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   managedByController: 1
@@ -5855,11 +5855,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 390090308}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 163737564737f237362796074737f276, type: 3}
+  m_Script: {fileID: 11500000, guid: 0dbaea08942000000972fa0894200000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   managedByController: 1
-  animated: 0
+  animated: 1
 --- !u!114 &390090311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6641,10 +6641,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 410393433}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 163737564737f237362796074737f276, type: 3}
+  m_Script: {fileID: 11500000, guid: 0dbaea08942000000972fa0894200000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  managedByController: 0
+  managedByController: 1
   animated: 1
 --- !u!114 &410393438
 MonoBehaviour:
@@ -7541,10 +7541,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 443784781}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 163737564737f237362796074737f276, type: 3}
+  m_Script: {fileID: 11500000, guid: 0dbaea08942000000972fa0894200000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  managedByController: 0
+  managedByController: 1
   animated: 1
 --- !u!114 &443784786
 MonoBehaviour:
@@ -11691,11 +11691,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 720375826}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 163737564737f237362796074737f276, type: 3}
+  m_Script: {fileID: 11500000, guid: 0dbaea08942000000972fa0894200000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   managedByController: 1
-  animated: 0
+  animated: 1
 --- !u!114 &720375829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13060,7 +13060,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 794078825}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 163737564737f237362796074737f276, type: 3}
+  m_Script: {fileID: 11500000, guid: 0dbaea08942000000972fa0894200000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   managedByController: 1
@@ -16271,6 +16271,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 42576250}
         m_MethodName: ExitBtnClicked
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 435538307}
+        m_MethodName: Death
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -20356,10 +20367,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1259979629}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 163737564737f237362796074737f276, type: 3}
+  m_Script: {fileID: 11500000, guid: 0dbaea08942000000972fa0894200000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  managedByController: 0
+  managedByController: 1
   animated: 1
 --- !u!114 &1259979634
 MonoBehaviour:
@@ -22010,11 +22021,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1373642665}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 163737564737f237362796074737f276, type: 3}
+  m_Script: {fileID: 11500000, guid: 0dbaea08942000000972fa0894200000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   managedByController: 1
-  animated: 0
+  animated: 1
 --- !u!114 &1373642667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27110,7 +27121,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1668488500}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 163737564737f237362796074737f276, type: 3}
+  m_Script: {fileID: 11500000, guid: 0dbaea08942000000972fa0894200000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   managedByController: 1
@@ -31991,6 +32002,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 435538307}
+        m_MethodName: Death
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1954938119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32604,10 +32626,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2026095891}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 163737564737f237362796074737f276, type: 3}
+  m_Script: {fileID: 11500000, guid: 0dbaea08942000000972fa0894200000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  managedByController: 0
+  managedByController: 1
   animated: 1
 --- !u!114 &2026095896
 MonoBehaviour:
@@ -33881,11 +33903,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2075723820}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 163737564737f237362796074737f276, type: 3}
+  m_Script: {fileID: 11500000, guid: 0dbaea08942000000972fa0894200000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   managedByController: 1
-  animated: 0
+  animated: 1
 --- !u!114 &2075723823
 MonoBehaviour:
   m_ObjectHideFlags: 0

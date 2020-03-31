@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 //[CreateAssetMenu(fileName = "New inventory", menuName = "MyAsset/Player")]
 public enum StatType
@@ -132,5 +133,13 @@ public class PlayerController : MonoBehaviour
     public void UpdateEnergy(int inc)
     {
         UpdateStat(inc, StatType.Energy);
+    }
+
+    public void Death()
+    {
+        if (currentStats[(int) StatType.Health] < 1)
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 }
