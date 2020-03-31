@@ -43,6 +43,11 @@ public class GameController : MonoBehaviour
         {
             LoadGame();
         }
+
+        if (PlayerController.IS_FIRST_GAME)
+        {
+            _introduction.StartIntroduction();
+        }
     }
 
     private void ErasePreviousSave()

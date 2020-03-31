@@ -304,8 +304,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a8cf800ea200000039cf800ea200000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  managedByController: 1
-  animated: 1
 --- !u!114 &15131960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -867,8 +865,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a8cf800ea200000039cf800ea200000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  managedByController: 1
-  animated: 1
 --- !u!114 &51055830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2602,7 +2598,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &116112950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5697,8 +5693,8 @@ MonoBehaviour:
   gameClock: 0
   clock: {fileID: 1732601649}
   BunkerPanel: {fileID: 1276335970}
-  transitionPanel: {fileID: 0}
-  transitionAnim: {fileID: 0}
+  transitionPanel: {fileID: 6341079}
+  transitionAnim: {fileID: 6341081}
   loaded:
     health: 0
     hunger: 0
@@ -5711,7 +5707,7 @@ MonoBehaviour:
     resources: []
     junks: []
     is_firstGame: 0
-  _introduction: {fileID: 0}
+  _introduction: {fileID: 1436346967}
 --- !u!4 &383633853
 Transform:
   m_ObjectHideFlags: 0
@@ -5850,8 +5846,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a8cf800ea200000039cf800ea200000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  managedByController: 1
-  animated: 1
 --- !u!114 &390090311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6636,8 +6630,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a8cf800ea200000039cf800ea200000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  managedByController: 0
-  animated: 1
 --- !u!114 &410393438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7525,8 +7517,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a8cf800ea200000039cf800ea200000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  managedByController: 0
-  animated: 1
 --- !u!114 &443784786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9500,10 +9490,10 @@ RectTransform:
   m_Father: {fileID: 214473504}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.002533, y: 6.5}
-  m_SizeDelta: {x: 1887.9, y: 1140.4}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -50.2, y: -27.400024}
+  m_SizeDelta: {x: 994.3, y: 802.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &582174085
 MonoBehaviour:
@@ -10845,8 +10835,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: -0.000030517578}
+  m_AnchoredPosition: {x: -50.2, y: -27.400024}
+  m_SizeDelta: {x: 994.3, y: 802.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &656130509
 MonoBehaviour:
@@ -12025,8 +12015,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a8cf800ea200000039cf800ea200000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  managedByController: 1
-  animated: 1
 --- !u!114 &720375829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13511,8 +13499,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a8cf800ea200000039cf800ea200000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  managedByController: 1
-  animated: 1
 --- !u!114 &794078830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20034,8 +20020,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a8cf800ea200000039cf800ea200000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  managedByController: 0
-  animated: 1
 --- !u!114 &1259979634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20353,13 +20337,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39f7f3539a73e454e8da65f776fcda06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenText: {fileID: 131118286}
-  maxResolutionWidthScale: 1
-  maxResolutionHeightScale: 1
-  minResolutionWidthScale: 0.5
-  minResolutionHeightScale: 0.5
-  scaleWidthIncrement: 0.1
-  scaleHeightIncrement: 0.1
 --- !u!1001 &1284649411
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21569,8 +21546,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a8cf800ea200000039cf800ea200000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  managedByController: 1
-  animated: 1
 --- !u!114 &1373642667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23387,8 +23362,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0.000030517578, y: 0.000030517578}
+  m_AnchoredPosition: {x: -50.2, y: -27.400024}
+  m_SizeDelta: {x: 994.3, y: 802.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1475881617
 MonoBehaviour:
@@ -24529,8 +24504,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0.000030517578, y: 0}
+  m_AnchoredPosition: {x: -50.2, y: -27.400024}
+  m_SizeDelta: {x: 994.3, y: 802.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1528528771
 MonoBehaviour:
@@ -26513,8 +26488,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a8cf800ea200000039cf800ea200000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  managedByController: 1
-  animated: 1
 --- !u!114 &1668488505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27888,8 +27861,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -0.000030517578, y: -0.000030517578}
+  m_AnchoredPosition: {x: -50.2, y: -27.400024}
+  m_SizeDelta: {x: 994.3, y: 802.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1759688494
 MonoBehaviour:
@@ -32072,8 +32045,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a8cf800ea200000039cf800ea200000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  managedByController: 0
-  animated: 1
 --- !u!114 &2026095896
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33349,8 +33320,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a8cf800ea200000039cf800ea200000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  managedByController: 1
-  animated: 1
 --- !u!114 &2075723823
 MonoBehaviour:
   m_ObjectHideFlags: 0
