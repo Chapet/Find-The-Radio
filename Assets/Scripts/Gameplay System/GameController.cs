@@ -28,11 +28,10 @@ public class GameController : MonoBehaviour
     void Start() {
         UpdateGameClock(gameClock);
         BunkerPanel.SetActive(true);
-        transitionPanel.SetActive(true);
-        StartCoroutine(TransitionAnim());
+        MenuController.Transition(transitionPanel, transitionAnim);
         if (NewGame)
         {
-            GameController.ResetGame();
+            ResetGame();
             CleanSave();
         }
         else
@@ -118,18 +117,19 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private IEnumerator TransitionAnim()
-    {
-        transitionAnim.SetTrigger("in");
-        yield return new WaitForSeconds(0.5f);
-    }    
-
     public void UpdateGameClock(float inc) {
         gameClock = (gameClock + inc) % 24f;
         double hours = Mathf.Floor(gameClock);
         double minutes = Mathf.Abs(Mathf.Ceil((gameClock - Mathf.Ceil(gameClock)) * 60));
         clock.UpdateClock((int) hours, (int) minutes);
         //clock.SetText("Clock : " + hours.ToString("0") + "h" + minutes.ToString("0"));
+    }
+
+    public void GoToMainMenu()
+    {
+        Debug.Log("Going to the main menu ...");
+        Save();
+        MenuController.Transition(transitionPanel, transitionAnim, "MainMenuScene");
     }
 
     void OnApplicationPause(bool isPaused)

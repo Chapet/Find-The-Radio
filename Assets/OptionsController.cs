@@ -27,6 +27,24 @@ public class OptionsController : MonoBehaviour
         m_Toggle_90.onValueChanged.AddListener(delegate {
             ToggleSelected(m_Toggle_90, 90);
         });
+        switch (GameController.framerate)
+        {
+            case 30:
+                m_Toggle_30.isOn = true;
+                break;
+            case 45:
+                m_Toggle_45.isOn = true;
+                break;
+            case 60:
+                m_Toggle_60.isOn = true;
+                break;
+            case 90:
+                m_Toggle_90.isOn = true;
+                break;
+            default:
+                m_Toggle_60.isOn = true;
+                break;
+        }
     }
 
     public void ExitBtnClicked()
@@ -40,6 +58,7 @@ public class OptionsController : MonoBehaviour
         {
             Debug.Log("New value : " + fps + " FPS");
             GameController.framerate = fps;
+            Application.targetFrameRate = fps;
         }
         else
         {

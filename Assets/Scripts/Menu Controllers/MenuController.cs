@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
@@ -8,6 +10,12 @@ public class MenuController : MonoBehaviour
     public GameObject backPanel;
     private Animator openCloseMenuAnimator;
     private float animDuration = 10f / 60f;
+    private static MenuController instance;
+
+    void Awake()
+    {
+        instance = this;
+    }
 
     public void ExitMenu(GameObject panel)
     {
@@ -64,5 +72,52 @@ public class MenuController : MonoBehaviour
         backPanelActive = !backPanelActive;
         backPanel.SetActive(backPanelActive);
         yield return null;
+    }
+
+    public static void Transition(GameObject transitionPanel, Animator anim)
+    {
+        instance.StartCoroutine(CoroutineAnim(transitionPanel, anim, null));       
+    }
+
+    public static void Transition(GameObject transitionPanel, Animator anim, string sceneName)
+    {
+        instance.StartCoroutine(CoroutineAnim(transitionPanel, anim, sceneName));
+    }
+
+    private static IEnumerator CoroutineAnim(GameObject transitionPanel, Animator anim, string sceneName)
+    {
+        transitionPanel.SetActive(true);
+        float st = 0.02f;
+        float lg = 0.18f;
+        if (sceneName == null)
+        {
+            var tmp_color = transitionPanel.GetComponent<Image>().color;
+            tmp_color.a = 1f;
+            transitionPanel.GetComponent<Image>().color = tmp_color;
+
+            yield return new WaitForSeconds(st);
+            anim.SetTrigger("toTransparent");
+            yield return new WaitForSeconds(lg);
+
+            tmp_color = transitionPanel.GetComponent<Image>().color;
+            tmp_color.a = 1f;
+            transitionPanel.GetComponent<Image>().color = tmp_color;
+        }
+        else
+        {
+            var tmp_color = transitionPanel.GetComponent<Image>().color;
+            tmp_color.a = 0f;
+            transitionPanel.GetComponent<Image>().color = tmp_color;
+
+            anim.SetTrigger("toOpaque");
+            yield return new WaitForSeconds(lg);
+            SceneManager.LoadScene(sceneName);
+            yield return new WaitForSeconds(st);
+
+            tmp_color = transitionPanel.GetComponent<Image>().color;
+            tmp_color.a = 0f;
+            transitionPanel.GetComponent<Image>().color = tmp_color;
+        }
+        transitionPanel.SetActive(false);
     }
 }
