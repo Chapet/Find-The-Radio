@@ -53,8 +53,17 @@ public class GameController : MonoBehaviour
 
     public static void ResetGame()
     {
-        DirectoryInfo save_dir = new DirectoryInfo(Application.persistentDataPath + SaveSystem.path);
-        save_dir.Delete(true);
+        //DirectoryInfo save_dir = new DirectoryInfo(SaveSystem.path);
+        //save_dir.Delete(true);
+        if(File.Exists(SaveSystem.path))
+        {
+            File.Delete(SaveSystem.path);
+            Debug.Log("Previous save deleted");
+        }
+        else
+        {
+            Debug.Log("No previous to delete");
+        }
     }
 
     private void LoadGame()

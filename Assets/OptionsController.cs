@@ -65,4 +65,9 @@ public class OptionsController : MonoBehaviour
             Debug.Log("Old value : " + fps + " FPS");
         }
     }
+
+    public void ResetBtnClicked()
+    {
+        GameController.ResetGame();
+    }
 }
