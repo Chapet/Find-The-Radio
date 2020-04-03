@@ -32,7 +32,8 @@ public class GameController : MonoBehaviour
         if (NewGame)
         {
             ResetGame();
-            CleanSave();
+            CleanSave();;
+            PlayerController.IS_FIRST_GAME=true;
         }
         else
         {
