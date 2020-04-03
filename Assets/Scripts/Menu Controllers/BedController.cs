@@ -21,8 +21,8 @@ public class BedController : MonoBehaviour
     void Update()
     {
         sleepTime = (Slider.GetComponent<Slider>().value) / 2;
-        String hours = Math.Truncate(sleepTime).ToString("0");
-        String minutes = Math.Truncate((sleepTime - Math.Truncate(sleepTime)) * 60).ToString("0");
+        String hours = Math.Truncate(sleepTime).ToString("00");
+        String minutes = Math.Truncate((sleepTime - Math.Truncate(sleepTime)) * 60).ToString("00");
         sleepText.SetText("Sleep for : " + hours + "h" + minutes);
     }
 
