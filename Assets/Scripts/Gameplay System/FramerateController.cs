@@ -17,7 +17,7 @@ public class FramerateController : MonoBehaviour
     void Update()
 	{
 		Application.targetFrameRate = targetFramerate;
-		deltaTime += (Time.unscaledDeltaTime - deltaTime) * 0.1f;
+		deltaTime += (Time.deltaTime - deltaTime) * 0.1f;
 		//Screen.SetResolution(width, height, true, targetFramerate);
 	}
 

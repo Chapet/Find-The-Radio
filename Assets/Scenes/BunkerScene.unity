@@ -5625,6 +5625,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameClock: 0
+  autoSaveTiming: 30
+  timePrevSave: 0
   BunkerPanel: {fileID: 1276335970}
   transitionPanel: {fileID: 6341079}
   transitionAnim: {fileID: 6341081}

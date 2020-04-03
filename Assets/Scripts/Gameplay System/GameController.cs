@@ -15,6 +15,9 @@ public class GameController : MonoBehaviour
 
     public static int framerate = 60;
 
+    public float autoSaveTiming = 30f;
+    private float timePrevSave = 0f;
+
     public GameObject BunkerPanel;
     public GameObject transitionPanel;
     public Animator transitionAnim;
@@ -43,12 +46,23 @@ public class GameController : MonoBehaviour
         {
             _introduction.StartIntroduction();
         }
+        timePrevSave = 0f;
     }
 
     private void CleanSave()
     {
         Debug.Log("NewGame");
         Save();
+    }
+
+    private void FixedUpdate()
+    {
+        if(timePrevSave >= autoSaveTiming - Time.fixedDeltaTime)
+        {
+            Save();
+            Debug.Log("Autosave ...");
+        }
+        timePrevSave = (timePrevSave + Time.fixedDeltaTime) % autoSaveTiming;
     }
 
     public static void ResetGame()

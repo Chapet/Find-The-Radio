@@ -180,7 +180,7 @@ public class ScavengingController : MonoBehaviour
                     {
                         int index = (int) (rand.NextDouble() * (possibleItem.Length) - 1); //index random parmis les objets possible
                         Gear element = Resources.Load<Gear>(possibleItem[index].link); //load l'item
-                        //Debug.Log("Find" + element.name);//print
+                        //Debug.Log("Gear ID : " + element.GetInstanceID());//print
                         addItemFound(element);//add to inventory
                     }
                 }
