@@ -55,24 +55,24 @@ public class InventoryTutorial : TutorialStep
                 break;
             case 2:
                 //tab food&gear
-                InventoryController.tabController.TabBtnListener(TabController.Tab.FoodAndDrink);
+                InventoryController.tabController.TabSwitcher(TabController.Tab.FoodAndDrink);
                 food.SetActive(true);
                 this.SetText("The food and drink tab lists the items that affect your hunger and thirst.");
                 break;
             case 3:
-                InventoryController.tabController.TabBtnListener(TabController.Tab.Meds);
+                InventoryController.tabController.TabSwitcher(TabController.Tab.Meds);
                 food.SetActive(false);
                 med.SetActive(true);
                 this.SetText("The med tab takes the items that are used to recover from life");
                 break;
             case 4:
-                InventoryController.tabController.TabBtnListener(TabController.Tab.Gear);
+                InventoryController.tabController.TabSwitcher(TabController.Tab.Gear);
                 med.SetActive(false);
                 gear.SetActive(true);
                 this.SetText("The gear tab lists the items you can wear that will help you when you get out of the bunker.");
                 break;
             case 5:
-                InventoryController.tabController.TabBtnListener(TabController.Tab.Misc);
+                InventoryController.tabController.TabSwitcher(TabController.Tab.Misc);
                 gear.SetActive(false);
                 trash.SetActive(true);
                 this.SetText("This tab contains all the other items you might need to craft.");
@@ -86,7 +86,7 @@ public class InventoryTutorial : TutorialStep
     protected override void StopTutorial()
     {
 
-        InventoryController.tabController.TabBtnListener(TabController.Tab.FoodAndDrink);
+        InventoryController.tabController.TabSwitcher(TabController.Tab.FoodAndDrink);
         base.StopTutorial();
     }
 }

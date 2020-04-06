@@ -29,10 +29,10 @@ public class StatusBarController : MonoBehaviour
         foreach (StatusBar s in bars[(int)type])
         {
             s.SetValue(player.currentStats[(int)type]);
-            Debug.Log(s + " set to " + player.currentStats[(int)type]);
+            //Debug.Log(s + " set to " + player.currentStats[(int)type]);
         }
 
-        Debug.Log("Updating status bars of type "+type);
+        //Debug.Log("Updating status bars of type "+type);
     }
 
     public void AddStatusBar(StatusBar s)

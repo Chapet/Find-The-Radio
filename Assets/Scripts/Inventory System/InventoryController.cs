@@ -68,11 +68,6 @@ public class InventoryController : MonoBehaviour
         playerController = PlayerController.Player;
     }
 
-    void OnEnable()
-    {
-        StartCoroutine(StartOnTabAfterWait(15));
-    }
-
     public void AddEquipmentSlot(EquipmentSlot es)
     {
         equipment[(int) es.slotType] = es;
@@ -134,10 +129,11 @@ public class InventoryController : MonoBehaviour
             Item selectedItem = curr.GetItem();
             Consumable cons = selectedItem as Consumable;
 
-            playerController.UpdateEnergy(cons.GetEnergy());
-            playerController.UpdateHealth(cons.GetHealth());
-            playerController.UpdateHunger(cons.GetHunger());
-            playerController.UpdateThirst(cons.GetThirst());
+            //playerController.UpdateEnergy(cons.GetEnergy());
+            //playerController.UpdateHealth(cons.GetHealth());
+            //playerController.UpdateHunger(cons.GetHunger());
+            //playerController.UpdateThirst(cons.GetThirst());
+            BackgroundTasks.BgTasks.Use(cons);
 
             inventory.RemoveItem(selectedItem);
             slotsHandler.DeleteCurrentSlot();
@@ -330,6 +326,7 @@ public class InventoryController : MonoBehaviour
 
     public void ExitBtnClicked()
     {
+        tabController.CloseTabs();
         menuController.ExitMenu(gameObject);
     }
 
@@ -355,13 +352,6 @@ public class InventoryController : MonoBehaviour
         {
             return 0;
         }           
-    }
-
-    IEnumerator StartOnTabAfterWait(int msec)
-    {
-        Debug.Log("Wait for " + msec + " millisecond(s)");
-        yield return new WaitForSeconds((float)msec / 1000f);
-        tabController.TabBtnListener(TabController.Tab.FoodAndDrink);
     }
 
     private void RefreshEquipmentSlots()

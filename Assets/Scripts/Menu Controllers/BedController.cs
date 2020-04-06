@@ -6,7 +6,7 @@ using TMPro;
 
 public class BedController : MonoBehaviour
 {
-    public GameController gameController;
+    private GameController gameController;
     public PlayerController player;
     //public GameObject BunkerPanel;
     //public GameObject backPanel;
@@ -17,6 +17,11 @@ public class BedController : MonoBehaviour
     private float sleepTime;
 
     public MenuController menuController;
+
+    private void Start()
+    {
+        gameController = GameController.Controller;
+    }
 
     void Update()
     {
@@ -44,8 +49,9 @@ public class BedController : MonoBehaviour
 
     void Sleep()
     {
-        gameController.UpdateGameClock(sleepTime);
-        // 1 energy point per 9.6 mintues <=> 6.25 energy points per hour <=> 100 energy point per 16 hours
-        player.UpdateEnergy(Mathf.FloorToInt((Mathf.Floor(sleepTime) + Mathf.Floor((sleepTime - Mathf.Floor(sleepTime)))) * 60f / 9.6f));
+        //StopCoroutine(gameController.Sleep(sleepTime));
+        BackgroundTasks.BgTasks.Sleep(sleepTime);
     }
+
+    
 }

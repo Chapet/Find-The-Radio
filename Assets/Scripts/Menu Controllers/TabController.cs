@@ -15,48 +15,46 @@ public class TabController : MonoBehaviour
     public GameObject contentPanel;
     public GameObject scrollView;
 
-    public Button foodDrinkTab;
-    public Button gearTab;
-    public Button medsTab;
-    public Button miscTab;
+    public Toggle foodDrinkTog;
+    public Toggle gearTog;
+    public Toggle medsTog;
+    public Toggle miscTog;
+
+    private Toggle[] togs;
 
     private TMP_Text foodDrinkTabText;
     private TMP_Text gearTabText;
     private TMP_Text medsTabText;
     private TMP_Text ressourcesTabText;
 
-    //private Vector2 unselectedAnchors;
-    //private Vector2 selectedAnchors;// = new Vector2(215f, 5f);
-    
-
     public float fadeDuration = 0.3f;
 
     public Color brightColor;
     public Color darkColor;
 
-    Tab whichTabIsActive = Tab.None;
 
     private void Awake()
     {
-        foodDrinkTab.GetComponent<Image>().color = darkColor;
-        gearTab.GetComponent<Image>().color = darkColor;
-        medsTab.GetComponent<Image>().color = darkColor;
-        miscTab.GetComponent<Image>().color = darkColor;
 
-        foodDrinkTab.onClick.AddListener(delegate { TabBtnListener(Tab.FoodAndDrink); });
-        gearTab.onClick.AddListener(delegate { TabBtnListener(Tab.Gear); });
-        medsTab.onClick.AddListener(delegate { TabBtnListener(Tab.Meds); });
-        miscTab.onClick.AddListener(delegate { TabBtnListener(Tab.Misc); });
+        togs = new Toggle[] { null, foodDrinkTog, gearTog, medsTog, miscTog };
 
-        foodDrinkTabText = foodDrinkTab.transform.GetChild(0).gameObject.GetComponent<TMP_Text>();
-        gearTabText = gearTab.transform.GetChild(0).gameObject.GetComponent<TMP_Text>();
-        medsTabText = medsTab.transform.GetChild(0).gameObject.GetComponent<TMP_Text>();
-        ressourcesTabText = miscTab.transform.GetChild(0).gameObject.GetComponent<TMP_Text>();
+        foodDrinkTog.GetComponent<Image>().color = darkColor;
+        gearTog.GetComponent<Image>().color = darkColor;
+        medsTog.GetComponent<Image>().color = darkColor;
+        miscTog.GetComponent<Image>().color = darkColor;
+
+        foodDrinkTog.onValueChanged.AddListener(delegate { TabSwitcher(Tab.FoodAndDrink); });
+        gearTog.onValueChanged.AddListener(delegate { TabSwitcher(Tab.Gear); });
+        medsTog.onValueChanged.AddListener(delegate { TabSwitcher(Tab.Meds); });
+        miscTog.onValueChanged.AddListener(delegate { TabSwitcher(Tab.Misc); });
+
+        foodDrinkTabText = foodDrinkTog.transform.GetChild(0).gameObject.GetComponent<TMP_Text>();
+        gearTabText = gearTog.transform.GetChild(0).gameObject.GetComponent<TMP_Text>();
+        medsTabText = medsTog.transform.GetChild(0).gameObject.GetComponent<TMP_Text>();
+        ressourcesTabText = miscTog.transform.GetChild(0).gameObject.GetComponent<TMP_Text>();
 
         contentPanel.GetComponent<Image>().color = darkColor;
 
-        //unselectedAnchors = foodDrinkTab.GetComponent<RectTransform>().sizeDelta;
-        //selectedAnchors = new Vector2(-0.5f * unselectedAnchors.x, unselectedAnchors.y);
     }
 
     private void Start()
@@ -64,89 +62,65 @@ public class TabController : MonoBehaviour
         inventory = InventoryManager.Inventory;
     }
 
-    public void TabBtnListener(Tab which)
+    private void OnEnable()
     {
-        Debug.Log(whichTabIsActive);
-        Debug.Log(which);
+        StartCoroutine(DelayedStartTab(5f));
+    }
 
-        if (which != whichTabIsActive)
+    private IEnumerator DelayedStartTab(float delay)
+    {
+        yield return new WaitForSeconds(delay / 1000f);
+        TabSwitcher(Tab.FoodAndDrink, foodDrinkTog);
+    }
+
+    public void TabSwitcher(Tab which, Toggle tog = null)
+    {
+        if (tog == null)
         {
-            if(whichTabIsActive != Tab.None)
-            {
-                Debug.Log("Disabling current tab ...");
-
-                if (contentPanel.GetComponent<Image>().color == brightColor)
-                {
-                    StartCoroutine(ColorFade(brightColor, darkColor, fadeDuration / 3f, contentPanel.GetComponent<Image>()));
-                }
-
-                foreach (Transform child in headerPanel.transform)
-                {
-                    GameObject btn = child.gameObject;
-                    Image img = btn.GetComponent<Image>();
-                    if (img.color == brightColor)
-                    {
-                        StartCoroutine(ColorFade(brightColor, darkColor, 0.1f, img));
-                        btn.GetComponent<RectTransform>().offsetMax += new Vector2(-20, 0);
-                        if (btn.name == foodDrinkTab.name)
-                        {
-                            Debug.Log(1);
-                            btn.GetComponent<RectTransform>().offsetMin += new Vector2(5, 5);
-                        }
-                        else
-                        {
-                            Debug.Log(2);
-                            btn.GetComponent<RectTransform>().offsetMin += new Vector2(5, 5);
-                            btn.GetComponent<RectTransform>().offsetMax += new Vector2(0, -5);
-                        }
-                        //btn.GetComponent<RectTransform>().sizeDelta = unselectedAnchors;
-                    }
-                }
-                inventoryController.Clear();
-            }
+            tog = togs[(int)which];
+        }
+        if (tog.isOn)// && tabActive != which)
+        {
             List<Item> list = new List<Item>();
             switch (which)
             {
                 case Tab.FoodAndDrink:
-                    Debug.Log("Food & Drink Tab");
-                    StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, foodDrinkTab.GetComponent<Image>()));
+                    StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, tog.GetComponent<Image>()));
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, contentPanel.GetComponent<Image>()));
-                    //foodDrinkTab.GetComponent<RectTransform>().sizeDelta = selectedAnchors;
-                    foodDrinkTab.GetComponent<RectTransform>().offsetMax += new Vector2(20, 0);
-                    foodDrinkTab.GetComponent<RectTransform>().offsetMin += new Vector2(-5, -5);
+
+                    tog.GetComponent<RectTransform>().offsetMax += new Vector2(20, 0);
+                    tog.GetComponent<RectTransform>().offsetMin += new Vector2(-5, -5);
+
                     //Getting food AND drinks
                     list = inventory.GetItems(Consumable.ItemType.Food, Consumable.ItemType.Drink);
                     break;
                 case Tab.Gear:
-                    Debug.Log("Gear Tab");
-                    StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, gearTab.GetComponent<Image>()));
+                    StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, tog.GetComponent<Image>()));
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, contentPanel.GetComponent<Image>()));
-                    //gearTab.GetComponent<RectTransform>().sizeDelta = selectedAnchors;
-                    gearTab.GetComponent<RectTransform>().offsetMax += new Vector2(20, 5);
-                    gearTab.GetComponent<RectTransform>().offsetMin += new Vector2(-5, -5);
+
+                    tog.GetComponent<RectTransform>().offsetMax += new Vector2(20, 5);
+                    tog.GetComponent<RectTransform>().offsetMin += new Vector2(-5, -5);
 
                     //Getting all gears    
                     list = inventory.GetItems(typeof(Gear));
 
                     break;
                 case Tab.Meds:
-                    Debug.Log("Meds Tab");
-                    StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, medsTab.GetComponent<Image>()));
+                    StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, tog.GetComponent<Image>()));
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, contentPanel.GetComponent<Image>()));
-                    //medsTab.GetComponent<RectTransform>().sizeDelta = selectedAnchors;
-                    medsTab.GetComponent<RectTransform>().offsetMax += new Vector2(20, 5);
-                    medsTab.GetComponent<RectTransform>().offsetMin += new Vector2(-5, -5);
+
+                    tog.GetComponent<RectTransform>().offsetMax += new Vector2(20, 5);
+                    tog.GetComponent<RectTransform>().offsetMin += new Vector2(-5, -5);
 
                     list = inventory.GetItems(Consumable.ItemType.Meds);
 
                     break;
                 case Tab.Misc:
-                    Debug.Log("Misc. Tab");
-                    StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, miscTab.GetComponent<Image>()));
+                    StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, tog.GetComponent<Image>()));
                     StartCoroutine(ColorFade(darkColor, brightColor, fadeDuration, contentPanel.GetComponent<Image>()));
-                    //miscTab.GetComponent<RectTransform>().sizeDelta = selectedAnchors;
-                    miscTab.GetComponent<RectTransform>().offsetMax += new Vector2(20, 5);
-                    miscTab.GetComponent<RectTransform>().offsetMin += new Vector2(-5, -5);
+
+                    tog.GetComponent<RectTransform>().offsetMax += new Vector2(20, 5);
+                    tog.GetComponent<RectTransform>().offsetMin += new Vector2(-5, -5);
 
                     list = inventory.GetItems(typeof(Resource), typeof(Junk));
 
@@ -156,18 +130,51 @@ public class TabController : MonoBehaviour
                     break;
             }
 
-            if (which == Tab.Gear) inventoryController.GearTabSelected();
-            else inventoryController.StandardTabSelected();
+            
+            if (which == Tab.Gear)
+            {
+                inventoryController.GearTabSelected();
+            }
+            else
+            {
+                inventoryController.StandardTabSelected();
+            }
 
-            whichTabIsActive = which;
+            inventoryController.Clear();
             inventoryController.Show(list);
+        }
+        else if(!tog.isOn)
+        {
+            if (contentPanel.GetComponent<Image>().color == brightColor)
+            {
+                StartCoroutine(ColorFade(brightColor, darkColor, fadeDuration / 3f, contentPanel.GetComponent<Image>()));
+            }
+
+            foreach (Transform child in headerPanel.transform)
+            {
+                GameObject toggle = child.gameObject;
+                Image img = toggle.GetComponent<Image>();
+                if (img.color == brightColor)
+                {
+                    StartCoroutine(ColorFade(brightColor, darkColor, 0.1f, img));
+                    toggle.GetComponent<RectTransform>().offsetMax += new Vector2(-20, 0);
+                    if (toggle.name == foodDrinkTog.name)
+                    {
+                        toggle.GetComponent<RectTransform>().offsetMin += new Vector2(5, 5);
+                    }
+                    else
+                    {
+                        toggle.GetComponent<RectTransform>().offsetMin += new Vector2(5, 5);
+                        toggle.GetComponent<RectTransform>().offsetMax += new Vector2(0, -5);
+                    }
+                }
+            }
+            inventoryController.Clear();
         }
         else
         {
-            Debug.Log("Already in the right tab :-)");
+            Debug.Log("OK");
         }
-
-        
     }
 
     public void CloseTabs()
@@ -175,17 +182,26 @@ public class TabController : MonoBehaviour
         inventoryController.Clear();
         for (int i = 0; i < 4; i++)
         {
-            GameObject btn = headerPanel.transform.GetChild(i).gameObject;
-            Image img = btn.GetComponent<Image>();
+            GameObject toggle = headerPanel.transform.GetChild(i).gameObject;
+            Image img = toggle.GetComponent<Image>();
             if (img.color == brightColor)
             {
                 StartCoroutine(ColorFade(brightColor, darkColor, 0.001f, img));
-                //btn.GetComponent<RectTransform>().sizeDelta = unselectedAnchors;
-                btn.GetComponent<RectTransform>().offsetMax += new Vector2(-20, 0);
+                toggle.GetComponent<RectTransform>().offsetMax += new Vector2(-20, 0);
+                if (toggle.name == foodDrinkTog.name)
+                {
+                    Debug.Log("OK1");
+                    toggle.GetComponent<RectTransform>().offsetMin += new Vector2(5, 5);
+                }
+                else
+                {
+                    Debug.Log("OK2");
+                    toggle.GetComponent<RectTransform>().offsetMin += new Vector2(5, 5);
+                    toggle.GetComponent<RectTransform>().offsetMax += new Vector2(0, -5);
+                }
             }
         }
         StartCoroutine(ColorFade(brightColor, darkColor, 0.001f, contentPanel.GetComponent<Image>()));
-        whichTabIsActive = Tab.None;
     }
 
     private IEnumerator ColorFade(Color start, Color end, float duration, Image btnImage)

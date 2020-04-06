@@ -301,6 +301,6 @@ public class InventoryManager : MonoBehaviour
 
         }
         //inventory.Add(item);
-        Debug.Log(item + " has been added to the inventory");
+        //Debug.Log(item + " has been added to the inventory");
     }
 }

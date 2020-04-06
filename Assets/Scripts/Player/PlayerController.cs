@@ -135,6 +135,26 @@ public class PlayerController : MonoBehaviour
         UpdateStat(inc, StatType.Energy);
     }
 
+    public int GetHealth()
+    {
+        return this.currentStats[(int)StatType.Health];
+    }
+
+    public int GetHunger()
+    {
+        return this.currentStats[(int)StatType.Hunger];
+    }
+
+    public int GetThirst()
+    {
+        return this.currentStats[(int)StatType.Thirst];
+    }
+
+    public int GetEnergy()
+    {
+        return this.currentStats[(int)StatType.Energy];
+    }
+
     public void Death()
     {
         if (currentStats[(int) StatType.Health] < 1)
