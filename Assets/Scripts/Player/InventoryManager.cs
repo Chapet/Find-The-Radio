@@ -303,4 +303,76 @@ public class InventoryManager : MonoBehaviour
         //inventory.Add(item);
         //Debug.Log(item + " has been added to the inventory");
     }
+
+    /**
+     * return the first item with the same name
+     * return null if there is no such item with the same name
+     * 
+     */
+    public Item GetItem(string itemName,Item.ItemClass itemClass)
+    {
+        if (itemClass == Item.ItemClass.Consumable)
+        {
+            foreach (Item item in consumables)
+            {
+                if (item.name.Equals(itemName))
+                    return item;
+            } 
+        }
+        else if (itemClass == Item.ItemClass.Gear)
+        {
+            foreach (Item item in equipment)
+            {
+                if (item.name.Equals(itemName))
+                    return item;
+            } 
+        }
+        else if (itemClass == Item.ItemClass.Junk)
+        {
+            foreach (Item item in junks)
+            {
+                if (item.name.Equals(itemName))
+                    return item;
+            } 
+        }
+        else if (itemClass == Item.ItemClass.Resource)
+        {
+            foreach (Item item in resources)
+            {
+                if (item.name.Equals(itemName))
+                    return item;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * return null if there is no such item with that name
+     */
+    public Item GetItem(string itemName)
+    {
+        Item item;
+        item = GetItem(itemName, Item.ItemClass.Consumable);
+        if (item != null)
+            return item;
+        item = GetItem(itemName, Item.ItemClass.Gear);
+        if (item != null)
+            return item;
+        item = GetItem(itemName, Item.ItemClass.Junk);
+        if (item != null)
+            return item;
+        item = GetItem(itemName, Item.ItemClass.Resource);
+        return item;
+    }
+
+    public bool Contain(string itemName)
+    {
+        return GetItem(itemName) != null;
+    }
+
+    public bool Contain(string itemName, Item.ItemClass itemClass)
+    {
+        return GetItem(itemName, itemClass) != null;
+    }
+
 }

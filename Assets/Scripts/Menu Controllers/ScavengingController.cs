@@ -60,6 +60,57 @@ public class ScavengingController : MonoBehaviour
     }
 
     
+    /**
+     * Check if we are going to use the gun (depend of probability) and modify inventory of gun if it's use
+     * @Pre: probabilité have to be between 0 and 1
+     *
+     * if we don't have a gun, return false
+     */
+    private bool MayUseGun(double probability)
+    {
+        if (probability > 1 || probability < 0)
+        {
+            Debug.Log("probability of gun usage have to be between 0 and 1");
+            return false;
+        }
+
+        if (!inventory.Contain("Gun"))
+        {
+            return false;
+        }
+        
+        double chance=new System.Random().NextDouble();
+        
+        if (chance <= probability)
+        {
+            //TODO:dommage
+            return true;
+        }
+
+        return false;
+    }
+
+    private bool MyUseArmor(double probability)
+    {
+        Item armorPiece;
+        double proba=new System.Random().NextDouble();
+        
+        if (inventory.Equipment.Count == 0||proba>probability)
+        {
+            return false;
+        }
+
+        
+        
+        if(armorPiece=inventory.GetItem("Chestplate",Item.ItemClass.Gear)){
+               //TODO:DOMMAGE
+        }
+
+        return true;
+
+    }
+
+
     /*========================= ALL ITEM SCAVENGE =================================*/
     /**
      * link: lien vers l'item
@@ -125,10 +176,25 @@ public class ScavengingController : MonoBehaviour
      * Rajoute les items trouvé dans l'inventaire et dans la liste des items trouvés qui sera ensuite transmis
      * à la popUp pour visualisé les résultats
      */
-    private void addItemFound(Item item)
+    private void addItemFound(Item item,Item.ItemClass itemClass)
     {
         itemsFound.Add(item);
-        inventory.AddItem(item);
+        if (itemClass == Item.ItemClass.Consumable)
+        {
+            inventory.AddItem(Instantiate(item as Consumable));
+        }
+        else if (itemClass == Item.ItemClass.Gear)
+        {
+            inventory.AddItem(Instantiate(item as Gear));            
+        }
+        else if (itemClass == Item.ItemClass.Junk)
+        {
+            inventory.AddItem(Instantiate(item as Junk));
+        }
+        else if (itemClass == Item.ItemClass.Resource)
+        {
+            inventory.AddItem(Instantiate(item as Resource));
+        }
     }
 
     void Scavenge()
@@ -180,8 +246,8 @@ public class ScavengingController : MonoBehaviour
                     {
                         int index = (int) (rand.NextDouble() * (possibleItem.Length) - 1); //index random parmis les objets possible
                         Gear element = Resources.Load<Gear>(possibleItem[index].link); //load l'item
-                        //Debug.Log("Gear ID : " + element.GetInstanceID());//print
-                        addItemFound(element);//add to inventory
+                        //Debug.Log("Find" + element.name);//print
+                        addItemFound(element,Item.ItemClass.Gear);//add to inventory
                     }
                 }
                 else if (chance > 0.45)/*========== Consumable ===========*/
@@ -193,7 +259,7 @@ public class ScavengingController : MonoBehaviour
                         int index = (int) (rand.NextDouble() * (possibleItem.Length - 1));
                         Consumable element = Resources.Load<Consumable>(possibleItem[index].link);
                         //Debug.Log("Find" + element.name);
-                        addItemFound(element);
+                        addItemFound(element,Item.ItemClass.Consumable);
                     }
                 }
                 else if (chance > 0.15)/*========== RESSOURCES ===========*/
@@ -205,7 +271,7 @@ public class ScavengingController : MonoBehaviour
                         int index = (int) (rand.NextDouble() * (possibleItem.Length - 1));
                         Resource element = Resources.Load<Resource>(possibleItem[index].link);
                         //Debug.Log("Find" + element.name);
-                        addItemFound(element);
+                        addItemFound(element,Item.ItemClass.Resource);
                     }
                 }else if (chance > 0) /*========== JUNK ===========*/
                 {
@@ -216,7 +282,7 @@ public class ScavengingController : MonoBehaviour
                         int index = (int) (rand.NextDouble() * (possibleItem.Length - 1));
                         Junk element = Resources.Load<Junk>(possibleItem[index].link);
                         //Debug.Log("Find" + element.name);
-                        addItemFound(element);
+                        addItemFound(element,Item.ItemClass.Junk);
                     }
                 }
                 
@@ -227,19 +293,22 @@ public class ScavengingController : MonoBehaviour
                 Debug.Log("Start senario");
                 hadSenario = true;
             }
-            
-            
-
-            /*====================    MEET MONSTRER, BE BITTEN, DEAD, LOST ITEMS,...    ====================================== */
-            if (!ev)
+            else if (!ev) /*======    MEET MONSTRER, BE BITTEN, DEAD, LOST ITEMS,...    ====== */
             {
                 chance = rand.NextDouble();
                 if (chance > 0.999) pop.PopMessage(PopupSystem.Popup.Death);
                 else if (chance > 0.80)
                 {
                     //=========    BITTEN    =========
-                    scavengeLog.Add("You were bitten by a zombie (-10)");//ADD log/message
-                    player.UpdateHealth(-10);//update heamth
+                    if (MayUseGun(0.8));
+                    else if (MyUseArmor(0.8)) ;
+                    else
+                    {
+                        scavengeLog.Add("You were bitten by a zombie (-10)"); //ADD log/message
+                        player.UpdateHealth(-10); //update heamth    
+                    }
+
+
                 }
             }
                
@@ -252,7 +321,6 @@ public class ScavengingController : MonoBehaviour
 
 
         //========== MODIFY STATUS BAR =================
-
         player.UpdateEnergy(-1 * nbTimeSlice);
         player.UpdateHunger(-2 * nbTimeSlice);
         player.UpdateThirst(-2 * nbTimeSlice);
