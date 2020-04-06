@@ -19216,7 +19216,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryController: {fileID: 2098586216}
-  headerPanel: {fileID: 730577863}
+  tabsPanel: {fileID: 730577863}
   contentPanel: {fileID: 302552443}
   scrollView: {fileID: 1498914968}
   foodDrinkTog: {fileID: 1521666242}
