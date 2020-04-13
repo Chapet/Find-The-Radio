@@ -33,7 +33,7 @@ public class GameController : MonoBehaviour
         {
             ResetGame();
             CleanSave();;
-            PlayerController.IS_FIRST_GAME=true;
+            PlayerController.IS_FIRST_GAME = true;
         }
         else
         {
