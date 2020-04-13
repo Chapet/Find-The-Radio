@@ -42,8 +42,8 @@ public class ScavengingController : MonoBehaviour
     void Update()
     {
         scavengeTime = (Slider.GetComponent<Slider>().value) / 2;
-        String hours = Math.Truncate(scavengeTime).ToString("0");
-        String minutes = Math.Truncate((scavengeTime - Math.Truncate(scavengeTime)) * 60).ToString("0");
+        String hours = Math.Truncate(scavengeTime).ToString("00");
+        String minutes = Math.Truncate((scavengeTime - Math.Truncate(scavengeTime)) * 60).ToString("00");
         scavengeText.SetText("Scavenge for : " + hours + "h" + minutes);
     }
 

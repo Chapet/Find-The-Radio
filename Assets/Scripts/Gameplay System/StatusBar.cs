@@ -32,7 +32,7 @@ public class StatusBar : MonoBehaviour
     {
         if (initialized && managedByController)
         {
-            slider.value = PlayerController.Player.currentStats[(int) Type];
+            slider.value = PlayerController.Player.currentStats[(int)Type];
             newValue = PlayerController.Player.currentStats[(int)Type];
         }
     }

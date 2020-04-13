@@ -14,6 +14,10 @@ public class GameController : MonoBehaviour
     public float gameClock = 8f;
 
     public static int framerate = 60;
+    public static GameController Controller { get; private set; }
+
+    public float autoSaveTiming = 30f;
+    private float timePrevSave = 0f;
 
     public GameObject BunkerPanel;
     public GameObject transitionPanel;
@@ -22,7 +26,12 @@ public class GameController : MonoBehaviour
     [SerializeField] private Introduction _introduction;
     public static bool NewGame { get; set; }
 
-    public ClockController clock; 
+    public ClockController clock;
+
+    private void Awake()
+    {
+        Controller = this;
+    }
 
     // Start is called before the first frame update
     void Start() {
@@ -44,12 +53,23 @@ public class GameController : MonoBehaviour
         {
             _introduction.StartIntroduction();
         }
+        timePrevSave = 0f;
     }
 
     private void CleanSave()
     {
         Debug.Log("NewGame");
         Save();
+    }
+
+    private void FixedUpdate()
+    {
+        if(timePrevSave >= autoSaveTiming - Time.fixedDeltaTime)
+        {
+            Save();
+            Debug.Log("Autosave ...");
+        }
+        timePrevSave = (timePrevSave + Time.fixedDeltaTime) % autoSaveTiming;
     }
 
     public static void ResetGame()

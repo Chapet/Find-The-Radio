@@ -16,8 +16,16 @@ public class Introduction : MonoBehaviour
 
     private string[] introTxt=
     {
-        "cela prend place durant l'an 20erzrz ou les petut essaye d e prende de plus en plius de place les prochains jours pcq j et on saot trop bien que ce texte est trop logn pour le cadre et ouis voilà ce qui se passe quant ut revail",
-        "viucezrzr"
+        "The year is 2020, a virus causes a global pandemic, bringing humanity to its knees.",
+        "The global healthcare system is unable to follow, the virus spreads and mutates at an abnormal speed.",
+        "People infected by the virus begin to change, showing signs of dementia and aggressive behaviors.",
+        "Before measures can be taken, all the infected turn into zombies.",
+        "The governments fall one after the others, as the virus spreads to every corner of the world.",
+        "A short time after, only a few people, immuned to the virus, were able to survive.",
+        "You are one of those survivors.",
+        "All by yourself, you desperatly search for other survivors and a safe shelter.",
+        "Finding radio parts and assembling them to commmunicate is your last hope.",
+        "Good Luck."
     };
     
     [SerializeField] private TutorialController _tutorialController;
