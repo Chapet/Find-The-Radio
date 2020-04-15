@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 using System.IO;
-
+using Assets.SimpleAndroidNotifications;
 
 public class GameController : MonoBehaviour
 {
@@ -35,13 +36,15 @@ public class GameController : MonoBehaviour
 
     // Start is called before the first frame update
     void Start() {
-        UpdateGameClock(gameClock);
         BunkerPanel.SetActive(true);
         MenuController.Transition(transitionPanel, transitionAnim);
+        NotificationManager.CancelAll();
+
         if (NewGame)
         {
             ResetGame();
-            CleanSave();;
+            UpdateGameClock(8f);
+            CleanSave();
             PlayerController.IS_FIRST_GAME=true;
         }
         else
@@ -58,7 +61,6 @@ public class GameController : MonoBehaviour
 
     private void CleanSave()
     {
-        Debug.Log("NewGame");
         Save();
     }
 
@@ -149,10 +151,10 @@ public class GameController : MonoBehaviour
 
     public void UpdateGameClock(float inc) {
         gameClock = (gameClock + inc) % 24f;
-        double hours = Mathf.Floor(gameClock);
-        double minutes = Mathf.Abs(Mathf.Ceil((gameClock - Mathf.Ceil(gameClock)) * 60));
-        clock.UpdateClock((int) hours, (int) minutes);
-        //clock.SetText("Clock : " + hours.ToString("0") + "h" + minutes.ToString("0"));
+        int hours = (int) Mathf.Floor(gameClock);
+        int minutes = (int) Mathf.Round((gameClock - hours) * 60f);
+        Debug.Log("Clock : " + gameClock + " = " + hours.ToString("00") + "h" + minutes.ToString("00"));
+        clock.UpdateClock(hours, minutes);
     }
 
     public void GoToMainMenu()
@@ -167,17 +169,31 @@ public class GameController : MonoBehaviour
         if (isPaused)
         {
             Save();
+            StartNotificationsProcess();
+        }
+        else
+        {
+            NotificationManager.CancelAll();
         }
     }
 
     private void OnApplicationQuit()
     {
         Save();
+        StartNotificationsProcess();
     }
 
     private void Save()
     {
         GameData data = new GameData(PlayerController.Player, InventoryManager.Inventory, gameClock);
         SaveSystem.Save(data);
+    }
+
+    private void StartNotificationsProcess()
+    {
+        if (BackgroundTasks.Tasks.IsScavenging)
+        {
+            NotificationManager.SendWithAppIcon(TimeSpan.FromSeconds(10), "Scavenging finished !", "Your survivor has returned from the harsh wasteland ...", new Color32(82, 60, 78, 255), NotificationIcon.Event);
+        }
     }
 }

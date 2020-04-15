@@ -50,7 +50,7 @@ public class BedController : MonoBehaviour
     void Sleep()
     {
         //StopCoroutine(gameController.Sleep(sleepTime));
-        BackgroundTasks.BgTasks.Sleep(sleepTime);
+        BackgroundTasks.Tasks.Sleep(sleepTime);
     }
 
     

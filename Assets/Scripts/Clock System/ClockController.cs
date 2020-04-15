@@ -25,6 +25,7 @@ public class ClockController : MonoBehaviour
 
         int ten_minutes = minutes / 10;
         int unit_minutes = minutes % 10;
+        Debug.Log("ClockController : " + ten_hours + " " + unit_hours + " " + ten_minutes + " " + unit_minutes);
         UpdateUI(ten_hours, unit_hours, ten_minutes, unit_minutes);
     }
 

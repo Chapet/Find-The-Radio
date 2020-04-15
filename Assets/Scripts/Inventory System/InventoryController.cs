@@ -70,7 +70,7 @@ public class InventoryController : MonoBehaviour
 
     public void AddEquipmentSlot(EquipmentSlot es)
     {
-        equipment[(int) es.slotType] = es;
+        equipment[(int)es.slotType] = es;
     }
 
     public void Show(List<Item> items)
@@ -133,7 +133,7 @@ public class InventoryController : MonoBehaviour
             //playerController.UpdateHealth(cons.GetHealth());
             //playerController.UpdateHunger(cons.GetHunger());
             //playerController.UpdateThirst(cons.GetThirst());
-            BackgroundTasks.BgTasks.Use(cons);
+            BackgroundTasks.Tasks.Use(cons);
 
             inventory.RemoveItem(selectedItem);
             slotsHandler.DeleteCurrentSlot();
@@ -161,7 +161,7 @@ public class InventoryController : MonoBehaviour
         InventorySlot curr = slotsHandler.GetCurrentSlot();
         if (curr != null)
         {
-            
+
             Item selectedItem = curr.GetItem();
             Gear g = selectedItem as Gear;
 
@@ -190,7 +190,7 @@ public class InventoryController : MonoBehaviour
             inventory.RemoveItem(selectedItem);
             slotsHandler.DeleteCurrentSlot();
 
-            if(selectedItem is Gear)
+            if (selectedItem is Gear)
             {
                 equipButton.gameObject.SetActive(false);
                 deleteGearButton.gameObject.SetActive(false);
@@ -220,10 +220,10 @@ public class InventoryController : MonoBehaviour
 
     private void SetProperties(Item item)
     {
-        if(item.IsConsumable())
+        if (item.IsConsumable())
         {
             Consumable toUse = (Consumable)item;
-            if(toUse.HaveHealthValue())
+            if (toUse.HaveHealthValue())
             {
                 SetProperty(health, toUse.GetHealth());
             }
@@ -263,7 +263,7 @@ public class InventoryController : MonoBehaviour
         if (value < 0)
         {
             value = PropertyRound(-value);
-            for(int i = 0; i< value; i++)
+            for (int i = 0; i < value; i++)
             {
                 str += "-";
             }
@@ -344,21 +344,21 @@ public class InventoryController : MonoBehaviour
         {
             return 2;
         }
-        else if(i > 0)
+        else if (i > 0)
         {
             return 1;
         }
         else
         {
             return 0;
-        }           
+        }
     }
 
     private void RefreshEquipmentSlots()
     {
-        foreach(EquipmentSlot e in equipment)
+        foreach (EquipmentSlot e in equipment)
         {
-            if(e!=null)
+            if (e != null)
             {
                 e.Refresh();
             }

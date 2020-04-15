@@ -56,6 +56,7 @@ public class ScavengingController : MonoBehaviour
     public void ScavengingBtnClicked()
     {
         Scavenge();
+        BackgroundTasks.Tasks.Scavenge(scavengeTime);
         //menuController.ExitMenu(gameObject);
     }
 
@@ -321,7 +322,7 @@ public class ScavengingController : MonoBehaviour
 
 
         //========== MODIFY STATUS BAR =================
-        player.UpdateEnergy(-1 * nbTimeSlice);
+        player.UpdateEnergy(-2 * nbTimeSlice);
         player.UpdateHunger(-2 * nbTimeSlice);
         player.UpdateThirst(-2 * nbTimeSlice);
         

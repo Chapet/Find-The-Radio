@@ -1,47 +1,76 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BackgroundTasks : MonoBehaviour
 {
-    public static BackgroundTasks BgTasks { get; private set; }
+    public static BackgroundTasks Tasks { get; private set; }
 
-    public bool isSleeping = false;
-    public int sleepInc = 1;
-    public float hungerMultiplier = 0.3f;
-    public float thirstMultiplier = 0.4f;
+    public bool IsSleeping { get; private set; }
+    private DateTime startSleeping;
+    private DateTime endSleeping;
+    public float updateStep;
+    public int sleepInc;
+    public float hungerMultiplier;
+    public float thirstMultiplier;
+
+    public bool IsScavenging { get; private set; }
+    public DateTime StartScavenging { get; private set; }
+    public DateTime EndScavenging { get; private set; }
 
     private float hStep = 0f;
     private float tStep = 0f;
-    private float energyTarget = 0f;
     // Start is called before the first frame update
     void Start()
     {
-        BgTasks = this;
+        Tasks = this;
+        IsSleeping = false;
+        IsScavenging = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isSleeping)
+        if (IsSleeping)
         {
-            hStep += sleepInc * hungerMultiplier;
-            tStep += sleepInc * thirstMultiplier;
-            BackgroundSleep();
+            var diffInSeconds = (DateTime.Now - startSleeping).TotalSeconds;
+            if (diffInSeconds > updateStep)
+            {
+                hStep += sleepInc * hungerMultiplier;
+                tStep += sleepInc * thirstMultiplier;
+                BackgroundSleep();
+            }          
         }
+        if (IsScavenging)
+        {
+            if(DateTime.Now < EndScavenging)
+            {
+                IsScavenging = false;
+                Debug.Log("Returning from scavenging :-)");
+            }
+        }
+    }
+
+    public void Scavenge(float scavengeTime)
+    {
+        IsScavenging = true;
+        StartScavenging = DateTime.Now;
+        // Real implem : endTime = startTime.AddMinutes(scavengeTime);
+        // Debug.Log("scavengeTime : " + scavengeTime);
+        EndScavenging = StartScavenging.AddSeconds(2*scavengeTime); // For testing
     }
 
     public void Sleep(float sleepTime)
     {
-        isSleeping = true;
-        //this.sleepTime = sleepTime;
-        // 6.25 EP per hour <=> 50 EP per 8 hours
-        energyTarget = PlayerController.Player.GetEnergy() + Mathf.FloorToInt((Mathf.Floor(sleepTime) + Mathf.Floor((sleepTime - Mathf.Floor(sleepTime)))) * 60f / 9.6f);
+        IsSleeping = true;
+        startSleeping = DateTime.Now;
+        endSleeping = startSleeping.AddSeconds(sleepTime * updateStep);
     }
 
     private void BackgroundSleep()
     {
-        if (PlayerController.Player.GetEnergy() < energyTarget)
+        if (startSleeping < endSleeping)
         {
             PlayerController.Player.UpdateEnergy(sleepInc);
             if (hStep >= 1f)
@@ -54,13 +83,14 @@ public class BackgroundTasks : MonoBehaviour
                 PlayerController.Player.UpdateThirst(-1 * (int)tStep);
                 tStep = 0f;
             }
+            startSleeping = startSleeping.AddSeconds(updateStep);
+            GameController.Controller.UpdateGameClock(1);
         }
         else
         {
-            isSleeping = false;
+            IsSleeping = false;
             hStep = 0f;
             tStep = 0f;
-            energyTarget = 0f;
         }
     }
 
