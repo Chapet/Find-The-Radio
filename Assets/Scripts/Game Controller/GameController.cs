@@ -45,7 +45,7 @@ public class GameController : MonoBehaviour
             ResetGame();
             UpdateGameClock(8f);
             CleanSave();
-            PlayerController.IS_FIRST_GAME=true;
+            PlayerController.IS_FIRST_GAME = true;
         }
         else
         {
