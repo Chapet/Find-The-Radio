@@ -9,9 +9,9 @@ using Slider = UnityEngine.UI.Slider;
 
 public class ScavengingController : MonoBehaviour
 {
-    public GameController gameController;
-    public GameObject BunkerPanel;
-    public InventoryManager inventory;
+    [SerializeField]private GameController gameController;
+    [SerializeField]private GameObject BunkerPanel;
+    [SerializeField]private InventoryManager inventory;
     //public GameObject backPanel;
     public Color BrightYellow;
     public Color DarkYellow;
@@ -19,10 +19,10 @@ public class ScavengingController : MonoBehaviour
     public GameObject Slider;
     private float scavengeTime;
     [Tooltip("Contain the object player")]
-    public PlayerController player;
-    public MenuController menuController;
-    public PopupSystem pop;
-    public ScavengeResultsSystem popUpResult;
+    [SerializeField]private PlayerController player;
+    [SerializeField]private MenuController menuController;
+    [SerializeField]private PopupSystem pop;
+    [SerializeField]private ScavengeResultsSystem popUpResult;
 
     /*[SerializeField] [Tooltip("Contain all the items that you can find outside the bunker")]
     private ScavengingListItem itemList;
@@ -33,7 +33,12 @@ public class ScavengingController : MonoBehaviour
         player = PlayerController.Player;
         inventory = InventoryManager.Inventory;
     }
-    
+
+    private void Awake()
+    {
+        BuildScavengeItems(scavengeItemsData);
+    }
+
     void Update()
     {
         scavengeTime = (Slider.GetComponent<Slider>().value) / 2;
@@ -75,16 +80,28 @@ public class ScavengingController : MonoBehaviour
             return false;
         }
 
-        if (!inventory.Contain("Gun"))
+        Gear gun;
+        if ((gun=player.GetGear(Gear.ItemType.Weapon))==null)
         {
+            //I'm not equip with a weapon
             return false;
         }
-        
+
         double chance=new System.Random().NextDouble();
         
         if (chance <= probability)
         {
-            //TODO:dommage
+            //SHOT with the gun
+            /*====    DOMAGE    ====*/
+            gun.liveGear -= 10;
+            
+            if (gun.liveGear <= 0)
+            {
+                inventory.RemoveItem(gun);
+                Debug.Log(gun.name+" is broken");
+                return false;
+            }
+
             return true;
         }
 
@@ -93,57 +110,87 @@ public class ScavengingController : MonoBehaviour
 
     private bool MyUseArmor(double probability)
     {
-        Item armorPiece;
+        Gear armorPiece;
         double proba=new System.Random().NextDouble();
         
         if (inventory.Equipment.Count == 0||proba>probability)
         {
             return false;
         }
-
+        
+        if ((armorPiece = player.GetGear(Gear.ItemType.Chestplate)) != null) ;
+        else if ((armorPiece = player.GetGear(Gear.ItemType.Greaves)) != null) ;
+        else if ((armorPiece = player.GetGear(Gear.ItemType.Helmet)) != null) ;
         
         
-        if(armorPiece=inventory.GetItem("Chestplate",Item.ItemClass.Gear)){
-               //TODO:DOMMAGE
+        if (armorPiece != null)
+        {
+            /*==  DOMAGE  ==*/
+            armorPiece.liveGear -= 10;
+            
+            if (armorPiece.liveGear <= 0)
+            {
+                inventory.RemoveItem(armorPiece);
+                Debug.Log(armorPiece.name+" is broken");
+                return false;
+            }
+            
+            return true;
         }
-
-        return true;
-
+        return false;
     }
 
 
     /*========================= ALL ITEM SCAVENGE =================================*/
+    private (string link, int minLevel, Item.ItemClass itemType, double minTimeOut)[] scavengeItems;
     /**
      * link: lien vers l'item
      * MinLevel: le libeau minimum de l'utilisateur pour avoir cet iem
      * itypeType: le type de ressources
      * scavengeTime: le temps minimum qu'il faut sortir pour trouuver cet item (en nbr d'heure)
      */
-    private (string link, int minLevel, Item.ItemClass itemType, double minTimeOut)[] scavengeItems = new[]
+    private (string link, int minLevel, Item.ItemClass itemType, double minTimeOut,int weight)[] scavengeItemsData = new[]
     {
         /*======CONSUMABLE=====*/
-        (link: "Items/Consumables/WaterBottle", minLevel: 0, itemType: Item.ItemClass.Consumable, minTimeOut: 0.0),
-        (link: "Items/Consumables/FoodCan", minLevel: 0, itemType: Item.ItemClass.Consumable, minTimeOut: 0.0),
-        (link: "Items/Consumables/Soda", minLevel: 0, itemType: Item.ItemClass.Consumable, minTimeOut: 0.0),
-        (link: "Items/Consumables/MilitaryRation", minLevel: 0, itemType: Item.ItemClass.Consumable, minTimeOut: 0.0),
+        (link: "Items/Consumables/WaterBottle", minLevel: 0, itemType: Item.ItemClass.Consumable, minTimeOut: 0.0,weight:1),
+
+        (link: "Items/Consumables/FoodCan", minLevel: 0, itemType: Item.ItemClass.Consumable, minTimeOut: 0.0,weight:2),
+
+        (link: "Items/Consumables/Soda", minLevel: 0, itemType: Item.ItemClass.Consumable, minTimeOut: 0.0,weight:2),
+        
+        (link: "Items/Consumables/Medkit", minLevel: 0, itemType: Item.ItemClass.Consumable, minTimeOut: 0.0,weight:2),
+
+        (link: "Items/Consumables/MilitaryRation", minLevel: 0, itemType: Item.ItemClass.Consumable, minTimeOut: 3.0,weight:1),
 
 
         /*======GEAR=====*/
-        (link: "Items/Gear/Gun", minLevel: 0, itemType: Item.ItemClass.Gear, minTimeOut: 0.0),
+        (link: "Items/Gear/Gun", minLevel: 0, itemType: Item.ItemClass.Gear, minTimeOut: 2.0,weight:1),
 
         /*======RESOURCES=====*/
-        (link: "Items/Resources/Wood", minLevel: 0, itemType: Item.ItemClass.Resource, minTimeOut: 0.0),
-        (link: "Items/Resources/Metalscrap", minLevel: 0, itemType: Item.ItemClass.Resource, minTimeOut: 0.0),
+        (link: "Items/Resources/Wood", minLevel: 0, itemType: Item.ItemClass.Resource, minTimeOut: 0.0,weight:1),
+        (link: "Items/Resources/Metalscrap", minLevel: 0, itemType: Item.ItemClass.Resource, minTimeOut: 0.0,weight:1),
 
         /*======Junk=====*/
-
-        (link: "Items/Junks/Grass", minLevel: 0, itemType: Item.ItemClass.Junk, minTimeOut: 0.0),
+        (link: "Items/Junks/Grass", minLevel: 0, itemType: Item.ItemClass.Junk, minTimeOut: 0.0,weight:1),
 
     };
 
-    public void Awake()
+    /**
+     * build array that contain all items that can be scavenging with the weight attach to each item
+     */
+    private void BuildScavengeItems(
+        (string link, int minLevel, Item.ItemClass itemType, double minTimeOut, int weight)[] input)
     {
-        
+        List<(string link, int minLevel, Item.ItemClass itemType, double minTimeOut)> itemList=new List<(string link, int minLevel, Item.ItemClass itemType, double minTimeOut)>();
+        foreach (var item in input)
+        {
+            for (int i = 0; i < item.weight; i++)
+            {
+                itemList.Add((link: item.link, minLevel: item.minLevel, itemType: item.itemType, minTimeOut: item.minTimeOut));
+            }
+        }
+
+        scavengeItems = itemList.ToArray();
     }
 
     /*============================================================================================== */
@@ -255,7 +302,6 @@ public class ScavengingController : MonoBehaviour
                 {
                     possibleItem= getMyLevelItems(scavengeItems, myLevel,Item.ItemClass.Consumable,scavengeTime);
                     if (possibleItem != null&& possibleItem.Length>0)
-
                     {
                         int index = (int) (rand.NextDouble() * (possibleItem.Length - 1));
                         Consumable element = Resources.Load<Consumable>(possibleItem[index].link);
@@ -274,7 +320,7 @@ public class ScavengingController : MonoBehaviour
                         //Debug.Log("Find" + element.name);
                         addItemFound(element,Item.ItemClass.Resource);
                     }
-                }else if (chance > 0) /*========== JUNK ===========*/
+                }else if (chance > 0.0) /*========== JUNK ===========*/
                 {
                     possibleItem= getMyLevelItems(scavengeItems, myLevel,Item.ItemClass.Junk,scavengeTime);
                     if (possibleItem != null&& possibleItem.Length>0)
@@ -301,15 +347,20 @@ public class ScavengingController : MonoBehaviour
                 else if (chance > 0.80)
                 {
                     //=========    BITTEN    =========
-                    if (MayUseGun(0.8));
-                    else if (MyUseArmor(0.8)) ;
+                    if (MayUseGun(0.8))
+                    {
+                        Debug.Log("Weapon has been used");
+                    }
+                    else if (MyUseArmor(0.8))
+                    {
+                        Debug.Log("Armor has been used");
+                    }
                     else
                     {
                         scavengeLog.Add("You were bitten by a zombie (-10)"); //ADD log/message
                         player.UpdateHealth(-10); //update heamth    
                     }
-
-
+                    
                 }
             }
                
@@ -350,6 +401,7 @@ public class ScavengingController : MonoBehaviour
                 energy: (old: oldEnergy, now: player.currentStats[(int)StatType.Energy])),
                 scavengeLog.ToArray()
                 );
+            
         }
         
         itemsFound.Clear();

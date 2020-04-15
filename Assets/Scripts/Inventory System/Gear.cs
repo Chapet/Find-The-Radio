@@ -15,6 +15,9 @@ public class Gear:Item
     {
         None = 0, Helmet, Chestplate, Greaves, Weapon
     }
+
+    public int liveGear = 100;
+    
     public ItemType type;
 
     public ItemType Type {
