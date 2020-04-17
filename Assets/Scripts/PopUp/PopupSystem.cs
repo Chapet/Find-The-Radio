@@ -4,6 +4,7 @@ using TMPro;
 
 public class PopupSystem : MonoBehaviour
 {
+    public static PopupSystem Popup_System { get; private set; }
     public TMP_Text textPopupMsg;
     public Button acceptButton;
     public Button refuseButton;

@@ -1,9 +1,7 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System;
 using System.IO;
-using Assets.SimpleAndroidNotifications;
-
 public class GameController : MonoBehaviour
 {
 
@@ -39,7 +37,6 @@ public class GameController : MonoBehaviour
         BunkerPanel.SetActive(true);
         MenuController.Transition(transitionPanel, transitionAnim);
         NotificationManager.CancelAll();
-
         if (NewGame)
         {
             ResetGame();
