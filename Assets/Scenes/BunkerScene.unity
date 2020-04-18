@@ -301,7 +301,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 15131955}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 163737564737f24697e616d696362756, type: 3}
+  m_Script: {fileID: 11500000, guid: 163737564737f237362796074737f276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   managedByController: 1
@@ -864,7 +864,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 51055825}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 163737564737f24697e616d696362756, type: 3}
+  m_Script: {fileID: 11500000, guid: 163737564737f237362796074737f276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   managedByController: 1
@@ -1056,8 +1056,8 @@ MonoBehaviour:
   menuController: {fileID: 2070697086}
   pop: {fileID: 1998431299}
   popUpResult: {fileID: 42576250}
-  scavengeButton: {fileID: 235234374}
-  scavengeSlider: {fileID: 1353558617}
+  scavengeButton: {fileID: 0}
+  scavengeSlider: {fileID: 0}
 --- !u!95 &58736630
 Animator:
   serializedVersion: 3
@@ -5828,10 +5828,8 @@ MonoBehaviour:
     scavengingPalier: []
     scavengingActualStep: 0
     scavengingTotalSteps: 0
-    IsScavenging: 0
-    scavengeEnding: 
   _introduction: {fileID: 442291356}
-  backgroundTasks: {fileID: 383633854}
+  backgroundTasks: {fileID: 0}
   clock: {fileID: 1103367990}
 --- !u!4 &383633853
 Transform:
@@ -5863,11 +5861,10 @@ MonoBehaviour:
   sleepInc: 7
   hungerMultiplier: 0.2
   thirstMultiplier: 0.3
-  scavengePopUpResultPanel: {fileID: 42576248}
-  menuController: {fileID: 2070697086}
-  bunkerController: {fileID: 1276335971}
-  snackbarController: {fileID: 1497798701}
-  IsScavenging: 0
+  scavengePopUpResultPanel: {fileID: 0}
+  menuController: {fileID: 0}
+  bunkerController: {fileID: 0}
+  snackbarController: {fileID: 0}
   actualScavengingStep: 0
   totalScavengingSteps: 0
 --- !u!114 &383633855
@@ -6003,7 +6000,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 390090308}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 163737564737f24697e616d696362756, type: 3}
+  m_Script: {fileID: 11500000, guid: 163737564737f237362796074737f276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   managedByController: 1
@@ -6805,7 +6802,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 410393433}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 163737564737f24697e616d696362756, type: 3}
+  m_Script: {fileID: 11500000, guid: 163737564737f237362796074737f276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   managedByController: 0
@@ -7932,7 +7929,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 443784781}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 163737564737f24697e616d696362756, type: 3}
+  m_Script: {fileID: 11500000, guid: 163737564737f237362796074737f276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   managedByController: 0
@@ -12325,7 +12322,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 720375826}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 163737564737f24697e616d696362756, type: 3}
+  m_Script: {fileID: 11500000, guid: 163737564737f237362796074737f276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   managedByController: 1
@@ -13863,7 +13860,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 794078825}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 163737564737f24697e616d696362756, type: 3}
+  m_Script: {fileID: 11500000, guid: 163737564737f237362796074737f276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   managedByController: 1
@@ -21055,7 +21052,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1259979629}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 163737564737f24697e616d696362756, type: 3}
+  m_Script: {fileID: 11500000, guid: 163737564737f237362796074737f276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   managedByController: 0
@@ -21410,7 +21407,7 @@ MonoBehaviour:
   inventoryPanel: {fileID: 2098586214}
   cheatPanel: {fileID: 687011556}
   craftingPanel: {fileID: 1351669588}
-  scavengingPopUpResultPanel: {fileID: 42576248}
+  scavengingPopUpResultPanel: {fileID: 0}
   healthBar: {fileID: 2075723820}
   hungerBar: {fileID: 390090308}
   thirstBar: {fileID: 720375826}
@@ -22718,7 +22715,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1373642665}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 163737564737f24697e616d696362756, type: 3}
+  m_Script: {fileID: 11500000, guid: 163737564737f237362796074737f276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   managedByController: 1
@@ -27600,7 +27597,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1668488500}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 163737564737f24697e616d696362756, type: 3}
+  m_Script: {fileID: 11500000, guid: 163737564737f237362796074737f276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   managedByController: 1
@@ -32921,7 +32918,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2026095891}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 163737564737f24697e616d696362756, type: 3}
+  m_Script: {fileID: 11500000, guid: 163737564737f237362796074737f276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   managedByController: 0
@@ -34210,7 +34207,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2075723820}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 163737564737f24697e616d696362756, type: 3}
+  m_Script: {fileID: 11500000, guid: 163737564737f237362796074737f276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   managedByController: 1
