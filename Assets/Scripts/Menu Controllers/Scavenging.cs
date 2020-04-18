@@ -1,5 +1,5 @@
 ﻿
-using Boo.Lang;
+using System.Collections.Generic;
 public class Scavenging
 {
     private PlayerController player;

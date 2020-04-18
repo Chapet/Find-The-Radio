@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System;
+using System.Collections.Generic;
 using System.IO;
 public class GameController : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class GameController : MonoBehaviour
     public Animator transitionAnim;
     public GameData loaded;
     [SerializeField] private Introduction _introduction;
+
+    [SerializeField] private BackgroundTasks backgroundTasks;
     public static bool NewGame { get; set; }
 
     public ClockController clock;
@@ -143,8 +146,49 @@ public class GameController : MonoBehaviour
             }
             Debug.Log("Save loaded!");
             NewGame = false;
+            
+            
+            /*=====    SCAVENGING    =======*/
+            if (data.isScavenging)
+            {
+                backgroundTasks.actualScavengingStep = data.scavengingActualStep;
+                backgroundTasks.totalScavengingSteps = data.scavengingTotalSteps;
+            
+                Scavenging scavenging= new Scavenging();
+                //load itemsfound
+                List<(Item item,Item.ItemClass itemClass)> itemsFound=new List<(Item item, Item.ItemClass itemClass)>();
+                for (int i = 0; i < data.scavengingItemsFound_itemName.Count; i++)
+                {
+                    Item.ItemClass itemC = Item.ConvertStringToItemCLass(data.scavengingItemsFound_itemClass[i]);
+                    itemsFound.Add((Item.LoadItem(data.scavengingItemsFound_itemName[i],itemC),itemC));
+                }
+            
+                scavenging.itemsFound = itemsFound;
+                scavenging.scavengeLog = data.ScavengeLog;
+                scavenging.oldStatusBar = (data.scavengingOldStatusBar[0], data.scavengingOldStatusBar[1],
+                    data.scavengingOldStatusBar[2], data.scavengingOldStatusBar[3]);
+                
+                backgroundTasks.lastScavenging = scavenging;
+
+                List<DateTime> scavengepalier=new List<DateTime>();
+                foreach (var palier in data.scavengingPalier)
+                {
+                    scavengepalier.Add(GameData.ConvertStringToDateTime(palier));
+                }
+                
+                backgroundTasks.scavengingPalier = scavengepalier;
+
+            }
+            backgroundTasks.IsScavenging = data.isScavenging;
+            Debug.Log("New State Of IsScavenging because loaddata"+backgroundTasks.IsScavenging);
+
+            /*========    END SCAVENGING    ========*/
+
+
         }
     }
+
+
 
     public void UpdateGameClock(float inc) {
         gameClock = (gameClock + inc) % 24f;

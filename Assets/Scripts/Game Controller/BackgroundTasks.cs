@@ -27,7 +27,8 @@ public class BackgroundTasks : MonoBehaviour
     {
         Tasks = this;
         IsSleeping = false;
-        IsScavenging = false;
+        if(!IsScavenging||lastScavenging==null)
+            IsScavenging = false;
         
     }
 
@@ -72,17 +73,17 @@ public class BackgroundTasks : MonoBehaviour
     /*==============================================================================================*/
     /*=========    SCAVENGING     ==================================================================*/
     /*==============================================================================================*/
-    
-    public bool IsScavenging { get; private set; }
+
+    public bool IsScavenging;
     public DateTime startScavenging { get; private set; }
     public DateTime endScavenging { get; private set; }
     
     public int ActualScavengingStep => actualScavengingStep;
     public int TotalScavengingSteps => totalScavengingSteps;
 
-    private int actualScavengingStep;
-    private int totalScavengingSteps;
-    private List<DateTime> scavengingPalier;
+    public int actualScavengingStep;
+    public int totalScavengingSteps;
+    public List<DateTime> scavengingPalier;
     
     
     
