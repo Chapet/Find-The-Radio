@@ -26,7 +26,6 @@ public class GameController : MonoBehaviour
     public GameData loaded;
     [SerializeField] private Introduction _introduction;
 
-    [SerializeField] private BackgroundTasks backgroundTasks;
     public static bool NewGame { get; set; }
 
     public ClockController clock;
@@ -152,8 +151,8 @@ public class GameController : MonoBehaviour
             /*=====    SCAVENGING    =======*/
             if (data.isScavenging)
             {
-                backgroundTasks.actualScavengingStep = data.scavengingActualStep;
-                backgroundTasks.totalScavengingSteps = data.scavengingTotalSteps;
+                BackgroundTasks.Tasks.actualScavengingStep = data.scavengingActualStep;
+                BackgroundTasks.Tasks.totalScavengingSteps = data.scavengingTotalSteps;
             
                 Scavenging scavenging= new Scavenging();
                 //load itemsfound
@@ -168,20 +167,24 @@ public class GameController : MonoBehaviour
                 scavenging.scavengeLog = data.ScavengeLog;
                 scavenging.oldStatusBar = (data.scavengingOldStatusBar[0], data.scavengingOldStatusBar[1],
                     data.scavengingOldStatusBar[2], data.scavengingOldStatusBar[3]);
-                
-                backgroundTasks.lastScavenging = scavenging;
+
+                BackgroundTasks.Tasks.lastScavenging = scavenging;
 
                 List<DateTime> scavengepalier=new List<DateTime>();
                 foreach (var palier in data.scavengingPalier)
                 {
                     scavengepalier.Add(GameData.ConvertStringToDateTime(palier));
                 }
-                
-                backgroundTasks.scavengingPalier = scavengepalier;
+
+                BackgroundTasks.Tasks.scavengingPalier = scavengepalier;
+                BackgroundTasks.Tasks.IsScavenging = true;
+            }
+            else
+            {
+                BackgroundTasks.Tasks.IsScavenging = false;
 
             }
-            backgroundTasks.IsScavenging = data.isScavenging;
-            Debug.Log("New State Of IsScavenging because loaddata"+backgroundTasks.IsScavenging);
+            Debug.Log("New State Of IsScavenging because loaddata"+ BackgroundTasks.Tasks.IsScavenging);
 
             /*========    END SCAVENGING    ========*/
         }

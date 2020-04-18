@@ -26,14 +26,15 @@ public class BackgroundTasks : MonoBehaviour
 
     private float hStep = 0f;
     private float tStep = 0f;
-    // Start is called before the first frame update
-    void Start()
+
+    void Awake()
     {
         Tasks = this;
         IsSleeping = false;
-        if(!IsScavenging||lastScavenging==null)
+        if(!IsScavenging || lastScavenging==null)
+        {
             IsScavenging = false;
-        
+        }
     }
 
     // Update is called once per frame

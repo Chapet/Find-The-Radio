@@ -21407,7 +21407,7 @@ MonoBehaviour:
   inventoryPanel: {fileID: 2098586214}
   cheatPanel: {fileID: 687011556}
   craftingPanel: {fileID: 1351669588}
-  scavengingPopUpResultPanel: {fileID: 0}
+  scavengingPopUpResultPanel: {fileID: 42576248}
   healthBar: {fileID: 2075723820}
   hungerBar: {fileID: 390090308}
   thirstBar: {fileID: 720375826}
