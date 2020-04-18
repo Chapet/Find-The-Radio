@@ -5861,10 +5861,10 @@ MonoBehaviour:
   sleepInc: 7
   hungerMultiplier: 0.2
   thirstMultiplier: 0.3
-  scavengePopUpResultPanel: {fileID: 0}
-  menuController: {fileID: 0}
-  bunkerController: {fileID: 0}
-  snackbarController: {fileID: 0}
+  scavengePopUpResultPanel: {fileID: 42576248}
+  menuController: {fileID: 2070697086}
+  bunkerController: {fileID: 1276335971}
+  snackbarController: {fileID: 1497798701}
   actualScavengingStep: 0
   totalScavengingSteps: 0
 --- !u!114 &383633855
@@ -24304,7 +24304,7 @@ GameObject:
   - component: {fileID: 1497798702}
   - component: {fileID: 1497798701}
   m_Layer: 5
-  m_Name: SnakBar
+  m_Name: SnackBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
