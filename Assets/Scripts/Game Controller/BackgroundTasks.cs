@@ -14,6 +14,7 @@ public class BackgroundTasks : MonoBehaviour
     public int sleepInc;
     public float hungerMultiplier;
     public float thirstMultiplier;
+    public PopupSystem pop;
 
     public bool IsScavenging { get; set; }
     public DateTime StartScavenging { get; private set; }
@@ -197,8 +198,117 @@ public class BackgroundTasks : MonoBehaviour
             }
             else if (!hadSenario)/*========== START SENARIO ===========*/
             {
-                Debug.Log("Start senario");
-                hadSenario = true;
+                chance = rand.NextDouble();
+                if (chance > 0.85)
+                {
+                    Debug.Log("Start senario");
+
+                    if (totalScavengingSteps - actualScavengingStep > 12) //level 3 -> ZombieLot, PoliceStation, Radio, Death
+                    {
+                        chance = rand.NextDouble();
+                        if (chance > 0.999) pop.PopMessage(PopupSystem.Popup.Death);
+                        else if (chance > 0.66)
+                        {
+                            if (lastScavenging.MayUseGun(1))
+                            {
+                                pop.PopMessage(PopupSystem.Popup.ZombieLot1);
+                            }
+                            else
+                            {
+                                pop.PopMessage(PopupSystem.Popup.ZombieLot0);
+                            }
+                        }
+                        else if (chance > 0.33)
+                        {
+                            pop.PopMessage(PopupSystem.Popup.PoliceStation);
+                            Gear element = Resources.Load<Gear>("Items/Gear/Gun");
+                            addItemFound(element, Item.ItemClass.Gear);
+                        }
+                        else
+                        {
+                            pop.PopMessage(PopupSystem.Popup.Radio);
+                            //addItem RadioPart
+                        }
+
+                    }
+                    else if (totalScavengingSteps - actualScavengingStep > 6) //level 2 -> ZombieFew, HuntingStore, OutdoorStore, Pharmacy, Death
+                    {
+                        chance = rand.NextDouble();
+                        if (chance > 0.999) pop.PopMessage(PopupSystem.Popup.Death);
+                        else if (chance > 0.75)
+                        {
+                            pop.PopMessage(PopupSystem.Popup.OutdoorStore);
+                            //addItem Bag
+                        }
+                        else if (chance > 0.50)
+                        {
+                            pop.PopMessage(PopupSystem.Popup.HuntingStore);
+                            //addItem 6 ammos
+                        }
+                        else if (chance > 0.25)
+                        {
+                            pop.PopMessage(PopupSystem.Popup.Pharmacy);
+                            Consumable element = Resources.Load<Consumable>("Items/Consumables/Medkit");
+                            addItemFound(element, Item.ItemClass.Consumable);
+                        }
+                        else
+                        {
+                            if (lastScavenging.MayUseGun(1))
+                            {
+                                pop.PopMessage(PopupSystem.Popup.ZombieFew1);
+                            }
+                            else
+                            {
+                                pop.PopMessage(PopupSystem.Popup.ZombieFew0);
+                            }
+                        }
+                    }
+                    else //level 1 -> ZombieOne, GroceryStore, ClothingStore, Parc, Death
+                    {
+                        chance = rand.NextDouble();
+                        if (chance > 0.999) pop.PopMessage(PopupSystem.Popup.Death);
+                        else if (chance > 0.75)
+                        {
+                            pop.PopMessage(PopupSystem.Popup.Parc);
+                            Resource element = Resources.Load<Resource>("Items/Resources/Wood");
+                            addItemFound(element, Item.ItemClass.Resource);
+                            addItemFound(element, Item.ItemClass.Resource);
+                            addItemFound(element, Item.ItemClass.Resource);
+                        }
+                        else if (chance > 0.50)
+                        {
+                            pop.PopMessage(PopupSystem.Popup.GroceryStore);
+                            Consumable element1 = Resources.Load<Consumable>("Items/Consumables/Coffee");
+                            addItemFound(element1, Item.ItemClass.Consumable);
+                            Consumable element2 = Resources.Load<Consumable>("Items/Consumables/Soda");
+                            addItemFound(element2, Item.ItemClass.Consumable);
+                            Consumable element3 = Resources.Load<Consumable>("Items/Consumables/Crackers");
+                            addItemFound(element3, Item.ItemClass.Consumable);
+                        }
+                        else if (chance > 0.25)
+                        {
+                            pop.PopMessage(PopupSystem.Popup.ClothingStore);
+                            Resource element = Resources.Load<Resource>("Items/Resources/Cloth");
+                            addItemFound(element, Item.ItemClass.Resource);
+                            addItemFound(element, Item.ItemClass.Resource);
+                            addItemFound(element, Item.ItemClass.Resource);
+                        }
+                        else
+                        {
+                            if (lastScavenging.MayUseGun(1))
+                            {
+                                pop.PopMessage(PopupSystem.Popup.ZombieOne1);
+                            }
+                            else
+                            {
+                                pop.PopMessage(PopupSystem.Popup.ZombieOne0);
+                            }
+                        }
+                    }
+
+                    hadSenario = true;
+                }
+
             }
             else if (!ev) /*======    MEET MONSTRER, BE BITTEN, DEAD, LOST ITEMS,...    ====== */
             {
@@ -234,6 +344,7 @@ public class BackgroundTasks : MonoBehaviour
     private void ReturnFromScavenging()
     {
         addItemFoundToInventory(lastScavenging);
+        hadSenario = false;
         snackbarController.StartSnackBare("You are back from scavenging");
         return;
 
