@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Threading;
-using System.Collections.Generic;
 using System.Security.Cryptography;
+using Boo.Lang;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,12 +10,14 @@ using UnityEngine.UI;
 public class ScavengeResultsSystem : MonoBehaviour
 {
     
+    public static ScavengeResultsSystem PopUpResultScavenging { get; private set; }
     public  MenuController menuController;
     public GameObject backPanel;
     public GameObject slotPrefab;
     public GameObject scavengingLogprefab;
     public GameObject itemContent;
     public GameObject scavengingLogContent;
+    
     private List<GameObject> inventorySlots= new List<GameObject>();
     public TextMeshProUGUI message;
     private PlayerController player;
@@ -26,6 +28,10 @@ public class ScavengeResultsSystem : MonoBehaviour
     public StatusBar energyBar;
 
     private float[] goals;
+    private int healthBarGoal;
+    private int HungerBarGoal;
+    private int thirstBarGoal;
+    private int energyBarGoal;
     
 
     public void Awake()
@@ -35,14 +41,38 @@ public class ScavengeResultsSystem : MonoBehaviour
         Array.Copy(player.currentStats, 0, goals, 0, player.currentStats.Length);
     }
 
-    public void PopResult(List<Item> items,((int old, int now) health,(int old, int now) hunger,(int old, int now) thirst,(int old, int now) energy) statusBarUpdate,string [] scavengingLog)
+    public void FixedUpdate()
     {
-        
+        InscSlider(healthBar,healthBarGoal);
+        InscSlider(hungerBar,HungerBarGoal);
+        InscSlider(thirstBar,thirstBarGoal);
+        InscSlider(energyBar,energyBarGoal);
+    }
+
+    private void InscSlider(StatusBar statusBar, int goal)
+    {
+        if (goal < statusBar.GetValue())
+        {
+            statusBar.addValue(-1);
+        }
+        else if (goal>statusBar.GetValue())
+        {
+            statusBar.addValue(1);
+        }
+    }
+
+    public void OnEnable()
+    {
+        PopResult(BackgroundTasks.Tasks.lastScavenging);
+    }
+
+    public void PopResult(Scavenging scavenging)
+    {
+
         clearInventorySlot();
-
-
+        
         //add show all Item
-        foreach (Item item in items)
+        foreach (Item item in scavenging.GetItemsFound())
         {
             GameObject obj = Instantiate(slotPrefab);
             InventorySlot slot = obj.GetComponent<InventorySlot>();
@@ -52,7 +82,7 @@ public class ScavengeResultsSystem : MonoBehaviour
             inventorySlots.Add(obj);
         }
         
-        menuController.OpenMenu(gameObject);
+        //menuController.OpenMenu(gameObject);
         
         //=============    REMOVE EXEMPLE TEXTE    ===================
         for (int i=0 ;i< scavengingLogContent.transform.childCount;i++)
@@ -60,10 +90,11 @@ public class ScavengeResultsSystem : MonoBehaviour
             Destroy(scavengingLogContent.transform.GetChild(i).gameObject); 
         }
 
+        
         //=============    ADD SCAVENGING LOG    ===================
 
 
-        foreach (string log in scavengingLog)
+        foreach (string log in scavenging.scavengeLog)
         {
             GameObject obj = Instantiate(scavengingLogprefab);
             ScavengeLog scavengeLog = obj.GetComponent<ScavengeLog>();
@@ -73,13 +104,22 @@ public class ScavengeResultsSystem : MonoBehaviour
         }
 
         //=============    ANIMATION    ================
-        healthBar.SetValue(statusBarUpdate.health.now);
+        healthBar.SetValue(scavenging.oldStatusBar.health);
+        hungerBar.SetValue(scavenging.oldStatusBar.hunger);
+        thirstBar.SetValue(scavenging.oldStatusBar.thirst);
+        energyBar.SetValue(scavenging.oldStatusBar.energy);
+        
+        //set objectif
+        healthBarGoal = player.GetHealth();
+        HungerBarGoal = player.GetHunger();
+        thirstBarGoal = player.GetThirst();
+        energyBarGoal = player.GetEnergy();
 
-        hungerBar.SetValue(statusBarUpdate.hunger.now);
+        if (!BackgroundTasks.Tasks.IsScavenging && BackgroundTasks.Tasks.lastScavenging != null)
+        {
+            BackgroundTasks.Tasks.lastScavenging = null;
+        }
 
-        thirstBar.SetValue(statusBarUpdate.thirst.now);
-
-        energyBar.SetValue(statusBarUpdate.energy.now);
     }
 
     private void clearInventorySlot()

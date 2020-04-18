@@ -34,16 +34,4 @@ public static class SaveSystem
             return null;
         }
     }
-
-    public static DateTime GetScavengeEndTime(GameData data)
-    {
-        if (data.isScavenging)
-        {
-            return XmlConvert.ToDateTime(data.scavengeEnding, XmlDateTimeSerializationMode.Local);
-        }
-        else
-        {
-            return default;
-        }
-    }
 }

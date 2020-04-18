@@ -5,12 +5,14 @@ using UnityEngine.UI;
 
 public class BunkerController : MonoBehaviour
 {
+    public static BunkerController Bunker_Controller { get; private set; }
     public GameObject bedPanel;
     public GameObject scavengingPanel;
     private GameObject bunkerPanel;
     public GameObject inventoryPanel;
     public GameObject cheatPanel;
     public GameObject craftingPanel;
+    public GameObject scavengingPopUpResultPanel;
 
     public GameObject healthBar;
     public GameObject hungerBar;
@@ -45,7 +47,16 @@ public class BunkerController : MonoBehaviour
     public void ScavengeButtonClicked()
     {
         Debug.Log("Scavenge: depart into the unknown ...");
-        menuController.OpenMenu(scavengingPanel);
+        if (BackgroundTasks.Tasks.IsScavenging || BackgroundTasks.Tasks.lastScavenging != null) 
+        {
+            menuController.OpenMenu(scavengingPopUpResultPanel);
+        }
+        else
+        {
+            menuController.OpenMenu(scavengingPanel);
+        }
+
+        
     }
 
     public void CraftingBtnClicked()
