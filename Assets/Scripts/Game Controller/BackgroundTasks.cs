@@ -15,9 +15,9 @@ public class BackgroundTasks : MonoBehaviour
     public float hungerMultiplier;
     public float thirstMultiplier;
 
-    public bool IsScavenging { get; private set; }
+    public bool IsScavenging { get; set; }
     public DateTime StartScavenging { get; private set; }
-    public DateTime EndScavenging { get; private set; }
+    public DateTime EndScavenging { get; set; }
 
     private float hStep = 0f;
     private float tStep = 0f;
@@ -44,7 +44,7 @@ public class BackgroundTasks : MonoBehaviour
         }
         if (IsScavenging)
         {
-            if(DateTime.Now < EndScavenging)
+            if(DateTime.Now > EndScavenging)
             {
                 IsScavenging = false;
                 Debug.Log("Returning from scavenging :-)");

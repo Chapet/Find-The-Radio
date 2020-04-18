@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using System.Xml;
+using System;
 
 [System.Serializable]
 public class GameData
@@ -19,8 +21,18 @@ public class GameData
     [SerializeField] public List<string> junks = new List<string>();
     [SerializeField] public bool is_firstGame;
 
-    public GameData(PlayerController p, InventoryManager i, float t)
+    // Background tasks :
+    public bool isScavenging;
+    public string scavengeEnding;
+
+    public GameData(PlayerController p, InventoryManager i, float t, bool isScavenging, DateTime scavengeEnding)
     {
+        if (isScavenging)
+        {
+            this.isScavenging = isScavenging;
+            this.scavengeEnding = XmlConvert.ToString(scavengeEnding, XmlDateTimeSerializationMode.Local);
+        }
+    
         health = p.currentStats[(int) StatType.Health];
         hunger = p.currentStats[(int)StatType.Hunger];
         thirst = p.currentStats[(int)StatType.Thirst];

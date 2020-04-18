@@ -5628,6 +5628,7 @@ GameObject:
   - component: {fileID: 383633853}
   - component: {fileID: 383633852}
   - component: {fileID: 383633854}
+  - component: {fileID: 383633855}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -5664,6 +5665,8 @@ MonoBehaviour:
     resources: []
     junks: []
     is_firstGame: 0
+    IsScavenging: 0
+    scavengeEnding: 
   _introduction: {fileID: 442291356}
   clock: {fileID: 1103367990}
 --- !u!4 &383633853
@@ -5694,8 +5697,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   updateStep: 0.4
   sleepInc: 7
-  hungerMultiplier: 0.25
-  thirstMultiplier: 0.35
+  hungerMultiplier: 0.2
+  thirstMultiplier: 0.3
+--- !u!114 &383633855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383633851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c9087d9b995a4e718985662fa3d0dc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &388178134
 GameObject:
   m_ObjectHideFlags: 0

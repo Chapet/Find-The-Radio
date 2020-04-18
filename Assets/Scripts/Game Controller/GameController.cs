@@ -2,7 +2,6 @@
 using System.Collections;
 using System;
 using System.IO;
-using Assets.SimpleAndroidNotifications;
 
 public class GameController : MonoBehaviour
 {
@@ -38,7 +37,7 @@ public class GameController : MonoBehaviour
     void Start() {
         BunkerPanel.SetActive(true);
         MenuController.Transition(transitionPanel, transitionAnim);
-        NotificationManager.CancelAll();
+        NotificationManager.Manager.CancelAllNotifications();
 
         if (NewGame)
         {
@@ -146,6 +145,13 @@ public class GameController : MonoBehaviour
             }
             Debug.Log("Save loaded!");
             NewGame = false;
+
+            DateTime dt = SaveSystem.GetScavengeEndTime(data);
+            if (dt != default)
+            {
+                BackgroundTasks.Tasks.IsScavenging = data.isScavenging;
+                BackgroundTasks.Tasks.EndScavenging = dt;
+            }
         }
     }
 
@@ -169,31 +175,29 @@ public class GameController : MonoBehaviour
         if (isPaused)
         {
             Save();
-            StartNotificationsProcess();
+            if (BackgroundTasks.Tasks.IsScavenging)
+            {
+                NotificationManager.Manager.SendDelayedNotif("Scavenging finished !", "Your vault dweller has returned from the harsh wasteland", BackgroundTasks.Tasks.EndScavenging);
+            }
         }
         else
         {
-            NotificationManager.CancelAll();
+            NotificationManager.Manager.CancelAllNotifications();
         }
     }
 
     private void OnApplicationQuit()
     {
         Save();
-        StartNotificationsProcess();
+        if (BackgroundTasks.Tasks.IsScavenging)
+        {
+            NotificationManager.Manager.SendDelayedNotif("Scavenging finished !", "Your vault dweller has returned from the harsh wasteland", BackgroundTasks.Tasks.EndScavenging);
+        }
     }
 
     private void Save()
     {
-        GameData data = new GameData(PlayerController.Player, InventoryManager.Inventory, gameClock);
+        GameData data = new GameData(PlayerController.Player, InventoryManager.Inventory, gameClock, BackgroundTasks.Tasks.IsScavenging, BackgroundTasks.Tasks.EndScavenging);
         SaveSystem.Save(data);
-    }
-
-    private void StartNotificationsProcess()
-    {
-        if (BackgroundTasks.Tasks.IsScavenging)
-        {
-            NotificationManager.SendWithAppIcon(TimeSpan.FromSeconds(10), "Scavenging finished !", "Your survivor has returned from the harsh wasteland ...", new Color32(82, 60, 78, 255), NotificationIcon.Event);
-        }
     }
 }

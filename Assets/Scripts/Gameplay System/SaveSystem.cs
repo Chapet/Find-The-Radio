@@ -1,6 +1,8 @@
 ﻿using System.IO;
 using UnityEngine;
 using System.Runtime.Serialization.Formatters.Binary;
+using System;
+using System.Xml;
 
 public static class SaveSystem
 {
@@ -30,6 +32,18 @@ public static class SaveSystem
         else
         {
             return null;
+        }
+    }
+
+    public static DateTime GetScavengeEndTime(GameData data)
+    {
+        if (data.isScavenging)
+        {
+            return XmlConvert.ToDateTime(data.scavengeEnding, XmlDateTimeSerializationMode.Local);
+        }
+        else
+        {
+            return default;
         }
     }
 }
