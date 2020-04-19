@@ -17,6 +17,8 @@ public class CraftingController : MonoBehaviour
     public Image itemPreview;
     public Button craftButton;
 
+    private bool isCoroutineExecuting = false;
+
     private void Start()
     {
         inventoryManager = InventoryManager.Inventory;
@@ -47,7 +49,7 @@ public class CraftingController : MonoBehaviour
         CraftingSlot selectedSlot = craftsHandler.GetSlotSelected();
         if (selectedSlot == null) return;
         if (selectedSlot.GetIsCraftable()) {
-            craftButton.interactable = true; 
+            StartCoroutine(ExecuteAfterTime(1f));
         }
         else {
             craftButton.interactable = false;
@@ -61,6 +63,20 @@ public class CraftingController : MonoBehaviour
             inventoryManager.RemoveItem(removedItem);
         }
         inventoryManager.AddItem(selectedSlot.GetItem());
+        craftButton.interactable = false;
         UpdateCraftable();
+    }
+
+    IEnumerator ExecuteAfterTime(float time) {
+        if (isCoroutineExecuting)
+            yield break;
+
+        isCoroutineExecuting = true;
+
+        yield return new WaitForSeconds(time);
+
+        craftButton.interactable = true;
+
+        isCoroutineExecuting = false;
     }
 }
