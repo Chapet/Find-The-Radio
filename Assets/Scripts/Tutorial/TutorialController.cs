@@ -38,14 +38,9 @@ public class TutorialController : MonoBehaviour
     {
         TEXT_MAX_CARACTERE = text_max_character;
         TUTORIAL_CONTROLER = this;
-        this.gameObject.SetActive(true);
         DIALOG_SCROLL_RECT = scrollRect;
     }
-
-    private void Start()
-    {
-        //backPanel.SetActive(true);
-    }
+    
 
     public void StartTutorial()
     {
