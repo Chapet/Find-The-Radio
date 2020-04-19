@@ -673,6 +673,7 @@ MonoBehaviour:
   backpanel: {fileID: 116112949}
   _scrollRect: {fileID: 1675897412}
   TEXT_MAX_CARACTERE: 50
+  backGroundBunker: {fileID: 1803838805}
   _tutorialController: {fileID: 407022337}
 --- !u!1 &42576248
 GameObject:
@@ -1083,17 +1084,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f248fd40b2d05a4790e896f2a028192, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameController: {fileID: 383633852}
-  BunkerPanel: {fileID: 1276335970}
-  inventory: {fileID: 0}
   BrightYellow: {r: 0, g: 0, b: 0, a: 0}
   DarkYellow: {r: 0, g: 0, b: 0, a: 0}
   scavengeText: {fileID: 80881787}
   Slider: {fileID: 1353558616}
-  player: {fileID: 0}
   menuController: {fileID: 2070697086}
   pop: {fileID: 1998431299}
   popUpResult: {fileID: 42576250}
+  scavengeButton: {fileID: 0}
+  scavengeSlider: {fileID: 0}
 --- !u!95 &58736630
 Animator:
   serializedVersion: 3
@@ -5158,11 +5157,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66410602a857a424997293ad3d424fe8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 435538307}
   gameClock: 0
-  clock: {fileID: 1732601649}
+  autoSaveTiming: 30
   BunkerPanel: {fileID: 1276335970}
-  introduction: {fileID: 29317019}
+  transitionPanel: {fileID: 0}
+  transitionAnim: {fileID: 0}
+  loaded:
+    health: 0
+    hunger: 0
+    thirst: 0
+    energy: 0
+    gameClock: 0
+    equippedGear: []
+    consumables: []
+    equipment: []
+    resources: []
+    junks: []
+    is_firstGame: 0
+    isScavenging: 0
+    scavengingItemsFound_itemName: []
+    scavengingItemsFound_itemClass: []
+    scavengingOldStatusBar: 
+    ScavengeLog: []
+    scavengingPalier: []
+    scavengingActualStep: 0
+    scavengingTotalSteps: 0
+  _introduction: {fileID: 0}
+  clock: {fileID: 0}
 --- !u!4 &383633853
 Transform:
   m_ObjectHideFlags: 0
@@ -6903,6 +6924,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentStats: 
   maxCarryingSize: 4
+  clock_num:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   statusBarController: {fileID: 435538308}
   equipment: []
 --- !u!114 &435538308
@@ -13327,7 +13359,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d167b3d78f63c461e96736e62e6d3e23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameController: {fileID: 383633852}
   player: {fileID: 435538307}
   BrightYellow: {r: 0, g: 0, b: 0, a: 0}
   DarkYellow: {r: 0, g: 0, b: 0, a: 0}
@@ -17531,13 +17562,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryController: {fileID: 2098586216}
-  headerPanel: {fileID: 730577863}
+  tabsPanel: {fileID: 0}
   contentPanel: {fileID: 302552443}
   scrollView: {fileID: 1498914968}
-  foodDrinkTab: {fileID: 346924036}
-  gearTab: {fileID: 242232888}
-  medsTab: {fileID: 2058980523}
-  miscTab: {fileID: 407342658}
+  foodDrinkTog: {fileID: 0}
+  gearTog: {fileID: 0}
+  medsTog: {fileID: 0}
+  miscTog: {fileID: 0}
   fadeDuration: 0.3
   brightColor: {r: 0.32156864, g: 0.23529412, b: 0.30588236, a: 1}
   darkColor: {r: 0.16470589, g: 0.16470589, b: 0.22745098, a: 1}
@@ -19616,6 +19647,7 @@ MonoBehaviour:
   inventoryPanel: {fileID: 2098586214}
   cheatPanel: {fileID: 687011556}
   craftingPanel: {fileID: 1351669588}
+  scavengingPopUpResultPanel: {fileID: 0}
   healthBar: {fileID: 2075723820}
   hungerBar: {fileID: 390090308}
   thirstBar: {fileID: 720375826}

@@ -16,6 +16,7 @@ public class CraftingController : MonoBehaviour
     public TMP_Text descriptionText;
     public Image itemPreview;
     public Button craftButton;
+    public PopupSystem pop;
 
     private bool isCoroutineExecuting = false;
 
@@ -64,6 +65,10 @@ public class CraftingController : MonoBehaviour
         }
         inventoryManager.AddItem(selectedSlot.GetItem());
         craftButton.interactable = false;
+        if (selectedSlot.GetItem().IsSameAs(Resources.Load<Gear>("Items/Gear/Radio")))
+        {
+            pop.PopMessage(PopupSystem.Popup.Radio);
+        }
         UpdateCraftable();
     }
 

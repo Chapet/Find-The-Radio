@@ -4,7 +4,6 @@ using TMPro;
 
 public class PopupSystem : MonoBehaviour
 {
-    public static PopupSystem Popup_System { get; private set; }
     public TMP_Text textPopupMsg;
     public Button acceptButton;
     public Button refuseButton;
@@ -12,14 +11,16 @@ public class PopupSystem : MonoBehaviour
     public GameObject popPanel;
     public GameObject backPanel;
     public PlayerController player;
+    public BunkerController bunk;
     public enum Popup
     {
         Bite, Death, DeathEvent, ZombieOne0, ZombieOne1, ZombieFew0, ZombieFew1, ZombieLot0,
-        ZombieLot1, GroceryStore, ClothingStore, HuntingStore, Parc, OutdoorStore, PoliceStation, Pharmacy, Radio
+        ZombieLot1, GroceryStore, ClothingStore, HuntingStore, Parc, OutdoorStore, PoliceStation, Pharmacy, Radio, RadioParts
     };
 
     public void PopMessage(Popup popup) 
     {
+        bunk.GoToBunker();
         popPanel.SetActive(true);
         backPanel.SetActive(true);
 
@@ -33,11 +34,12 @@ public class PopupSystem : MonoBehaviour
                 break;
             case Popup.DeathEvent:
                 textPopupMsg.text = "   You were assaulted by a crowd of zombies, you didn't make it";
-                player.UpdateHealth(-100);
+                okButton.onClick.AddListener(delegate () { player.UpdateHealth(-100); });
                 okButton.gameObject.SetActive(true);
                 break;
             case Popup.Death:
                 textPopupMsg.text = "   You were unable to survive in this harsh world. Your story ends here.";
+                okButton.onClick.AddListener(delegate () { player.UpdateHealth(-100); });
                 okButton.gameObject.SetActive(true);
                 break;
             case Popup.ZombieOne0: //event lvl 1
@@ -95,9 +97,13 @@ public class PopupSystem : MonoBehaviour
                 textPopupMsg.text = "   You searched a pharmacy and found some medical supplies.";
                 okButton.gameObject.SetActive(true);
                 break;
-            case Popup.Radio: //event lvl 3
+            case Popup.RadioParts: //event lvl 3
                 textPopupMsg.text = "   You found some radio parts!";
                 okButton.gameObject.SetActive(true);
+                break;
+            case Popup.Radio:
+                textPopupMsg.text = "   You obtained a radio, congratulation! You are now able to contact other survivors, and maybe build a new world ...";
+                okButton.onClick.AddListener(delegate () { PlayerController.Win(); });
                 break;
         }
     }

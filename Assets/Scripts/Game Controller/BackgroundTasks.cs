@@ -206,8 +206,8 @@ public class BackgroundTasks : MonoBehaviour
                     if (totalScavengingSteps - actualScavengingStep > 12) //level 3 -> ZombieLot, PoliceStation, Radio, Death
                     {
                         chance = rand.NextDouble();
-                        if (chance > 0.999) pop.PopMessage(PopupSystem.Popup.Death);
-                        else if (chance > 0.66)
+                        if (chance > 0.999) pop.PopMessage(PopupSystem.Popup.DeathEvent);
+                        else if (chance > 0.90)
                         {
                             if (lastScavenging.MayUseGun(1))
                             {
@@ -218,7 +218,7 @@ public class BackgroundTasks : MonoBehaviour
                                 pop.PopMessage(PopupSystem.Popup.ZombieLot0);
                             }
                         }
-                        else if (chance > 0.33)
+                        else if (chance > 0.80)
                         {
                             pop.PopMessage(PopupSystem.Popup.PoliceStation);
                             Gear element = Resources.Load<Gear>("Items/Gear/Gun");
@@ -226,15 +226,24 @@ public class BackgroundTasks : MonoBehaviour
                         }
                         else
                         {
-                            pop.PopMessage(PopupSystem.Popup.Radio);
-                            //addItem RadioPart
+                            pop.PopMessage(PopupSystem.Popup.RadioParts); //gives all the radioParts for now to allow testing
+                            Resource element1 = Resources.Load<Resource>("Items/Resources/Diode");
+                            addItemFound(element1, Item.ItemClass.Resource);
+                            Resource element2 = Resources.Load<Resource>("Items/Resources/TuningCoil");
+                            addItemFound(element2, Item.ItemClass.Resource);
+                            Resource element3 = Resources.Load<Resource>("Items/Resources/Antenna");
+                            addItemFound(element3, Item.ItemClass.Resource);
+                            Resource element4 = Resources.Load<Resource>("Items/Resources/Capacitor");
+                            addItemFound(element4, Item.ItemClass.Resource);
+                            Resource element5 = Resources.Load<Resource>("Items/Resources/Speaker");
+                            addItemFound(element5, Item.ItemClass.Resource);
                         }
 
                     }
                     else if (totalScavengingSteps - actualScavengingStep > 6) //level 2 -> ZombieFew, HuntingStore, OutdoorStore, Pharmacy, Death
                     {
                         chance = rand.NextDouble();
-                        if (chance > 0.999) pop.PopMessage(PopupSystem.Popup.Death);
+                        if (chance > 0.999) pop.PopMessage(PopupSystem.Popup.DeathEvent);
                         else if (chance > 0.75)
                         {
                             pop.PopMessage(PopupSystem.Popup.OutdoorStore);
@@ -266,7 +275,7 @@ public class BackgroundTasks : MonoBehaviour
                     else //level 1 -> ZombieOne, GroceryStore, ClothingStore, Parc, Death
                     {
                         chance = rand.NextDouble();
-                        if (chance > 0.999) pop.PopMessage(PopupSystem.Popup.Death);
+                        if (chance > 0.999) pop.PopMessage(PopupSystem.Popup.DeathEvent);
                         else if (chance > 0.75)
                         {
                             pop.PopMessage(PopupSystem.Popup.Parc);
@@ -278,10 +287,10 @@ public class BackgroundTasks : MonoBehaviour
                         else if (chance > 0.50)
                         {
                             pop.PopMessage(PopupSystem.Popup.GroceryStore);
-                            Consumable element1 = Resources.Load<Consumable>("Items/Consumables/Coffee");
-                            addItemFound(element1, Item.ItemClass.Consumable);
-                            Consumable element2 = Resources.Load<Consumable>("Items/Consumables/Soda");
-                            addItemFound(element2, Item.ItemClass.Consumable);
+                            Resource element1 = Resources.Load<Resource>("Items/Resources/CoffeeBeans");
+                            addItemFound(element1, Item.ItemClass.Resource);
+                            Resource element2 = Resources.Load<Resource>("Items/Resources/TeaLeaf");
+                            addItemFound(element2, Item.ItemClass.Resource);
                             Consumable element3 = Resources.Load<Consumable>("Items/Consumables/Crackers");
                             addItemFound(element3, Item.ItemClass.Consumable);
                         }
@@ -313,7 +322,7 @@ public class BackgroundTasks : MonoBehaviour
             else if (!ev) /*======    MEET MONSTRER, BE BITTEN, DEAD, LOST ITEMS,...    ====== */
             {
                 chance = rand.NextDouble();
-                if (chance > 0.999) PopupSystem.Popup_System.PopMessage(PopupSystem.Popup.Death);
+                if (chance > 0.999) pop.PopMessage(PopupSystem.Popup.DeathEvent);
                 else if (chance > 0.80)
                 {
                     //=========    BITTEN    =========

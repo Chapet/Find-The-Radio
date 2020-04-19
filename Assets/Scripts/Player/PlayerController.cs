@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour
     public static bool IS_FIRST_GAME = true;
     public Gear[] Equipment {get {return equipment; }}
 
+    public PopupSystem pop;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -159,8 +161,15 @@ public class PlayerController : MonoBehaviour
     {
         if (currentStats[(int) StatType.Health] < 1)
         {
+            pop.PopMessage(PopupSystem.Popup.Death);
             GameController.ResetGame();
             SceneManager.LoadScene(0);
         }
+    }
+
+    public static void Win()
+    {
+        GameController.ResetGame();
+        SceneManager.LoadScene(0);
     }
 }
