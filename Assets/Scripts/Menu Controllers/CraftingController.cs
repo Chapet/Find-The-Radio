@@ -9,6 +9,7 @@ public class CraftingController : MonoBehaviour
 {
     public MenuController menuController;
     public CraftsHandler craftsHandler;
+    public NumbersHandler numbersHandler;
     private InventoryManager inventoryManager;
 
     public GameObject descBackground;
@@ -42,12 +43,14 @@ public class CraftingController : MonoBehaviour
         } else {
             craftButton.interactable = false;
         }
+        numbersHandler.Show(selectedSlot);
     }
 
     public void UpdateCraftable() {
         craftsHandler.UpdateRecipe();
         CraftingSlot selectedSlot = craftsHandler.GetSlotSelected();
         if (selectedSlot == null) return;
+        numbersHandler.UpdateNumbers();
         if (selectedSlot.GetIsCraftable()) {
             StartCoroutine(ExecuteAfterTime(1f));
         }
