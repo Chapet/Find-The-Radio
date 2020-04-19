@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -13,6 +14,9 @@ public class Introduction : MonoBehaviour
     [SerializeField] private GameObject backpanel;
     [SerializeField] private ScrollRect _scrollRect;
     [SerializeField] private int TEXT_MAX_CARACTERE;
+    [SerializeField] private GameObject backGroundBunker;
+    private Vector3 initalPosition;
+    private Vector3 tempPosition;
 
     private string[] introTxt=
     {
@@ -35,7 +39,13 @@ public class Introduction : MonoBehaviour
     {
         this.SetText(introTxt[0]);
         _scrollRect.enabled = false;
-        //background.transform.position = new Vector3(0, -700);
+        
+        initalPosition = backGroundBunker.transform.position;
+        tempPosition = initalPosition;
+        tempPosition.y -= 10f;
+        backGroundBunker.transform.position = tempPosition;
+
+
     }
     //.transform.position = new Vector3(0, 20, 0)
     
@@ -52,25 +62,49 @@ public class Introduction : MonoBehaviour
     }
 
     private int currentTxt = 0;
+    private Vector3 positionGoal;
     public void NextStep()
     {
         currentTxt++;
         if (currentTxt >= introTxt.Length)
         {
-            //FIN DE L'INTRO
-            this.gameObject.SetActive(false);
-            //this.gameObject.transform.position=new Vector3(0,421);//on resize pour le tutorial
-            
-            
-            //DEBUT TUTORIAL
-            _tutorialController.StartTutorial();
-            this.gameObject.SetActive(false);
-            this.enabled = false;
+            //FIN INTRODUCTION
+            positionGoal = initalPosition;
+            updatePosition = true;
+            gameObject.transform.GetChild(0).gameObject.SetActive(false);
         }
         else
         {
             // on continue l'intro
             this.SetText(introTxt[currentTxt]);
+        }
+    }
+
+    private bool updatePosition = false;
+    public void FixedUpdate()
+    {
+        if (updatePosition)
+        {
+            if (backGroundBunker.transform.position.y < positionGoal.y)
+            {
+                backGroundBunker.transform.position=new Vector3(backGroundBunker.transform.position.x,backGroundBunker.transform.position.y+0.25f,backGroundBunker.transform.position.z);
+            }
+            else
+            {
+                //FIN DE L'INTRO
+                this.gameObject.SetActive(false);
+                //this.gameObject.transform.position=new Vector3(0,421);//on resize pour le tutorial
+                backGroundBunker.transform.position = initalPosition;
+            
+                //DEBUT TUTORIAL
+                _tutorialController.StartTutorial();
+                this.gameObject.SetActive(false);
+                gameObject.transform.GetChild(0).gameObject.SetActive(true);
+                this.enabled = false;
+                
+                updatePosition = false;
+            }
+            
         }
     }
 
