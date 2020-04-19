@@ -55,22 +55,30 @@ public class BunkerController : MonoBehaviour
 
     public void ScavengeButtonClicked()
     {
-        Debug.Log("Scavenge: depart into the unknown ...");
-        if (BackgroundTasks.Tasks.IsScavenging || BackgroundTasks.Tasks.lastScavenging != null)
+        if (BackgroundTasks.Tasks.IsSleeping)
         {
-            menuController.OpenMenu(scavengingPopUpResultPanel);
+            snackbar.ShowSnackBar("You can't scavenge because you are sleeping !");
         }
         else
         {
-            menuController.OpenMenu(scavengingPanel);
+            Debug.Log("Scavenge: depart into the unknown ...");
+            if (BackgroundTasks.Tasks.IsScavenging || BackgroundTasks.Tasks.lastScavenging != null)
+            {
+                menuController.OpenMenu(scavengingPopUpResultPanel);
+            }
+            else
+            {
+                menuController.OpenMenu(scavengingPanel);
+            }
         }
     }
 
     public void CraftingBtnClicked()
     {
-        if (BackgroundTasks.Tasks.IsScavenging)
+        if (BackgroundTasks.Tasks.IsScavenging || BackgroundTasks.Tasks.IsSleeping)
         {
-            snackbar.ShowSnackBar("You can't craft because you are scavenging !");
+            if (BackgroundTasks.Tasks.IsScavenging) snackbar.ShowSnackBar("You can't craft because you are scavenging !");
+            if (BackgroundTasks.Tasks.IsSleeping) snackbar.ShowSnackBar("You can't craft because you are sleeping !");
         }
         else
         {
@@ -90,7 +98,11 @@ public class BunkerController : MonoBehaviour
         {
             menuController.ExitMenu(scavengingPanel);
         }
-        if(inventoryPanel.activeSelf)
+        if(scavengingPopUpResultPanel.activeSelf)
+        {
+            menuController.ExitMenu(scavengingPopUpResultPanel);
+        }
+        if (inventoryPanel.activeSelf)
         {
             tabController.CloseTabs();
             menuController.ExitMenu(inventoryPanel);
@@ -113,9 +125,10 @@ public class BunkerController : MonoBehaviour
 
     public void InventoryButtonClicked()
     {
-        if (BackgroundTasks.Tasks.IsScavenging)
+        if (BackgroundTasks.Tasks.IsScavenging || BackgroundTasks.Tasks.IsSleeping)
         {
-            snackbar.ShowSnackBar("You can't see your inventory because you are scavenging !");
+            if (BackgroundTasks.Tasks.IsScavenging) snackbar.ShowSnackBar("You can't open your inventory because you are scavenging !");
+            if (BackgroundTasks.Tasks.IsSleeping) snackbar.ShowSnackBar("You can't open your inventory because you are sleeping !");
         }
         else
         {

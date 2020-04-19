@@ -93,15 +93,36 @@ public class Scavenging
         
         (link: "Items/Consumables/Medkit", minLevel: 0, itemType: Item.ItemClass.Consumable, minTimeOut: 0.0,weight:5),
 
-        (link: "Items/Consumables/MilitaryRation", minLevel: 0, itemType: Item.ItemClass.Consumable, minTimeOut: 3.0,weight:3),
+        (link: "Items/Consumables/MilitaryRation", minLevel: 0, itemType: Item.ItemClass.Consumable, minTimeOut: 7.0,weight:3),
 
 
         /*======GEAR=====*/
-        (link: "Items/Gear/Gun", minLevel: 0, itemType: Item.ItemClass.Gear, minTimeOut: 2.0,weight:2),
+        (link: "Items/Gear/Gun", minLevel: 0, itemType: Item.ItemClass.Gear, minTimeOut: 10.0,weight:2),
+
 
         /*======RESOURCES=====*/
-        (link: "Items/Resources/Wood", minLevel: 0, itemType: Item.ItemClass.Resource, minTimeOut: 0.0,weight:1),
-        (link: "Items/Resources/Metalscrap", minLevel: 0, itemType: Item.ItemClass.Resource, minTimeOut: 0.0,weight:1),
+        (link: "Items/Resources/Wood", minLevel: 0, itemType: Item.ItemClass.Resource, minTimeOut: 0.0,weight:4),
+
+        (link: "Items/Resources/Metalscrap", minLevel: 0, itemType: Item.ItemClass.Resource, minTimeOut: 0.0,weight:4),
+
+        (link: "Items/Resources/Leather", minLevel: 0, itemType: Item.ItemClass.Resource, minTimeOut: 0.0,weight:4),
+
+        (link: "Items/Resources/Cloth", minLevel: 0, itemType: Item.ItemClass.Resource, minTimeOut: 0.0,weight:4),
+
+        (link: "Items/Resources/TeaLeaf", minLevel: 0, itemType: Item.ItemClass.Resource, minTimeOut: 0.0,weight:4),
+
+        (link: "Items/Resources/CoffeeBeans", minLevel: 0, itemType: Item.ItemClass.Resource, minTimeOut: 0.0,weight:4),
+
+        (link: "Items/Resources/Antenna", minLevel: 0, itemType: Item.ItemClass.Resource, minTimeOut: 50.0,weight:1),
+
+        (link: "Items/Resources/Capacitor", minLevel: 0, itemType: Item.ItemClass.Resource, minTimeOut: 50.0,weight:1),
+
+        (link: "Items/Resources/Diode", minLevel: 0, itemType: Item.ItemClass.Resource, minTimeOut: 50.0,weight:1),
+
+        (link: "Items/Resources/Speaker", minLevel: 0, itemType: Item.ItemClass.Resource, minTimeOut: 50.0,weight:1),
+
+        (link: "Items/Resources/TuningCoil", minLevel: 0, itemType: Item.ItemClass.Resource, minTimeOut: 50.0,weight:1),
+
 
         /*======Junk=====*/
         (link: "Items/Junks/Grass", minLevel: 0, itemType: Item.ItemClass.Junk, minTimeOut: 0.0,weight:1),
@@ -140,6 +161,7 @@ public class Scavenging
             if (gun.liveGear <= 0)
             {
                 inventory.RemoveItem(gun);
+                player.Equipment[(int) Gear.ItemType.Weapon] = null;
                 return false;
             }
 
@@ -172,6 +194,14 @@ public class Scavenging
             if (armorPiece.liveGear <= 0)
             {
                 inventory.RemoveItem(armorPiece);
+                for (int i = 0; i < player.Equipment.Length; i++)
+                {
+                    if (player.Equipment[i].Equals(armorPiece))
+                    {
+                        player.Equipment[i] = null;
+                        break;
+                    }
+                }
                 return false;
             }
             

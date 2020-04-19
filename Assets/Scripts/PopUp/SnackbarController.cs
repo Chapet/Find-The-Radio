@@ -27,11 +27,7 @@ public class SnackbarController : MonoBehaviour
 
     private IEnumerator Animation(Animator anim, float showDuration, string txt)
     {
-        while (anim.GetCurrentAnimatorStateInfo(0).IsName("show notification"))
-        {
-            yield return new WaitForSeconds(animDuration / 4f);
-        }
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("hide notification"))
+        while (!anim.GetCurrentAnimatorStateInfo(0).IsName("idle"))
         {
             yield return new WaitForSeconds(animDuration / 4f);
         }
