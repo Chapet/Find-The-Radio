@@ -14,6 +14,8 @@ public class BunkerController : MonoBehaviour
     public GameObject craftingPanel;
     public GameObject scavengingPopUpResultPanel;
 
+    public SnackbarController snackbar;
+
     public GameObject healthBar;
     public GameObject hungerBar;
     public GameObject thirstBar;
@@ -39,15 +41,22 @@ public class BunkerController : MonoBehaviour
 
     public void SleepButtonClicked()
     {
-        Debug.Log("Going to bed ... zZzZ ");
-        //throw new System.Exception("test exception CLickOnBed ");
-        menuController.OpenMenu(bedPanel);
+        if (BackgroundTasks.Tasks.IsScavenging)
+        {
+            snackbar.ShowSnackBar("You can't sleep because you are scavenging !");
+        }
+        else
+        {
+            Debug.Log("Going to bed ... zZzZ ");
+            //throw new System.Exception("test exception CLickOnBed ");
+            menuController.OpenMenu(bedPanel);
+        }
     }
 
     public void ScavengeButtonClicked()
     {
         Debug.Log("Scavenge: depart into the unknown ...");
-        if (BackgroundTasks.Tasks.IsScavenging || BackgroundTasks.Tasks.lastScavenging != null) 
+        if (BackgroundTasks.Tasks.IsScavenging || BackgroundTasks.Tasks.lastScavenging != null)
         {
             menuController.OpenMenu(scavengingPopUpResultPanel);
         }
@@ -55,15 +64,20 @@ public class BunkerController : MonoBehaviour
         {
             menuController.OpenMenu(scavengingPanel);
         }
-
-        
     }
 
     public void CraftingBtnClicked()
     {
-        Debug.Log("Let's go crafting ...");
-        craftingPanel.GetComponent<CraftingController>().UpdateCraftable();
-        menuController.OpenMenu(craftingPanel);
+        if (BackgroundTasks.Tasks.IsScavenging)
+        {
+            snackbar.ShowSnackBar("You can't craft because you are scavenging !");
+        }
+        else
+        {
+            Debug.Log("Let's go crafting ...");
+            craftingPanel.GetComponent<CraftingController>().UpdateCraftable();
+            menuController.OpenMenu(craftingPanel);
+        }
     }
 
     public void GoToBunker()
@@ -99,6 +113,13 @@ public class BunkerController : MonoBehaviour
 
     public void InventoryButtonClicked()
     {
-        menuController.OpenMenu(inventoryPanel);
+        if (BackgroundTasks.Tasks.IsScavenging)
+        {
+            snackbar.ShowSnackBar("You can't see your inventory because you are scavenging !");
+        }
+        else
+        {
+            menuController.OpenMenu(inventoryPanel);
+        }
     }
 }

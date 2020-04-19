@@ -31,7 +31,7 @@ public class BackgroundTasks : MonoBehaviour
     {
         Tasks = this;
         IsSleeping = false;
-        if(!IsScavenging || lastScavenging==null)
+        if (!IsScavenging || lastScavenging == null)
         {
             IsScavenging = false;
         }
@@ -48,12 +48,12 @@ public class BackgroundTasks : MonoBehaviour
                 hStep += sleepInc * hungerMultiplier;
                 tStep += sleepInc * thirstMultiplier;
                 BackgroundSleep();
-            }          
+            }
         }
         if (IsScavenging)
         {
             DateTime now = DateTime.Now;
-            if(now>EndScavenging && actualScavengingStep>=totalScavengingSteps)
+            if (now > EndScavenging && actualScavengingStep >= totalScavengingSteps)
             {
                 Debug.Log("*********    FIN SCAVENGING    *************");
                 IsScavenging = false;
@@ -65,29 +65,29 @@ public class BackgroundTasks : MonoBehaviour
             Scavenge(now);
         }
     }
-    
-    
-   
+
+
+
     /*==============================================================================================*/
     /*=========    SCAVENGING     ==================================================================*/
     /*==============================================================================================*/
-    
+
     public int ActualScavengingStep => actualScavengingStep;
     public int TotalScavengingSteps => totalScavengingSteps;
 
     public int actualScavengingStep;
     public int totalScavengingSteps;
     public List<DateTime> scavengingPalier;
-    
-    
-    
+
+
+
     public void StartNewScavenging(double scavengeTime)
     {
-        this.lastScavenging=new Scavenging();
-        
+        this.lastScavenging = new Scavenging();
+
         actualScavengingStep = 0;
-        totalScavengingSteps = (int) (scavengeTime * 2);
-        
+        totalScavengingSteps = (int)(scavengeTime * 2);
+
         if (totalScavengingSteps == 0)
         {
             return;
@@ -96,18 +96,18 @@ public class BackgroundTasks : MonoBehaviour
         Debug.Log("*****    START SCAVENGING    ************");
 
         this.scavengeTime = scavengeTime;
-        
-        
+
+
         StartScavenging = DateTime.Now;
-        EndScavenging = StartScavenging.AddSeconds(5*scavengeTime);
-        
+        EndScavenging = StartScavenging.AddSeconds(5 * scavengeTime);
+
         // Real implem : endTime = startTime.AddMinutes(scavengeTime);
         // Debug.Log("scavengeTime : " + scavengeTime);
-        
+
         TimeSpan deltaT = (EndScavenging - StartScavenging);
-        TimeSpan dt=new TimeSpan(deltaT.Ticks/totalScavengingSteps);
-        
-        List<DateTime> stepsTime=new List<DateTime>();
+        TimeSpan dt = new TimeSpan(deltaT.Ticks / totalScavengingSteps);
+
+        List<DateTime> stepsTime = new List<DateTime>();
         stepsTime.Add(StartScavenging);
         Debug.Log("Palier:");
         for (int i = 1; i <= totalScavengingSteps; i++)
@@ -127,73 +127,75 @@ public class BackgroundTasks : MonoBehaviour
     private bool ev = false;
     public Scavenging lastScavenging;
     private double scavengeTime;
-    
+
     private void Scavenge(DateTime now)
     {
-        for(;actualScavengingStep<=totalScavengingSteps && now>=scavengingPalier[actualScavengingStep];actualScavengingStep++){
-            Debug.Log("*******    SCAVENGING STEP "+actualScavengingStep+"/"+totalScavengingSteps+"**************");
-            
-            
+        for (; actualScavengingStep <= totalScavengingSteps && now >= scavengingPalier[actualScavengingStep]; actualScavengingStep++)
+        {
+            Debug.Log("*******    SCAVENGING STEP " + actualScavengingStep + "/" + totalScavengingSteps + "**************");
+
+
             var rand = new System.Random();
-            double chance  = rand.NextDouble(); // 0.0 <= chance < 1.0
+            double chance = rand.NextDouble(); // 0.0 <= chance < 1.0
             if (chance > 0.66)/*========== FIND A ITEM  ===========*/
             {
 
                 //chances for the found item, has to be balance when all items in the game
                 chance = rand.NextDouble();
-                
+
                 int myLevel = 100;//TODO: link with player
-                
-                (string link,int minLevel,Item.ItemClass itemType,double minTimeOut)[] possibleItem;
+
+                (string link, int minLevel, Item.ItemClass itemType, double minTimeOut)[] possibleItem;
 
                 if (chance > 0.9)/*========== GEAR ===========*/
                 {
                     //retourn tt les items que je pourrais possiblement trouver sur mon chemin en fonction de mon level, du type d'objet et du temps que j'ai décidé de sortir
-                    possibleItem= lastScavenging.getMyLevelItems( myLevel,Item.ItemClass.Gear,scavengeTime);
-                    
-                    if (possibleItem != null && possibleItem.Length>0)
+                    possibleItem = lastScavenging.getMyLevelItems(myLevel, Item.ItemClass.Gear, scavengeTime);
+
+                    if (possibleItem != null && possibleItem.Length > 0)
                     {
-                        int index = (int) (rand.NextDouble() * (possibleItem.Length) - 1); //index random parmis les objets possible
+                        int index = (int)(rand.NextDouble() * (possibleItem.Length) - 1); //index random parmis les objets possible
                         Gear element = Resources.Load<Gear>(possibleItem[index].link); //load l'item
                         //Debug.Log("Find" + element.name);//print
-                        addItemFound(element,Item.ItemClass.Gear);//add to inventory
+                        addItemFound(element, Item.ItemClass.Gear);//add to inventory
                     }
                 }
                 else if (chance > 0.45)/*========== Consumable ===========*/
                 {
-                    possibleItem= lastScavenging.getMyLevelItems(myLevel,Item.ItemClass.Consumable,scavengeTime);
-                    if (possibleItem != null&& possibleItem.Length>0)
+                    possibleItem = lastScavenging.getMyLevelItems(myLevel, Item.ItemClass.Consumable, scavengeTime);
+                    if (possibleItem != null && possibleItem.Length > 0)
                     {
-                        int index = (int) (rand.NextDouble() * (possibleItem.Length - 1));
+                        int index = (int)(rand.NextDouble() * (possibleItem.Length - 1));
                         Consumable element = Resources.Load<Consumable>(possibleItem[index].link);
                         //Debug.Log("Find" + element.name);
-                        addItemFound(element,Item.ItemClass.Consumable);
+                        addItemFound(element, Item.ItemClass.Consumable);
                     }
                 }
                 else if (chance > 0.15)/*========== RESSOURCES ===========*/
                 {
-                    possibleItem= lastScavenging.getMyLevelItems(myLevel,Item.ItemClass.Resource,scavengeTime);
-                    if (possibleItem != null&& possibleItem.Length>0)
+                    possibleItem = lastScavenging.getMyLevelItems(myLevel, Item.ItemClass.Resource, scavengeTime);
+                    if (possibleItem != null && possibleItem.Length > 0)
 
                     {
-                        int index = (int) (rand.NextDouble() * (possibleItem.Length - 1));
+                        int index = (int)(rand.NextDouble() * (possibleItem.Length - 1));
                         Resource element = Resources.Load<Resource>(possibleItem[index].link);
                         //Debug.Log("Find" + element.name);
-                        addItemFound(element,Item.ItemClass.Resource);
-                    }
-                }else if (chance > 0.0) /*========== JUNK ===========*/
-                {
-                    possibleItem= lastScavenging.getMyLevelItems( myLevel,Item.ItemClass.Junk,scavengeTime);
-                    if (possibleItem != null&& possibleItem.Length>0)
-                    {
-                        int index = (int) (rand.NextDouble() * (possibleItem.Length - 1));
-                        Junk element = Resources.Load<Junk>(possibleItem[index].link);
-                        //Debug.Log("Find" + element.name);
-                        addItemFound(element,Item.ItemClass.Junk);
+                        addItemFound(element, Item.ItemClass.Resource);
                     }
                 }
-                
-       
+                else if (chance > 0.0) /*========== JUNK ===========*/
+                {
+                    possibleItem = lastScavenging.getMyLevelItems(myLevel, Item.ItemClass.Junk, scavengeTime);
+                    if (possibleItem != null && possibleItem.Length > 0)
+                    {
+                        int index = (int)(rand.NextDouble() * (possibleItem.Length - 1));
+                        Junk element = Resources.Load<Junk>(possibleItem[index].link);
+                        //Debug.Log("Find" + element.name);
+                        addItemFound(element, Item.ItemClass.Junk);
+                    }
+                }
+
+
             }
             else if (!hadSenario)/*========== START SENARIO ===========*/
             {
@@ -220,21 +222,21 @@ public class BackgroundTasks : MonoBehaviour
                         lastScavenging.scavengeLog.Add("You were bitten by a zombie (-10)"); //ADD log/message
                         PlayerController.Player.UpdateHealth(-10); //update heamth    
                     }
-                    
+
                 }
             }
-            
+
             PlayerController.Player.UpdateEnergy(-2);
             PlayerController.Player.UpdateHunger(-2);
             PlayerController.Player.UpdateThirst(-2);
-            
+
         }
     }
 
     private void ReturnFromScavenging()
     {
         addItemFoundToInventory(lastScavenging);
-        snackbarController.StartSnackBare("You are back from scavenging");
+        snackbarController.ShowSnackBar("You are back from scavenging");
         return;
 
         /*
@@ -248,10 +250,10 @@ public class BackgroundTasks : MonoBehaviour
             menuController.OpenMenu(scavengePopUpResultPanel);
         }
         */
-        
-       //scavengePopUpResultPanel.SetActive(true);
-       //var vv = scavengePopUpResultPanel.GetComponent<ScavengeResultsSystem>();
-       //vv.PopResult(lastScavenging);
+
+        //scavengePopUpResultPanel.SetActive(true);
+        //var vv = scavengePopUpResultPanel.GetComponent<ScavengeResultsSystem>();
+        //vv.PopResult(lastScavenging);
     }
 
     /**
@@ -260,13 +262,13 @@ public class BackgroundTasks : MonoBehaviour
      */
     private void addItemFound(Item item, Item.ItemClass itemClass)
     {
-        lastScavenging.itemsFound.Add((item,itemClass));
+        lastScavenging.itemsFound.Add((item, itemClass));
     }
 
 
     private void addItemFoundToInventory(Scavenging scavenging)
     {
-        foreach ((Item item,Item.ItemClass itemClass) in scavenging.itemsFound)
+        foreach ((Item item, Item.ItemClass itemClass) in scavenging.itemsFound)
         {
             if (itemClass == Item.ItemClass.Consumable)
             {
@@ -274,7 +276,7 @@ public class BackgroundTasks : MonoBehaviour
             }
             else if (itemClass == Item.ItemClass.Gear)
             {
-                InventoryManager.Inventory.AddItem(Instantiate(item as Gear));            
+                InventoryManager.Inventory.AddItem(Instantiate(item as Gear));
             }
             else if (itemClass == Item.ItemClass.Junk)
             {
@@ -285,11 +287,11 @@ public class BackgroundTasks : MonoBehaviour
                 InventoryManager.Inventory.AddItem(Instantiate(item as Resource));
             }
         }
-        
+
     }
-    
-    
-    
+
+
+
     /*==========================    END SCAVINGING    ==========================================*/
 
 

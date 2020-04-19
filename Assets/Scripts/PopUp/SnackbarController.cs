@@ -16,23 +16,40 @@ public class SnackbarController : MonoBehaviour
     
 
     [SerializeField] private TextMeshProUGUI text;
+    private float animDuration = 0.4f;
 
-    public void StartSnackBare(String txt)
+    public void ShowSnackBar(String txt)
     {
-        text.SetText(txt);
+        Animator anim = gameObject.GetComponent<Animator>();
         gameObject.SetActive(true);
-        StartCoroutine(Animation(this.gameObject.GetComponent<Animator>()));
+        StartCoroutine(Animation(anim, 1.5f, txt));
     }
 
-    private IEnumerator Animation(Animator animator)
+    private IEnumerator Animation(Animator anim, float showDuration, string txt)
     {
-        animator.SetBool("do",true);
-        yield return new WaitForSeconds(2);
+        while (anim.GetCurrentAnimatorStateInfo(0).IsName("show notification"))
+        {
+            yield return new WaitForSeconds(animDuration / 4f);
+        }
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("hide notification"))
+        {
+            yield return new WaitForSeconds(animDuration / 4f);
+        }
+        text.SetText(txt);
+        anim.SetBool("Hide", false);
+        anim.SetBool("Show", true);
+        yield return new WaitForSeconds(animDuration + showDuration);
+        anim.SetBool("Hide", true);
+        anim.SetBool("Show", false);
+        yield return new WaitForSeconds(animDuration);
+        anim.SetBool("Hide", false);
     }
 
+    /*
     public void ResetAnimation()
     {
         this.gameObject.GetComponent<Animator>().SetBool("do",false);
     }
+    */
 
 }
