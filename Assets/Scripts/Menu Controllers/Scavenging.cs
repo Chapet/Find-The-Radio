@@ -140,6 +140,7 @@ public class Scavenging
             if (gun.liveGear <= 0)
             {
                 inventory.RemoveItem(gun);
+                player.Equipment[(int) Gear.ItemType.Weapon] = null;
                 return false;
             }
 
@@ -172,6 +173,14 @@ public class Scavenging
             if (armorPiece.liveGear <= 0)
             {
                 inventory.RemoveItem(armorPiece);
+                for (int i = 0; i < player.Equipment.Length; i++)
+                {
+                    if (player.Equipment[i].Equals(armorPiece))
+                    {
+                        player.Equipment[i] = null;
+                        break;
+                    }
+                }
                 return false;
             }
             
