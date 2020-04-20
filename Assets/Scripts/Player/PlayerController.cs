@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
 
     public int maxCarryingSize = 4;
 
-    public Sprite[] clock_num = new Sprite[10];
+    //public Sprite[] clock_num = new Sprite[10];
 
     public StatusBarController statusBarController;
 
