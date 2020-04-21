@@ -83,7 +83,7 @@ public class InventoryTutorial : TutorialStep
         }
     }
 
-    protected override void StopTutorial()
+    public override void StopTutorial()
     {
 
         InventoryController.tabController.TabSwitcher(TabController.Tab.FoodAndDrink);

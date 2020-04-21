@@ -43,9 +43,5 @@ public class BedTutorial : TutorialStep
                 break;
         }
     }
-
-    protected override void StopTutorial()
-    {
-        base.StopTutorial();
-    }
+    
 }

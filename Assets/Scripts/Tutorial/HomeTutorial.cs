@@ -73,8 +73,5 @@ public class HomeTutorial : TutorialStep
         }
     }
 
-    protected override void StopTutorial()
-    {
-        base.StopTutorial();
-    }
+
 }

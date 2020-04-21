@@ -23,7 +23,7 @@ public class BackgroundTasks : MonoBehaviour
     [SerializeField] private GameObject scavengePopUpResultPanel;
     [SerializeField] private MenuController menuController;
     [SerializeField] private BunkerController bunkerController;
-    [SerializeField] private SnackbarController snackbarController;
+    [SerializeField] public SnackbarController snackbarController;
 
     private float hStep = 0f;
     private float tStep = 0f;
@@ -120,6 +120,8 @@ public class BackgroundTasks : MonoBehaviour
 
         scavengingPalier = stepsTime;
         IsScavenging = true;
+        snackbarController.ShowSnackBar("You'll be back from scavening in "+deltaT.Minutes+"m:"+deltaT.Seconds+"s");
+        
 
 
 
@@ -134,7 +136,7 @@ public class BackgroundTasks : MonoBehaviour
         for (; actualScavengingStep <= totalScavengingSteps && now >= scavengingPalier[actualScavengingStep]; actualScavengingStep++)
         {
             Debug.Log("*******    SCAVENGING STEP " + actualScavengingStep + "/" + totalScavengingSteps + "**************");
-
+            //TODO:update clock
 
             var rand = new System.Random();
             double chance = rand.NextDouble(); // 0.0 <= chance < 1.0

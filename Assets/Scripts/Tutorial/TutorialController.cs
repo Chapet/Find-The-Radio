@@ -24,7 +24,11 @@ public class TutorialController : MonoBehaviour
     private int last_tutorial_current_step = -1;
 
     [SerializeField] private BunkerController bunkerController;
+
+    [Tooltip("Tutorial Bow Without skip button")] 
+    [SerializeField] private GameObject tutorialBoxWithoutSkip;
     [SerializeField]private Button nextDialog;
+    [SerializeField] private Button skipTutorial;
     [SerializeField] private TextMeshProUGUI dialogText;
 
     [SerializeField] private List<TutorialStep> tutorialSteps;
@@ -57,6 +61,11 @@ public class TutorialController : MonoBehaviour
         return nextDialog;
     }
 
+    public Button GetSkipTutorialButton()
+    {
+        return skipTutorial;
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -76,9 +85,7 @@ public class TutorialController : MonoBehaviour
             else if (tutorialSteps.Count <= TUTORIAL_CURRENT_STEP)
             {
                 //=============    END OF TUTORIAL    ==============
-                backPanel.SetActive(false);
-                PlayerController.IS_FIRST_GAME = false;
-                this.gameObject.SetActive(false);
+                EndOfTutorial();
             }
             
         }
@@ -88,5 +95,17 @@ public class TutorialController : MonoBehaviour
     public BunkerController GetBunkerCotnroller()
     {
         return bunkerController;
+    }
+
+    public void SkipTutorial()
+    {
+        EndOfTutorial();
+    }
+
+    private void EndOfTutorial()
+    {
+        backPanel.SetActive(false);
+        PlayerController.IS_FIRST_GAME = false;
+        this.gameObject.SetActive(false);
     }
 }

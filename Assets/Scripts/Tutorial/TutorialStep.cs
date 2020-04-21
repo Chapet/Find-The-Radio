@@ -48,7 +48,7 @@ public abstract class TutorialStep:MonoBehaviour
         dialogText.SetText(s);
     }
 
-    protected virtual void StopTutorial()
+    public virtual void StopTutorial()
     {
         TutorialController.TUTORIAL_CONTROLER.GetBunkerCotnroller().GoToBunker();
         this.gameObject.SetActive(false);

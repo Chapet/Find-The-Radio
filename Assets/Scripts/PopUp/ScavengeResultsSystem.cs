@@ -17,9 +17,8 @@ public class ScavengeResultsSystem : MonoBehaviour
     public GameObject scavengingLogprefab;
     public GameObject itemContent;
     public GameObject scavengingLogContent;
-    
+    public TextMeshProUGUI titlePanel;
     private List<GameObject> inventorySlots= new List<GameObject>();
-    public TextMeshProUGUI message;
     private PlayerController player;
 
     public StatusBar healthBar;
@@ -47,6 +46,7 @@ public class ScavengeResultsSystem : MonoBehaviour
         InscSlider(hungerBar,HungerBarGoal);
         InscSlider(thirstBar,thirstBarGoal);
         InscSlider(energyBar,energyBarGoal);
+        UpdateTitle();
     }
 
     private void InscSlider(StatusBar statusBar, int goal)
@@ -65,12 +65,25 @@ public class ScavengeResultsSystem : MonoBehaviour
     {
         PopResult(BackgroundTasks.Tasks.lastScavenging);
     }
+    
+    
+
+    private void UpdateTitle()
+    {
+        TimeSpan totalDt = BackgroundTasks.Tasks.EndScavenging - BackgroundTasks.Tasks.StartScavenging;
+        TimeSpan myDelta =DateTime.Now - BackgroundTasks.Tasks.StartScavenging;
+        int pourcentage = (int)(((double)((double) myDelta.Ticks / (double) totalDt.Ticks)) * 100);
+
+        int show=Math.Min(pourcentage, (int) (pourcentage / 10))*10;
+            
+        titlePanel.SetText("Summary of your Journey ("+Math.Min(show,100)+"%)");
+    }
 
     public void PopResult(Scavenging scavenging)
     {
 
         clearInventorySlot();
-        
+
         //add show all Item
         foreach (Item item in scavenging.GetItemsFound())
         {

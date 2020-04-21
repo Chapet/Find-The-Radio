@@ -42,14 +42,13 @@ public class ScavengeTutorial : TutorialStep
             case 3:
                 this.SetText("Gears can protect you from certain dangers.");
                 break;
+            case 4:
+                this.SetText("During the scavening, you can't sleep, use items or craft.");
+                break;
             default:
                 StopTutorial();
                 break;
         }
     }
-
-    protected override void StopTutorial()
-    {
-        base.StopTutorial();
-    }
+    
 }

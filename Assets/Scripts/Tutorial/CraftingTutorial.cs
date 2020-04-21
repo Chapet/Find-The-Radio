@@ -61,8 +61,4 @@ public class CraftingTutorial : TutorialStep
         }
     }
 
-    protected override void StopTutorial()
-    {
-        base.StopTutorial();
-    }
 }
