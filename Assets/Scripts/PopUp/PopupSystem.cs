@@ -18,11 +18,11 @@ public class PopupSystem : MonoBehaviour
         ZombieLot1, GroceryStore, ClothingStore, HuntingStore, Parc, OutdoorStore, PoliceStation, Pharmacy, Radio, RadioParts
     };
 
+
     public void PopMessage(Popup popup) 
     {
         bunk.GoToBunker();
-        popPanel.SetActive(true);
-        backPanel.SetActive(true);
+        MenuController.Controller.OpenMenu(gameObject);
 
         switch (popup) 
         {
@@ -106,5 +106,10 @@ public class PopupSystem : MonoBehaviour
                 okButton.onClick.AddListener(delegate () { PlayerController.Win(); });
                 break;
         }
+    }
+
+    public void OkBtnClicked()
+    {
+        MenuController.Controller.ExitMenu(gameObject);
     }
 }

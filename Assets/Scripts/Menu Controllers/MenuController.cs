@@ -11,10 +11,12 @@ public class MenuController : MonoBehaviour
     private Animator openCloseMenuAnimator;
     private float animDuration = 10f / 60f;
     private static MenuController instance;
+    public static MenuController Controller;
 
     void Awake()
     {
         instance = this;
+        Controller = this;
     }
 
     public void ExitMenu(GameObject panel)

@@ -136,6 +136,7 @@ public class BackgroundTasks : MonoBehaviour
         for (; actualScavengingStep <= totalScavengingSteps && now >= scavengingPalier[actualScavengingStep]; actualScavengingStep++)
         {
             Debug.Log("*******    SCAVENGING STEP " + actualScavengingStep + "/" + totalScavengingSteps + "**************");
+            GameController.Controller.UpdateGameClock(0.5f);
             //TODO:update clock
 
             var rand = new System.Random();
