@@ -20,6 +20,7 @@ public class SnackbarController : MonoBehaviour
 
     public void ShowSnackBar(String txt)
     {
+		this.gameObject.SetActive(true);
         Animator anim = gameObject.GetComponent<Animator>();
         gameObject.SetActive(true);
         StartCoroutine(Animation(anim, 1.5f, txt));
@@ -39,6 +40,7 @@ public class SnackbarController : MonoBehaviour
         anim.SetBool("Show", false);
         yield return new WaitForSeconds(animDuration);
         anim.SetBool("Hide", false);
+		this.gameObject.SetActive(false);
     }
 
     /*

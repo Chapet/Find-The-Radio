@@ -40,6 +40,8 @@ public class ScavengeResultsSystem : MonoBehaviour
         Array.Copy(player.currentStats, 0, goals, 0, player.currentStats.Length);
     }
 
+    private int nbrItemFound = 0;
+    private int nbrLog = 0;
     public void FixedUpdate()
     {
         InscSlider(healthBar,healthBarGoal);
@@ -47,6 +49,41 @@ public class ScavengeResultsSystem : MonoBehaviour
         InscSlider(thirstBar,thirstBarGoal);
         InscSlider(energyBar,energyBarGoal);
         UpdateTitle();
+        
+        if (BackgroundTasks.Tasks.lastScavenging!=null && BackgroundTasks.Tasks.lastScavenging.GetItemsFound().Count != nbrItemFound)
+        {
+            clearInventorySlot();
+
+            //add show all Item
+            foreach (Item item in BackgroundTasks.Tasks.lastScavenging.GetItemsFound())
+            {
+                GameObject obj = Instantiate(slotPrefab);
+                InventorySlot slot = obj.GetComponent<InventorySlot>();
+                slot.AddItem(item);
+                obj.transform.SetParent(itemContent.transform, false);
+            
+                inventorySlots.Add(obj);
+            }
+
+            nbrItemFound = BackgroundTasks.Tasks.lastScavenging.GetItemsFound().Count;
+        }
+
+        
+        
+        //=============    ADD SCAVENGING LOG    ===================
+        if (BackgroundTasks.Tasks.lastScavenging!=null && BackgroundTasks.Tasks.lastScavenging.scavengeLog.Count != nbrLog)
+        {
+            foreach (string log in BackgroundTasks.Tasks.lastScavenging.scavengeLog)
+            {
+                GameObject obj = Instantiate(scavengingLogprefab);
+                ScavengeLog scavengeLog = obj.GetComponent<ScavengeLog>();
+                scavengeLog.SetText(log);
+
+                obj.transform.SetParent(scavengingLogContent.transform, false);
+            }
+
+            nbrLog = BackgroundTasks.Tasks.lastScavenging.scavengeLog.Count;
+        }
     }
 
     private void InscSlider(StatusBar statusBar, int goal)
@@ -63,6 +100,9 @@ public class ScavengeResultsSystem : MonoBehaviour
 
     public void OnEnable()
     {
+        UpdateTitle();
+        
+
         PopResult(BackgroundTasks.Tasks.lastScavenging);
     }
     
@@ -70,32 +110,24 @@ public class ScavengeResultsSystem : MonoBehaviour
 
     private void UpdateTitle()
     {
-        TimeSpan totalDt = BackgroundTasks.Tasks.EndScavenging - BackgroundTasks.Tasks.StartScavenging;
-        TimeSpan myDelta =DateTime.Now - BackgroundTasks.Tasks.StartScavenging;
-        int pourcentage = (int)(((double)((double) myDelta.Ticks / (double) totalDt.Ticks)) * 100);
+        
+            TimeSpan totalDt = BackgroundTasks.Tasks.EndScavenging - BackgroundTasks.Tasks.StartScavenging;
+            TimeSpan myDelta = DateTime.Now - BackgroundTasks.Tasks.StartScavenging;
+            int pourcentage = (int) (((double) ((double) myDelta.Ticks / (double) totalDt.Ticks)) * 100);
 
-        int show=Math.Min(pourcentage, (int) (pourcentage / 10))*10;
-            
-        titlePanel.SetText("Summary of your Journey ("+Math.Min(show,100)+"%)");
+            int show = Math.Min(pourcentage, (int) (pourcentage / 10)) * 10;
+
+            titlePanel.SetText("Summary of your Journey (" + Math.Min(show, 100) + "%)");
     }
 
     public void PopResult(Scavenging scavenging)
     {
 
         clearInventorySlot();
-
-        //add show all Item
-        foreach (Item item in scavenging.GetItemsFound())
-        {
-            GameObject obj = Instantiate(slotPrefab);
-            InventorySlot slot = obj.GetComponent<InventorySlot>();
-            slot.AddItem(item);
-            obj.transform.SetParent(itemContent.transform, false);
-            
-            inventorySlots.Add(obj);
-        }
         
-        //menuController.OpenMenu(gameObject);
+        //Force to reload itemfound and log
+        nbrItemFound = 0;
+        nbrLog = 0;
         
         //=============    REMOVE EXEMPLE TEXTE    ===================
         for (int i=0 ;i< scavengingLogContent.transform.childCount;i++)
@@ -104,17 +136,6 @@ public class ScavengeResultsSystem : MonoBehaviour
         }
 
         
-        //=============    ADD SCAVENGING LOG    ===================
-
-
-        foreach (string log in scavenging.scavengeLog)
-        {
-            GameObject obj = Instantiate(scavengingLogprefab);
-            ScavengeLog scavengeLog = obj.GetComponent<ScavengeLog>();
-            scavengeLog.SetText(log);
-
-            obj.transform.SetParent(scavengingLogContent.transform, false);
-        }
 
         //=============    ANIMATION    ================
         healthBar.SetValue(scavenging.oldStatusBar.health);
@@ -128,19 +149,10 @@ public class ScavengeResultsSystem : MonoBehaviour
         thirstBarGoal = player.GetThirst();
         energyBarGoal = player.GetEnergy();
 
-        if (!BackgroundTasks.Tasks.IsScavenging && BackgroundTasks.Tasks.lastScavenging != null)
-        {
-            BackgroundTasks.Tasks.lastScavenging = null;
-        }
-
     }
 
     private void clearInventorySlot()
     {
-        /*foreach (GameObject slot in inventorySlots)
-        {
-            Destroy(slot);
-        }*/
         for (int i = 0; i < itemContent.transform.childCount; i++)
         {
             Destroy(itemContent.transform.GetChild(i).gameObject);
@@ -150,7 +162,15 @@ public class ScavengeResultsSystem : MonoBehaviour
 
     public void ExitBtnClicked()
     {
+        if (!BackgroundTasks.Tasks.IsScavenging && BackgroundTasks.Tasks.lastScavenging != null)
+        {
+            BackgroundTasks.Tasks.lastScavenging = null;
+        }
+
+        nbrItemFound = 0;
+        nbrLog = 0;
         menuController.ExitMenu(this.gameObject);
+        
     } 
     
 }
