@@ -100,10 +100,11 @@ public class ScavengeResultsSystem : MonoBehaviour
 
     public void OnEnable()
     {
+        backPanel.SetActive(true);
         UpdateTitle();
         
-
         PopResult(BackgroundTasks.Tasks.lastScavenging);
+        
     }
     
     
