@@ -17,6 +17,9 @@ public class ScavengingController : MonoBehaviour
     public Color BrightYellow;
     public Color DarkYellow;
     public TMP_Text scavengeText;
+    public TMP_Text ETAText;
+    public TMP_Text AddDayText;
+    public TMP_Text SliderText;
     public GameObject Slider;
     private float scavengeTime;
     private PlayerController player;
@@ -55,9 +58,29 @@ public class ScavengingController : MonoBehaviour
         scavengeTime = (Slider.GetComponent<Slider>().value) / 2;
         String hours = Math.Truncate(scavengeTime).ToString("00");
         String minutes = Math.Truncate((scavengeTime - Math.Truncate(scavengeTime)) * 60).ToString("00");
-        scavengeText.SetText("Scavenge for : " + hours + "h" + minutes);
+        SliderText.SetText(hours + "h" + minutes);
+        UpdateETA();
     }
-    
+
+    private void UpdateETA()
+    {
+        double eta = GameController.Controller.gameClock + scavengeTime;
+        string etaHoursStr;
+        string etaMinutesStr;
+        if (eta >= 24)
+        {
+            eta = eta % 24;
+            AddDayText.SetText("(+1 day)");
+        }
+        else
+        {
+            AddDayText.SetText("");
+        }
+        etaHoursStr = Math.Truncate(eta).ToString("00");
+        etaMinutesStr = Math.Truncate((eta - Math.Truncate(eta)) * 60).ToString("00");
+        ETAText.SetText(etaHoursStr + "h" + etaMinutesStr);
+    }
+
 
     public void ExitBtnClicked()
     {
@@ -67,9 +90,8 @@ public class ScavengingController : MonoBehaviour
     public void ScavengingBtnClicked()
     {
         //Scavenge();
-        BackgroundTasks.Tasks.StartNewScavenging(scavengeTime);
         menuController.ExitMenu(gameObject);
-
+        BackgroundTasks.Tasks.StartNewScavenging(scavengeTime);
     }
 
 

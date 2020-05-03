@@ -4,11 +4,11 @@ public class AutoRegen : MonoBehaviour
 {
     PlayerController player;
 
-    public float timeDelta = 5f;
-    public int inc = 5;
-    public int threshold = 75;
+    public float timeDelta;
+    public int inc;
+    public int threshold;
 
-    public float lastInc = 0;
+    private float lastInc = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +26,10 @@ public class AutoRegen : MonoBehaviour
             {
                 player.UpdateHealth(inc);
             }
+        }
+        else
+        {
+            lastInc = 0;
         }
     }
 

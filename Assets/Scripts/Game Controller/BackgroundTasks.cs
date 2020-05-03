@@ -27,6 +27,7 @@ public class BackgroundTasks : MonoBehaviour
 
     private float hStep = 0f;
     private float tStep = 0f;
+    private float sStep = 0f;
 
     void Awake()
     {
@@ -48,6 +49,7 @@ public class BackgroundTasks : MonoBehaviour
             {
                 hStep += sleepInc * hungerMultiplier;
                 tStep += sleepInc * thirstMultiplier;
+                sStep += sleepInc;
                 BackgroundSleep();
             }
         }
@@ -422,14 +424,18 @@ public class BackgroundTasks : MonoBehaviour
     {
         IsSleeping = true;
         startSleeping = DateTime.Now;
-        endSleeping = startSleeping.AddSeconds(sleepTime * updateStep);
+        endSleeping = startSleeping.AddSeconds(2 * sleepTime * updateStep);
     }
 
     private void BackgroundSleep()
     {
         if (startSleeping < endSleeping)
         {
-            PlayerController.Player.UpdateEnergy(sleepInc);
+            if (sStep >= 1f)
+            {
+                PlayerController.Player.UpdateEnergy((int)sStep);
+                sStep = 0f;
+            }
             if (hStep >= 1f)
             {
                 PlayerController.Player.UpdateHunger(-1 * (int)hStep);
@@ -441,7 +447,7 @@ public class BackgroundTasks : MonoBehaviour
                 tStep = 0f;
             }
             startSleeping = startSleeping.AddSeconds(updateStep);
-            GameController.Controller.UpdateGameClock(1);
+            GameController.Controller.UpdateGameClock(0.5f);
         }
         else
         {
