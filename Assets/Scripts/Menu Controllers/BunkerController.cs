@@ -37,6 +37,7 @@ public class BunkerController : MonoBehaviour
         cheatPanel.SetActive(false);
         craftingPanel.SetActive(false);
         backPanel.SetActive(false);
+        scavengingPopUpResultPanel.SetActive(false);
     }
 
     public void SleepButtonClicked()

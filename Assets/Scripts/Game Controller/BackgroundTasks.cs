@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -222,6 +222,7 @@ public class BackgroundTasks : MonoBehaviour
                             }
                             else
                             {
+                                lastScavenging.scavengeLog.Add("You were attacked by a large group of zombies!");
                                 pop.PopMessage(PopupSystem.Popup.ZombieLot0);
                             }
                         }
@@ -274,7 +275,8 @@ public class BackgroundTasks : MonoBehaviour
                                 pop.PopMessage(PopupSystem.Popup.ZombieFew1);
                             }
                             else
-                            {
+                            {   
+                                lastScavenging.scavengeLog.Add("A bunch of zombies attacked you");
                                 pop.PopMessage(PopupSystem.Popup.ZombieFew0);
                             }
                         }
@@ -317,6 +319,7 @@ public class BackgroundTasks : MonoBehaviour
                             }
                             else
                             {
+                                lastScavenging.scavengeLog.Add("A zombie attacked you");
                                 pop.PopMessage(PopupSystem.Popup.ZombieOne0);
                             }
                         }
@@ -362,23 +365,18 @@ public class BackgroundTasks : MonoBehaviour
         addItemFoundToInventory(lastScavenging);
         hadSenario = false;
         snackbarController.ShowSnackBar("You are back from scavenging");
-        return;
-
-        /*
-        if (scavengePopUpResultPanel.activeSelf)
+        if (pop.gameObject.activeSelf)
         {
-            scavengePopUpResultPanel.GetComponent<ScavengeResultsSystem>().PopResult(lastScavenging);   
+            pop.OkBtnClicked();
         }
-        else
-        {
-            bunkerController.GoToBunker();
-            menuController.OpenMenu(scavengePopUpResultPanel);
-        }
-        */
 
-        //scavengePopUpResultPanel.SetActive(true);
-        //var vv = scavengePopUpResultPanel.GetComponent<ScavengeResultsSystem>();
-        //vv.PopResult(lastScavenging);
+        if (!scavengePopUpResultPanel.activeSelf)
+        {
+            bunkerController.ScavengeButtonClicked();
+            
+        }
+
+
     }
 
     /**
