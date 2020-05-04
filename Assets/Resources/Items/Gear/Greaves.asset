@@ -18,12 +18,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f4eaed167bd2440478490f5ce4f0b2c8, type: 2}
   name: Greaves
   filename: Greaves
-  image: {fileID: 21300000, guid: d9e0fefb84ab941598640860872a3412, type: 3}
+  image: {fileID: 21300000, guid: e313c259e19f74ad589543de445e0ac4, type: 3}
   itemID: 24
   description: Iron Greaves from Minecraft
   maskColor:
     serializedVersion: 2
     rgba: 4294967295
+  liveGear: 100
   type: 3
   scavengRate: 0
   scavengSize: 0
