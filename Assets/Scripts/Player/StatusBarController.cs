@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 //using System.Linq;
 using UnityEngine;
 
@@ -10,8 +11,11 @@ public class StatusBarController : MonoBehaviour
     }
 
     private List<StatusBar>[] bars;
+    public int[] prevStats;
 
     private PlayerController player = PlayerController.Player;
+
+    public bool statsChanged;
 
     private void Awake()
     {
@@ -22,6 +26,23 @@ public class StatusBarController : MonoBehaviour
     private void Start()
     {
         player = PlayerController.Player;
+        prevStats = new int[player.currentStats.Length];
+        Array.Copy(player.currentStats, prevStats, prevStats.Length);
+    }
+
+    private void FixedUpdate()
+    {
+        statsChanged = StatsChanged();
+        if (statsChanged)
+        {
+            for (int i = 0; i < prevStats.Length; i++)
+            {
+                if (prevStats[i] != player.currentStats[i])
+                {
+                    UpdateStatusBars((StatType) i);
+                }
+            }
+        }
     }
 
     public void UpdateStatusBars(StatType type)
@@ -31,12 +52,24 @@ public class StatusBarController : MonoBehaviour
             s.SetValue(player.currentStats[(int)type]);
             //Debug.Log(s + " set to " + player.currentStats[(int)type]);
         }
-
+        Array.Copy(player.currentStats, prevStats, prevStats.Length);
         //Debug.Log("Updating status bars of type "+type);
     }
 
     public void AddStatusBar(StatusBar s)
     {
         bars[(int) s.Type].Add(s);
+    }
+
+    private bool StatsChanged()
+    {
+        for (int i=0; i<prevStats.Length; i++)
+        {
+            if (prevStats[i] != player.currentStats[i])
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
