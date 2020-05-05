@@ -42,7 +42,7 @@ public class Introduction : MonoBehaviour
         
         initalPosition = backgroundBunker.transform.position;
         tempPosition = initalPosition;
-        tempPosition.y -= 10f;
+        tempPosition.y -= 11f;
         backgroundBunker.transform.position = tempPosition;
 
 
