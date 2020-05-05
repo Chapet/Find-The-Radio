@@ -8322,6 +8322,7 @@ MonoBehaviour:
   TEXT_MAX_CARACTERE: 50
   backgroundBunker: {fileID: 1803838805}
   fixedPanel: {fileID: 219790761}
+  headPanel: {fileID: 872526662}
   _tutorialController: {fileID: 959947272}
 --- !u!1 &443784781
 GameObject:
@@ -17522,8 +17523,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ceci est un petit test pour le tutorial et surtout pour voir si on sait
-    mettre pas mal de texte dans ce rectange ezrzkjerzhrzrzkrzhkjrhzkrzhkrzrz
+  m_text: You can recuperate energy in your sleep. But don't forget that time passes
+    during this time...
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
