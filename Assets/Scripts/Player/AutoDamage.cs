@@ -14,7 +14,7 @@ public class AutoDamage : MonoBehaviour
 
     public float timeDelta;
     public int inc;
-    public float lastInc = 0;
+    private float lastInc = 0;
 
     private PlayerController player;
 

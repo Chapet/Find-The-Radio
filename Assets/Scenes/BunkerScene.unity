@@ -8236,7 +8236,6 @@ MonoBehaviour:
   energyThreshold: 8
   timeDelta: 10
   inc: 1
-  lastInc: 0
 --- !u!1 &440267811
 GameObject:
   m_ObjectHideFlags: 0
