@@ -15,6 +15,7 @@ public class Introduction : MonoBehaviour
     [SerializeField] private ScrollRect _scrollRect;
     [SerializeField] private int TEXT_MAX_CARACTERE;
     [SerializeField] private GameObject backgroundBunker;
+    [SerializeField] private GameObject fixedPanel;
     private Vector3 initalPosition;
     private Vector3 tempPosition;
 
@@ -39,6 +40,7 @@ public class Introduction : MonoBehaviour
     {
         this.SetText(introTxt[0]);
         _scrollRect.enabled = false;
+        fixedPanel.SetActive(false);
         
         initalPosition = backgroundBunker.transform.position;
         tempPosition = initalPosition;
@@ -93,6 +95,7 @@ public class Introduction : MonoBehaviour
             {
                 //FIN DE L'INTRO
                 this.gameObject.SetActive(false);
+                fixedPanel.SetActive(true);
                 //this.gameObject.transform.position=new Vector3(0,421);//on resize pour le tutorial
                 backgroundBunker.transform.position = initalPosition;
             
