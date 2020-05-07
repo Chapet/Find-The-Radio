@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BackgroundTasks : MonoBehaviour
 {
@@ -15,6 +16,11 @@ public class BackgroundTasks : MonoBehaviour
     public float hungerMultiplier;
     public float thirstMultiplier;
     public PopupSystem pop;
+
+    public SpriteRenderer bunker;
+    public Sprite bunkerWithoutLights;
+    public Sprite bunkerWithLights;
+    public GameObject filtreSombre;
 
     public bool IsScavenging { get; set; }
     public DateTime StartScavenging { get; private set; }
@@ -86,6 +92,11 @@ public class BackgroundTasks : MonoBehaviour
 
     public void StartNewScavenging(double scavengeTime)
     {
+        Debug.Log("Lights off");
+        bunker.sprite = bunkerWithoutLights;
+        filtreSombre.SetActive(true);
+
+
         this.lastScavenging = new Scavenging();
 
         actualScavengingStep = 0;
@@ -362,6 +373,11 @@ public class BackgroundTasks : MonoBehaviour
 
     private void ReturnFromScavenging()
     {
+
+        Debug.Log("Lights on");
+        bunker.sprite = bunkerWithLights;
+        filtreSombre.SetActive(false);
+
         addItemFoundToInventory(lastScavenging);
         hadSenario = false;
         snackbarController.ShowSnackBar("You are back from scavenging");
