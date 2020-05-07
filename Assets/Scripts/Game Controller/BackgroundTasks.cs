@@ -437,6 +437,11 @@ public class BackgroundTasks : MonoBehaviour
     public void Sleep(float sleepTime)
     {
         IsSleeping = true;
+
+        Debug.Log("Lights off");
+        bunker.sprite = bunkerWithoutLights;
+        filtreSombre.SetActive(true);
+
         startSleeping = DateTime.Now;
         endSleeping = startSleeping.AddSeconds(2 * sleepTime * updateStep);
     }
@@ -466,6 +471,11 @@ public class BackgroundTasks : MonoBehaviour
         else
         {
             IsSleeping = false;
+
+            Debug.Log("Lights on");
+            bunker.sprite = bunkerWithLights;
+            filtreSombre.SetActive(false);
+
             hStep = 0f;
             tStep = 0f;
         }
