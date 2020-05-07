@@ -21,6 +21,7 @@ public class BackgroundTasks : MonoBehaviour
     public Sprite bunkerWithoutLights;
     public Sprite bunkerWithLights;
     public GameObject filtreSombre;
+    public GameObject lights;
 
     public bool IsScavenging { get; set; }
     public DateTime StartScavenging { get; private set; }
@@ -95,6 +96,7 @@ public class BackgroundTasks : MonoBehaviour
         Debug.Log("Lights off");
         bunker.sprite = bunkerWithoutLights;
         filtreSombre.SetActive(true);
+        lights.SetActive(false);
 
 
         this.lastScavenging = new Scavenging();
@@ -377,6 +379,7 @@ public class BackgroundTasks : MonoBehaviour
         Debug.Log("Lights on");
         bunker.sprite = bunkerWithLights;
         filtreSombre.SetActive(false);
+        lights.SetActive(true);
 
         addItemFoundToInventory(lastScavenging);
         hadSenario = false;
@@ -441,6 +444,7 @@ public class BackgroundTasks : MonoBehaviour
         Debug.Log("Lights off");
         bunker.sprite = bunkerWithoutLights;
         filtreSombre.SetActive(true);
+        lights.SetActive(false);
 
         startSleeping = DateTime.Now;
         endSleeping = startSleeping.AddSeconds(2 * sleepTime * updateStep);
@@ -475,6 +479,7 @@ public class BackgroundTasks : MonoBehaviour
             Debug.Log("Lights on");
             bunker.sprite = bunkerWithLights;
             filtreSombre.SetActive(false);
+            lights.SetActive(true);
 
             hStep = 0f;
             tStep = 0f;
