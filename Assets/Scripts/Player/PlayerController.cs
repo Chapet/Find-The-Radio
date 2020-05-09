@@ -172,7 +172,6 @@ public class PlayerController : MonoBehaviour
     {
         if (currentStats[(int) StatType.Health] < 1)
         {
-            pop.PopMessage(PopupSystem.Popup.Death);
             GameController.ResetGame();
             SceneManager.LoadScene(0);
         }

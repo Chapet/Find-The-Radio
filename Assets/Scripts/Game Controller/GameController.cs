@@ -25,6 +25,7 @@ public class GameController : MonoBehaviour
     public Animator transitionAnim;
     public GameData loaded;
     [SerializeField] private Introduction _introduction;
+    public PopupSystem pop;
 
     public static bool NewGame { get; set; }
 
@@ -65,6 +66,7 @@ public class GameController : MonoBehaviour
         Save();
     }
 
+    private bool dead = false;
     private void FixedUpdate()
     {
         if(timePrevSave >= autoSaveTiming - Time.fixedDeltaTime)
@@ -73,6 +75,12 @@ public class GameController : MonoBehaviour
             Debug.Log("Autosave ...");
         }
         timePrevSave = (timePrevSave + Time.fixedDeltaTime) % autoSaveTiming;
+        
+        if (PlayerController.Player.GetHealth()<=0&&dead==false)
+        {
+            dead = true;
+            pop.PopMessage(PopupSystem.Popup.Death);
+        }
     }
 
     public static void ResetGame()

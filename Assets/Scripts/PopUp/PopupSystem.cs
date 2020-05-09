@@ -39,7 +39,7 @@ public class PopupSystem : MonoBehaviour
                 break;
             case Popup.Death:
                 textPopupMsg.text = "   You were unable to survive in this harsh world. Your story ends here.";
-                okButton.onClick.AddListener(delegate () { player.UpdateHealth(-100); });
+                okButton.onClick.AddListener(delegate () { player.UpdateHealth(-100); player.Death();  });
                 okButton.gameObject.SetActive(true);
                 break;
             case Popup.ZombieOne0: //event lvl 1
