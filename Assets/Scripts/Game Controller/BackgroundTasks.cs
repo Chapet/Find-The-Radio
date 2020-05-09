@@ -93,11 +93,7 @@ public class BackgroundTasks : MonoBehaviour
 
     public void StartNewScavenging(double scavengeTime)
     {
-        Debug.Log("Lights off");
-        bunker.sprite = bunkerWithoutLights;
-        filtreSombre.SetActive(true);
-        lights.SetActive(false);
-
+        SwitchLightsOff();
 
         this.lastScavenging = new Scavenging();
 
@@ -145,6 +141,8 @@ public class BackgroundTasks : MonoBehaviour
 
     private void Scavenge(DateTime now)
     {
+        SwitchLightsOff();
+
         for (; actualScavengingStep <= totalScavengingSteps && now >= scavengingPalier[actualScavengingStep]; actualScavengingStep++)
         {
             Debug.Log("*******    SCAVENGING STEP " + actualScavengingStep + "/" + totalScavengingSteps + "**************");
@@ -362,10 +360,7 @@ public class BackgroundTasks : MonoBehaviour
     private void ReturnFromScavenging()
     {
 
-        Debug.Log("Lights on");
-        bunker.sprite = bunkerWithLights;
-        filtreSombre.SetActive(false);
-        lights.SetActive(true);
+        SwitchLightsOn();
 
         addItemFoundToInventory(lastScavenging);
         hadSenario = false;
@@ -427,10 +422,7 @@ public class BackgroundTasks : MonoBehaviour
     {
         IsSleeping = true;
 
-        Debug.Log("Lights off");
-        bunker.sprite = bunkerWithoutLights;
-        filtreSombre.SetActive(true);
-        lights.SetActive(false);
+        SwitchLightsOff();
 
         startSleeping = DateTime.Now;
         endSleeping = startSleeping.AddSeconds(2 * sleepTime * updateStep);
@@ -462,10 +454,7 @@ public class BackgroundTasks : MonoBehaviour
         {
             IsSleeping = false;
 
-            Debug.Log("Lights on");
-            bunker.sprite = bunkerWithLights;
-            filtreSombre.SetActive(false);
-            lights.SetActive(true);
+            SwitchLightsOn();
 
             hStep = 0f;
             tStep = 0f;
@@ -476,9 +465,6 @@ public class BackgroundTasks : MonoBehaviour
     {
         StartCoroutine(DelayedUse(delay, toUse));
     }
-
-
-
 
     private IEnumerator DelayedUse(float delay, Consumable cons)
     {
@@ -493,4 +479,22 @@ public class BackgroundTasks : MonoBehaviour
 
         yield return null;
     }
+
+    /*==========================    Switch lights    ==========================================*/
+    private void SwitchLightsOn()
+    {
+        Debug.Log("Lights on");
+        bunker.sprite = bunkerWithLights;
+        filtreSombre.SetActive(false);
+        lights.SetActive(true);
+    }
+
+    private void SwitchLightsOff()
+    {
+        Debug.Log("Lights off");
+        bunker.sprite = bunkerWithoutLights;
+        filtreSombre.SetActive(true);
+        lights.SetActive(false);
+    }
+
 }

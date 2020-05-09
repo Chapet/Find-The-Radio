@@ -60,6 +60,8 @@ public class Introduction : MonoBehaviour
     // Update is called once per frame
     public void StartIntroduction()
     {
+        fixedPanel.SetActive(false);
+        headPanel.SetActive(false);
         this.gameObject.SetActive(true);   
         this.SetText(introTxt[0]);
         
