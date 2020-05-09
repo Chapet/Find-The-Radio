@@ -497,7 +497,6 @@ public class BackgroundTasks : MonoBehaviour
     /*==========================    Switch lights    ==========================================*/
     private void SwitchLightsOn()
     {
-        Debug.Log("Lights on");
         bunker.sprite = bunkerWithLights;
         filtreSombre.SetActive(false);
         lights.SetActive(true);
@@ -505,7 +504,6 @@ public class BackgroundTasks : MonoBehaviour
 
     private void SwitchLightsOff()
     {
-        Debug.Log("Lights off");
         bunker.sprite = bunkerWithoutLights;
         filtreSombre.SetActive(true);
         lights.SetActive(false);

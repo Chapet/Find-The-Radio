@@ -125,7 +125,7 @@ public class Scavenging
 
 
         /*======Junk=====*/
-        (link: "Items/Junks/Grass", minLevel: 0, itemType: Item.ItemClass.Junk, minTimeOut: 0.0,weight:1),
+        //(link: "Items/Junks/Grass", minLevel: 0, itemType: Item.ItemClass.Junk, minTimeOut: 0.0,weight:1),
 
     };
     
