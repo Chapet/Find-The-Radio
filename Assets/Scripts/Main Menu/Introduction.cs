@@ -43,8 +43,6 @@ public class Introduction : MonoBehaviour
     {
         this.SetText(introTxt[0]);
         _scrollRect.enabled = false;
-        fixedPanel.SetActive(false);
-        headPanel.SetActive(false);
         
         initalPosition = backgroundBunker.transform.position;
         tempPosition = initalPosition;
@@ -58,6 +56,8 @@ public class Introduction : MonoBehaviour
     // Update is called once per frame
     public void StartIntroduction()
     {
+        fixedPanel.SetActive(false);
+        headPanel.SetActive(false);
         this.gameObject.SetActive(true);   
         this.SetText(introTxt[0]);
         
