@@ -17,8 +17,9 @@ public class Introduction : MonoBehaviour
     [SerializeField] private GameObject backgroundBunker;
     [SerializeField] private GameObject fixedPanel;
     [SerializeField] private GameObject headPanel;
-    
-    
+    [SerializeField] private GameObject lightsPanel;
+
+
     private Vector3 initalPosition;
     private Vector3 tempPosition;
 
@@ -43,6 +44,9 @@ public class Introduction : MonoBehaviour
     {
         this.SetText(introTxt[0]);
         _scrollRect.enabled = false;
+        fixedPanel.SetActive(false);
+        headPanel.SetActive(false);
+        lightsPanel.SetActive(false);
         
         initalPosition = backgroundBunker.transform.position;
         tempPosition = initalPosition;
@@ -101,6 +105,7 @@ public class Introduction : MonoBehaviour
                 this.gameObject.SetActive(false);
                 fixedPanel.SetActive(true);
                 headPanel.SetActive(true);
+                lightsPanel.SetActive(true);
                 //this.gameObject.transform.position=new Vector3(0,421);//on resize pour le tutorial
                 backgroundBunker.transform.position = initalPosition;
             

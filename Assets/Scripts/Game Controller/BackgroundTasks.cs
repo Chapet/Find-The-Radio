@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BackgroundTasks : MonoBehaviour
 {
@@ -15,6 +16,12 @@ public class BackgroundTasks : MonoBehaviour
     public float hungerMultiplier;
     public float thirstMultiplier;
     public PopupSystem pop;
+
+    public SpriteRenderer bunker;
+    public Sprite bunkerWithoutLights;
+    public Sprite bunkerWithLights;
+    public GameObject filtreSombre;
+    public GameObject lights;
 
     public bool IsScavenging { get; set; }
     public DateTime StartScavenging { get; private set; }
@@ -86,6 +93,8 @@ public class BackgroundTasks : MonoBehaviour
 
     public void StartNewScavenging(double scavengeTime)
     {
+        SwitchLightsOff();
+
         this.lastScavenging = new Scavenging();
 
         actualScavengingStep = 0;
@@ -135,6 +144,8 @@ public class BackgroundTasks : MonoBehaviour
 
     private void Scavenge(DateTime now)
     {
+        SwitchLightsOff();
+
         for (; actualScavengingStep <= totalScavengingSteps && now >= scavengingPalier[actualScavengingStep]; actualScavengingStep++)
         {
             Debug.Log("*******    SCAVENGING STEP " + actualScavengingStep + "/" + totalScavengingSteps + "**************");
@@ -362,6 +373,9 @@ public class BackgroundTasks : MonoBehaviour
 
     private void ReturnFromScavenging()
     {
+
+        SwitchLightsOn();
+
         addItemFoundToInventory(lastScavenging);
         hadSenario = false;
         snackbarController.ShowSnackBar("You are back from scavenging");
@@ -421,6 +435,9 @@ public class BackgroundTasks : MonoBehaviour
     public void Sleep(float sleepTime)
     {
         IsSleeping = true;
+
+        SwitchLightsOff();
+
         startSleeping = DateTime.Now;
         endSleeping = startSleeping.AddSeconds(2 * sleepTime * updateStep);
     }
@@ -450,6 +467,9 @@ public class BackgroundTasks : MonoBehaviour
         else
         {
             IsSleeping = false;
+
+            SwitchLightsOn();
+
             hStep = 0f;
             tStep = 0f;
         }
@@ -459,9 +479,6 @@ public class BackgroundTasks : MonoBehaviour
     {
         StartCoroutine(DelayedUse(delay, toUse));
     }
-
-
-
 
     private IEnumerator DelayedUse(float delay, Consumable cons)
     {
@@ -476,4 +493,22 @@ public class BackgroundTasks : MonoBehaviour
 
         yield return null;
     }
+
+    /*==========================    Switch lights    ==========================================*/
+    private void SwitchLightsOn()
+    {
+        Debug.Log("Lights on");
+        bunker.sprite = bunkerWithLights;
+        filtreSombre.SetActive(false);
+        lights.SetActive(true);
+    }
+
+    private void SwitchLightsOff()
+    {
+        Debug.Log("Lights off");
+        bunker.sprite = bunkerWithoutLights;
+        filtreSombre.SetActive(true);
+        lights.SetActive(false);
+    }
+
 }
