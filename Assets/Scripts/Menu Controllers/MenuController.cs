@@ -7,7 +7,7 @@ public class MenuController : MonoBehaviour
 {
     //public StatusBarController barController;
     public GameObject backPanel;
-    public GameObject backToMenuBtn;
+    public GameObject bunkerPanel;
     private Animator openCloseMenuAnimator;
     private float animDuration = 10f / 60f;
     private static MenuController instance;
@@ -48,41 +48,53 @@ public class MenuController : MonoBehaviour
 
     private IEnumerator OpenWithAnim(float f)
     {
-        openCloseMenuAnimator.SetBool("close", false);
-        openCloseMenuAnimator.SetBool("open", true);
-        
-        yield return new WaitForSeconds(f);
+        lock (mutex)
+        {
+            openCloseMenuAnimator.SetBool("close", false);
+            openCloseMenuAnimator.SetBool("open", true);
+
+            yield return new WaitForSeconds(f);
+        }
     }
 
     private IEnumerator ExitWithAnim(GameObject panel, float f)
     {
-        openCloseMenuAnimator.SetBool("open", false);
-        openCloseMenuAnimator.SetBool("close", true);
-        yield return new WaitForSeconds(f);
-        openCloseMenuAnimator.SetBool("close", false);
-        panel.SetActive(false);
+        lock (mutex)
+        {
+            openCloseMenuAnimator.SetBool("open", false);
+            openCloseMenuAnimator.SetBool("close", true);
+            yield return new WaitForSeconds(f);
+            openCloseMenuAnimator.SetBool("close", false);
+            panel.SetActive(false);
+        }
     }
 
     private IEnumerator DoFade(CanvasGroup c, float start, float end)
     {
-        float counter = 0f;
-
-        while (counter < animDuration)
+        lock (mutex)
         {
-            counter += Time.deltaTime;
-            c.alpha = Mathf.Lerp(start, end, counter / animDuration);
+            float counter = 0f;
 
-            yield return null;
+            while (counter < animDuration)
+            {
+                counter += Time.deltaTime;
+                c.alpha = Mathf.Lerp(start, end, counter / animDuration);
+
+                yield return null;
+            }
         }
     }
 
-    private bool backPanelActive = false;
+    private bool menuOpened = false;
     private IEnumerator BackPanel()
     {
-        backPanelActive = !backPanelActive;
-        backToMenuBtn.SetActive(!backPanelActive);
-        backPanel.SetActive(backPanelActive);
-        yield return null;
+        lock (mutex)
+        {
+            menuOpened = !menuOpened;
+            bunkerPanel.SetActive(!menuOpened);
+            backPanel.SetActive(menuOpened);
+            yield return null;
+        }
     }
 
     public static void Transition(GameObject transitionPanel, Animator anim)
