@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
 
     public PopupSystem pop;
 
+    private object mutex = new object();
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -69,42 +71,51 @@ public class PlayerController : MonoBehaviour
 
     public void EquipGear(Gear g)
     {
-        if (!IsEquipped(g))
+        lock (mutex)
         {
-            equipment[(int)g.Type] = g;
-        }
-        else
-        {
-            Debug.Log("This gear was already equipped!");
-        }
+            if (!IsEquipped(g))
+            {
+                equipment[(int)g.Type] = g;
+            }
+            else
+            {
+                Debug.Log("This gear was already equipped!");
+            }
+        } 
     }
 
     public void UnequipGear(Gear g)
     {
-        if (IsEquipped(g))
+        lock (mutex)
         {
-            equipment[(int)g.Type] = null;
-        }
-        else
-        {
-            Debug.Log("This gear wasn't equipped!");
+            if (IsEquipped(g))
+            {
+                equipment[(int)g.Type] = null;
+            }
+            else
+            {
+                Debug.Log("This gear wasn't equipped!");
+            }
         }
     }
 
     public void UpdateStat(int inc, StatType type)
     {
-        int value;
-        if (inc > 0)
+        lock (mutex)
         {
-            value = Mathf.Min(maxHunger, currentStats[(int) type] + inc);
-        }
-        else
-        {
-            value = Mathf.Max(0, currentStats[(int)type] + inc);
-        }
+            int value;
+            if (inc > 0)
+            {
+                value = Mathf.Min(maxHunger, currentStats[(int)type] + inc);
+            }
+            else
+            {
+                value = Mathf.Max(0, currentStats[(int)type] + inc);
+            }
 
-        currentStats[(int) type] = value;
-        statusBarController.UpdateStatusBars(type);
+            currentStats[(int)type] = value;
+            statusBarController.UpdateStatusBars(type);
+        }
     }
 
     /**

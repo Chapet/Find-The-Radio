@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -14,6 +13,8 @@ public class MenuController : MonoBehaviour
     private static MenuController instance;
     public static MenuController Controller;
 
+    private object mutex = new object();
+
     void Awake()
     {
         instance = this;
@@ -22,21 +23,27 @@ public class MenuController : MonoBehaviour
 
     public void ExitMenu(GameObject panel)
     {
-        var canvGroup = panel.GetComponent<CanvasGroup>();
-        openCloseMenuAnimator = panel.GetComponent<Animator>();
-        StartCoroutine(DoFade(canvGroup, 1, 0));
-        StartCoroutine(BackPanel());
-        StartCoroutine(ExitWithAnim(panel, animDuration));
+        lock (mutex)
+        {
+            var canvGroup = panel.GetComponent<CanvasGroup>();
+            openCloseMenuAnimator = panel.GetComponent<Animator>();
+            StartCoroutine(DoFade(canvGroup, 1, 0));
+            StartCoroutine(BackPanel());
+            StartCoroutine(ExitWithAnim(panel, animDuration));
+        }
     }
 
     public void OpenMenu(GameObject panel)
     {
-        var canvGroup = panel.GetComponent<CanvasGroup>();
-        openCloseMenuAnimator = panel.GetComponent<Animator>();
-        panel.SetActive(true);
-        StartCoroutine(DoFade(canvGroup, 0, 1));
-        StartCoroutine(BackPanel());
-        StartCoroutine(OpenWithAnim(animDuration));
+        lock (mutex)
+        {
+            var canvGroup = panel.GetComponent<CanvasGroup>();
+            openCloseMenuAnimator = panel.GetComponent<Animator>();
+            panel.SetActive(true);
+            StartCoroutine(DoFade(canvGroup, 0, 1));
+            StartCoroutine(BackPanel());
+            StartCoroutine(OpenWithAnim(animDuration));
+        }    
     }
 
     private IEnumerator OpenWithAnim(float f)
