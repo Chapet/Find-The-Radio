@@ -20,7 +20,7 @@ MonoBehaviour:
   filename: BaseballBat
   image: {fileID: 21300000, guid: 8c9e30ec4e39f47eaad471cf1c08d1ed, type: 3}
   itemID: 26
-  description: 
+  description: The only homerun you can hope to achieve is with a zombie's head.
   maskColor:
     serializedVersion: 2
     rgba: 4294967295

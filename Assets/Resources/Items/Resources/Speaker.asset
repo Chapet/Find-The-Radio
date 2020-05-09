@@ -17,7 +17,7 @@ MonoBehaviour:
   filename: Speaker
   image: {fileID: 21300000, guid: 7913d4703e1f24c9785089297f59d6c7, type: 3}
   itemID: 412
-  description: 
+  description: A speaker, needed to build a functionnal radio!
   maskColor:
     serializedVersion: 2
     rgba: 4294967295

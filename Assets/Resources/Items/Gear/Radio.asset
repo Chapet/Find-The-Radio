@@ -22,7 +22,7 @@ MonoBehaviour:
   filename: Radio
   image: {fileID: 21300000, guid: 130e7e9cfb1a45743936762b437abd4c, type: 3}
   itemID: 28
-  description: 
+  description: YOU. FOUND. IT.
   maskColor:
     serializedVersion: 2
     rgba: 4294967295

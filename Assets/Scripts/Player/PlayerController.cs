@@ -2,7 +2,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-//[CreateAssetMenu(fileName = "New inventory", menuName = "MyAsset/Player")]
 public enum StatType
 {
     None = 0, Health, Hunger, Thirst, Energy
@@ -107,25 +106,19 @@ public class PlayerController : MonoBehaviour
         statusBarController.UpdateStatusBars(type);
     }
 
-    /**
-     * add inc to the health value
-     */
+    //add inc to the health value
     public void UpdateHealth(int inc)
     {
         UpdateStat(inc, StatType.Health);
     }
 
-    /**
-     * add inc to the hunger value
-     */
+    //add inc to the hunger value
     public void UpdateHunger(int inc)
     {
         UpdateStat(inc, StatType.Hunger);
     }
     
-    /**
-     * add inc to the thirst value
-     */
+    //add inc to the thirst value
     public void UpdateThirst(int inc)
     {
         UpdateStat(inc, StatType.Thirst);

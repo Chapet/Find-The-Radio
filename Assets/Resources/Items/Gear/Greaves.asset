@@ -20,7 +20,7 @@ MonoBehaviour:
   filename: Greaves
   image: {fileID: 21300000, guid: e313c259e19f74ad589543de445e0ac4, type: 3}
   itemID: 24
-  description: Iron Greaves from Minecraft
+  description: Legs are pretty important you know ?
   maskColor:
     serializedVersion: 2
     rgba: 4294967295

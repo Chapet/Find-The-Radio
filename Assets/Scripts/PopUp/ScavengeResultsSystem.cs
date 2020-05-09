@@ -9,7 +9,6 @@ using UnityEngine.UI;
 
 public class ScavengeResultsSystem : MonoBehaviour
 {
-    
     public static ScavengeResultsSystem PopUpResultScavenging { get; private set; }
     public  MenuController menuController;
     public GameObject backPanel;
@@ -68,8 +67,6 @@ public class ScavengeResultsSystem : MonoBehaviour
             nbrItemFound = BackgroundTasks.Tasks.lastScavenging.GetItemsFound().Count;
         }
 
-        
-        
         //=============    ADD SCAVENGING LOG    ===================
         if (BackgroundTasks.Tasks.lastScavenging!=null && BackgroundTasks.Tasks.lastScavenging.scavengeLog.Count != nbrLog)
         {
@@ -104,14 +101,10 @@ public class ScavengeResultsSystem : MonoBehaviour
         UpdateTitle();
         
         PopResult(BackgroundTasks.Tasks.lastScavenging);
-        
     }
     
-    
-
     private void UpdateTitle()
     {
-        
             TimeSpan totalDt = BackgroundTasks.Tasks.EndScavenging - BackgroundTasks.Tasks.StartScavenging;
             TimeSpan myDelta = DateTime.Now - BackgroundTasks.Tasks.StartScavenging;
             int pourcentage = (int) (((double) ((double) myDelta.Ticks / (double) totalDt.Ticks)) * 100);
@@ -123,7 +116,6 @@ public class ScavengeResultsSystem : MonoBehaviour
 
     public void PopResult(Scavenging scavenging)
     {
-
         clearInventorySlot();
         
         //Force to reload itemfound and log
@@ -135,8 +127,6 @@ public class ScavengeResultsSystem : MonoBehaviour
         {
             Destroy(scavengingLogContent.transform.GetChild(i).gameObject); 
         }
-
-        
 
         //=============    ANIMATION    ================
         healthBar.SetValue(scavenging.oldStatusBar.health);
@@ -171,7 +161,6 @@ public class ScavengeResultsSystem : MonoBehaviour
         nbrItemFound = 0;
         nbrLog = 0;
         menuController.ExitMenu(this.gameObject);
-        
     } 
     
 }

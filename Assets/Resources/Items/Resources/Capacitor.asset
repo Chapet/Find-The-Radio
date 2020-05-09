@@ -17,7 +17,7 @@ MonoBehaviour:
   filename: Capacitor
   image: {fileID: 21300000, guid: cd45b0622e16044268ac9ebc79534317, type: 3}
   itemID: 49
-  description: 
+  description: A capacitor, needed to build a functionnal radio!
   maskColor:
     serializedVersion: 2
     rgba: 4294967295

@@ -17,7 +17,7 @@ MonoBehaviour:
   filename: Leather
   image: {fileID: 21300000, guid: f31672d6d0ac96540b31f17ec8b98fdc, type: 3}
   itemID: 43
-  description: Just a piece of leather
+  description: A piece of rugged leather, useful.
   maskColor:
     serializedVersion: 2
     rgba: 4294967295

@@ -21,7 +21,7 @@ MonoBehaviour:
   filename: Knife
   image: {fileID: 21300000, guid: 304d33c75a6b044f88b51b3a98dcf110, type: 3}
   itemID: 25
-  description: 
+  description: Sharp and dangerous.
   maskColor:
     serializedVersion: 2
     rgba: 4294967295

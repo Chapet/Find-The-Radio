@@ -17,9 +17,7 @@ MonoBehaviour:
   filename: Grass
   image: {fileID: 21300000, guid: 81430f3f47e96451f8b584dd04f0b93a, type: 3}
   itemID: 31
-  description: 'The grass was greener,
-
-    The light was brighter, ...'
+  description: You're not a cow, so this is prettyuseless for you.
   maskColor:
     serializedVersion: 2
     rgba: 4281518180

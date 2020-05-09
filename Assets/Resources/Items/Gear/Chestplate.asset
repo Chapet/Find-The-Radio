@@ -20,7 +20,7 @@ MonoBehaviour:
   filename: Chestplate
   image: {fileID: 21300000, guid: 3330a06c79eb94328b67c58a8222b9d5, type: 3}
   itemID: 23
-  description: Iron Chestplate from Minecraft
+  description: Protects a good part of your body.
   maskColor:
     serializedVersion: 2
     rgba: 4294967295

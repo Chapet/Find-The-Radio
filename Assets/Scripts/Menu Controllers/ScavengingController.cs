@@ -30,28 +30,10 @@ public class ScavengingController : MonoBehaviour
     [SerializeField]private Button scavengeButton;
     [SerializeField]private Slider scavengeSlider;
 
-
-    /*[SerializeField] [Tooltip("Contain all the items that you can find outside the bunker")]
-    private ScavengingListItem itemList;
-    */
     void Start()
     {
         player = PlayerController.Player;
-
     }
-
-    /*void OnEnable()
-    {
-        
-        //    scavengeButton.onClick.RemoveAllListeners();
-         //   scavengeSlider.interactable = false;
-          //  scavengeButton.gameObject.GetComponentInChildren<TextMeshProUGUI>().SetText("Is still scavenging");
-            scavengeButton.onClick.RemoveAllListeners();
-            scavengeButton.onClick.AddListener(ScavengingBtnClicked);
-            scavengeSlider.interactable = true;
-            scavengeButton.gameObject.GetComponentInChildren<TextMeshProUGUI>().SetText("Scavenge");
-    }*/
-
 
     void Update()
     {
@@ -89,7 +71,6 @@ public class ScavengingController : MonoBehaviour
 
     public void ScavengingBtnClicked()
     {
-        //Scavenge();
         menuController.ExitMenu(gameObject);
         BackgroundTasks.Tasks.StartNewScavenging(scavengeTime);
     }
@@ -139,37 +120,8 @@ public class ScavengingController : MonoBehaviour
         int oldHunger = player.currentStats[(int)StatType.Hunger];
         int oldThirst = player.currentStats[(int)StatType.Thirst];
         int oldEnergy = player.currentStats[(int)StatType.Energy];
-        
-
 
         menuController.ExitMenu(gameObject);
-
-        
-        
-        /*  /!\ MAX 29 caractères  /!\   */
-
-        /*
-        if (player.currentStats[(int)StatType.Health] <= 0)
-        {
-            //======    DEAD    ==========
-            pop.PopMessage(PopupSystem.Popup.Death);
-        }
-        else
-        {
-            //=======    POP UP RESULT    =============
-            popUpResult.PopResult(itemsFound, (
-                health: (old: oldHealth, now: player.currentStats[(int)StatType.Health]),
-                hunger: (old: oldHunger, now: player.currentStats[(int)StatType.Hunger]),
-                thirst: (old: oldThirst, now: player.currentStats[(int)StatType.Thirst]),
-                energy: (old: oldEnergy, now: player.currentStats[(int)StatType.Energy])),
-                scavengeLog.ToArray()
-                );
-            
-        }
-        
-        itemsFound.Clear();*/
-
     }
-
    
 }

@@ -19,12 +19,12 @@ MonoBehaviour:
   filename: Coffee
   image: {fileID: 21300000, guid: a5c0f0e5ea74d7f46b90a14c2ce3611a, type: 3}
   itemID: 14
-  description: COFFEEEEEEE
+  description: COFFEEEEEEE !!!
   maskColor:
     serializedVersion: 2
     rgba: 4294967295
   types: 02000000
-  thirstValue: 25
+  thirstValue: 35
   hungerValue: 0
   healthValue: 0
-  energyValue: 25
+  energyValue: 20

@@ -117,9 +117,6 @@ public class BackgroundTasks : MonoBehaviour
         StartScavenging = DateTime.Now;
         EndScavenging = StartScavenging.AddSeconds(5 * scavengeTime);
 
-        // Real implem : endTime = startTime.AddMinutes(scavengeTime);
-        // Debug.Log("scavengeTime : " + scavengeTime);
-
         TimeSpan deltaT = (EndScavenging - StartScavenging);
         TimeSpan dt = new TimeSpan(deltaT.Ticks / totalScavengingSteps);
 
@@ -152,21 +149,20 @@ public class BackgroundTasks : MonoBehaviour
         {
             Debug.Log("*******    SCAVENGING STEP " + actualScavengingStep + "/" + totalScavengingSteps + "**************");
             GameController.Controller.UpdateGameClock(0.5f);
-            //TODO:update clock
 
             var rand = new System.Random();
             double chance = rand.NextDouble(); // 0.0 <= chance < 1.0
-            if (chance > 0.66)/*========== FIND A ITEM  ===========*/
+            if (chance > 0.75)/*========== FIND A ITEM  =========== - 50% chance for each 30 min*/
             {
 
-                //chances for the found item, has to be balance when all items in the game
+                //chances for the found item
                 chance = rand.NextDouble();
 
                 int myLevel = 100;//TODO: link with player
 
                 (string link, int minLevel, Item.ItemClass itemType, double minTimeOut)[] possibleItem;
 
-                if (chance > 0.9)/*========== GEAR ===========*/
+                if (chance > 0.9)/*========== GEAR =========== - 10% */
                 {
                     //retourn tt les items que je pourrais possiblement trouver sur mon chemin en fonction de mon level, du type d'objet et du temps que j'ai décidé de sortir
                     possibleItem = lastScavenging.getMyLevelItems(myLevel, Item.ItemClass.Gear, scavengeTime);
@@ -179,7 +175,7 @@ public class BackgroundTasks : MonoBehaviour
                         addItemFound(element, Item.ItemClass.Gear);//add to inventory
                     }
                 }
-                else if (chance > 0.45)/*========== Consumable ===========*/
+                else if (chance > 0.45)/*========== Consumable =========== - 45% */
                 {
                     possibleItem = lastScavenging.getMyLevelItems(myLevel, Item.ItemClass.Consumable, scavengeTime);
                     if (possibleItem != null && possibleItem.Length > 0)
@@ -190,7 +186,7 @@ public class BackgroundTasks : MonoBehaviour
                         addItemFound(element, Item.ItemClass.Consumable);
                     }
                 }
-                else if (chance > 0.15)/*========== RESSOURCES ===========*/
+                else if (chance > 0.00)/*========== RESSOURCES =========== - 45% */
                 {
                     possibleItem = lastScavenging.getMyLevelItems(myLevel, Item.ItemClass.Resource, scavengeTime);
                     if (possibleItem != null && possibleItem.Length > 0)
@@ -202,18 +198,8 @@ public class BackgroundTasks : MonoBehaviour
                         addItemFound(element, Item.ItemClass.Resource);
                     }
                 }
-                else if (chance > 0.0) /*========== JUNK ===========*/
-                {
-                    possibleItem = lastScavenging.getMyLevelItems(myLevel, Item.ItemClass.Junk, scavengeTime);
-                    if (possibleItem != null && possibleItem.Length > 0)
-                    {
-                        int index = (int)(rand.NextDouble() * (possibleItem.Length - 1));
-                        Junk element = Resources.Load<Junk>(possibleItem[index].link);
-                        //Debug.Log("Find" + element.name);
-                        addItemFound(element, Item.ItemClass.Junk);
-                    }
-                }
 
+                //junk was not implemented in the final game
 
             }
             else if (!hadSenario)/*========== START SENARIO ===========*/

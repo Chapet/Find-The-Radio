@@ -17,12 +17,12 @@ MonoBehaviour:
   filename: MilitaryRation
   image: {fileID: 21300000, guid: 7d9b0235b2ad58249af6f54f3323f306, type: 3}
   itemID: 18
-  description: Military ration ... disgusting but effcient.
+  description: Military ration ... tasteless but filling!
   maskColor:
     serializedVersion: 2
     rgba: 4294967295
   types: 02000000
   thirstValue: 0
-  hungerValue: 50
+  hungerValue: 65
   healthValue: 0
-  energyValue: 25
+  energyValue: 0
