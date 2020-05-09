@@ -15,7 +15,7 @@ public class PopupSystem : MonoBehaviour
     public enum Popup
     {
         Bite, Death, DeathEvent, ZombieOne0, ZombieOne1, ZombieFew0, ZombieFew1, ZombieLot0,
-        ZombieLot1, GroceryStore, ClothingStore, HuntingStore, Parc, OutdoorStore, PoliceStation, Pharmacy, Radio, RadioParts
+        ZombieLot1, GroceryStore, ClothingStore, HuntingStore, Parc, SportStore, PoliceStation, Pharmacy, Radio, RadioParts
     };
 
 
@@ -80,8 +80,8 @@ public class PopupSystem : MonoBehaviour
                 textPopupMsg.text = "   You searched a hunting store and found some supplies.";
                 okButton.gameObject.SetActive(true);
                 break;
-            case Popup.OutdoorStore: //event lvl 2
-                textPopupMsg.text = "   You searched an outdooor store and found some supplies.";
+            case Popup.SportStore: //event lvl 2
+                textPopupMsg.text = "   You searched an sport store and found some supplies.";
                 okButton.gameObject.SetActive(true);
                 break;
             case Popup.PoliceStation: //event lvl 3

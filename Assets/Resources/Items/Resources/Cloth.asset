@@ -17,7 +17,7 @@ MonoBehaviour:
   filename: Cloth
   image: {fileID: 21300000, guid: 1c39ec40909c7aa459f0197dee1f66c9, type: 3}
   itemID: 42
-  description: Just a piece of cloth
+  description: Just a piece of cloth. Could be useful to create some stuff.
   maskColor:
     serializedVersion: 2
     rgba: 4294967295

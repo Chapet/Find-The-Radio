@@ -17,7 +17,7 @@ MonoBehaviour:
   filename: Metalscrap
   image: {fileID: 21300000, guid: 335902f830438cd44b11906482f31fd3, type: 3}
   itemID: 44
-  description: Some metalscraps
+  description: Some leftover metal. Could be useful to create some stuff.
   maskColor:
     serializedVersion: 2
     rgba: 4294967295

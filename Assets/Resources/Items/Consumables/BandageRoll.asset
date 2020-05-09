@@ -20,7 +20,7 @@ MonoBehaviour:
   filename: BandageRoll
   image: {fileID: 21300000, guid: 4ca663d13478f475f9fb002d1667a239, type: 3}
   itemID: 19
-  description: 
+  description: Enough to stop a bleeding.
   maskColor:
     serializedVersion: 2
     rgba: 4294967295

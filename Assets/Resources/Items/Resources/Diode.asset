@@ -17,7 +17,7 @@ MonoBehaviour:
   filename: Diode
   image: {fileID: 21300000, guid: 935ed88aecbb4417ba542487e8967e7b, type: 3}
   itemID: 48
-  description: 
+  description: Diodes, needed to build a radio!
   maskColor:
     serializedVersion: 2
     rgba: 4294967295

@@ -17,7 +17,7 @@ MonoBehaviour:
   filename: Wood
   image: {fileID: 21300000, guid: f5bbca650e98ffd45b9cf913998c723d, type: 3}
   itemID: 41
-  description: Timbeeeeeeeer !!!
+  description: Some usable wood. Could be useful to create some stuff.
   maskColor:
     serializedVersion: 2
     rgba: 4294967295

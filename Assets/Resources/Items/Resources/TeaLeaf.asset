@@ -17,7 +17,7 @@ MonoBehaviour:
   filename: TeaLeaf
   image: {fileID: 21300000, guid: 238e1e34404b14c4e8a5073e9b567d07, type: 3}
   itemID: 45
-  description: 
+  description: A fine brew is coming.
   maskColor:
     serializedVersion: 2
     rgba: 4294967295

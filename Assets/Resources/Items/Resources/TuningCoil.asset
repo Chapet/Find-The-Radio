@@ -17,7 +17,7 @@ MonoBehaviour:
   filename: TuningCoil
   image: {fileID: 21300000, guid: a74dfbe264c64409eac8a9531ec908b6, type: 3}
   itemID: 411
-  description: 
+  description: A tuning coil, needed to build a radio!
   maskColor:
     serializedVersion: 2
     rgba: 4294967295

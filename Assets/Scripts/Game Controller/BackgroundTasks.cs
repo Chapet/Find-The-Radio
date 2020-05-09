@@ -239,23 +239,41 @@ public class BackgroundTasks : MonoBehaviour
                         }
                         else if (chance > 0.80)
                         {
-                            pop.PopMessage(PopupSystem.Popup.PoliceStation);
+                            pop.PopMessage(PopupSystem.Popup.HuntingStore);
                             Gear element = Resources.Load<Gear>("Items/Gear/Gun");
                             addItemFound(element, Item.ItemClass.Gear);
                         }
                         else
                         {
-                            pop.PopMessage(PopupSystem.Popup.RadioParts); //gives all the radioParts for now to allow testing
-                            Resource element1 = Resources.Load<Resource>("Items/Resources/Diode");
-                            addItemFound(element1, Item.ItemClass.Resource);
-                            Resource element2 = Resources.Load<Resource>("Items/Resources/TuningCoil");
-                            addItemFound(element2, Item.ItemClass.Resource);
-                            Resource element3 = Resources.Load<Resource>("Items/Resources/Antenna");
-                            addItemFound(element3, Item.ItemClass.Resource);
-                            Resource element4 = Resources.Load<Resource>("Items/Resources/Capacitor");
-                            addItemFound(element4, Item.ItemClass.Resource);
-                            Resource element5 = Resources.Load<Resource>("Items/Resources/Speaker");
-                            addItemFound(element5, Item.ItemClass.Resource);
+                            pop.PopMessage(PopupSystem.Popup.RadioParts); //gives a random radio part
+
+                            //chance range is 0.80-0.00, there are 5 radio parts so 80/5 = 16.0
+                            if (chance > 0.64)
+                            {
+                                Resource element1 = Resources.Load<Resource>("Items/Resources/Diode");
+                                addItemFound(element1, Item.ItemClass.Resource);
+                            }
+                            else if (chance > 0.48)
+                            {
+                                Resource element2 = Resources.Load<Resource>("Items/Resources/TuningCoil");
+                                addItemFound(element2, Item.ItemClass.Resource);
+                            }
+                            else if (chance > 32)
+                            {
+                                Resource element3 = Resources.Load<Resource>("Items/Resources/Antenna");
+                                addItemFound(element3, Item.ItemClass.Resource);
+                            }
+                            else if (chance > 0.16)
+                            {
+                                Resource element4 = Resources.Load<Resource>("Items/Resources/Capacitor");
+                                addItemFound(element4, Item.ItemClass.Resource);
+                            }
+
+                            else
+                            {
+                                Resource element5 = Resources.Load<Resource>("Items/Resources/Speaker");
+                                addItemFound(element5, Item.ItemClass.Resource);
+                            }
                         }
 
                     }
@@ -265,13 +283,30 @@ public class BackgroundTasks : MonoBehaviour
                         if (chance > 0.999) pop.PopMessage(PopupSystem.Popup.DeathEvent);
                         else if (chance > 0.75)
                         {
-                            pop.PopMessage(PopupSystem.Popup.OutdoorStore);
-                            //addItem Bag
+                            pop.PopMessage(PopupSystem.Popup.SportStore);
+                            Gear element = Resources.Load<Gear>("Items/Gear/BaseballBat");
+                            addItemFound(element, Item.ItemClass.Gear);
                         }
                         else if (chance > 0.50)
                         {
-                            pop.PopMessage(PopupSystem.Popup.HuntingStore);
-                            //addItem 6 ammos
+                            pop.PopMessage(PopupSystem.Popup.PoliceStation);
+
+                            //chance range is 0.75 - 0.50
+                            if (chance > 0.60)
+                            {
+                                Gear element = Resources.Load<Gear>("Items/Gear/Greaves");
+                                addItemFound(element, Item.ItemClass.Gear);
+                            }
+                            else if (chance > 0.70)
+                            {
+                                Gear element = Resources.Load<Gear>("Items/Gear/Helmet");
+                                addItemFound(element, Item.ItemClass.Gear);
+                            }
+                            else
+                            {
+                                Gear element = Resources.Load<Gear>("Items/Gear/Chestplate");
+                                addItemFound(element, Item.ItemClass.Gear);
+                            }
                         }
                         else if (chance > 0.25)
                         {

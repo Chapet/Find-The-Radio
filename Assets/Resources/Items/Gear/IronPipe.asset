@@ -20,7 +20,7 @@ MonoBehaviour:
   filename: IronPipe
   image: {fileID: 21300000, guid: 6bd83170c929c4a81805e7a183c7e8e4, type: 3}
   itemID: 27
-  description: 
+  description: Better than your fists.
   maskColor:
     serializedVersion: 2
     rgba: 4294967295

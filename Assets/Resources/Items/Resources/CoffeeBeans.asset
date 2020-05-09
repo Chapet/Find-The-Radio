@@ -17,7 +17,7 @@ MonoBehaviour:
   filename: CoffeeBeans
   image: {fileID: 21300000, guid: a52e0a2785fdd470abe8d8322310a726, type: 3}
   itemID: 46
-  description: 
+  description: Smells good.
   maskColor:
     serializedVersion: 2
     rgba: 4294967295

@@ -17,7 +17,7 @@ MonoBehaviour:
   filename: Antenna
   image: {fileID: 21300000, guid: 8f588490e74844c9fa4d67a5f6352cde, type: 3}
   itemID: 47
-  description: 
+  description: An antenna, needed to build a radio!
   maskColor:
     serializedVersion: 2
     rgba: 4294967295

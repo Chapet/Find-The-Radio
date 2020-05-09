@@ -17,10 +17,11 @@ MonoBehaviour:
   filename: Gun
   image: {fileID: 21300000, guid: b33698affa852443bb6626fdc446e66d, type: 3}
   itemID: 21
-  description: This is a gun ... Pew Pew !
+  description: The best weapon you can hope to have in this world. Pew Pew!
   maskColor:
     serializedVersion: 2
     rgba: 4294967295
+  liveGear: 100
   type: 4
   scavengRate: 0
   scavengSize: 0

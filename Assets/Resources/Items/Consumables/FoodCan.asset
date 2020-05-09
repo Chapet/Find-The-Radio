@@ -17,12 +17,12 @@ MonoBehaviour:
   filename: FoodCan
   image: {fileID: 21300000, guid: 5a8741c22e9fd43cfb589566c964c6cc, type: 3}
   itemID: 11
-  description: This is a can of food (Miam)
+  description: You often dream of other foods, but it's good nonetheless.
   maskColor:
     serializedVersion: 2
     rgba: 4294967295
   types: 01000000
   thirstValue: 0
-  hungerValue: 25
+  hungerValue: 35
   healthValue: 0
-  energyValue: 13
+  energyValue: 0
