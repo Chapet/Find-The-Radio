@@ -21,7 +21,6 @@ public class PopupSystem : MonoBehaviour
 
     public void PopMessage(Popup popup) 
     {
-        bunk.GoToBunker();
         MenuController.Controller.OpenMenu(gameObject);
 
         switch (popup) 

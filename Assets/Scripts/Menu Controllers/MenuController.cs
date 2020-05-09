@@ -13,6 +13,10 @@ public class MenuController : MonoBehaviour
     private static MenuController instance;
     public static MenuController Controller;
 
+    public GameObject[] Panels;
+
+    private bool menuOpened = false;
+
     private object mutex = new object();
 
     void Awake()
@@ -25,6 +29,7 @@ public class MenuController : MonoBehaviour
     {
         lock (mutex)
         {
+            menuOpened = false;
             var canvGroup = panel.GetComponent<CanvasGroup>();
             openCloseMenuAnimator = panel.GetComponent<Animator>();
             StartCoroutine(DoFade(canvGroup, 1, 0));
@@ -37,6 +42,14 @@ public class MenuController : MonoBehaviour
     {
         lock (mutex)
         {
+            if (menuOpened)
+            {
+                CloseAllPanels();
+            }
+            else
+            {
+                menuOpened = true;
+            }      
             var canvGroup = panel.GetComponent<CanvasGroup>();
             openCloseMenuAnimator = panel.GetComponent<Animator>();
             panel.SetActive(true);
@@ -44,6 +57,21 @@ public class MenuController : MonoBehaviour
             StartCoroutine(BackPanel());
             StartCoroutine(OpenWithAnim(animDuration));
         }    
+    }
+
+    public void CloseAllPanels()
+    {
+        foreach(GameObject go in Panels)
+        {
+            if (go.activeSelf)
+            {
+                if (go.name == "InventoryPanel")
+                {
+                    go.transform.GetChild(1).gameObject.GetComponent<TabController>().CloseTabs();
+                }
+                ExitMenu(go);
+            }
+        }
     }
 
     private IEnumerator OpenWithAnim(float f)
@@ -85,12 +113,10 @@ public class MenuController : MonoBehaviour
         }
     }
 
-    private bool menuOpened = false;
     private IEnumerator BackPanel()
     {
         lock (mutex)
         {
-            menuOpened = !menuOpened;
             bunkerPanel.SetActive(!menuOpened);
             backPanel.SetActive(menuOpened);
             yield return null;
