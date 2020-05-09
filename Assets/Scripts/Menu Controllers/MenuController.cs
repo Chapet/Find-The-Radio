@@ -8,6 +8,7 @@ public class MenuController : MonoBehaviour
 {
     //public StatusBarController barController;
     public GameObject backPanel;
+    public GameObject backToMenuBtn;
     private Animator openCloseMenuAnimator;
     private float animDuration = 10f / 60f;
     private static MenuController instance;
@@ -72,6 +73,7 @@ public class MenuController : MonoBehaviour
     private IEnumerator BackPanel()
     {
         backPanelActive = !backPanelActive;
+        backToMenuBtn.SetActive(!backPanelActive);
         backPanel.SetActive(backPanelActive);
         yield return null;
     }
