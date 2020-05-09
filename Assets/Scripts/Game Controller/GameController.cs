@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
     [Range(0f, 24f)]
     public float gameClock = 8f;
 
-    public static int framerate = 60;
+    public static int framerate = 90;
     public static GameController Controller { get; private set; }
 
     public float autoSaveTiming = 30f;
@@ -33,6 +33,7 @@ public class GameController : MonoBehaviour
     private void Awake()
     {
         Controller = this;
+        Application.targetFrameRate = framerate;
     }
 
     // Start is called before the first frame update
