@@ -104,6 +104,8 @@ public class GameData
             {
                 this.scavengingStartTime = ConvertDateTimeToString(BackgroundTasks.Tasks.StartScavenging);
                 this.scavengingEndTime = ConvertDateTimeToString(BackgroundTasks.Tasks.EndScavenging);
+                Debug.Log("Before loading before conversion : " + BackgroundTasks.Tasks.StartScavenging + " - " + BackgroundTasks.Tasks.EndScavenging);
+                Debug.Log("Before loading after conversion : " + this.scavengingStartTime + " - " + this.scavengingEndTime);
             }
         }
         else
@@ -118,7 +120,7 @@ public class GameData
 
     public static string ConvertDateTimeToString(DateTime dateTime)
     {
-        return dateTime.ToString("yyyy/MM/dd hh:mm:ss");
+        return dateTime.ToString("yyyy/MM/dd hh:mm:ss tt");
     }
 
     /**
@@ -129,6 +131,7 @@ public class GameData
         var a=input.Split(' ');
         var ymd = a[0].Split('/');
         var hms = a[1].Split(':');
+        var AmPm = a[2];
         
         int year=Int32.Parse(ymd[0]);
         int month=Int32.Parse(ymd[1]);
@@ -136,6 +139,11 @@ public class GameData
         int h=Int32.Parse(hms[0]);
         int m=Int32.Parse(hms[1]);
         int s=Int32.Parse(hms[2]);
+
+        if (AmPm == "PM")
+        {
+            h += 12;
+        }
 
         // plus simple : this.scavengeEnding = XmlConvert.ToString(scavengeEnding, XmlDateTimeSerializationMode.Local);
         // reconvertir : XmlConvert.ToDateTime(data.scavengeEnding, XmlDateTimeSerializationMode.Local);
