@@ -85,43 +85,49 @@ public class Scavenging
     private (string link, int minLevel, Item.ItemClass itemType, double minTimeOut,int weight)[] scavengeItemsData = new[]
     {
         /*======CONSUMABLE=====*/
-        (link: "Items/Consumables/WaterBottle", minLevel: 0, itemType: Item.ItemClass.Consumable, minTimeOut: 0.0,weight:5),
+        (link: "Items/Consumables/WaterBottle", minLevel: 0, itemType: Item.ItemClass.Consumable, minTimeOut: 0.0,weight:4),
 
-        (link: "Items/Consumables/FoodCan", minLevel: 0, itemType: Item.ItemClass.Consumable, minTimeOut: 0.0,weight:5),
+        (link: "Items/Consumables/FoodCan", minLevel: 0, itemType: Item.ItemClass.Consumable, minTimeOut: 0.0,weight:2),
 
-        (link: "Items/Consumables/Soda", minLevel: 0, itemType: Item.ItemClass.Consumable, minTimeOut: 0.0,weight:5),
+        (link: "Items/Consumables/Soda", minLevel: 0, itemType: Item.ItemClass.Consumable, minTimeOut: 0.0,weight:2),
         
-        (link: "Items/Consumables/Medkit", minLevel: 0, itemType: Item.ItemClass.Consumable, minTimeOut: 0.0,weight:5),
+        (link: "Items/Consumables/Medkit", minLevel: 0, itemType: Item.ItemClass.Consumable, minTimeOut: 6.0,weight:1),
 
-        (link: "Items/Consumables/MilitaryRation", minLevel: 0, itemType: Item.ItemClass.Consumable, minTimeOut: 7.0,weight:3),
+        (link: "Items/Consumables/MilitaryRation", minLevel: 0, itemType: Item.ItemClass.Consumable, minTimeOut: 4.0,weight:1),
+
+        (link: "Items/Consumables/Crackers", minLevel: 0, itemType: Item.ItemClass.Consumable, minTimeOut: 0.0,weight:2),
+
+        (link: "Items/Consumables/Bandage", minLevel: 0, itemType: Item.ItemClass.Consumable, minTimeOut: 2.0,weight:1),
 
 
         /*======GEAR=====*/
-        (link: "Items/Gear/Gun", minLevel: 0, itemType: Item.ItemClass.Gear, minTimeOut: 10.0,weight:2),
+        (link: "Items/Gear/Gun", minLevel: 0, itemType: Item.ItemClass.Gear, minTimeOut: 8.0,weight:1),
+
+        (link: "Items/Gear/BaseballBat", minLevel: 0, itemType: Item.ItemClass.Gear, minTimeOut: 0.0,weight:1),
+
+        (link: "Items/Gear/Helmet", minLevel: 0, itemType: Item.ItemClass.Gear, minTimeOut: 3.0,weight:1),
+
+        (link: "Items/Gear/Chestplate", minLevel: 0, itemType: Item.ItemClass.Gear, minTimeOut: 5.0,weight:1),
+
+        (link: "Items/Gear/Greaves", minLevel: 0, itemType: Item.ItemClass.Gear, minTimeOut: 4.0,weight:1),
+
+        (link: "Items/Gear/IronPipe", minLevel: 0, itemType: Item.ItemClass.Gear, minTimeOut: 4.0,weight:1),
+
+        (link: "Items/Gear/Knife", minLevel: 0, itemType: Item.ItemClass.Gear, minTimeOut: 6.0,weight:1),
 
 
         /*======RESOURCES=====*/
-        (link: "Items/Resources/Wood", minLevel: 0, itemType: Item.ItemClass.Resource, minTimeOut: 0.0,weight:4),
+        (link: "Items/Resources/Wood", minLevel: 0, itemType: Item.ItemClass.Resource, minTimeOut: 0.0,weight:1),
 
-        (link: "Items/Resources/Metalscrap", minLevel: 0, itemType: Item.ItemClass.Resource, minTimeOut: 0.0,weight:4),
+        (link: "Items/Resources/Metalscrap", minLevel: 0, itemType: Item.ItemClass.Resource, minTimeOut: 0.0,weight:1),
 
-        (link: "Items/Resources/Leather", minLevel: 0, itemType: Item.ItemClass.Resource, minTimeOut: 0.0,weight:4),
+        (link: "Items/Resources/Leather", minLevel: 0, itemType: Item.ItemClass.Resource, minTimeOut: 0.0,weight:1),
 
-        (link: "Items/Resources/Cloth", minLevel: 0, itemType: Item.ItemClass.Resource, minTimeOut: 0.0,weight:4),
+        (link: "Items/Resources/Cloth", minLevel: 0, itemType: Item.ItemClass.Resource, minTimeOut: 0.0,weight:1),
 
-        (link: "Items/Resources/TeaLeaf", minLevel: 0, itemType: Item.ItemClass.Resource, minTimeOut: 0.0,weight:4),
+        (link: "Items/Resources/TeaLeaf", minLevel: 0, itemType: Item.ItemClass.Resource, minTimeOut: 0.0,weight:1),
 
-        (link: "Items/Resources/CoffeeBeans", minLevel: 0, itemType: Item.ItemClass.Resource, minTimeOut: 0.0,weight:4),
-
-        (link: "Items/Resources/Antenna", minLevel: 0, itemType: Item.ItemClass.Resource, minTimeOut: 50.0,weight:1),
-
-        (link: "Items/Resources/Capacitor", minLevel: 0, itemType: Item.ItemClass.Resource, minTimeOut: 50.0,weight:1),
-
-        (link: "Items/Resources/Diode", minLevel: 0, itemType: Item.ItemClass.Resource, minTimeOut: 50.0,weight:1),
-
-        (link: "Items/Resources/Speaker", minLevel: 0, itemType: Item.ItemClass.Resource, minTimeOut: 50.0,weight:1),
-
-        (link: "Items/Resources/TuningCoil", minLevel: 0, itemType: Item.ItemClass.Resource, minTimeOut: 50.0,weight:1),
+        (link: "Items/Resources/CoffeeBeans", minLevel: 0, itemType: Item.ItemClass.Resource, minTimeOut: 0.0,weight:1),
 
 
         /*======Junk=====*/
