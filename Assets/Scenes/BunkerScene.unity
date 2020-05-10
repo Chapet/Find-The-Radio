@@ -451,7 +451,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 15131955}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dbaea08942000000972fa0894200000, type: 3}
+  m_Script: {fileID: 11500000, guid: 163737564737f237362796074737f276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   managedByController: 1
@@ -1020,7 +1020,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 51055825}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dbaea08942000000972fa0894200000, type: 3}
+  m_Script: {fileID: 11500000, guid: 163737564737f237362796074737f276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   managedByController: 1
@@ -6270,7 +6270,7 @@ MonoBehaviour:
     scavengingActualStep: 0
     scavengingTotalSteps: 0
   _introduction: {fileID: 442291356}
-  pop: {fileID: 1998431299}
+  pop: {fileID: 0}
   clock: {fileID: 1103367990}
 --- !u!4 &383633853
 Transform:
@@ -6448,7 +6448,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 390090308}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dbaea08942000000972fa0894200000, type: 3}
+  m_Script: {fileID: 11500000, guid: 163737564737f237362796074737f276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   managedByController: 1
@@ -7250,10 +7250,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 410393433}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dbaea08942000000972fa0894200000, type: 3}
+  m_Script: {fileID: 11500000, guid: 163737564737f237362796074737f276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  managedByController: 1
+  managedByController: 0
   animated: 1
 --- !u!114 &410393438
 MonoBehaviour:
@@ -8220,9 +8220,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8624daa6c457548d7b0c96fd2eea1432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeDelta: 10
-  inc: 10
+  deltaTime: 0.5
   threshold: 75
+  inc: 5
 --- !u!114 &435538312
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8241,8 +8241,8 @@ MonoBehaviour:
   hungerThreshold: 4
   thirstThreshold: 16
   energyThreshold: 8
-  timeDelta: 10
-  inc: 1
+  deltaTime: 1
+  inc: 2
 --- !u!1 &440267811
 GameObject:
   m_ObjectHideFlags: 0
@@ -8543,10 +8543,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 443784781}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dbaea08942000000972fa0894200000, type: 3}
+  m_Script: {fileID: 11500000, guid: 163737564737f237362796074737f276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  managedByController: 1
+  managedByController: 0
   animated: 1
 --- !u!114 &443784786
 MonoBehaviour:
@@ -13051,7 +13051,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 720375826}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dbaea08942000000972fa0894200000, type: 3}
+  m_Script: {fileID: 11500000, guid: 163737564737f237362796074737f276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   managedByController: 1
@@ -14366,7 +14366,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 794078825}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dbaea08942000000972fa0894200000, type: 3}
+  m_Script: {fileID: 11500000, guid: 163737564737f237362796074737f276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   managedByController: 1
@@ -18090,10 +18090,10 @@ RectTransform:
   m_Father: {fileID: 872526663}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 550.00006, y: 430}
-  m_SizeDelta: {x: -1200.0001, y: -960}
+  m_AnchoredPosition: {x: -410, y: -110}
+  m_SizeDelta: {x: 720, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &982786090
 MonoBehaviour:
@@ -22145,10 +22145,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1259979629}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dbaea08942000000972fa0894200000, type: 3}
+  m_Script: {fileID: 11500000, guid: 163737564737f237362796074737f276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  managedByController: 1
+  managedByController: 0
   animated: 1
 --- !u!114 &1259979634
 MonoBehaviour:
@@ -23851,7 +23851,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1373642665}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dbaea08942000000972fa0894200000, type: 3}
+  m_Script: {fileID: 11500000, guid: 163737564737f237362796074737f276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   managedByController: 1
@@ -29072,7 +29072,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1668488500}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dbaea08942000000972fa0894200000, type: 3}
+  m_Script: {fileID: 11500000, guid: 163737564737f237362796074737f276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   managedByController: 1
@@ -34812,10 +34812,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2026095891}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dbaea08942000000972fa0894200000, type: 3}
+  m_Script: {fileID: 11500000, guid: 163737564737f237362796074737f276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  managedByController: 1
+  managedByController: 0
   animated: 1
 --- !u!114 &2026095896
 MonoBehaviour:
@@ -35962,7 +35962,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backPanel: {fileID: 116112949}
-  bunkerPanel: {fileID: 1276335970}
+  mainPanel: {fileID: 1276335970}
   Panels:
   - {fileID: 818302289}
   - {fileID: 58736627}
@@ -36073,7 +36073,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2075723820}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0dbaea08942000000972fa0894200000, type: 3}
+  m_Script: {fileID: 11500000, guid: 163737564737f237362796074737f276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   managedByController: 1

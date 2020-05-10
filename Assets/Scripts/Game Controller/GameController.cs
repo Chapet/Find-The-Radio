@@ -46,6 +46,7 @@ public class GameController : MonoBehaviour
         if (NewGame)
         {
             ResetGame();
+            Debug.Log("GameController : " + PlayerController.Player);
             UpdateGameClock(8f);
             CleanSave();
             PlayerController.IS_FIRST_GAME = true;
@@ -215,6 +216,8 @@ public class GameController : MonoBehaviour
         int minutes = (int) Mathf.Round((gameClock - hours) * 60f);
         Debug.Log("Clock : " + gameClock + " = " + hours.ToString("00") + "h" + minutes.ToString("00"));
         clock.UpdateClock(hours, minutes);
+        AutoRegen.GetAutoRegen.DoRegen(inc);
+        AutoDamage.GetAutoDamage.DoDamage(inc);
     }
 
     public void GoToMainMenu()

@@ -153,7 +153,7 @@ public class BackgroundTasks : MonoBehaviour
 
             var rand = new System.Random();
             double chance = rand.NextDouble(); // 0.0 <= chance < 1.0
-            if (chance > 0.66)/*========== FIND A ITEM  ===========*/
+            if (chance > 0.75)/*========== FIND A ITEM  ===========*/
             {
 
                 //chances for the found item, has to be balance when all items in the game
@@ -187,7 +187,7 @@ public class BackgroundTasks : MonoBehaviour
                         addItemFound(element, Item.ItemClass.Consumable);
                     }
                 }
-                else if (chance > 0.15)/*========== RESSOURCES ===========*/
+                else if (chance > 0.00)/*========== RESSOURCES ===========*/
                 {
                     possibleItem = lastScavenging.getMyLevelItems(myLevel, Item.ItemClass.Resource, scavengeTime);
                     if (possibleItem != null && possibleItem.Length > 0)
@@ -199,17 +199,9 @@ public class BackgroundTasks : MonoBehaviour
                         addItemFound(element, Item.ItemClass.Resource);
                     }
                 }
-                else if (chance > 0.0) /*========== JUNK ===========*/
-                {
-                    possibleItem = lastScavenging.getMyLevelItems(myLevel, Item.ItemClass.Junk, scavengeTime);
-                    if (possibleItem != null && possibleItem.Length > 0)
-                    {
-                        int index = (int)(rand.NextDouble() * (possibleItem.Length - 1));
-                        Junk element = Resources.Load<Junk>(possibleItem[index].link);
-                        //Debug.Log("Find" + element.name);
-                        addItemFound(element, Item.ItemClass.Junk);
-                    }
-                }
+                
+
+                //junk not implemented
 
 
             }

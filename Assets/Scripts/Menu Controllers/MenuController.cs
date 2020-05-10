@@ -7,7 +7,7 @@ public class MenuController : MonoBehaviour
 {
     //public StatusBarController barController;
     public GameObject backPanel;
-    public GameObject bunkerPanel;
+    public GameObject mainPanel;
     private Animator openCloseMenuAnimator;
     private float animDuration = 10f / 60f;
     private static MenuController instance;
@@ -117,7 +117,7 @@ public class MenuController : MonoBehaviour
     {
         lock (mutex)
         {
-            bunkerPanel.SetActive(!menuOpened);
+            mainPanel.SetActive(!menuOpened);
             backPanel.SetActive(menuOpened);
             yield return null;
         }
