@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections.Generic;
 public class Scavenging
 {
@@ -136,7 +137,7 @@ public class Scavenging
      *
      * if we don't have a gun, return false
      */
-    public bool MayUseGun(double probability)
+    public bool MayUseWeapon(double probability)
     {
         if (probability > 1 || probability < 0)
         {
@@ -174,18 +175,32 @@ public class Scavenging
     public bool MyUseArmor(double probability)
     {
         Gear armorPiece;
+        int count = 0;
         double proba=new System.Random().NextDouble();
         
-        if (inventory.Equipment.Count == 0||proba>probability)
+        if (inventory.Equipment.Count == 0)
         {
             return false;
         }
-        
-        if ((armorPiece = player.GetGear(Gear.ItemType.Chestplate)) != null) ;
-        else if ((armorPiece = player.GetGear(Gear.ItemType.Greaves)) != null) ;
-        else if ((armorPiece = player.GetGear(Gear.ItemType.Helmet)) != null) ;
-        
-        
+
+        if ((armorPiece = player.GetGear(Gear.ItemType.Chestplate)) != null)
+        {
+            count++;
+        }
+        else if ((armorPiece = player.GetGear(Gear.ItemType.Greaves)) != null)
+        {
+            count++;
+        }
+        else if ((armorPiece = player.GetGear(Gear.ItemType.Helmet)) != null)
+        {
+            count++;
+        }
+
+        if (count >= 0 && proba >= probability)
+        {
+            return false;
+        }
+
         if (armorPiece != null)
         {
             /*==  DOMAGE  ==*/

@@ -185,6 +185,14 @@ public class GameController : MonoBehaviour
                     scavengepalier.Add(GameData.ConvertStringToDateTime(palier));
                 }
 
+
+                if (data.scavengingStartTime != null && data.scavengingEndTime != null)
+                {
+                    BackgroundTasks.Tasks.StartScavenging = GameData.ConvertStringToDateTime(data.scavengingStartTime);
+                    BackgroundTasks.Tasks.EndScavenging = GameData.ConvertStringToDateTime(data.scavengingEndTime);
+                }
+
+                
                 BackgroundTasks.Tasks.scavengingPalier = scavengepalier;
                 BackgroundTasks.Tasks.IsScavenging = true;
             }

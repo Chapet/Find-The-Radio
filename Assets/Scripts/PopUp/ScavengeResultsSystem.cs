@@ -44,10 +44,10 @@ public class ScavengeResultsSystem : MonoBehaviour
     private int nbrLog = 0;
     public void FixedUpdate()
     {
-        InscSlider(healthBar,healthBarGoal);
-        InscSlider(hungerBar,HungerBarGoal);
-        InscSlider(thirstBar,thirstBarGoal);
-        InscSlider(energyBar,energyBarGoal);
+        InscSlider(healthBar,player.GetHealth());
+        InscSlider(hungerBar,player.GetHunger());
+        InscSlider(thirstBar,player.GetThirst());
+        InscSlider(energyBar,player.GetEnergy());
         UpdateTitle();
         
         if (BackgroundTasks.Tasks.lastScavenging!=null && BackgroundTasks.Tasks.lastScavenging.GetItemsFound().Count != nbrItemFound)
@@ -84,6 +84,8 @@ public class ScavengeResultsSystem : MonoBehaviour
 
             nbrLog = BackgroundTasks.Tasks.lastScavenging.scavengeLog.Count;
         }
+        
+        
     }
 
     private void InscSlider(StatusBar statusBar, int goal)
@@ -102,6 +104,11 @@ public class ScavengeResultsSystem : MonoBehaviour
     {
         backPanel.SetActive(true);
         UpdateTitle();
+        
+        healthBar.SetValue(player.GetHealth());
+        hungerBar.SetValue(player.GetHunger());
+        thirstBar.SetValue(player.GetThirst());
+        energyBar.SetValue(player.GetEnergy());
         
         PopResult(BackgroundTasks.Tasks.lastScavenging);
         

@@ -31,6 +31,9 @@ public class GameData
     public int[] scavengingOldStatusBar;
     public List<string> ScavengeLog;
     public List<string> scavengingPalier;
+    public string scavengingStartTime;
+    public string scavengingEndTime;
+    
     public int scavengingActualStep;
     public int scavengingTotalSteps;
 
@@ -95,6 +98,12 @@ public class GameData
             foreach (var date in BackgroundTasks.Tasks.scavengingPalier)
             {
                 this.scavengingPalier.Add(ConvertDateTimeToString(date));
+            }
+
+            if (BackgroundTasks.Tasks.StartScavenging != null && BackgroundTasks.Tasks.EndScavenging != null)
+            {
+                this.scavengingStartTime = ConvertDateTimeToString(BackgroundTasks.Tasks.StartScavenging);
+                this.scavengingEndTime = ConvertDateTimeToString(BackgroundTasks.Tasks.EndScavenging);
             }
         }
         else

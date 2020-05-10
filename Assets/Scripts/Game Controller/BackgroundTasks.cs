@@ -24,7 +24,7 @@ public class BackgroundTasks : MonoBehaviour
     public GameObject lights;
 
     public bool IsScavenging { get; set; }
-    public DateTime StartScavenging { get; private set; }
+    public DateTime StartScavenging { get;  set; }
     public DateTime EndScavenging { get; set; }
 
     [SerializeField] private GameObject scavengePopUpResultPanel;
@@ -63,7 +63,7 @@ public class BackgroundTasks : MonoBehaviour
         if (IsScavenging)
         {
             DateTime now = DateTime.Now;
-            if (now > EndScavenging && actualScavengingStep >= totalScavengingSteps)
+            if (EndScavenging!=null && now > EndScavenging && actualScavengingStep >= totalScavengingSteps)
             {
                 Debug.Log("*********    FIN SCAVENGING    *************");
                 IsScavenging = false;
@@ -226,7 +226,7 @@ public class BackgroundTasks : MonoBehaviour
                         if (chance > 0.999) pop.PopMessage(PopupSystem.Popup.DeathEvent);
                         else if (chance > 0.90)
                         {
-                            if (lastScavenging.MayUseGun(1))
+                            if (lastScavenging.MayUseWeapon(1))
                             {
                                 pop.PopMessage(PopupSystem.Popup.ZombieLot1);
                             }
@@ -315,7 +315,7 @@ public class BackgroundTasks : MonoBehaviour
                         }
                         else
                         {
-                            if (lastScavenging.MayUseGun(1))
+                            if (lastScavenging.MayUseWeapon(1))
                             {
                                 pop.PopMessage(PopupSystem.Popup.ZombieFew1);
                             }
@@ -358,7 +358,7 @@ public class BackgroundTasks : MonoBehaviour
                         }
                         else
                         {
-                            if (lastScavenging.MayUseGun(1))
+                            if (lastScavenging.MayUseWeapon(1))
                             {
                                 pop.PopMessage(PopupSystem.Popup.ZombieOne1);
                             }
@@ -381,13 +381,46 @@ public class BackgroundTasks : MonoBehaviour
                 else if (chance > 0.80)
                 {
                     //=========    BITTEN    =========
-                    if (lastScavenging.MayUseGun(0.8))
+                    double probaWeapon;
+                    Gear getGear = PlayerController.Player.GetGear(Gear.ItemType.Weapon);
+                    if (getGear != null)
+                    {
+                        if (getGear.filename== "Gun")
+                        {
+                            probaWeapon = 0.9;
+                        }else if (getGear.filename == "Knife")
+                        {
+                            probaWeapon = 0.7;
+                        }else if (getGear.filename== "IronPipe")
+                        {
+                            probaWeapon = 0.5;
+                        }else if (getGear.filename== "BaseballBat")
+                        {
+                            probaWeapon = 0.4;
+                        }
+                        else
+                        {
+                            probaWeapon = 0.2;
+                        }
+                    }
+                    else
+                    {
+                        probaWeapon = 0;
+                    }
+
+
+
+                    if (lastScavenging.MayUseWeapon(probaWeapon))
                     {
                         Debug.Log("Weapon has been used");
+                        pop.PopMessage(PopupSystem.Popup.ZombieUseWeapon);
                     }
                     else if (lastScavenging.MyUseArmor(0.8))
                     {
                         Debug.Log("Armor has been used");
+                        pop.PopMessage(PopupSystem.Popup.ZombieUseArmor);
+                        PlayerController.Player.UpdateHealth(-5); //update heamth   
+                        lastScavenging.scavengeLog.Add("You were bitten by a zombie (-5)");
                     }
                     else
                     {

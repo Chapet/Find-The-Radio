@@ -14,7 +14,7 @@ public class PopupSystem : MonoBehaviour
     public BunkerController bunk;
     public enum Popup
     {
-        Bite, Death, DeathEvent, ZombieOne0, ZombieOne1, ZombieFew0, ZombieFew1, ZombieLot0,
+        Bite, Death, DeathEvent, ZombieOne0, ZombieOne1, ZombieUseWeapon,ZombieUseArmor,ZombieFew0, ZombieFew1, ZombieLot0,
         ZombieLot1, GroceryStore, ClothingStore, HuntingStore, Parc, SportStore, PoliceStation, Pharmacy, Radio, RadioParts
     };
 
@@ -48,6 +48,14 @@ public class PopupSystem : MonoBehaviour
                 break;
             case Popup.ZombieOne1: //event lvl 1
                 textPopupMsg.text = "   A zombie attacked you but you were able to kill it with your gun!";
+                okButton.gameObject.SetActive(true);
+                break;
+            case Popup.ZombieUseWeapon: 
+                textPopupMsg.text = "   A zombie attacked you but you were able to kill it with your weapon!";
+                okButton.gameObject.SetActive(true);
+                break;
+            case Popup.ZombieUseArmor: //event lvl 1
+                textPopupMsg.text = "   A zombie attacked you and your armor has partially protected you!";
                 okButton.gameObject.SetActive(true);
                 break;
             case Popup.ZombieFew0: //event lvl 2
