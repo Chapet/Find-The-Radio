@@ -27,10 +27,7 @@ public class ScavengeResultsSystem : MonoBehaviour
     public StatusBar energyBar;
 
     private float[] goals;
-    private int healthBarGoal;
-    private int HungerBarGoal;
-    private int thirstBarGoal;
-    private int energyBarGoal;
+
     
 
     public void Awake()
@@ -150,12 +147,7 @@ public class ScavengeResultsSystem : MonoBehaviour
         hungerBar.SetValue(scavenging.oldStatusBar.hunger);
         thirstBar.SetValue(scavenging.oldStatusBar.thirst);
         energyBar.SetValue(scavenging.oldStatusBar.energy);
-        
-        //set objectif
-        healthBarGoal = player.GetHealth();
-        HungerBarGoal = player.GetHunger();
-        thirstBarGoal = player.GetThirst();
-        energyBarGoal = player.GetEnergy();
+
 
     }
 
