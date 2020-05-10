@@ -150,7 +150,6 @@ public class BackgroundTasks : MonoBehaviour
         {
             Debug.Log("*******    SCAVENGING STEP " + actualScavengingStep + "/" + totalScavengingSteps + "**************");
             GameController.Controller.UpdateGameClock(0.5f);
-            //TODO:update clock
 
             var rand = new System.Random();
             double chance = rand.NextDouble(); // 0.0 <= chance < 1.0
@@ -160,7 +159,7 @@ public class BackgroundTasks : MonoBehaviour
                 //chances for the found item, has to be balance when all items in the game
                 chance = rand.NextDouble();
 
-                int myLevel = 100;//TODO: link with player
+                int myLevel = 100;
 
                 (string link, int minLevel, Item.ItemClass itemType, double minTimeOut)[] possibleItem;
 

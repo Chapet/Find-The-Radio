@@ -91,31 +91,6 @@ public class BunkerController : MonoBehaviour
 
     public void GoToBunker()
     {
-        //if(bedPanel.activeSelf)
-        //{
-        //    menuController.ExitMenu(bedPanel);
-        //}
-        //if(scavengingPanel.activeSelf)
-        //{
-        //    menuController.ExitMenu(scavengingPanel);
-        //}
-        //if(scavengingPopUpResultPanel.activeSelf)
-        //{
-        //    menuController.ExitMenu(scavengingPopUpResultPanel);
-        //}
-        //if (inventoryPanel.activeSelf)
-        //{
-        //    tabController.CloseTabs();
-        //    menuController.ExitMenu(inventoryPanel);
-        //}
-        //if(cheatPanel.activeSelf)
-        //{
-        //    menuController.ExitMenu(cheatPanel);
-        //}
-        //if (craftingPanel.activeSelf)
-        //{
-        //    menuController.ExitMenu(craftingPanel);
-        //}
         menuController.CloseAllPanels();
     }
 

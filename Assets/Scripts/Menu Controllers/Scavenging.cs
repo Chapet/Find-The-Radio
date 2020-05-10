@@ -5,8 +5,8 @@ public class Scavenging
     private PlayerController player;
     private InventoryManager inventory;
 
-    public List<(Item item,Item.ItemClass itemClass)> itemsFound; //TODO: N'EST PAS SAUVEGARDE SI L'APPLICATION SE FERME
-    public List<string> scavengeLog; //TODO: N'EST PAS SAUVEGARDE SI L'APPLICATION SE FERME 
+    public List<(Item item,Item.ItemClass itemClass)> itemsFound;
+    public List<string> scavengeLog; 
 
     public List<Item> GetItemsFound()
     {

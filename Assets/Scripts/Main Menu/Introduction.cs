@@ -55,8 +55,7 @@ public class Introduction : MonoBehaviour
 
 
     }
-    //.transform.position = new Vector3(0, 20, 0)
-    
+
     // Update is called once per frame
     public void StartIntroduction()
     {
@@ -106,7 +105,6 @@ public class Introduction : MonoBehaviour
                 fixedPanel.SetActive(true);
                 headPanel.SetActive(true);
                 lightsPanel.SetActive(true);
-                //this.gameObject.transform.position=new Vector3(0,421);//on resize pour le tutorial
                 backgroundBunker.transform.position = initalPosition;
             
                 //DEBUT TUTORIAL
