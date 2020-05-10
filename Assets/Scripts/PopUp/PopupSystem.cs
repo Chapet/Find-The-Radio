@@ -47,7 +47,7 @@ public class PopupSystem : MonoBehaviour
                 okButton.gameObject.SetActive(true);
                 break;
             case Popup.ZombieOne1: //event lvl 1
-                textPopupMsg.text = "   A zombie attacked you but you were able to kill it with your gun!";
+                textPopupMsg.text = "   A zombie attacked you but you were able to kill it with your weapon!";
                 okButton.gameObject.SetActive(true);
                 break;
             case Popup.ZombieUseWeapon: 
@@ -64,7 +64,7 @@ public class PopupSystem : MonoBehaviour
                 okButton.gameObject.SetActive(true);
                 break;
             case Popup.ZombieFew1: //event lvl 2
-                textPopupMsg.text = "   A bunch of zombies attacked you but you were able to kill them with your gun!";
+                textPopupMsg.text = "   A bunch of zombies attacked you but you were able to kill them with your weapon!";
                 okButton.gameObject.SetActive(true);
                 break;
             case Popup.ZombieLot0: //event lvl 3
@@ -73,7 +73,7 @@ public class PopupSystem : MonoBehaviour
                 okButton.gameObject.SetActive(true);
                 break;
             case Popup.ZombieLot1: //event lvl 3
-                textPopupMsg.text = "   A large group of zombies attacked you but you were able to kill them with your gun!";
+                textPopupMsg.text = "   A large group of zombies attacked you but you were able to kill them with your weapon!";
                 okButton.gameObject.SetActive(true);
                 break;
             case Popup.GroceryStore:  //event lvl 1
