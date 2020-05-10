@@ -43,6 +43,11 @@ public class GameController : MonoBehaviour
         MenuController.Transition(transitionPanel, transitionAnim);
         NotificationManager.Manager.CancelAllNotifications();
 
+        if (!NewGame)
+        {
+            LoadGame();
+        }
+
         if (NewGame)
         {
             ResetGame();
@@ -51,10 +56,7 @@ public class GameController : MonoBehaviour
             CleanSave();
             PlayerController.IS_FIRST_GAME = true;
         }
-        else
-        {
-            LoadGame();
-        }
+        
 
         if (PlayerController.IS_FIRST_GAME)
         {
@@ -205,6 +207,10 @@ public class GameController : MonoBehaviour
             Debug.Log("New State Of IsScavenging because loaddata"+ BackgroundTasks.Tasks.IsScavenging);
 
             /*========    END SCAVENGING    ========*/
+        }
+        else
+        {
+            NewGame = true;
         }
     }
 

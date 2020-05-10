@@ -6267,10 +6267,12 @@ MonoBehaviour:
     scavengingOldStatusBar: 
     ScavengeLog: []
     scavengingPalier: []
+    scavengingStartTime: 
+    scavengingEndTime: 
     scavengingActualStep: 0
     scavengingTotalSteps: 0
   _introduction: {fileID: 442291356}
-  pop: {fileID: 0}
+  pop: {fileID: 1998431299}
   clock: {fileID: 1103367990}
 --- !u!4 &383633853
 Transform:
@@ -8155,7 +8157,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentStats: 
   maxCarryingSize: 4
-  statusBarController: {fileID: 0}
   equipment: []
   pop: {fileID: 1998431299}
 --- !u!114 &435538308

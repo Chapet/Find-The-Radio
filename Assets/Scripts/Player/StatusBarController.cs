@@ -13,8 +13,6 @@ public class StatusBarController : MonoBehaviour
     private List<StatusBar>[] bars;
     public int[] prevStats;
 
-    private PlayerController player = PlayerController.Player;
-
     public bool statsChanged;
 
     private void Awake()
@@ -25,9 +23,8 @@ public class StatusBarController : MonoBehaviour
 
     private void Start()
     {
-        player = PlayerController.Player;
-        prevStats = new int[player.currentStats.Length];
-        Array.Copy(player.currentStats, prevStats, prevStats.Length);
+        prevStats = new int[PlayerController.Player.currentStats.Length];
+        Array.Copy(PlayerController.Player.currentStats, prevStats, prevStats.Length);
     }
 
     private void FixedUpdate()
@@ -37,7 +34,7 @@ public class StatusBarController : MonoBehaviour
         {
             for (int i = 0; i < prevStats.Length; i++)
             {
-                if (prevStats[i] != player.currentStats[i])
+                if (prevStats[i] != PlayerController.Player.currentStats[i])
                 {
                     UpdateStatusBars((StatType) i);
                 }
@@ -49,10 +46,10 @@ public class StatusBarController : MonoBehaviour
     {
         foreach (StatusBar s in bars[(int)type])
         {
-            s.SetValue(player.currentStats[(int)type]);
+            s.SetValue(PlayerController.Player.currentStats[(int)type]);
             //Debug.Log(s + " set to " + player.currentStats[(int)type]);
         }
-        Array.Copy(player.currentStats, prevStats, prevStats.Length);
+        Array.Copy(PlayerController.Player.currentStats, prevStats, prevStats.Length);
         //Debug.Log("Updating status bars of type "+type);
     }
 
@@ -65,7 +62,7 @@ public class StatusBarController : MonoBehaviour
     {
         for (int i=0; i<prevStats.Length; i++)
         {
-            if (prevStats[i] != player.currentStats[i])
+            if (prevStats[i] != PlayerController.Player.currentStats[i])
             {
                 return true;
             }
