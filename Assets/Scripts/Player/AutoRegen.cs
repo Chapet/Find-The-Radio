@@ -2,41 +2,42 @@
 
 public class AutoRegen : MonoBehaviour
 {
-    PlayerController player;
+    public static AutoRegen GetAutoRegen { get; private set; }
 
-    public float timeDelta;
-    public int inc;
-    public int threshold;
+    [Range(0.5f, 8f)] public float deltaTime;
+    [Range(0, 100)] public int threshold;
+    [Range(1, 25)] public int inc;
 
-    private float lastInc = 0;
+    private float lastInc = 0f;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        player = PlayerController.Player;
+        GetAutoRegen = this;
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    public void DoRegen(float timeElapsed)
     {      
         if (RegenCond())
         {
-            lastInc = (lastInc + Time.fixedDeltaTime) % timeDelta;
-            if (lastInc <= Time.fixedDeltaTime)
+            lastInc += timeElapsed;
+            while (lastInc >= deltaTime)
             {
-                player.UpdateHealth(inc);
+                PlayerController.Player.UpdateHealth(inc);
+                lastInc -= deltaTime;
             }
         }
         else
         {
-            lastInc = 0;
+            lastInc = 0f;
         }
     }
 
     private bool RegenCond()
     {
-        bool b = player.GetHunger() >= threshold && player.GetThirst() >= threshold && player.GetEnergy() >= threshold;
-        b = b && player.GetHealth() < 100;
+        Debug.Log(PlayerController.Player);
+        bool b = PlayerController.Player.GetHunger() >= threshold && PlayerController.Player.GetThirst() >= threshold && PlayerController.Player.GetEnergy() >= threshold;
+        b = b && PlayerController.Player.GetHealth() < 100;
         return b;
     }
 }

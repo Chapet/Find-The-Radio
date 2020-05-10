@@ -12,31 +12,32 @@ public class AutoDamage : MonoBehaviour
     [Range(0, 100)] public int thirstThreshold;
     [Range(0, 100)] public int energyThreshold;
 
-    public float timeDelta;
-    public int inc;
-    private float lastInc = 0;
+    public static AutoDamage GetAutoDamage { get; private set; }
 
-    private PlayerController player;
+    [Range(0.5f, 8f)] public float deltaTime;
+    [Range(1f, 25f)] public int inc;
 
-    // Start is called before the first frame update
-    void Start()
+    private float lastInc = 0f;
+
+    void Awake()
     {
-        player = PlayerController.Player;
+        GetAutoDamage = this;
     }
 
     // Update is called once per frame
-    void Update()
+    public void DoDamage(float elapsedTime)
     {
         if (DmgCond())
         {
-            lastInc = (lastInc + Time.fixedDeltaTime) % timeDelta;
-            if (lastInc <= Time.fixedDeltaTime)
+            lastInc += elapsedTime;
+            while (lastInc >= deltaTime)
             {
                 float tmp = inc;
-                if (player.GetHunger() <= hungerThreshold) tmp *= hungerMultiplier;
-                if (player.GetThirst() <= thirstThreshold) tmp *= thirstMultiplier;
-                if (player.GetEnergy() <= energyThreshold) tmp *= energyMultiplier;
-                player.UpdateHealth(-1*(int)tmp);
+                if (PlayerController.Player.GetHunger() <= hungerThreshold) tmp *= hungerMultiplier;
+                if (PlayerController.Player.GetThirst() <= thirstThreshold) tmp *= thirstMultiplier;
+                if (PlayerController.Player.GetEnergy() <= energyThreshold) tmp *= energyMultiplier;
+                PlayerController.Player.UpdateHealth(-1*(int)tmp);
+                lastInc -= deltaTime;
             }
         }
         else
@@ -47,6 +48,6 @@ public class AutoDamage : MonoBehaviour
 
     private bool DmgCond()
     {
-        return player.GetHunger() <= hungerThreshold || player.GetThirst() <= thirstThreshold || player.GetEnergy() <= energyThreshold;
+        return PlayerController.Player.GetHunger() <= hungerThreshold || PlayerController.Player.GetThirst() <= thirstThreshold || PlayerController.Player.GetEnergy() <= energyThreshold;
     }
 }
