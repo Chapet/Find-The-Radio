@@ -163,7 +163,7 @@ public class Scavenging
         {
             //SHOT with the gun
             /*====    DOMAGE    ====*/
-            gun.liveGear -= 10;
+            gun.liveGear -= 20;
             
             if (gun.liveGear <= 0)
             {
@@ -210,7 +210,7 @@ public class Scavenging
         if (armorPiece != null)
         {
             /*==  DOMAGE  ==*/
-            armorPiece.liveGear -= 10;
+            armorPiece.liveGear -= 20;
             
             if (armorPiece.liveGear <= 0)
             {

@@ -114,14 +114,25 @@ public class GameController : MonoBehaviour
 
             UpdateGameClock(data.gameClock);
 
-            foreach (string s in data.equippedGear)
+            for (int i = 0; i < data.equippedGear.Count; i++)
             {
-                Gear g = Resources.Load("Items/Gear/" + s) as Gear;
+                Gear g = Resources.Load("Items/Gear/" + data.equippedGear[i]) as Gear;
+                g.liveGear = data.equippedgearLife[i];
                 if (g != null)
                 {
                     PlayerController.Player.EquipGear(g);
                 }
             }
+
+            /*foreach (string s in data.equippedGear)
+            {
+                Gear g = Resources.Load("Items/Gear/" + s) as Gear;
+                g.liveGear=da
+                if (g != null)
+                {
+                    PlayerController.Player.EquipGear(g);
+                }
+            }*/
 
             foreach (string s in data.consumables)
             {
@@ -131,6 +142,7 @@ public class GameController : MonoBehaviour
                     InventoryManager.Inventory.AddItem(c);
                 }
             }
+
             foreach (string s in data.equipment)
             {
                 Gear g = Resources.Load("Items/Gear/" + s) as Gear;
@@ -139,6 +151,7 @@ public class GameController : MonoBehaviour
                     InventoryManager.Inventory.AddItem(g);
                 }
             }
+            
             foreach (string s in data.junks)
             {
                 Junk j = Resources.Load("Items/Junks/" + s) as Junk;
@@ -190,7 +203,9 @@ public class GameController : MonoBehaviour
                 if (data.scavengingStartTime != null && data.scavengingEndTime != null)
                 {
                     BackgroundTasks.Tasks.StartScavenging = GameData.ConvertStringToDateTime(data.scavengingStartTime);
+                    DateTime a = BackgroundTasks.Tasks.StartScavenging;
                     BackgroundTasks.Tasks.EndScavenging = GameData.ConvertStringToDateTime(data.scavengingEndTime);
+                    DateTime b=BackgroundTasks.Tasks.StartScavenging;
                 }
 
                 
