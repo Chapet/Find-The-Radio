@@ -25,7 +25,11 @@ public class GameData
 
     [SerializeField] public List<string> resources = new List<string>();
     [SerializeField] public List<string> junks = new List<string>();
-    
+
+    public bool isSleeping;
+    public string sleepingStartTime;
+    public string sleepingEndTime;
+
     /*=====    INTRODUCTION    =======*/
     [SerializeField] public bool is_firstGame;
 
@@ -78,7 +82,17 @@ public class GameData
         {
             resources.Add(r.filename);
         }
-        
+
+        if (BackgroundTasks.Tasks.IsSleeping)
+        {
+            isSleeping = true;
+            sleepingStartTime = ConvertDateTimeToString(BackgroundTasks.Tasks.StartSleeping);
+            sleepingEndTime = ConvertDateTimeToString(BackgroundTasks.Tasks.EndSleeping);
+        }
+        else
+        {
+            isSleeping = false;
+        }
         
         /*=======    SCAVENGING    ========*/
         this.isScavenging = BackgroundTasks.Tasks.IsScavenging;

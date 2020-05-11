@@ -151,16 +151,6 @@ public class GameController : MonoBehaviour
                 }
             }
 
-            //for (int i = 0; i < data.equippedGear.Count; i++)
-            //{
-            //    Gear g = Resources.Load("Items/Gear/" + data.equippedGear[i]) as Gear;
-            //    g.liveGear = data.equippedGearLife[i];
-            //    if (g != null)
-            //    {
-            //        PlayerController.Player.EquipGear(g);
-            //    }
-            //}
-
             for (int i = 0; i < data.equippedGear.Count; i++)
             {
                 Gear equipped = Resources.Load("Items/Gear/" + data.equippedGear[i]) as Gear;
@@ -180,7 +170,14 @@ public class GameController : MonoBehaviour
             }
 
             Debug.Log("Save loaded!");
-            NewGame = false;           
+            NewGame = false;
+
+            if (data.isSleeping)
+            {
+                BackgroundTasks.Tasks.IsSleeping = true;
+                BackgroundTasks.Tasks.StartSleeping = GameData.ConvertStringToDateTime(data.sleepingStartTime);
+                BackgroundTasks.Tasks.EndSleeping = GameData.ConvertStringToDateTime(data.sleepingEndTime);
+            }
             
             /*=====    SCAVENGING    =======*/
             if (data.isScavenging)

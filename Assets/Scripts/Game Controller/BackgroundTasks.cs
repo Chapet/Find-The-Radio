@@ -8,9 +8,9 @@ public class BackgroundTasks : MonoBehaviour
 {
     public static BackgroundTasks Tasks { get; private set; }
 
-    public bool IsSleeping { get; private set; }
-    private DateTime startSleeping;
-    private DateTime endSleeping;
+    public bool IsSleeping { get; set; }
+    public DateTime StartSleeping { get; set; }
+    public DateTime EndSleeping { get; set; }
     public float updateStep;
     public int sleepInc;
     public float hungerMultiplier;
@@ -51,7 +51,7 @@ public class BackgroundTasks : MonoBehaviour
     {
         if (IsSleeping)
         {
-            var diffInSeconds = (DateTime.Now - startSleeping).TotalSeconds;
+            var diffInSeconds = (DateTime.Now - StartSleeping).TotalSeconds;
             if (diffInSeconds > updateStep)
             {
                 hStep += sleepInc * hungerMultiplier;
@@ -469,14 +469,15 @@ public class BackgroundTasks : MonoBehaviour
 
         SwitchLightsOff();
 
-        startSleeping = DateTime.Now;
-        endSleeping = startSleeping.AddSeconds(2 * sleepTime * updateStep);
+        StartSleeping = DateTime.Now;
+        EndSleeping = StartSleeping.AddSeconds(2 * sleepTime * updateStep);
     }
 
     private void BackgroundSleep()
     {
-        if (startSleeping < endSleeping)
+        if (StartSleeping < EndSleeping)
         {
+            SwitchLightsOff();
             if (sStep >= 1f)
             {
                 PlayerController.Player.UpdateEnergy((int)sStep);
@@ -492,7 +493,7 @@ public class BackgroundTasks : MonoBehaviour
                 PlayerController.Player.UpdateThirst(-1 * (int)tStep);
                 tStep = 0f;
             }
-            startSleeping = startSleeping.AddSeconds(updateStep);
+            StartSleeping = StartSleeping.AddSeconds(updateStep);
             GameController.Controller.UpdateGameClock(0.5f);
         }
         else
