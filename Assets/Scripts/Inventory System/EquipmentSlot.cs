@@ -14,6 +14,7 @@ public class EquipmentSlot : MonoBehaviour
     {
         player = PlayerController.Player;
         InventoryController.InvController.AddEquipmentSlot(this);
+        Refresh();
     }
 
     public void Refresh()

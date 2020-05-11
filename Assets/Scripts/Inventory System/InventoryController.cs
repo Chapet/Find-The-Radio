@@ -354,7 +354,7 @@ public class InventoryController : MonoBehaviour
         }
     }
 
-    private void RefreshEquipmentSlots()
+    public void RefreshEquipmentSlots()
     {
         foreach (EquipmentSlot e in equipment)
         {
