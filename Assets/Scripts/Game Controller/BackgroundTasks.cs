@@ -231,7 +231,7 @@ public class BackgroundTasks : MonoBehaviour
                         else if (chance > 0.80)
                         {
                             pop.PopMessage(PopupSystem.Popup.HuntingStore);
-                            Gear element = Resources.Load<Gear>("Items/Gear/Gun");
+                            Gear element = Instantiate(Resources.Load<Gear>("Items/Gear/Gun"));
                             addItemFound(element, Item.ItemClass.Gear);
                         }
                         else
@@ -275,7 +275,7 @@ public class BackgroundTasks : MonoBehaviour
                         else if (chance > 0.75)
                         {
                             pop.PopMessage(PopupSystem.Popup.SportStore);
-                            Gear element = Resources.Load<Gear>("Items/Gear/BaseballBat");
+                            Gear element = Instantiate(Resources.Load<Gear>("Items/Gear/BaseballBat"));
                             addItemFound(element, Item.ItemClass.Gear);
                         }
                         else if (chance > 0.50)
@@ -285,17 +285,17 @@ public class BackgroundTasks : MonoBehaviour
                             //chance range is 0.75 - 0.50
                             if (chance > 0.60)
                             {
-                                Gear element = Resources.Load<Gear>("Items/Gear/Greaves");
+                                Gear element = Instantiate(Resources.Load<Gear>("Items/Gear/Greaves"));
                                 addItemFound(element, Item.ItemClass.Gear);
                             }
                             else if (chance > 0.70)
                             {
-                                Gear element = Resources.Load<Gear>("Items/Gear/Helmet");
+                                Gear element = Instantiate(Resources.Load<Gear>("Items/Gear/Helmet"));
                                 addItemFound(element, Item.ItemClass.Gear);
                             }
                             else
                             {
-                                Gear element = Resources.Load<Gear>("Items/Gear/Chestplate");
+                                Gear element = Instantiate(Resources.Load<Gear>("Items/Gear/Chestplate"));
                                 addItemFound(element, Item.ItemClass.Gear);
                             }
                         }

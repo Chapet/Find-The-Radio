@@ -220,34 +220,37 @@ public class Scavenging
         if ((armorPiece = player.GetGear(Gear.ItemType.Chestplate)) != null)
         {
             count+=3;
+
+            armorPiece.liveGear -= 20;
+            if (armorPiece.liveGear <= 0)
+            {
+                inventory.RemoveItem(armorPiece);
+            }
+
         }
         if ((armorPiece = player.GetGear(Gear.ItemType.Greaves)) != null)
         {
             count+=2;
+
+            armorPiece.liveGear -= 20;
+            if (armorPiece.liveGear <= 0)
+            {
+                inventory.RemoveItem(armorPiece);
+            }
+
         }
         if ((armorPiece = player.GetGear(Gear.ItemType.Helmet)) != null)
         {
             count+=2;
-        }
 
-        if (armorPiece != null)
-        {
-            /*==  DOMAGE  ==*/
             armorPiece.liveGear -= 20;
-            
             if (armorPiece.liveGear <= 0)
             {
                 inventory.RemoveItem(armorPiece);
-                for (int i = 0; i < player.Equipment.Length; i++)
-                {
-                    if (player.Equipment[i].Equals(armorPiece))
-                    {
-                        player.Equipment[i] = null;
-                        break;
-                    }
-                }
             }
+
         }
+
         return count;
     }
     
