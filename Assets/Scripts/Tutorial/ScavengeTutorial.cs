@@ -37,7 +37,7 @@ public class ScavengeTutorial : TutorialStep
                 this.SetText("The longer you're out, the better the items you'll find.");
                 break;
             case 2:
-                this.SetText("However, the longer you scavenge, the more dangerous it gets");
+                this.SetText("However, the longer you scavenge, the more dangerous it gets.");
                 break;
             case 3:
                 this.SetText("Gears can protect you from zombies.");

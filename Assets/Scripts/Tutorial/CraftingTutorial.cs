@@ -43,7 +43,7 @@ public class CraftingTutorial : TutorialStep
                 break;
             case 1:
                 finalItem.SetActive(true);
-                this.SetText("The item that will be crafted is displayed here");
+                this.SetText("The item that will be crafted is displayed here.");
                 break;
             case 2:
                 finalItem.SetActive(false);
