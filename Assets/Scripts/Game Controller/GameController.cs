@@ -115,18 +115,9 @@ public class GameController : MonoBehaviour
 
             UpdateGameClock(data.gameClock);
 
-            foreach (string s in data.equippedGear)
-            {
-                Gear g = Resources.Load("Items/Gear/" + s) as Gear;
-                if (g != null)
-                {
-                    PlayerController.Player.EquipGear(g);
-                }
-            }
-
             foreach (string s in data.consumables)
             {
-                Consumable c = Resources.Load("Items/Consumables/" + s) as Consumable;
+                Consumable c = Instantiate(Resources.Load("Items/Consumables/" + s) as Consumable);
                 if (c != null)
                 {
                     InventoryManager.Inventory.AddItem(c);
@@ -134,7 +125,7 @@ public class GameController : MonoBehaviour
             }
             foreach (string s in data.equipment)
             {
-                Gear g = Resources.Load("Items/Gear/" + s) as Gear;
+                Gear g = Instantiate(Resources.Load("Items/Gear/" + s) as Gear);
                 if (g != null)
                 {
                     InventoryManager.Inventory.AddItem(g);
@@ -142,7 +133,7 @@ public class GameController : MonoBehaviour
             }
             foreach (string s in data.junks)
             {
-                Junk j = Resources.Load("Items/Junks/" + s) as Junk;
+                Junk j = Instantiate(Resources.Load("Items/Junks/" + s) as Junk);
                 if (j != null)
                 {
                     InventoryManager.Inventory.AddItem(j);
@@ -150,12 +141,31 @@ public class GameController : MonoBehaviour
             }
             foreach (string s in data.resources)
             {
-                Resource r = Resources.Load("Items/Resources/" + s) as Resource;
+                Resource r = Instantiate(Resources.Load("Items/Resources/" + s) as Resource);
                 if (r != null)
                 {
                     InventoryManager.Inventory.AddItem(r);
                 }
             }
+
+            foreach (string s in data.equippedGear)
+            {
+                Gear equipped = Resources.Load("Items/Gear/" + s) as Gear;
+                if (equipped != null)
+                {
+                    Debug.Log(equipped + " is equipped");
+                    foreach (Gear g in InventoryManager.Inventory.GetItems(typeof(Gear)))
+                    {
+                        if (g.IsSameAs(equipped))
+                        {
+                            Debug.Log(g + " is equivalent to "+ equipped);
+                            PlayerController.Player.EquipGear(g);
+                        }
+                    }
+                    
+                }
+            }
+
             Debug.Log("Save loaded!");
             NewGame = false;           
             

@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using UnityEngine;
+using System.Collections;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -28,23 +29,27 @@ public class InventoryManager : MonoBehaviour
     private void Awake()
     {
         Inventory = this;
+        consumables = new List<Consumable>();
+        equipment = new List<Gear>();
+        resources = new List<Resource>();
+        junks = new List<Junk>();
         if (useExample)
         {
             //inventory = inventoryExample.GetInventory();
-            object[] example = inventoryExample.GetInventory();
-            consumables = example[0] as List<Consumable>;
-            equipment = example[1] as List<Gear>;
-            resources = example[2] as List<Resource>;
-            junks = example[3] as List<Junk>;
+            StartCoroutine(StartWithExample());
         }
-        else //if (!GameController.saveLoaded)
-        {
-            //inventory = new List<Item>();
-            consumables = new List<Consumable>();
-            equipment = new List<Gear>();
-            resources = new List<Resource>();
-            junks = new List<Junk>();
-        }
+    }
+
+    private IEnumerator StartWithExample()
+    {
+        Debug.Log("OK1");
+        yield return new WaitForSeconds(2f);
+        Debug.Log("OK2");
+        object[] example = inventoryExample.GetInventory();
+        consumables = example[0] as List<Consumable>;
+        equipment = example[1] as List<Gear>;
+        resources = example[2] as List<Resource>;
+        junks = example[3] as List<Junk>;
     }
 
     void Start()

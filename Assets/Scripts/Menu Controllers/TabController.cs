@@ -71,7 +71,7 @@ public class TabController : MonoBehaviour
     private IEnumerator DelayedStartTab(float delay)
     {
         yield return new WaitForSeconds(delay);
-        TabSwitcher(Tab.FoodAndDrink, foodDrinkTog);
+        TabSwitcher(Tab.FoodAndDrink);
     }
 
     public void TabSwitcher(Tab which, Toggle tog = null)
@@ -152,13 +152,9 @@ public class TabController : MonoBehaviour
             {
                 StartCoroutine(ColorFade(brightColor, darkColor, 0.1f, img));
                 toggle.GetComponent<RectTransform>().offsetMax += new Vector2(-20, 0);
-                if (toggle.name == foodDrinkTog.name)
+                toggle.GetComponent<RectTransform>().offsetMin += new Vector2(5, 5);
+                if (toggle.name != foodDrinkTog.name)
                 {
-                    toggle.GetComponent<RectTransform>().offsetMin += new Vector2(5, 5);
-                }
-                else
-                {
-                    toggle.GetComponent<RectTransform>().offsetMin += new Vector2(5, 5);
                     toggle.GetComponent<RectTransform>().offsetMax += new Vector2(0, -5);
                 }
             }
@@ -185,28 +181,13 @@ public class TabController : MonoBehaviour
 
     public void CloseTabs()
     {
+        foodDrinkTog.isOn = true;
+        gearTog.isOn = false;
+        medsTog.isOn = false;
+        miscTog.isOn = false;
+        foodDrinkTog.GetComponent<RectTransform>().offsetMax += new Vector2(-20, 0);
+        foodDrinkTog.GetComponent<RectTransform>().offsetMin += new Vector2(5, 5);
         inventoryController.Clear();
-        for (int i = 0; i < 4; i++)
-        {
-            GameObject toggle = tabsPanel.transform.GetChild(i).gameObject;
-            Image img = toggle.GetComponent<Image>();
-            if (img.color == brightColor)
-            {
-                StartCoroutine(ColorFade(brightColor, darkColor, 0.001f, img));
-                toggle.GetComponent<RectTransform>().offsetMax += new Vector2(-20, 0);
-                if (toggle.name == foodDrinkTog.name)
-                {
-                    Debug.Log("OK1");
-                    toggle.GetComponent<RectTransform>().offsetMin += new Vector2(5, 5);
-                }
-                else
-                {
-                    Debug.Log("OK2");
-                    toggle.GetComponent<RectTransform>().offsetMin += new Vector2(5, 5);
-                    toggle.GetComponent<RectTransform>().offsetMax += new Vector2(0, -5);
-                }
-            }
-        }
         prevActiveTab = Tab.None;
         StartCoroutine(ColorFade(brightColor, darkColor, 0.001f, contentPanel.GetComponent<Image>()));
     }
