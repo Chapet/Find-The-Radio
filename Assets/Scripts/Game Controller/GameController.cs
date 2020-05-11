@@ -124,9 +124,10 @@ public class GameController : MonoBehaviour
                 }
             }
 
-            foreach (string s in data.equipment)
+            for(int i=0;i<data.equipment.Count;i++)
             {
-                Gear g = Instantiate(Resources.Load("Items/Gear/" + s) as Gear);
+                Gear g = Instantiate(Resources.Load("Items/Gear/" + data.equipment[i]) as Gear);
+                g.liveGear = data.equipementLife[i];
                 if (g != null)
                 {
                     InventoryManager.Inventory.AddItem(g);
@@ -153,7 +154,7 @@ public class GameController : MonoBehaviour
             //for (int i = 0; i < data.equippedGear.Count; i++)
             //{
             //    Gear g = Resources.Load("Items/Gear/" + data.equippedGear[i]) as Gear;
-            //    g.liveGear = data.equippedgearLife[i];
+            //    g.liveGear = data.equippedGearLife[i];
             //    if (g != null)
             //    {
             //        PlayerController.Player.EquipGear(g);
@@ -168,7 +169,7 @@ public class GameController : MonoBehaviour
                     Debug.Log(equipped + " is equipped");
                     foreach (Gear g in InventoryManager.Inventory.GetItems(typeof(Gear)))
                     {
-                        if (g.IsSameAs(equipped) && g.liveGear == data.equippedgearLife[i])
+                        if (g.IsSameAs(equipped) && g.liveGear == data.equippedGearLife[i])
                         {
                             Debug.Log(g + " is equivalent to "+ equipped);
                             PlayerController.Player.EquipGear(g);
