@@ -51,7 +51,7 @@ public class HomeTutorial : TutorialStep
                 //inventory
                 bed.SetActive(false);
                 inventory.SetActive(true);
-                this.SetText("Your items are visible in the inventory");
+                this.SetText("Your items are visible in the inventory.");
                 break;
 
             case 3 :
