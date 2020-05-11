@@ -143,9 +143,38 @@ public class Scavenging
      *
      * if we don't have a gun, return false
      */
-    public bool MayUseWeapon(double probability)
+    public bool MayUseWeapon()
     {
-        if (probability > 1 || probability < 0)
+        double probaWeapon;
+        Gear getGear = PlayerController.Player.GetGear(Gear.ItemType.Weapon);
+        if (getGear != null)
+        {
+            if (getGear.filename == "Gun")
+            {
+                probaWeapon = 0.9;
+            }
+            else if (getGear.filename == "Knife")
+            {
+                probaWeapon = 0.6;
+            }
+            else if (getGear.filename == "IronPipe")
+            {
+                probaWeapon = 0.4;
+            }
+            else if (getGear.filename == "BaseballBat")
+            {
+                probaWeapon = 0.2;
+            }
+            else
+            {
+                probaWeapon = 0;
+            }
+        }
+        else
+        {
+            probaWeapon = 0;
+        }
+        if (probaWeapon > 1 || probaWeapon < 0)
         {
             return false;
         }
@@ -153,15 +182,14 @@ public class Scavenging
         Gear gun;
         if ((gun=player.GetGear(Gear.ItemType.Weapon))==null)
         {
-            //I'm not equip with a weapon
+            //I'm not equiped with a weapon
             return false;
         }
 
         double chance=new System.Random().NextDouble();
         
-        if (chance <= probability)
+        if (chance <= probaWeapon)
         {
-            //SHOT with the gun
             /*====    DOMAGE    ====*/
             gun.liveGear -= 10;
             
@@ -178,7 +206,7 @@ public class Scavenging
         return false;
     }
     
-    public bool MyUseArmor(double probability)
+    public int MyUseArmor()
     {
         Gear armorPiece;
         int count = 0;
@@ -186,25 +214,20 @@ public class Scavenging
         
         if (inventory.Equipment.Count == 0)
         {
-            return false;
+            return 0;
         }
 
         if ((armorPiece = player.GetGear(Gear.ItemType.Chestplate)) != null)
         {
-            count++;
+            count+=3;
         }
-        else if ((armorPiece = player.GetGear(Gear.ItemType.Greaves)) != null)
+        if ((armorPiece = player.GetGear(Gear.ItemType.Greaves)) != null)
         {
-            count++;
+            count+=2;
         }
-        else if ((armorPiece = player.GetGear(Gear.ItemType.Helmet)) != null)
+        if ((armorPiece = player.GetGear(Gear.ItemType.Helmet)) != null)
         {
-            count++;
-        }
-
-        if (count >= 0 && proba >= probability)
-        {
-            return false;
+            count+=2;
         }
 
         if (armorPiece != null)
@@ -223,12 +246,12 @@ public class Scavenging
                         break;
                     }
                 }
-                return false;
+                return 0;
             }
             
-            return true;
+            return count;
         }
-        return false;
+        return 0;
     }
     
     
