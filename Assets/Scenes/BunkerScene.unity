@@ -6256,9 +6256,10 @@ MonoBehaviour:
     energy: 0
     gameClock: 0
     equippedGear: []
-    equippedgearLife: 
+    equippedGearLife: 
     consumables: []
     equipment: []
+    equipementLife: 
     resources: []
     junks: []
     is_firstGame: 0

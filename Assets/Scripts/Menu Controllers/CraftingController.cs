@@ -26,6 +26,11 @@ public class CraftingController : MonoBehaviour
         inventoryManager = InventoryManager.Inventory;
     }
 
+    private void OnEnable()
+    {
+        UpdateCraftable();
+    }
+
     public void ExitBtnClicked()
     {
         menuController.ExitMenu(gameObject);
