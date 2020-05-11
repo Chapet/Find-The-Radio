@@ -15,9 +15,13 @@ public class GameData
     public float gameClock;
 
     [SerializeField] public List<string> equippedGear = new List<string>();
+    [SerializeField] public List<int> equippedgearLife = new List<int>();
 
     [SerializeField] public List<string> consumables = new List<string>();
+    
+    
     [SerializeField] public List<string> equipment = new List<string>();
+    
     [SerializeField] public List<string> resources = new List<string>();
     [SerializeField] public List<string> junks = new List<string>();
     
@@ -52,6 +56,7 @@ public class GameData
             if (g != null)
             {
                 equippedGear.Add(g.filename);
+                equippedgearLife.Add(g.liveGear);
             }
         }
 

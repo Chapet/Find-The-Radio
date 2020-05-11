@@ -218,7 +218,7 @@ public class BackgroundTasks : MonoBehaviour
                         if (chance > 0.999) pop.PopMessage(PopupSystem.Popup.DeathEvent);
                         else if (chance > 0.90)
                         {
-                            if (lastScavenging.MayUseWeapon(1))
+                            if (lastScavenging.MayUseWeapon())
                             {
                                 pop.PopMessage(PopupSystem.Popup.ZombieLot1);
                             }
@@ -307,7 +307,7 @@ public class BackgroundTasks : MonoBehaviour
                         }
                         else
                         {
-                            if (lastScavenging.MayUseWeapon(1))
+                            if (lastScavenging.MayUseWeapon())
                             {
                                 pop.PopMessage(PopupSystem.Popup.ZombieFew1);
                             }
@@ -350,7 +350,7 @@ public class BackgroundTasks : MonoBehaviour
                         }
                         else
                         {
-                            if (lastScavenging.MayUseWeapon(1))
+                            if (lastScavenging.MayUseWeapon())
                             {
                                 pop.PopMessage(PopupSystem.Popup.ZombieOne1);
                             }
@@ -373,51 +373,23 @@ public class BackgroundTasks : MonoBehaviour
                 else if (chance > 0.80)
                 {
                     //=========    BITTEN    =========
-                    double probaWeapon;
-                    Gear getGear = PlayerController.Player.GetGear(Gear.ItemType.Weapon);
-                    if (getGear != null)
-                    {
-                        if (getGear.filename== "Gun")
-                        {
-                            probaWeapon = 0.9;
-                        }else if (getGear.filename == "Knife")
-                        {
-                            probaWeapon = 0.7;
-                        }else if (getGear.filename== "IronPipe")
-                        {
-                            probaWeapon = 0.5;
-                        }else if (getGear.filename== "BaseballBat")
-                        {
-                            probaWeapon = 0.4;
-                        }
-                        else
-                        {
-                            probaWeapon = 0.2;
-                        }
-                    }
-                    else
-                    {
-                        probaWeapon = 0;
-                    }
-
-
-
-                    if (lastScavenging.MayUseWeapon(probaWeapon))
+                    if (lastScavenging.MayUseWeapon())
                     {
                         Debug.Log("Weapon has been used");
                         pop.PopMessage(PopupSystem.Popup.ZombieUseWeapon);
                     }
-                    else if (lastScavenging.MyUseArmor(0.8))
-                    {
-                        Debug.Log("Armor has been used");
-                        pop.PopMessage(PopupSystem.Popup.ZombieUseArmor);
-                        PlayerController.Player.UpdateHealth(-5); //update heamth   
-                        lastScavenging.scavengeLog.Add("You were bitten by a zombie (-5)");
-                    }
+
                     else
                     {
-                        lastScavenging.scavengeLog.Add("You were bitten by a zombie (-10)"); //ADD log/message
-                        PlayerController.Player.UpdateHealth(-10); //update heamth    
+                        int armorProt = lastScavenging.MyUseArmor();
+                        if (armorProt != 0)
+                        {
+                            Debug.Log("Armor has been used");
+                            pop.PopMessage(PopupSystem.Popup.ZombieUseArmor);
+                        }
+                        int totalDmg = -10 + armorProt;
+                        PlayerController.Player.UpdateHealth(totalDmg); //update health
+                        lastScavenging.scavengeLog.Add("You were bitten by a zombie ("+ totalDmg + ")");
                     }
 
                 }
