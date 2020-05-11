@@ -247,10 +247,8 @@ public class Scavenging
                     }
                 }
             }
-            
-            return count;
         }
-        return 0;
+        return count;
     }
     
     
