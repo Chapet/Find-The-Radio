@@ -206,7 +206,7 @@ public class Scavenging
         return false;
     }
     
-    public int MyUseArmor()
+    public int MayUseArmor()
     {
         Gear armorPiece;
         int count = 0;
@@ -246,7 +246,6 @@ public class Scavenging
                         break;
                     }
                 }
-                return 0;
             }
             
             return count;

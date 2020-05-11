@@ -381,7 +381,7 @@ public class BackgroundTasks : MonoBehaviour
 
                     else
                     {
-                        int armorProt = lastScavenging.MyUseArmor();
+                        int armorProt = lastScavenging.MayUseArmor();
                         if (armorProt != 0)
                         {
                             Debug.Log("Armor has been used");
