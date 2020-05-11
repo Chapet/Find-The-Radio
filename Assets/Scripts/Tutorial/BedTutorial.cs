@@ -32,7 +32,7 @@ public class BedTutorial : TutorialStep
         switch (currentStep)
         {
             case 0:
-                this.SetText("The bed allows you to recuperate energy");
+                this.SetText("The bed allows you to recuperate energy.");
                 break;
             case 1:
                 bedSlider.SetActive(true);
