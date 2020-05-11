@@ -35,7 +35,6 @@ public class AutoRegen : MonoBehaviour
 
     private bool RegenCond()
     {
-        Debug.Log(PlayerController.Player);
         bool b = PlayerController.Player.GetHunger() >= threshold && PlayerController.Player.GetThirst() >= threshold && PlayerController.Player.GetEnergy() >= threshold;
         b = b && PlayerController.Player.GetHealth() < 100;
         return b;

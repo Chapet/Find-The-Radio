@@ -43,18 +43,19 @@ public class GameController : MonoBehaviour
         MenuController.Transition(transitionPanel, transitionAnim);
         NotificationManager.Manager.CancelAllNotifications();
 
+        if (!NewGame)
+        {
+            LoadGame();
+        }
+
         if (NewGame)
         {
             ResetGame();
-            Debug.Log("GameController : " + PlayerController.Player);
             UpdateGameClock(8f);
             CleanSave();
             PlayerController.IS_FIRST_GAME = true;
         }
-        else
-        {
-            LoadGame();
-        }
+        
 
         if (PlayerController.IS_FIRST_GAME)
         {
@@ -203,9 +204,8 @@ public class GameController : MonoBehaviour
                 if (data.scavengingStartTime != null && data.scavengingEndTime != null)
                 {
                     BackgroundTasks.Tasks.StartScavenging = GameData.ConvertStringToDateTime(data.scavengingStartTime);
-                    DateTime a = BackgroundTasks.Tasks.StartScavenging;
                     BackgroundTasks.Tasks.EndScavenging = GameData.ConvertStringToDateTime(data.scavengingEndTime);
-                    DateTime b=BackgroundTasks.Tasks.StartScavenging;
+                    Debug.Log("After loading : " + BackgroundTasks.Tasks.StartScavenging + " - " + BackgroundTasks.Tasks.EndScavenging);
                 }
 
                 
@@ -221,6 +221,10 @@ public class GameController : MonoBehaviour
 
             /*========    END SCAVENGING    ========*/
         }
+        else
+        {
+            NewGame = true;
+        }
     }
 
 
@@ -229,7 +233,7 @@ public class GameController : MonoBehaviour
         gameClock = (gameClock + inc) % 24f;
         int hours = (int) Mathf.Floor(gameClock);
         int minutes = (int) Mathf.Round((gameClock - hours) * 60f);
-        Debug.Log("Clock : " + gameClock + " = " + hours.ToString("00") + "h" + minutes.ToString("00"));
+        //Debug.Log("Clock : " + gameClock + " = " + hours.ToString("00") + "h" + minutes.ToString("00"));
         clock.UpdateClock(hours, minutes);
         AutoRegen.GetAutoRegen.DoRegen(inc);
         AutoDamage.GetAutoDamage.DoDamage(inc);
@@ -237,7 +241,7 @@ public class GameController : MonoBehaviour
 
     public void GoToMainMenu()
     {
-        Debug.Log("Going to the main menu ...");
+        //Debug.Log("Going to the main menu ...");
         Save();
         MenuController.Transition(transitionPanel, transitionAnim, "MainMenuScene");
     }

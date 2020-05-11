@@ -27,8 +27,6 @@ public class PlayerController : MonoBehaviour
 
     //public Sprite[] clock_num = new Sprite[10];
 
-    public StatusBarController statusBarController;
-
     [SerializeField] private Gear[] equipment;
     public static bool IS_FIRST_GAME = true;
     public Gear[] Equipment {get {return equipment; }}
@@ -45,11 +43,6 @@ public class PlayerController : MonoBehaviour
         currentStats = new int[maxStats.Length];
         Array.Copy(maxStats, 0, currentStats, 0, maxStats.Length);
         equipment = new Gear[5];
-    }
-
-    private void Start()
-    {
-        statusBarController = StatusBarController.SBController;
     }
 
     public bool IsEquipped(Gear g)
@@ -114,7 +107,7 @@ public class PlayerController : MonoBehaviour
             }
 
             currentStats[(int)type] = value;
-            statusBarController.UpdateStatusBars(type);
+            StatusBarController.SBController.UpdateStatusBars(type);
         }
     }
 
