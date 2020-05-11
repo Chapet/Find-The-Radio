@@ -93,7 +93,7 @@ public class PopupSystem : MonoBehaviour
                 okButton.gameObject.SetActive(true);
                 break;
             case Popup.PoliceStation: //event lvl 3
-                textPopupMsg.text = "   You searched a police station and fond some supplies.";
+                textPopupMsg.text = "   You searched a police station and found some supplies.";
                 okButton.gameObject.SetActive(true);
                 break;
             case Popup.Parc: //event lvl 1

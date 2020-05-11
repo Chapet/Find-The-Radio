@@ -39,7 +39,7 @@ public class CraftsHandler : MonoBehaviour
             CraftingSlot slot = obj.GetComponent<CraftingSlot>();
             slot.inventoryManager = inventoryManager;
             slot.craftsHandler = this;
-            slot.AddItem(item);
+            slot.AddItem(Instantiate(item));
 
             obj.transform.SetParent(contentPanel.transform, false);
 
