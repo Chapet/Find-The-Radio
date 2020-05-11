@@ -22,7 +22,7 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4294967295
   types: 02000000
-  thirstValue: 30
+  thirstValue: 40
   hungerValue: 0
   healthValue: 0
   energyValue: 5
